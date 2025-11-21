@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.wav
+*.mp3
+*.log
+witness_memory_db/
+*.onnx
+*.onnx.json
+
+# Temp files
+*.tmp
+/tmp/
+
+# Debug/generated
+debug_*.jpg
+*.zip
+mlx-trace.json

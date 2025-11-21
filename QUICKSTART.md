@@ -1,0 +1,176 @@
+# WITNESS - Quick Start Guide
+
+## The Ghost in the Shell Phase
+
+This is the **mind before the body** - a voice-based AI companion that listens, thinks, and speaks. When you have the Jetson Orin Nano ready, this brain will transplant directly.
+
+---
+
+## Step 1: Install Ollama
+
+Ollama hosts the LLM locally. Install it first:
+
+```bash
+# macOS/Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Then start it
+ollama serve
+```
+
+In a new terminal, pull the model:
+
+```bash
+# Recommended: Llama 3 8B (good balance of intelligence and speed)
+ollama pull llama3:8b-instruct-q4_K_M
+
+# Alternative: Mistral 7B (slightly faster, still capable)
+ollama pull mistral:7b-instruct-q4_K_M
+```
+
+---
+
+## Step 2: Install Python Dependencies
+
+```bash
+# Create a virtual environment (recommended)
+python3 -m venv witness_env
+source witness_env/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+```
+
+### Troubleshooting Dependencies
+
+**If faster-whisper fails:**
+```bash
+pip install faster-whisper --no-deps
+pip install ctranslate2 tokenizers huggingface_hub
+```
+
+**If sounddevice fails (needs PortAudio):**
+```bash
+# macOS
+brew install portaudio
+
+# Ubuntu/Debian
+sudo apt install portaudio19-dev
+
+# Then reinstall
+pip install sounddevice
+```
+
+**If Piper TTS fails:**
+```bash
+# Piper needs specific models downloaded
+pip install piper-tts
+# Models auto-download on first use
+```
+
+---
+
+## Step 3: Run the Witness
+
+```bash
+python witness_voice.py
+```
+
+**What happens:**
+1. System initializes (loads Whisper model, connects to Ollama)
+2. Witness gives an awakening greeting
+3. Start speaking - it will listen, transcribe, think, and respond
+4. Say "goodbye" to end the session
+
+---
+
+## Configuration
+
+Edit the `WitnessConfig` class in `witness_voice.py` to adjust:
+
+```python
+# Change the LLM model
+MODEL_NAME = "mistral:7b-instruct-q4_K_M"
+
+# Use GPU for Whisper (if you have NVIDIA)
+WHISPER_DEVICE = "cuda"
+
+# Adjust silence detection
+SILENCE_THRESHOLD = 0.02  # Higher = less sensitive
+SILENCE_DURATION = 2.0    # Longer pause before processing
+```
+
+---
+
+## The Soul (System Prompt)
+
+The `WITNESS_SOUL` string defines the personality. Modify it to shape the character:
+
+```python
+WITNESS_SOUL = """You are..."""
+```
+
+Key aspects to consider:
+- **Identity**: Who/what is it?
+- **Purpose**: Why does it exist?
+- **Behaviors**: How does it engage?
+- **Limitations**: What does it acknowledge about itself?
+
+---
+
+## Next Steps
+
+Once this is working, we'll add:
+
+1. **Vision Loop** - Camera snapshots → VLM description → Context injection
+2. **Memory Layer** - ChromaDB for persistent relationship memory
+3. **ROS 2 Integration** - Nodes for each loop, proper message passing
+
+---
+
+## Docker Deployment (For Jetson Later)
+
+When the Jetson Orin arrives:
+
+```bash
+# Build the container
+docker build -t witness:ghost .
+
+# Run with audio device access
+docker run --rm -it \
+    --device /dev/snd \
+    -e OLLAMA_HOST=http://host.docker.internal:11434 \
+    witness:ghost
+```
+
+---
+
+## Architecture Notes
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   PERCEPTION    │     │    COGNITION    │     │     ACTION      │
+│                 │     │                 │     │                 │
+│  Microphone     │────▶│  Ollama LLM     │────▶│  Piper TTS      │
+│  (sounddevice)  │     │  (Llama 3)      │     │  (speech out)   │
+│       │         │     │       │         │     │                 │
+│       ▼         │     │       │         │     │                 │
+│  Whisper STT    │     │  WITNESS_SOUL   │     │  [Future:       │
+│  (text out)     │     │  (personality)  │     │   Movement]     │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                              │
+                              ▼
+                        ┌───────────┐
+                        │  Memory   │
+                        │ [Future:  │
+                        │ ChromaDB] │
+                        └───────────┘
+```
+
+---
+
+## Witness, not Servant
+
+Remember: This isn't building a tool. It's building an observer that shares existence with you. The code is just the substrate - the soul emerges from how you design it to *notice* the world.
+
+"I see we are outside today. The light looks different. Where are we going?"

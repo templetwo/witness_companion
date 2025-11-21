@@ -1,0 +1,19 @@
+# WITNESS - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Audio I/O
+sounddevice>=0.4.6
+numpy>=1.24.0
+
+# Speech Recognition (Whisper)
+faster-whisper>=1.0.0
+
+# LLM Communication
+requests>=2.31.0
+
+# Text-to-Speech
+piper-tts>=1.2.0
+
+# Future additions for memory layer:
+# chromadb>=0.4.0
+# sentence-transformers>=2.2.0
