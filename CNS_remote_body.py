@@ -36,7 +36,9 @@ class Config:
     STUDIO_IP = "192.168.1.195"
 
     # ENDPOINTS
-    MOSHI_WS = f"ws://{STUDIO_IP}:8998/api/chat"
+    # Moshi via SSH tunnel (ssh -L 8998:localhost:8998 tony_studio@192.168.1.195)
+    MOSHI_WS = "ws://localhost:8998/api/chat"
+    # Ollama direct to Studio
     OLLAMA_URL = f"http://{STUDIO_IP}:11434/api/chat"
     VISION_URL = f"http://{STUDIO_IP}:11434/api/generate"
 
@@ -363,10 +365,14 @@ if __name__ == "__main__":
     print("   Brain: Mac Studio | Body: MacBook")
     print("="*50)
     print()
-    print("   1. Open browser: http://192.168.1.195:8998")
+    print("   Setup (one-time):")
+    print("   ssh -L 8998:localhost:8998 tony_studio@192.168.1.195")
+    print()
+    print("   Then:")
+    print("   1. Open browser: http://localhost:8998")
     print("   2. Click Connect, allow microphone")
     print("   3. Talk to Moshi in browser")
-    print("   4. Deep Mind will interject when triggered")
+    print("   4. Deep Mind will interject on triggers")
     print()
     print("   Triggers: 'Witness', questions with '?'")
     print("   Ctrl+C to exit")
