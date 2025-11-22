@@ -22,46 +22,35 @@ echo -e "${BLUE}   WITNESS SYSTEM LAUNCHER${NC}"
 echo -e "${BLUE}================================================${NC}"
 echo ""
 
-# Step 1: Kill existing tunnels
+# Step 1: Kill existing tunnels (aggressive)
 echo -e "${YELLOW}Step 1: Cleaning up old tunnels...${NC}"
-pkill -f "ssh -L $LOCAL_PORT" 2>/dev/null || true
+
+# Kill by pattern
+pkill -9 -f "ssh.*8998" 2>/dev/null || true
+pkill -9 -f "ssh -L $LOCAL_PORT" 2>/dev/null || true
+pkill -9 -f "ssh -f -N -L" 2>/dev/null || true
 sleep 1
 
-if lsof -i :$LOCAL_PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo -e "${RED}Port $LOCAL_PORT still in use. Killing...${NC}"
-    kill -9 $(lsof -i :$LOCAL_PORT -t) 2>/dev/null || true
-    sleep 1
+# Kill anything on the port directly
+if lsof -i :$LOCAL_PORT -t >/dev/null 2>&1; then
+    echo -e "${YELLOW}Killing processes on port $LOCAL_PORT...${NC}"
+    lsof -i :$LOCAL_PORT -t | xargs kill -9 2>/dev/null || true
+    sleep 2
 fi
 
-if ! lsof -i :$LOCAL_PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo -e "${GREEN}✓ Port $LOCAL_PORT is clear${NC}"
-else
+# Final check
+if lsof -i :$LOCAL_PORT -t >/dev/null 2>&1; then
     echo -e "${RED}✗ Could not free port $LOCAL_PORT${NC}"
+    echo "Processes still using port:"
+    lsof -i :$LOCAL_PORT
     exit 1
-fi
-
-# Step 2: Check if Moshi is running on Studio
-echo ""
-echo -e "${YELLOW}Step 2: Checking Moshi on Studio...${NC}"
-
-if curl -s --connect-timeout 3 "http://${STUDIO_IP}:${LOCAL_PORT}" > /dev/null 2>&1; then
-    echo -e "${GREEN}✓ Moshi is running on Studio${NC}"
 else
-    echo -e "${RED}✗ Moshi not detected on Studio${NC}"
-    echo ""
-    echo -e "${YELLOW}Please start Moshi on Studio:${NC}"
-    echo "  ssh ${STUDIO_USER}@${STUDIO_IP}"
-    echo "  cd ~/witness_companion/witness_companion"
-    echo "  source venv/bin/activate"
-    echo "  python -m moshi_mlx.local_web --host 0.0.0.0"
-    echo ""
-    echo "Then run this script again."
-    exit 1
+    echo -e "${GREEN}✓ Port $LOCAL_PORT is clear${NC}"
 fi
 
-# Step 3: Create fresh SSH tunnel
+# Step 2: Create fresh SSH tunnel
 echo ""
-echo -e "${YELLOW}Step 3: Creating SSH tunnel...${NC}"
+echo -e "${YELLOW}Step 2: Creating SSH tunnel...${NC}"
 
 ssh -f -N -L ${LOCAL_PORT}:localhost:${LOCAL_PORT} ${STUDIO_USER}@${STUDIO_IP}
 
@@ -74,20 +63,30 @@ else
     exit 1
 fi
 
-# Step 4: Verify tunnel works
+# Step 3: Verify Moshi is running through tunnel
 echo ""
-echo -e "${YELLOW}Step 4: Verifying tunnel...${NC}"
+echo -e "${YELLOW}Step 3: Checking Moshi through tunnel...${NC}"
 
-if curl -s --connect-timeout 3 "http://localhost:${LOCAL_PORT}" > /dev/null 2>&1; then
-    echo -e "${GREEN}✓ Tunnel verified - Moshi accessible via localhost${NC}"
+if curl -s --connect-timeout 5 "http://localhost:${LOCAL_PORT}" > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ Moshi is running and accessible${NC}"
 else
-    echo -e "${RED}✗ Tunnel not working${NC}"
+    echo -e "${RED}✗ Moshi not responding on Studio${NC}"
+    echo ""
+    echo -e "${YELLOW}Please start Moshi on Studio:${NC}"
+    echo "  ssh ${STUDIO_USER}@${STUDIO_IP}"
+    echo "  cd ~/witness_companion/witness_companion"
+    echo "  source venv/bin/activate"
+    echo "  python -m moshi_mlx.local_web --host 0.0.0.0"
+    echo ""
+    echo "Then run this script again."
+    # Kill the tunnel we just created
+    pkill -f "ssh -L $LOCAL_PORT" 2>/dev/null || true
     exit 1
 fi
 
-# Step 5: Launch CNS
+# Step 4: Launch CNS
 echo ""
-echo -e "${YELLOW}Step 5: Launching CNS Remote Body...${NC}"
+echo -e "${YELLOW}Step 4: Launching CNS Remote Body...${NC}"
 echo ""
 echo -e "${GREEN}================================================${NC}"
 echo -e "${GREEN}   Open browser: http://localhost:${LOCAL_PORT}${NC}"

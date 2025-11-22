@@ -1,0 +1,73 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                    WITNESS PROJECT                            ║
+║                   WHERE TO START                              ║
+╚═══════════════════════════════════════════════════════════════╝
+
+You're feeling lost. That's okay. Here's the map:
+
+═══════════════════════════════════════════════════════════════
+
+OPTION 1: "I Just Want Something Working NOW"
+═══════════════════════════════════════════════════════════════
+
+Run this:
+    python CNS.py
+
+What you get:
+    ✓ Voice conversation
+    ✓ Camera vision
+    ✓ Memory across sessions
+    ✓ Emotional awareness
+
+This is YOUR COMPLETE WORKING SYSTEM.
+No Moshi. No complexity. Just works.
+
+═══════════════════════════════════════════════════════════════
+
+OPTION 2: "I Want The Bicameral Mind"
+═══════════════════════════════════════════════════════════════
+
+Step 1: Figure out what you have
+    python discover_moshi.py
+
+Step 2: Read what it says
+
+Step 3: Run the integration
+    python CNS_direct.py
+
+What you get:
+    ✓ System 1 (Moshi) - Fast responses
+    ✓ System 2 (Dolphin) - Deep thoughts
+    ✓ Vision grounding
+    ✓ Smart triggers
+
+This is THE BICAMERAL INTEGRATION.
+Two minds in one body.
+
+═══════════════════════════════════════════════════════════════
+
+CONFUSED? Read This:
+═══════════════════════════════════════════════════════════════
+
+    PROJECT_MAP.md        ← Complete file inventory
+    ACTION_PLAN.md        ← Step-by-step plan
+    README_INTEGRATION.md ← Technical details
+
+═══════════════════════════════════════════════════════════════
+
+THE BOTTOM LINE:
+═══════════════════════════════════════════════════════════════
+
+You have TWO paths:
+
+PATH A: python CNS.py
+        → Working AI companion right now
+        → No assembly required
+
+PATH B: python discover_moshi.py
+        → Then python CNS_direct.py  
+        → Bicameral mind (requires setup)
+
+Pick one. Walk it. Report back.
+
+═══════════════════════════════════════════════════════════════
