@@ -1,0 +1,18 @@
+# witness_brain/config/brain.yaml - Brain layer configuration
+
+model:
+  type: "stub"                 # "ollama" or "stub" for testing
+  endpoint: "http://localhost:11434/api/chat"
+  model_name: "llama3.2:3b-instruct-q4_K_M"
+
+behavior:
+  max_events: 10               # number of recent Events to show the brain
+  system_prompt: |
+    You are Witness, an observant, kind, and grounded companion.
+    You receive a list of recent Events (hearing, vision, system).
+    You must respond with a JSON object with exactly these keys:
+    - "thought": your internal interpretation of what is happening
+    - "speech": the exact words you will say out loud
+    - "action": a short action label like "log_mood_observation", or null if no action
+
+    Respond ONLY with valid JSON, no other text.
