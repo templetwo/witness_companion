@@ -48,10 +48,12 @@ except ImportError:
 
 # --- CONFIGURATION ---
 class Config:
-    # OLLAMA (Local)
+    # OLLAMA (Local or Remote)
     OLLAMA_URL = "http://localhost:11434/api/chat"
     VISION_URL = "http://localhost:11434/api/generate"
-    MODEL = "llama3.2-vision"  # The Single Mind
+
+    # MODELS - llava:7b is faster than llama3.2-vision:11b
+    MODEL = "llava:7b"
 
     # AUDIO
     SAMPLE_RATE = 16000
@@ -60,7 +62,8 @@ class Config:
 
     # VISION
     CAMERA_INDEX = 0
-    VISION_INTERVAL = 5  # How often to look (seconds)
+    VISION_INTERVAL = 8  # How often to look (seconds)
+    VISION_TIMEOUT = 30  # Timeout for vision requests
 
     # VOICE (set to "piper" or "say")
     VOICE_ENGINE = "say"  # macOS built-in, or "piper"
@@ -116,7 +119,7 @@ def visual_loop():
                     "images": [img],
                     "stream": False
                 },
-                timeout=15
+                timeout=Config.VISION_TIMEOUT
             )
             desc = res.json().get('response', '').strip()
             if desc:
@@ -189,9 +192,9 @@ def speak(text):
     print(f"\n   [Witness] {text}")
 
     if Config.VOICE_ENGINE == "say":
-        # macOS built-in voice
+        # macOS built-in voice (Ava Premium is highest quality)
         try:
-            subprocess.run(["say", "-v", "Samantha", text], check=True)
+            subprocess.run(["say", "-v", "Ava (Premium)", text], check=True)
         except Exception as e:
             print(f"   [Voice Error] {e}")
 
@@ -240,11 +243,11 @@ def run_soul():
     try:
         res = requests.get("http://localhost:11434/api/tags", timeout=3)
         models = [m['name'] for m in res.json().get('models', [])]
-        if any('llama3.2-vision' in m for m in models):
-            print("   [Brain] Ollama connected, llama3.2-vision ready")
+        if any(Config.MODEL.split(':')[0] in m for m in models):
+            print(f"   [Brain] Ollama connected, {Config.MODEL} ready")
         else:
-            print("   [Brain] Warning: llama3.2-vision not found")
-            print("   Run: ollama pull llama3.2-vision")
+            print(f"   [Brain] Warning: {Config.MODEL} not found")
+            print(f"   Run: ollama pull {Config.MODEL}")
     except:
         print("   [Brain] Error: Cannot connect to Ollama")
         print("   Run: ollama serve")

@@ -1,0 +1,29 @@
+# witness_brain/config/audio.yaml
+
+system:
+  log_file: "witness_events.log"
+  log_level: "INFO"
+
+audio:
+  sample_rate: 16000
+  channels: 1
+  block_size: 2048
+  buffer_duration_seconds: 1.0  # Reduced for snappier response
+
+conversation:
+  mode: "wake"   # options: "wake" or "continuous"
+
+stt:
+  model_size: "medium.en" # Upgraded for much better accuracy (~1.5GB model)
+  device: "cpu" # "cpu" or "cuda"
+  compute_type: "int8" # "int8" for CPU, "float16" for GPU if available
+
+tts:
+  enabled: true
+  voice_model: "en_US-lessac-medium" # Example: "en_US-lessac-medium"
+
+vision:
+  enabled: true
+  camera_index: 0
+  interval_seconds: 30        # More frequent checks
+  model_name: "llava:7b"  # Better detail than granite
