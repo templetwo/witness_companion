@@ -1,7 +1,11 @@
 # speech/stt.py - Speech-to-Text module
 import os
+import logging
 from faster_whisper import WhisperModel
 import numpy as np
+
+# Reduce faster-whisper VAD spam
+logging.getLogger("faster_whisper").setLevel(logging.WARNING)
 
 # Recommended: Set a cache directory for models
 MODEL_CACHE_DIR = os.path.join(os.path.expanduser("~"), ".cache", "witness_brain_models")
@@ -46,7 +50,16 @@ class STT:
         if audio_data.ndim > 1:
             audio_data = audio_data.squeeze()
 
-        segments, _ = self.model.transcribe(audio_data, beam_size=1, vad_filter=True)
+        segments, _ = self.model.transcribe(
+            audio_data,
+            beam_size=1,
+            vad_filter=True,
+            vad_parameters={
+                "threshold": 0.4,              # Lower = less aggressive (default ~0.5)
+                "min_silence_duration_ms": 300, # Shorter silence detection
+                "speech_pad_ms": 200,          # Padding around speech
+            }
+        )
 
         # Safely extract text from segments
         texts = []

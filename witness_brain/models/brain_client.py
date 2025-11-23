@@ -1,12 +1,20 @@
 # models/brain_client.py - Brain client for LLM integration
 import json
 import logging
+import re
 import requests
 import yaml
 from typing import List
 
 from witness_brain.schemas.event_schema import Event
 from witness_brain.schemas.brain_schema import BrainOutput
+
+# MLX imports (lazy loaded)
+try:
+    from mlx_lm import load as mlx_load, generate as mlx_generate
+    MLX_AVAILABLE = True
+except ImportError:
+    MLX_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +40,10 @@ class BrainClient:
         behavior_config = self.config.get("behavior", {})
         self.max_events = behavior_config.get("max_events", 10)
         self.system_prompt = behavior_config.get("system_prompt", "You are Witness.")
+
+        # MLX model (lazy loaded)
+        self._mlx_model = None
+        self._mlx_tokenizer = None
 
         logger.info(f"BrainClient initialized: type={self.model_type}, model={self.model_name}")
 
@@ -152,6 +164,80 @@ Based on these events, respond with a JSON object containing your thought, speec
             logger.error(f"Ollama request failed: {e}")
             return self._get_stub_response(events)
 
+    def _ensure_mlx_model(self):
+        """Lazy load MLX model on first use."""
+        if self._mlx_model is not None:
+            return
+
+        if not MLX_AVAILABLE:
+            raise RuntimeError("MLX not available. Install with: pip install mlx-lm")
+
+        logger.info(f"Loading MLX model: {self.model_name}")
+        self._mlx_model, self._mlx_tokenizer = mlx_load(self.model_name)
+        logger.info("MLX model loaded")
+
+    def _extract_json(self, text: str) -> str:
+        """Extract JSON object from model output text."""
+        # Try to find JSON in the text
+        match = re.search(r'\{[^{}]*\}', text, re.DOTALL)
+        if match:
+            return match.group()
+        return text
+
+    def _generate_mlx(self, events: List[Event]) -> BrainOutput:
+        """
+        Generate response using local MLX model.
+
+        Args:
+            events: List of recent events
+
+        Returns:
+            BrainOutput from MLX model
+        """
+        self._ensure_mlx_model()
+
+        events_text = self._format_events(events)
+
+        # Simple prompt for fast generation
+        prompt = f"""You are Witness, a calm companion. Given these events, respond with JSON containing thought, speech, action.
+
+Events:
+{events_text}
+
+Respond ONLY with valid JSON like: {{"thought": "...", "speech": "...", "action": null}}
+JSON:"""
+
+        try:
+            result_text = mlx_generate(
+                self._mlx_model,
+                self._mlx_tokenizer,
+                prompt=prompt,
+                max_tokens=150,
+                verbose=False
+            )
+
+            # Parse JSON from response
+            json_str = self._extract_json(result_text)
+            data = json.loads(json_str)
+
+            return BrainOutput(
+                thought=data.get("thought", "").strip(),
+                speech=data.get("speech", "I'm here.").strip(),
+                action=data.get("action")
+            )
+
+        except json.JSONDecodeError as e:
+            logger.error(f"MLX JSON parse error: {e}")
+            logger.debug(f"Raw MLX output: {result_text}")
+            return BrainOutput(
+                thought="Had trouble parsing my thoughts.",
+                speech="I'm here with you.",
+                action=None
+            )
+        except Exception as e:
+            logger.error(f"MLX generation error: {e}")
+            return self._get_stub_response(events)
+
     def generate(self, events: List[Event]) -> BrainOutput:
         """
         Generate a BrainOutput from recent events.
@@ -171,6 +257,9 @@ Based on these events, respond with a JSON object containing your thought, speec
         elif self.model_type == "ollama":
             logger.info(f"Calling Ollama model: {self.model_name}")
             return self._call_ollama(recent_events)
+        elif self.model_type == "mlx_local":
+            logger.info(f"Calling MLX model: {self.model_name}")
+            return self._generate_mlx(recent_events)
         else:
             logger.warning(f"Unknown model type: {self.model_type}, using stub")
             return self._get_stub_response(recent_events)

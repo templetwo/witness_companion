@@ -87,17 +87,19 @@ class TTS:
 
         logger.info(f"Synthesizing speech for: '{text}'")
         try:
-            audio_stream = self.voice.synthesize_stream_raw(text)
+            # Synthesize audio chunks
+            audio_chunks = list(self.voice.synthesize(text))
 
-            # Collect audio data
-            audio_data = b''
-            for audio_bytes in audio_stream:
-                audio_data += audio_bytes
+            if audio_chunks:
+                # Concatenate all audio chunks
+                audio_arrays = [chunk.audio_float_array for chunk in audio_chunks]
+                audio_np = np.concatenate(audio_arrays)
 
-            # Convert to numpy array and play
-            if audio_data:
-                audio_np = np.frombuffer(audio_data, dtype=np.int16)
-                sd.play(audio_np, samplerate=self.voice.config.sample_rate)
+                # Get sample rate from first chunk
+                sample_rate = audio_chunks[0].sample_rate
+
+                # Play audio
+                sd.play(audio_np, samplerate=sample_rate)
                 if blocking:
                     sd.wait()
                 logger.info("Finished speaking.")

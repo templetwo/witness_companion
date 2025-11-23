@@ -7,6 +7,7 @@ import numpy as np
 import queue
 import threading
 import time
+import re
 from datetime import datetime
 from typing import List, Dict
 
@@ -14,6 +15,8 @@ from witness_brain.speech.stt import STT
 from witness_brain.speech.tts import TTS
 from witness_brain.schemas.event_schema import Event
 from witness_brain.models.brain_client import BrainClient
+from witness_brain.vision.camera import Camera
+from witness_brain.vision.analyzer import VisionAnalyzer
 
 # Custom JSON Formatter for Event objects
 class JSONEventFormatter(logging.Formatter):
@@ -41,8 +44,10 @@ class WitnessCNS:
         self.BUFFER_MAX_SIZE = 20 # Max events to keep in memory
 
         self.wake_mode = False
-        self.wake_phrase = [phrase.lower() for phrase in ["hey witness", "witness"]]
-        self.logger.info(f"Wake phrases: {self.wake_phrase}")
+        self.wake_until = None  # Timestamp for wake window expiry
+        self.wake_window_seconds = 10.0  # How long to listen after wake
+        self.wake_phrases = ["witness", "hey witness", "hello witness", "ok witness"]
+        self.logger.info(f"Wake phrases: {self.wake_phrases}")
 
         # Initialize STT and TTS engines based on config
         stt_config = self.config.get("stt", {})
@@ -65,10 +70,39 @@ class WitnessCNS:
         # Initialize Brain client
         self.brain_client = BrainClient()
 
+        # Initialize Vision
+        vision_config = self.config.get("vision", {})
+        self.vision_enabled = vision_config.get("enabled", False)
+        if self.vision_enabled:
+            self.camera = Camera(camera_index=vision_config.get("camera_index", 0))
+            self.vision_analyzer = VisionAnalyzer(
+                model_name=vision_config.get("model_name", "llama3.2-vision:latest")
+            )
+            self.vision_interval = vision_config.get("interval_seconds", 30)
+            self._last_vision_time = 0
+            self._vision_in_progress = False
+            self.logger.info(f"Vision enabled: interval={self.vision_interval}s")
+        else:
+            self.camera = None
+            self.vision_analyzer = None
+            self.vision_interval = 0
+
+        # Conversation settings
+        conv_config = self.config.get("conversation", {})
+        self.conversation_mode = conv_config.get("mode", "wake")
+        self.conversation_until = None  # Timestamp for follow-up window
+        self.conversation_window_seconds = 10.0  # Follow-up window after response
+        self.logger.info(f"Conversation mode: {self.conversation_mode}")
+
         # Audio Stream Control
         self._stop_event = threading.Event()
         self._audio_stream = None
         self._processing_thread = None
+        self._is_speaking = False  # Flag to ignore input while speaking
+        self._last_ai_utterance = None  # Track last speech for echo detection
+        self._last_ai_utterance_time = 0  # When AI last spoke
+
+        self.logger.info("Tip: for best results, use headphones for Witness audio to avoid the mic hearing its own voice.")
 
     def _load_config(self, config_path: str) -> Dict:
         """Loads configuration from a YAML file."""
@@ -144,6 +178,125 @@ class WitnessCNS:
         """Return the last n events in memory."""
         return self.situation_buffer[-n:]
 
+    def _normalize_text(self, text: str) -> str:
+        """Normalize text for wake word matching."""
+        text = text.lower()
+        text = re.sub(r"[^a-z0-9\s']", " ", text)  # remove punctuation
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
+
+    def _is_wake_phrase(self, text: str) -> bool:
+        """Check if text contains a wake phrase."""
+        norm = self._normalize_text(text)
+        return any(phrase in norm for phrase in self.wake_phrases)
+
+    def _extract_command_from_wake(self, text: str) -> str:
+        """Extract command that follows a wake phrase, if any."""
+        norm = self._normalize_text(text)
+        for phrase in sorted(self.wake_phrases, key=len, reverse=True):
+            if phrase in norm:
+                # Find where the wake phrase ends
+                idx = norm.find(phrase)
+                remainder = norm[idx + len(phrase):].strip()
+                # Strip common filler words
+                for filler in ["can you", "could you", "please", "um", "uh"]:
+                    if remainder.startswith(filler):
+                        remainder = remainder[len(filler):].strip()
+                # Return if there's meaningful content (more than just "yes" or punctuation)
+                if remainder and len(remainder) > 3 and remainder not in ["yes", "yeah", "yep"]:
+                    return remainder
+        return ""
+
+    def _is_probable_echo(self, transcript: str) -> bool:
+        """Check if transcript is likely an echo of our own speech."""
+        if not self._last_ai_utterance:
+            return False
+
+        # Only check for echoes within 5 seconds of AI speaking
+        if time.time() - self._last_ai_utterance_time > 5.0:
+            return False
+
+        norm_t = self._normalize_text(transcript)
+        norm_ai = self._normalize_text(self._last_ai_utterance)
+
+        if not norm_t or not norm_ai:
+            return False
+
+        # Token overlap heuristic
+        t_tokens = set(norm_t.split())
+        ai_tokens = set(norm_ai.split())
+
+        if not t_tokens or not ai_tokens:
+            return False
+
+        overlap = len(t_tokens & ai_tokens) / max(len(t_tokens), 1)
+        return overlap >= 0.75  # 75% overlap = probable echo
+
+    def _speak_async(self, text: str):
+        """Speak text in a background thread so it doesn't block the loop."""
+        if not self.tts_enabled or not self.tts_engine:
+            return
+
+        def _run():
+            self._is_speaking = True
+            try:
+                self.tts_engine.speak(text)
+            except Exception as e:
+                self.logger.error(f"TTS error: {e}")
+            finally:
+                self._is_speaking = False
+
+        threading.Thread(target=_run, daemon=True).start()
+
+    def _check_vision(self):
+        """Perform a periodic vision check if enabled and due."""
+        if not self.vision_enabled or self.vision_interval <= 0:
+            return
+
+        # Don't start new check if one is in progress
+        if self._vision_in_progress:
+            return
+
+        now = time.time()
+        if now - self._last_vision_time < self.vision_interval:
+            return
+
+        self._last_vision_time = now
+        self._vision_in_progress = True
+
+        # Capture and analyze in background thread
+        def _vision_task():
+            try:
+                image = self.camera.capture_base64()
+                if image:
+                    description = self.vision_analyzer.describe_scene(image)
+                    if description:
+                        self.add_event(Event(source="vision:scene", content=description))
+                        self.logger.info(f"[VISION] {description}")
+            except Exception as e:
+                self.logger.error(f"Vision error: {e}")
+            finally:
+                self._vision_in_progress = False
+
+        threading.Thread(target=_vision_task, daemon=True).start()
+
+    def look(self) -> str:
+        """Manually trigger a vision check and return description."""
+        if not self.vision_enabled:
+            return "Vision not enabled"
+
+        try:
+            image = self.camera.capture_base64()
+            if image:
+                description = self.vision_analyzer.describe_scene(image)
+                if description:
+                    self.add_event(Event(source="vision:look", content=description))
+                    return description
+            return "Could not capture image"
+        except Exception as e:
+            self.logger.error(f"Vision error: {e}")
+            return f"Vision error: {e}"
+
     def _process_audio_loop(self):
         """Main loop for processing audio, transcription, and wake word detection."""
         
@@ -151,6 +304,9 @@ class WitnessCNS:
         buffer_duration_seconds = self.config["audio"].get("buffer_duration_seconds", 5.0)
 
         while not self._stop_event.is_set():
+            # Check vision periodically
+            self._check_vision()
+
             # Pull audio from queue
             while not self.audio_queue.empty():
                 chunk = self.audio_queue.get()
@@ -179,42 +335,108 @@ class WitnessCNS:
                     continue
 
                 if transcribed_text and len(transcribed_text) > 1:
-                    self.logger.debug(f"Transcription: '{transcribed_text}'")
+                    # Skip if we're currently speaking (avoid echo)
+                    if self._is_speaking:
+                        self.logger.debug(f"Ignoring input while speaking: '{transcribed_text}'")
+                        continue
 
-                    # Wake word detection logic
-                    if not self.wake_mode:
-                        is_wake_phrase = any(phrase in transcribed_text for phrase in self.wake_phrase)
-                        if is_wake_phrase:
-                            self.wake_mode = True
-                            self.add_event(Event(source="hearing:wake", content=transcribed_text))
-                            if self.tts_enabled:
-                                self.tts_engine.speak("Yes?")
-                            self.logger.info("Witness in wake mode.")
-                        # else:
-                            # Optionally log ambient non-wake phrases
-                            # self.add_event(Event(source="hearing:ambient", content=transcribed_text))
-                    else: # wake_mode is True
-                        # Log the user's command
+                    # Skip if this is probably an echo of our own speech
+                    if self._is_probable_echo(transcribed_text):
+                        self.logger.info(f"[ECHO] Suppressing probable self-echo: '{transcribed_text[:50]}...'")
+                        continue
+
+                    self.logger.debug(f"Transcription: '{transcribed_text}'")
+                    now = time.time()
+
+                    # Check windows
+                    in_wake_window = self.wake_until and now <= self.wake_until
+                    in_conversation = self.conversation_until and now <= self.conversation_until
+
+                    if self.conversation_mode == "continuous":
+                        # Continuous mode: everything is a command
                         self.add_event(Event(source="hearing:command", content=transcribed_text))
 
-                        # Get recent events and generate brain response
+                        # Generate brain response
                         recent_events = self.get_recent_events(self.brain_client.max_events)
                         brain_output = self.brain_client.generate(recent_events)
 
-                        # Log the brain's thought and action
+                        # Log thought and action
                         self.logger.info(f"[BRAIN_THOUGHT] {brain_output.thought}")
                         if brain_output.action:
                             self.logger.info(f"[BRAIN_ACTION] {brain_output.action}")
 
-                        # Speak the brain's response
-                        if self.tts_enabled and brain_output.speech:
-                            self.tts_engine.speak(brain_output.speech)
+                        # Speak and log
+                        if brain_output.speech:
+                            self._last_ai_utterance = brain_output.speech
+                            self._last_ai_utterance_time = time.time()
+                            self.add_event(Event(source="brain:speech", content=brain_output.speech))
+                            self._speak_async(brain_output.speech)
 
-                        # Log the brain's speech as an event
-                        self.add_event(Event(source="brain:speech", content=brain_output.speech))
+                    else:
+                        # Wake mode with conversation windows
+                        if self._is_wake_phrase(transcribed_text):
+                            # Check if there's a command embedded with the wake phrase
+                            embedded_command = self._extract_command_from_wake(transcribed_text)
 
-                        self.wake_mode = False # Reset wake mode after command
-                        self.logger.info("Witness returning to sleep mode.")
+                            if embedded_command:
+                                # Process the embedded command directly
+                                self.add_event(Event(source="hearing:wake", content=transcribed_text))
+                                self.add_event(Event(source="hearing:command", content=embedded_command))
+
+                                # Get recent events and generate brain response
+                                recent_events = self.get_recent_events(self.brain_client.max_events)
+                                brain_output = self.brain_client.generate(recent_events)
+
+                                # Log the brain's thought and action
+                                self.logger.info(f"[BRAIN_THOUGHT] {brain_output.thought}")
+                                if brain_output.action:
+                                    self.logger.info(f"[BRAIN_ACTION] {brain_output.action}")
+
+                                # Speak the brain's response
+                                if brain_output.speech:
+                                    self._last_ai_utterance = brain_output.speech
+                                    self._last_ai_utterance_time = time.time()
+                                    self.add_event(Event(source="brain:speech", content=brain_output.speech))
+                                    self._speak_async(brain_output.speech)
+
+                                # Set conversation follow-up window
+                                self.conversation_until = now + self.conversation_window_seconds
+                                self.logger.info(f"Conversation window open ({self.conversation_window_seconds}s)")
+                            else:
+                                # Just wake phrase, wait for command
+                                self.wake_until = now + self.wake_window_seconds
+                                self.add_event(Event(source="hearing:wake", content=transcribed_text))
+                                self._last_ai_utterance = "Yes?"
+                                self._last_ai_utterance_time = time.time()
+                                self._speak_async("Yes?")
+                                self.logger.info(f"Witness in wake mode (window: {self.wake_window_seconds}s)")
+
+                        elif in_wake_window or in_conversation:
+                            # We're in wake or conversation window - treat as command
+                            self.wake_until = None  # Close wake window
+
+                            # Log the user's command
+                            self.add_event(Event(source="hearing:command", content=transcribed_text))
+
+                            # Get recent events and generate brain response
+                            recent_events = self.get_recent_events(self.brain_client.max_events)
+                            brain_output = self.brain_client.generate(recent_events)
+
+                            # Log the brain's thought and action
+                            self.logger.info(f"[BRAIN_THOUGHT] {brain_output.thought}")
+                            if brain_output.action:
+                                self.logger.info(f"[BRAIN_ACTION] {brain_output.action}")
+
+                            # Speak the brain's response (async)
+                            if brain_output.speech:
+                                self._last_ai_utterance = brain_output.speech
+                                self._last_ai_utterance_time = time.time()
+                                self.add_event(Event(source="brain:speech", content=brain_output.speech))
+                                self._speak_async(brain_output.speech)
+
+                            # Set conversation follow-up window
+                            self.conversation_until = now + self.conversation_window_seconds
+                            self.logger.info(f"Conversation window open ({self.conversation_window_seconds}s)")
 
             time.sleep(0.05) # Small delay to prevent busy-waiting
 
@@ -254,6 +476,11 @@ class WitnessCNS:
                 self.logger.warning("Audio processing thread did not terminate cleanly.")
             else:
                 self.logger.info("Audio processing thread stopped.")
-        
+
+        # Release camera
+        if self.camera:
+            self.camera.release()
+            self.logger.info("Camera released.")
+
         self.logger.info("WitnessCNS stopped.")
 
