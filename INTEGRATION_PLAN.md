@@ -31,7 +31,7 @@ Nothing on the Jetson, the Pi, or any live Studio service was touched to produce
 | `schemas/tools.py` | Ignore | Empty placeholder. |
 | `config/*.yaml` | Leave in place | `brain.yaml`'s system prompt is lineage material; any change is Anthony's. |
 
-New, with no predecessor in the repo: the robot-side `CommandGuard`, the restart-safe `Journal`,
+New, with no predecessor in the repo: the tool surface `companion/tools.py` (section 7), the robot-side `CommandGuard`, the restart-safe `Journal`,
 `DisplayState`, the compute `Router` with provenance, and every fake adapter.
 
 ## 3. Verdict on `0802321` (`witness_companion.py` on `witness_brain_v1_architecture`)
@@ -148,7 +148,34 @@ Output: a table per task with receipts (commands, timestamps, raw timings), then
 where they live; usage budget; and which data each route may receive (camera frames, audio,
 transcripts, approved notes, chronicle content), per route.
 
-## 7. Rollback
+## 7. Harness: OpenClaw candidate (spec addition 3, 17:18 EDT)
+
+OpenClaw is the candidate agent harness. In that shape the harness manages the conversation, and
+`companion/` becomes the **Witness integration services** layer behind a small tool interface.
+`companion/tools.py` exposes exactly five plain Python callables with JSON-serialisable arguments
+and results, each returning `{"ok": bool, ..., "provenance": <record or null>}` and never raising:
+`witness_snapshot()`, `witness_speak(text)`, `witness_status()`, `witness_propose_note(text)`
+(writes an UNAPPROVED note to the local notes store; never the Stack), and
+`robot_request_action(name, params)` (one closed-set action through the guard; returns its verdict).
+None of them can arm. An MCP server wrapping them is to be written later in a separate worktree;
+it is not in this branch. The `Coordinator` stays usable on its own (and is what `tools.py` drives).
+
+**Inherited from HQ, not measured by this lane:**
+- **Jetson:** OpenClaw 2026.9.8 as a user systemd gateway on loopback 18789; model
+  `ollama/qwen3.5:2b`; `tools.profile = full`; one MCP server already configured (the temple-stack
+  read shim); workspace `~/.openclaw/workspace`.
+- **Studio:** OpenClaw 2026.7.1-2 as a launchd gateway on loopback 18789, with a telegram channel
+  and MCP servers configured.
+
+**Isolation, a proposal for Anthony:** a new agent name inside an existing gateway is not an
+isolation boundary; an OpenClaw gateway is a shared trust boundary. A Witness session that can
+request motion should therefore live in **its own gateway, under its own OS user or on its own
+host**, not as another agent in the Jetson's existing seat gateway (which runs `tools.profile = full`)
+or the Studio's. The robot-side guard still holds regardless of harness (keys on the Pi, closed set,
+disarmed start), but the harness boundary decides who can reach `robot_request_action` at all.
+Neither OpenClaw was installed, configured or contacted by this lane.
+
+## 8. Rollback
 
 The only artifacts are the worktree and the branch, both on the Studio:
 ```

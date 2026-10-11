@@ -30,7 +30,7 @@ from typing import Any, Callable, Dict, List, Optional, TextIO
 from .adapters.base import (BackendUnavailable, Brain, Controller, Notes, SpeechIn,
                             SpeechOut, Vision)
 from .persist import Journal
-from .schemas import (REJECTED, UNKNOWN, ActionRequest, ActionResult, DisplayState, Event, Request,
+from .schemas import (COMMANDS, REJECTED, UNKNOWN, ActionRequest, ActionResult, DisplayState, Event, Request,
                       clean_text)
 
 # Model-facing action names -> closed-set commands. Nothing else passes.
@@ -216,7 +216,18 @@ class Coordinator:
         action.mac = hmac.new(self._key, action.canonical_bytes(), hashlib.sha256).hexdigest()
         return action
 
-    def _issue(self, command: str, args: Dict[str, Any], spoken: str = "") -> Response:
+    def request_action(self, command: str, args: Dict[str, Any]) -> Response:
+        """Tool-facing: issue one closed-set command through the guard, without speaking.
+
+        The guard decides; this only builds, journals, signs and sends.
+        """
+        if command not in COMMANDS:
+            self._log("action:refused", "not in closed set", command=clean_text(command, 40))
+            return Response("error", "unknown action", data={"reason": "not in closed set"})
+        return self._issue(command, dict(args), spoken="", speak=False)
+
+    def _issue(self, command: str, args: Dict[str, Any], spoken: str = "",
+               speak: bool = True) -> Response:
         if self._missing(self.controller):
             return self._unavailable("controller")
         action = self._new_action(command, args)
@@ -243,7 +254,7 @@ class Coordinator:
             text = "I can't do that right now (%s)." % result.reason
         else:
             text = spoken
-        if text:
+        if text and speak:
             self._speak(text)
         if result.status == UNKNOWN:
             self.display.set("error", "link lost")
