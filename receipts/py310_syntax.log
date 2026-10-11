@@ -1,0 +1,7 @@
+python3 -c "import ast,pathlib;[ast.parse(p.read_text(),feature_version=(3,10)) for p in pathlib.Path('witness_mcp').rglob('*.py')]"
+Python 3.9.6
+exit_code: 0
+
+/opt/homebrew/bin/python3.12 -c "import ast,pathlib;[ast.parse(p.read_text(),feature_version=(3,10)) for p in pathlib.Path('witness_mcp').rglob('*.py')]"
+Python 3.12.12
+exit_code: 0

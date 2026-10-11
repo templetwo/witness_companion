@@ -1,0 +1,63 @@
+test_exact_freshness_boundary (test_witness_mcp.FailureTests.test_exact_freshness_boundary) ... ok
+test_invalid_notes_are_preserved (test_witness_mcp.FailureTests.test_invalid_notes_are_preserved) ... ok
+test_missing_and_future_images_are_explicit_failures (test_witness_mcp.FailureTests.test_missing_and_future_images_are_explicit_failures) ... ok
+test_note_tool_opens_only_local_file (test_witness_mcp.FailureTests.test_note_tool_opens_only_local_file) ... FAIL
+test_service_exception_becomes_traceable_failure (test_witness_mcp.FailureTests.test_service_exception_becomes_traceable_failure) ... ok
+test_symlink_note_target_is_not_written (test_witness_mcp.FailureTests.test_symlink_note_target_is_not_written) ... ok
+test_duplicate_nonce_rejected_even_after_disarmed_refusal (test_witness_mcp.GuardTests.test_duplicate_nonce_rejected_even_after_disarmed_refusal) ... ok
+test_expiry_rejected_even_when_armed (test_witness_mcp.GuardTests.test_expiry_rejected_even_when_armed) ... ok
+test_fake_armed_motion_is_bounded_and_never_executed (test_witness_mcp.GuardTests.test_fake_armed_motion_is_bounded_and_never_executed) ... ok
+test_invalid_expiry_nonce_and_missing_params (test_witness_mcp.GuardTests.test_invalid_expiry_nonce_and_missing_params) ... ok
+test_out_of_bounds_motion_refused (test_witness_mcp.GuardTests.test_out_of_bounds_motion_refused) ... ok
+test_start_disarmed_and_speak_is_recorded_only (test_witness_mcp.GuardTests.test_start_disarmed_and_speak_is_recorded_only) ... ok
+test_stop_always_accepted_and_disarms (test_witness_mcp.GuardTests.test_stop_always_accepted_and_disarms) ... ok
+test_unknown_action_cannot_arm (test_witness_mcp.GuardTests.test_unknown_action_cannot_arm) ... ok
+test_all_five_results_are_traceable (test_witness_mcp.InProcessTests.test_all_five_results_are_traceable) ... ok
+test_disarmed_motion_refused_and_expired_stop_accepted (test_witness_mcp.InProcessTests.test_disarmed_motion_refused_and_expired_stop_accepted) ... ok
+test_fresh_sample_is_returned (test_witness_mcp.InProcessTests.test_fresh_sample_is_returned) ... ok
+test_initialize_and_list_five_schemas (test_witness_mcp.InProcessTests.test_initialize_and_list_five_schemas) ... ok
+test_malformed_params_errors (test_witness_mcp.InProcessTests.test_malformed_params_errors) ... ok
+test_note_append_is_local_and_preserves_existing_notes (test_witness_mcp.InProcessTests.test_note_append_is_local_and_preserves_existing_notes) ... ok
+test_notifications_have_no_response_or_side_effect (test_witness_mcp.InProcessTests.test_notifications_have_no_response_or_side_effect) ... ok
+test_stale_image_has_explicit_reason_and_original_time (test_witness_mcp.InProcessTests.test_stale_image_has_explicit_reason_and_original_time) ... ok
+test_unknown_method_error (test_witness_mcp.InProcessTests.test_unknown_method_error) ... ok
+test_unknown_tool_error (test_witness_mcp.InProcessTests.test_unknown_tool_error) ... ok
+test_all_five_results_are_traceable (test_witness_mcp.SubprocessTests.test_all_five_results_are_traceable) ... ok
+test_disarmed_motion_refused_and_expired_stop_accepted (test_witness_mcp.SubprocessTests.test_disarmed_motion_refused_and_expired_stop_accepted) ... ok
+test_fresh_sample_is_returned (test_witness_mcp.SubprocessTests.test_fresh_sample_is_returned) ... ok
+test_initialize_and_list_five_schemas (test_witness_mcp.SubprocessTests.test_initialize_and_list_five_schemas) ... ok
+test_malformed_params_errors (test_witness_mcp.SubprocessTests.test_malformed_params_errors) ... ok
+test_note_append_is_local_and_preserves_existing_notes (test_witness_mcp.SubprocessTests.test_note_append_is_local_and_preserves_existing_notes) ... ok
+test_notifications_have_no_response_or_side_effect (test_witness_mcp.SubprocessTests.test_notifications_have_no_response_or_side_effect) ... ok
+test_stale_image_has_explicit_reason_and_original_time (test_witness_mcp.SubprocessTests.test_stale_image_has_explicit_reason_and_original_time) ... ok
+test_unknown_method_error (test_witness_mcp.SubprocessTests.test_unknown_method_error) ... ok
+test_unknown_tool_error (test_witness_mcp.SubprocessTests.test_unknown_tool_error) ... ok
+test_bad_framing_is_parse_error (test_witness_mcp.TransportTests.test_bad_framing_is_parse_error) ... ok
+test_content_length_framing_and_unicode_byte_count (test_witness_mcp.TransportTests.test_content_length_framing_and_unicode_byte_count) ... ok
+test_default_fake_has_no_image (test_witness_mcp.TransportTests.test_default_fake_has_no_image) ... ok
+test_framing_in_subprocess (test_witness_mcp.TransportTests.test_framing_in_subprocess) ... ok
+test_imports_do_not_load_device_packages (test_witness_mcp.TransportTests.test_imports_do_not_load_device_packages) ... ok
+test_initialize_offers_supported_version (test_witness_mcp.TransportTests.test_initialize_offers_supported_version) ... ok
+test_initialize_requires_valid_params_and_tools_require_initialize (test_witness_mcp.TransportTests.test_initialize_requires_valid_params_and_tools_require_initialize) ... ok
+test_invalid_json_constants_duplicates_and_encoding (test_witness_mcp.TransportTests.test_invalid_json_constants_duplicates_and_encoding) ... ok
+test_invalid_request_envelopes (test_witness_mcp.TransportTests.test_invalid_request_envelopes) ... ok
+test_null_request_id_receives_response (test_witness_mcp.TransportTests.test_null_request_id_receives_response) ... ok
+test_parse_error_then_recovery (test_witness_mcp.TransportTests.test_parse_error_then_recovery) ... ok
+test_sample_requires_explicit_timestamp (test_witness_mcp.TransportTests.test_sample_requires_explicit_timestamp) ... ok
+test_without_fake_exits_nonzero_without_stdout (test_witness_mcp.TransportTests.test_without_fake_exits_nonzero_without_stdout) ... ok
+
+======================================================================
+FAIL: test_note_tool_opens_only_local_file (test_witness_mcp.FailureTests.test_note_tool_opens_only_local_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tony_studio/Projects/witness-companion-prep/wc-mcp/tests/test_witness_mcp.py", line 325, in test_note_tool_opens_only_local_file
+    self.assertEqual(child.returncode, 0, child.stderr.decode())
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "<string>", line 16, in <module>
+AssertionError: {'content': [{'type': 'text', 'text': '{"trace_id": "44c41277-d7f5-479e-8253-9db1ec94194f", "issued_at": "2026-10-11T21:26:42.439852Z", "backend_provenance": {"backend_id": "fake", "kind": "none", "model": null, "where_computed": "unknown"}, "ok": false, "reason": "service_failure"}'}], 'isError': True}
+
+
+----------------------------------------------------------------------
+Ran 47 tests in 0.517s
+
+FAILED (failures=1)
