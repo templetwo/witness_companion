@@ -30,7 +30,7 @@ from typing import Any, Callable, Dict, List, Optional, TextIO
 from .adapters.base import (BackendUnavailable, Brain, Controller, Notes, SpeechIn,
                             SpeechOut, Vision)
 from .persist import Journal
-from .schemas import (UNKNOWN, ActionRequest, ActionResult, DisplayState, Event, Request,
+from .schemas import (REJECTED, UNKNOWN, ActionRequest, ActionResult, DisplayState, Event, Request,
                       clean_text)
 
 # Model-facing action names -> closed-set commands. Nothing else passes.
@@ -144,7 +144,10 @@ class Coordinator:
             resp = self._unavailable(exc.what, str(exc))
         if resp.kind in ("speech", "stale", "unavailable") and resp.text:
             self._speak(resp.text)
-        if resp.kind not in ("unavailable",) and self.display.mode == "speaking":
+        # Leave the display showing the outcome, not the transient "speaking".
+        if resp.kind == "unavailable":
+            self.display.set("unavailable", str(resp.data.get("backend", "")))
+        elif self.display.mode == "speaking":
             self.display.set("idle", resp.text)
         return resp
 
@@ -234,8 +237,14 @@ class Coordinator:
                              "status": result.status, "reason": result.reason})
         self.display.last_result = "%s %s" % (command, result.status)
         self._log("action:" + result.status, command, seq=action.seq, reason=result.reason)
-        if spoken and result.status != UNKNOWN:
-            self._speak(spoken)
-        elif result.status == UNKNOWN:
-            self._speak("I lost the link to the body. I don't know if that happened.")
-        return Response("action", spoken, action=action, result=result)
+        if result.status == UNKNOWN:
+            text = "I lost the link to the body. I don't know if that happened."
+        elif result.status == REJECTED:
+            text = "I can't do that right now (%s)." % result.reason
+        else:
+            text = spoken
+        if text:
+            self._speak(text)
+        if result.status == UNKNOWN:
+            self.display.set("error", "link lost")
+        return Response("action", text, action=action, result=result)
