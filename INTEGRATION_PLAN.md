@@ -123,9 +123,10 @@ candidates per capability. Cloud is not a last resort.
   **before any call**, and the coordinator refuses to send an image to a brain that does not
   declare `image`, returning a clear unavailable result. Ollama's OpenAI compatibility is a subset;
   real adapters must probe or declare capabilities, never infer them from a shared API shape.
-- **Verification status: the router is UNTESTED.** Its unit tests (`tests/test_compute.py`) were
-  blocked by a compass pause and never written (see `receipts/README.md`). Only its import is checked.
-  Do not read this section as verified behavior.
+- **Verification status: the router is unit-tested** at `4e25354` (`tests/test_compute.py`, 10 tests:
+  routing, fallback order, provenance, capability refusal, unset credential variable, bad config
+  shapes; see `receipts/README.md`). The tests ran under python 3.11 and 3.12 on the Studio, never
+  on the Jetson's 3.10, and they exercise fakes only: no backend was called.
 - **Gap against revision 2 item 3:** provenance flows for Brain and Vision results (through
   `RoutedBrain`). Nothing routes `speech_to_text` or `text_to_speech` yet: the config slots exist,
   but speech results (including `witness_speak`) carry `provenance: null` until routed STT/TTS
