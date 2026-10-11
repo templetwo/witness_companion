@@ -53,14 +53,23 @@ def _fail(error: str, **extra: Any) -> Dict[str, Any]:
 
 
 def _kind(obj: Any) -> str:
+    """Report what an adapter declares itself to be. Never guess "real".
+
+    An adapter may set `adapter_kind` ("fake", "null", "real", "routed").
+    Without a declaration, Null*/Fake* class names are recognised and anything
+    else is "undeclared", so a wrapper around fakes can never read as real.
+    """
     if obj is None:
         return "missing"
+    declared = getattr(obj, "adapter_kind", None)
+    if isinstance(declared, str) and declared:
+        return declared
     name = type(obj).__name__
     if name.startswith("Null"):
         return "null"
     if name.startswith("Fake"):
         return "fake"
-    return "real"
+    return "undeclared"
 
 
 def _guarded(fn: Callable[..., Dict[str, Any]]) -> Callable[..., Dict[str, Any]]:

@@ -66,6 +66,22 @@ class ToolSurface(TempDirCase):
                          ("fake", "fake", "fake"))
         self.assertIs(st["armed"], False)
 
+    def test_status_never_guesses_real(self):
+        from companion.adapters.fake_compute import FakeComputeBackend
+        from companion.compute import ComputeConfig, RoutedBrain, Router
+
+        class Wrapper(object):  # an unlabelled wrapper around a fake
+            pass
+
+        cfg = ComputeConfig.from_dict({"backends": {"jet": {"kind": "jetson_local"}},
+                                       "tasks": {"conversation": {"backend": "jet"}}})
+        self.coord.brain = RoutedBrain(Router(cfg, {"jet": FakeComputeBackend("jet")}, env={}))
+        self.coord.vision = Wrapper()
+        st = tools.witness_status()
+        self.assertEqual(st["backend"]["brain"], "routed")
+        self.assertEqual(st["backend"]["routes"]["conversation"][0]["status"], "ready")
+        self.assertEqual(st["camera"], "undeclared")
+
     def test_snapshot_stale_and_proposed_note_not_retrievable(self):
         self.clock.advance(120)
         snap = tools.witness_snapshot()

@@ -199,6 +199,8 @@ class Router:
 class RoutedBrain:
     """Brain interface backed by the Router. Keeps the last Provenance for logging."""
 
+    adapter_kind = "routed"  # what it routes to is reported per route, not assumed
+
     def __init__(self, router: Router) -> None:
         self.router = router
         self.last_provenance: Optional[Provenance] = None

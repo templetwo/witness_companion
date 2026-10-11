@@ -36,7 +36,9 @@ New, with no predecessor in the repo: the tool surface `companion/tools.py` (sec
 
 ## 3. Verdict on `0802321` (`witness_companion.py` on `witness_brain_v1_architecture`)
 
-**Leave it. Do not merge, do not cherry-pick.** Read in full (683 lines). Reasons:
+**Leave it. Do not merge, do not cherry-pick.** The file is 683 lines; this lane read lines 1 to 120,
+270 to 300, 384 to 420, 442 to 470 and 600 to 683, plus a whole-file grep of imports, definitions,
+subprocess calls, network hosts and memory writes. Lines in between were not read. Reasons:
 - Imports `cv2`, `sounddevice`, `chromadb`, `librosa`, `faster_whisper` at module top. Importing it
   opens nothing yet, but it fails outright on the Jetson (faster-whisper absent; chromadb and
   librosa are **unverified**, not in PREP_REPORT's measured list).
@@ -121,6 +123,13 @@ candidates per capability. Cloud is not a last resort.
   **before any call**, and the coordinator refuses to send an image to a brain that does not
   declare `image`, returning a clear unavailable result. Ollama's OpenAI compatibility is a subset;
   real adapters must probe or declare capabilities, never infer them from a shared API shape.
+- **Verification status: the router is UNTESTED.** Its unit tests (`tests/test_compute.py`) were
+  blocked by a compass pause and never written (see `receipts/README.md`). Only its import is checked.
+  Do not read this section as verified behavior.
+- **Gap against revision 2 item 3:** provenance flows for Brain and Vision results (through
+  `RoutedBrain`). Nothing routes `speech_to_text` or `text_to_speech` yet: the config slots exist,
+  but speech results (including `witness_speak`) carry `provenance: null` until routed STT/TTS
+  adapters exist.
 - Real compute adapters (Ollama client, Studio proxy client, cloud client) are **not written**; they
   are staged with the other real adapters (`companion/adapters/real/README.md`). No paid API call and
   no external transmission of camera, audio or chronicle data happens from anything in this branch.
@@ -175,7 +184,22 @@ or the Studio's. The robot-side guard still holds regardless of harness (keys on
 disarmed start), but the harness boundary decides who can reach `robot_request_action` at all.
 Neither OpenClaw was installed, configured or contacted by this lane.
 
-## 8. Rollback
+## 8. Known residuals of this design
+
+- Coordinator and guard keep separate journals. If the coordinator's journal is lost, it restarts
+  at seq 0 and the guard rejects every command as a duplicate. That fails closed, but a recovery
+  procedure (e.g. an operator-run seq re-base on the Pi) has to be defined.
+- A stop sent over a lost link reports UNKNOWN. The physical cutoff and a controller-level timeout
+  are what actually stop the robot.
+- Expiry is checked on the Pi against times the Jetson stamped, so it depends on clock sync between
+  the two hosts. NTP on both, plus a skew measurement, belongs in the commissioning checklist.
+- How the Pi guard gets armed in a real deployment (local button, Pi console, a separate
+  authenticated operator channel) is undefined and is Anthony's design call.
+- `say` and `display` are accepted while disarmed (not motion). Revisit if the speaker or OLED
+  ever sits on a path that can move anything.
+- The guard's keys must be provisioned to the Pi and Jetson out of band; no key handling exists yet.
+
+## 9. Rollback
 
 The only artifacts are the worktree and the branch, both on the Studio:
 ```
