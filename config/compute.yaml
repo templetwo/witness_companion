@@ -1,0 +1,76 @@
+# config/compute.yaml - per-task compute routing TEMPLATE. No secrets here, ever.
+#
+# Routing is explicit: each task names a primary backend and an ordered
+# fallback list. Nothing is chosen autonomously. Cloud is a normal candidate,
+# not a last resort. The ids, models and orders below are PLACEHOLDERS to be
+# replaced after the placement measurement (INTEGRATION_PLAN.md, "Compute
+# placement comparison"). Provider/account, credentials, usage budget and
+# which data each route may receive are Anthony's decisions.
+#
+# credential_env holds the NAME of an environment variable. Never a value.
+# A backend whose named variable is unset reports "not configured" and is
+# skipped; the value is never read into logs.
+
+backends:
+  jetson_ollama:
+    kind: jetson_local
+    provider: ollama
+    endpoint: "http://127.0.0.1:11434"      # loopback on the Jetson only
+    model: "gemma3:4b"                      # present on the Jetson (measured 2026-10-11)
+
+  jetson_whisper:
+    kind: jetson_local
+    provider: whisper.cpp                    # ~/whisper.cpp is built on the Jetson; faster-whisper is NOT installed
+    model: "TBD"                             # only test models present today
+
+  jetson_piper:
+    kind: jetson_local
+    provider: piper
+    model: "en_US-lessac-medium"             # present on the Jetson (piper-tts 1.3.0)
+
+  jetson_notes:
+    kind: jetson_local
+    provider: approved-notes-file
+    model: "none"
+
+  studio_ollama:
+    kind: studio_local
+    provider: ollama
+    # Must be an AUTHENTICATED, RESTRICTED endpoint (e.g. a token-checking
+    # reverse proxy bound to the LAN address, allowlisting the Jetson).
+    # Ollama's own API has no auth: never expose a raw Ollama port on every
+    # interface. Placeholder, not a live address.
+    endpoint: "https://studio.invalid/companion/ollama"
+    model: "TBD"
+    credential_env: "WITNESS_STUDIO_TOKEN"
+
+  studio_gateway:
+    kind: studio_gateway
+    provider: "TBD"                          # the Studio relaying to a cloud provider
+    endpoint: "https://studio.invalid/companion/gateway"
+    model: "TBD"
+    credential_env: "WITNESS_STUDIO_TOKEN"
+
+  cloud_primary:
+    kind: cloud
+    provider: "TBD"                          # provider name only
+    model: "TBD"
+    credential_env: "WITNESS_CLOUD_API_KEY"
+
+tasks:
+  conversation:
+    backend: jetson_ollama
+    fallbacks: [studio_ollama, cloud_primary]
+  vision_interpret:
+    backend: studio_ollama                   # must declare image capability at runtime
+    fallbacks: [cloud_primary]
+  speech_to_text:
+    backend: jetson_whisper
+    fallbacks: []                            # audio leaving the Jetson is Anthony's decision
+
+  text_to_speech:
+    backend: jetson_piper
+    fallbacks: []
+  note_retrieval:
+    backend: jetson_notes
+    fallbacks: []
