@@ -1,6 +1,6 @@
 # receipts: companion coordinator, hardware-free harness
 
-- **Tested sha:** `342f37adda6ab82d7ad917454bf74593b6a8b514` on branch `prep/companion-coordinator`
+- **Tested sha:** `4e253546417bca3578ceff2c125964f69e4c4e7a` on branch `prep/companion-coordinator`
   (worktree `~/Projects/witness-companion-prep/wc-prep`, baseline `origin/master @ 1728b26`).
   The tree was clean (`git status --porcelain` empty) when the tests ran. These receipt files are
   committed in the NEXT commit, so HEAD moves past the tested sha by exactly that commit.
@@ -17,7 +17,7 @@
 - **Files:** `unittest.log` (raw output, both interpreters), `py310_syntax.log`, `demo.log`
   (`run_demo.py` driven from a fixed stdin script, disarmed).
 
-## Results (32 run, 32 pass under 3.12 and under 3.11; 1 group BLOCKED)
+## Results (42 run. python3.11: 42 pass. python3.12: 41 pass, 1 skipped, the compute.yaml template test, because pyyaml is absent from that interpreter)
 
 | Required check | Test(s) | Result |
 |---|---|---|
@@ -40,7 +40,7 @@
 | addition 3: five tool functions return JSON-serialisable dicts and never raise (fakes wired, bad input, missing backends, unconfigured) | `test_tools.ToolSurface.test_all_five_return_json_dicts_and_never_raise`, `test_never_raise_on_bad_input_or_missing_backends` | PASS |
 | addition 3: `robot_request_action` disarmed refuses motion, accepts stop | `test_tools.ToolSurface.test_disarmed_refuses_motion_accepts_stop` | PASS |
 | addition 3: status reports wiring and armed state, never guesses "real"; stale snapshot flagged; proposed note not retrievable | `test_status_reports_wiring_and_armed`, `test_status_never_guesses_real`, `test_snapshot_stale_and_proposed_note_not_retrievable` | PASS |
-| **revision 2: per-task routing, fallback order, provenance on every result, capability mismatch refused before any call, missing credential env var reports "not configured" without its value, provenance in the log line** | `tests/test_compute.py` | **BLOCKED**: the command that writes this file was soft-denied by the t2helix compass (rule `credential-paste`, pending confirmation #2, listed as pending and unapproved at both checks this lane made). The file was not written by another route. `companion/compute.py` and `config/compute.yaml` exist and are import-checked by the no-device test, but their behavior is **untested**. |
+| revision 2: per-task routing, fallback order, provenance on every result, capability mismatch refused before any call, missing credential env var reports "not configured" without its value, provenance in the log line, config shape rejection, compute.yaml template | `tests/test_compute.py` (10 tests: `Routing.*` 8, `TemplateConfig` 1, `CoordinatorWithRouter` 1) | PASS (template test runs under 3.11, skipped under 3.12). Written by the approved retry of compass pending #2 (rule `credential-paste`), approved by HQ. Earlier receipts marked this group BLOCKED |
 
 ## What these tests do NOT prove
 
