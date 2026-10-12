@@ -1,0 +1,5 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:55:17 EDT
+3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]
+COMMAND: ast.parse(path.read_text(), feature_version=(3, minor)), minor in (10, 11), all companion/*.py and tests/*.py recursively
+Python 3.10 grammar: 30 files OK (host runtime 3.10 only)
+Python 3.11 grammar: 30 files OK (host runtime 3.10 only)

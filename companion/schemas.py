@@ -1,3 +1,4 @@
+# Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:55:17 EDT
 """Data shapes for the companion coordinator.
 
 Event mirrors witness_brain.schemas.event_schema.Event (id, timestamp, source,
@@ -7,6 +8,7 @@ importing anything under witness_brain/ risks pulling in device code.
 from __future__ import annotations
 
 import json
+import math
 import time
 import uuid
 from dataclasses import asdict, dataclass, field
@@ -133,6 +135,18 @@ class ActionRequest:
             raise MalformedCommand("command not in closed set")
         if raw["seq"] < 0:
             raise MalformedCommand("negative seq")
+        try:
+            finite = all(math.isfinite(raw[k]) for k in ("issued_at", "expires_at"))
+        except OverflowError:
+            finite = False
+        if not finite:
+            raise MalformedCommand("timestamps must be finite")
+        for name in ("issuer", "nonce"):
+            if not raw[name] or len(raw[name]) > 256 or clean_text(raw[name], 256) != raw[name]:
+                raise MalformedCommand("invalid %s" % name)
+        if raw["mac"] and (len(raw["mac"]) != 64 or
+                           any(c not in "0123456789abcdef" for c in raw["mac"])):
+            raise MalformedCommand("invalid mac")
         args = raw["args"]
         if raw["command"] in TEXT_COMMANDS:
             if set(args.keys()) != {"text"} or not isinstance(args["text"], str):
