@@ -8,40 +8,69 @@ import signal
 import sys
 import threading
 import time
+import traceback
 
 from .board import FakeBoard
+
+
+def _send_quietly(connection, message):
+    try:
+        connection.send(message)
+    except Exception:
+        pass
 
 
 def _worker(connection, factory, parent_pid):
     # Linux PR_SET_PDEATHSIG: parent crash/SIGKILL must also close the child FD.
     # spawn avoids inheriting the TCP listener, client, or journal lock.
-    libc = ctypes.CDLL(None, use_errno=True)
-    if libc.prctl(1, signal.SIGKILL, 0, 0, 0) != 0:
-        raise OSError(ctypes.get_errno(), 'parent-death signal unavailable')
-    if os.getppid() != parent_pid:
+    # Deployment is Linux only; prctl does not exist on macOS, skipped there so tests reach the factory.
+    if sys.platform.startswith('linux'):
+        libc = ctypes.CDLL(None, use_errno=True)
+        if libc.prctl(1, signal.SIGKILL, 0, 0, 0) != 0:
+            raise OSError(ctypes.get_errno(), 'parent-death signal unavailable')
+    ppid = os.getppid()
+    if ppid != parent_pid:
+        print('driver worker pid %d: parent mismatch ppid=%d expected=%d'
+              % (os.getpid(), ppid, parent_pid), file=sys.stderr, flush=True)
+        _send_quietly(connection, {'ready': False, 'reason': 'parent mismatch',
+                                   'ppid': ppid, 'expected': parent_pid})
+        connection.close()
         return
     sys.stdout = sys.stderr
     board = None
     try:
-        board = factory()
+        try:
+            # Exception text travels to the parent and journal: factories must not put secret values in exception messages.
+            board = factory()
+        except BaseException as exc:
+            trace = traceback.format_exc()
+            print('driver worker pid %d: factory failed\n%s' % (os.getpid(), trace),
+                  file=sys.stderr, flush=True)
+            _send_quietly(connection, {'ready': False, 'reason': 'factory failed',
+                                       'exc_type': type(exc).__name__,
+                                       'exc': str(exc)[:500], 'trace': trace[-2000:]})
+            if isinstance(exc, (SystemExit, KeyboardInterrupt)):
+                raise
+            raise SystemExit(1)
         connection.send({'ready': True, 'kind': getattr(board, 'adapter_kind', 'undeclared')})
-        while True:
-            operation, args = connection.recv()
-            if operation == 'ping':
-                result = board.health() if hasattr(board, 'health') else {'alive': True}
-            elif operation == 'status':
-                result = board.status() if hasattr(board, 'status') else {}
-            elif operation == 'probe':
-                result = board.probe(args) if hasattr(board, 'probe') else {'ok': False, 'reason': 'probe_unavailable'}
-            elif operation == 'action':
-                result = board.execute(args['command'], args['args'])
-            elif operation == 'snapshot':
-                result = board.snapshot()
-            else:
-                raise ValueError('unknown driver operation')
-            connection.send(result)
-    except EOFError:
-        pass
+        try:
+            while True:
+                operation, args = connection.recv()
+                if operation == 'ping':
+                    result = board.health() if hasattr(board, 'health') else {'alive': True}
+                elif operation == 'status':
+                    result = board.status() if hasattr(board, 'status') else {}
+                elif operation == 'probe':
+                    result = board.probe(args) if hasattr(board, 'probe') else {'ok': False, 'reason': 'probe_unavailable'}
+                elif operation == 'action':
+                    result = board.execute(args['command'], args['args'])
+                elif operation == 'snapshot':
+                    result = board.snapshot()
+                else:
+                    raise ValueError('unknown driver operation')
+                connection.send(result)
+        except EOFError:
+            pass
     finally:
         if board is not None:
             board.close()
@@ -75,12 +104,27 @@ class Supervisor:
             # Import/startup has a separate bounded budget, never arms hardware.
             if not self.connection.poll(min(2.0, lease_seconds)):
                 raise TimeoutError('driver startup timeout')
-            ready = self.connection.recv()
+            try:
+                ready = self.connection.recv()
+            except EOFError:
+                raise ConnectionError('driver child closed the pipe before ready') from None
+            if isinstance(ready, dict) and ready.get('ready') is False:
+                detail = ', '.join('%s=%s' % (k, ready[k]) for k in ('reason', 'exc_type', 'exc', 'ppid', 'expected')
+                                   if k in ready)
+                raise ConnectionError('driver startup failed in child: ' + detail)
             if not isinstance(ready, dict) or ready.get('ready') is not True:
                 raise ConnectionError('invalid driver startup')
             self.kind = ready.get('kind', 'undeclared')
-        except BaseException:
+        except BaseException as exc:
+            # Join briefly so the journal names the child's exit code (-9 = SIGKILL).
+            self.process.join(timeout=0.5)
+            exitcode, watchdog_reason = self.process.exitcode, self.reason
+            print('driver startup failed: %s: %s, child exitcode=%s, watchdog_reason=%s'
+                  % (type(exc).__name__, exc, exitcode, watchdog_reason), file=sys.stderr, flush=True)
             self.close('driver startup failed')
+            if isinstance(exc, (ConnectionError, TimeoutError)):
+                raise type(exc)('%s; child exitcode=%s, watchdog_reason=%s'
+                                % (exc, exitcode, watchdog_reason)) from exc
             raise
 
     @property

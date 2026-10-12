@@ -33,6 +33,14 @@ class BrokenBoard(FakeBoard):
         raise OSError('fake driver crash')
 
 
+def raising_factory():
+    raise RuntimeError('fake factory failure')
+
+
+def silent_exit_factory():
+    os._exit(3)
+
+
 class PiTests(unittest.TestCase):
     def setUp(self):
         self.key = os.urandom(32)
@@ -302,6 +310,7 @@ class PiTests(unittest.TestCase):
         thread.join(2)
         self.assertEqual(errors,[])
 
+    @unittest.skipUnless(sys.platform.startswith('linux'), 'needs Linux prctl and /proc; a non-Linux pass proves nothing')
     def test_parent_death_kills_driver(self):
         code = ('from companion.pi.supervisor import Supervisor\n'
                 'import time\n'
@@ -334,3 +343,25 @@ class PiTests(unittest.TestCase):
             proc.wait()
             proc.stdout.close()
             proc.stderr.close()
+
+class StartupFailureTests(unittest.TestCase):
+    def test_factory_exception_is_reported_by_name(self):
+        with self.assertRaises(ConnectionError) as ctx:
+            Supervisor(factory=raising_factory)
+        message = str(ctx.exception)
+        self.assertIn('factory failed', message)
+        self.assertIn('RuntimeError', message)
+        self.assertIn('fake factory failure', message)
+
+    def test_silent_child_exit_names_pipe_and_exitcode(self):
+        with self.assertRaises(ConnectionError) as ctx:
+            Supervisor(factory=silent_exit_factory)
+        message = str(ctx.exception)
+        self.assertIn('closed the pipe before ready', message)
+        self.assertIn('exitcode=3', message)
+
+    def test_happy_path_still_ready(self):
+        s = Supervisor()
+        self.addCleanup(s.close)
+        self.assertEqual(s.kind, 'fake')
+        self.assertTrue(s.healthy)
