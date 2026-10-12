@@ -107,3 +107,13 @@ confirmed opened farther and returned. Receipt: receipts/vendor-gripper-release.
 This follow-up is distinct from the initial all-slight survey. Runtime override
 removed after the test; authenticated status again disarmed, wheel limit0 and
 no joints/outputs. Larger arm poses and loaded travel measurements remain pending.
+
+
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:27:08.153274-04:00
+
+Bounded vendor-derived arm poses now tested; see ARM_POSES.md. The modelled1cm
+lift rose and returned roughly level but was very slight. A subsequent fixed5cm
+forward/2cm up reach in four stages was visibly larger and returned. Exact
+Cartesian displacement remains unmeasured. Pure planner is Jetson-only; general
+Cartesian control/stored actions remain unavailable.153 Jetson tests now pass;
+Pi code unchanged. Final status and boot configuration are again locked.

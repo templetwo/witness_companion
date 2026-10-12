@@ -36,3 +36,10 @@ Previously authorized push remains blocked by missing GitHub authentication.
 Follow-up: vendor gripper release1800us and return1500us physically confirmed
 (opened farther and returned),0.6s each way; see receipts/vendor-gripper-release.json.
 Temporary override removed; normal locked status verified afterwards.
+
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:27:08.153274-04:00
+
+Bounded arm planning added on Jetson (ARM_POSES.md): modelled1cm lift and staged
+5cm-forward/2cm-up reach physically observed with returns. Larger reach confirmed;
+exact distances remain predictions.153 Jetson tests pass. Pi code unchanged;
+runtime arming removed and locked status/vendor masks verified after both tests.
