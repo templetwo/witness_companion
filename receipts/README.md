@@ -1,3 +1,14 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:44:55.687385-04:00
+
+Current detailed handoff: `../PASSDOWN.md`. It supersedes historical state below.
+Cleanup correction: runtime arming override is absent, but inactive
+`/run/temple-witness/commissioning.json` remains. The active service uses the
+locked permanent configuration without operator signals; four vendor units are
+masked. This documentation task performed metadata-only SSH inspection, no
+hardware action, SDK session or restart. Last pose/battery are historical final
+observations from17:35 EDT, not newly measured here. See
+`passdown-state-inspection.json`.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:37:27.588607-04:00
 
 Latest: `arm-grasp-attempt.json` records unsuccessful attended grasp attempts,
