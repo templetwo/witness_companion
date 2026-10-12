@@ -1,7 +1,7 @@
-# Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:55:17 EDT
+# Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:32:40 EDT
 """Five-tool TCP service with an independent robot CommandGuard.
 
-The CLI is fake-only. No remote operation arms the guard. Snapshot/status/notes
+The CLI selects fake or explicit real hardware. No remote operation arms the guard. Snapshot/status/notes
 are not robot commands and never go through a motion mapping. Speech and robot
 actions must carry the existing signed ActionRequest, checked on the Pi.
 """
@@ -9,6 +9,8 @@ import argparse
 import fcntl
 import os
 import secrets
+import signal
+import threading
 import socket
 import time
 
@@ -33,6 +35,8 @@ class GuardService:
                     'executed': False}
         result = self.supervisor.call('action', {'command': decision.command,
                     'args': {} if decision.command == 'stop' else raw['args']})
+        if result.get('unavailable'):
+            return dict(result, ok=False, verdict='rejected')
         if 'error' in result:
             self.guard.disarm()
             self.supervisor.trip('board operation failed')
@@ -68,16 +72,18 @@ class GuardService:
             raise ValueError('tool takes no arguments')
         if tool == 'witness_snapshot':
             return self.supervisor.call('snapshot')
-        self.supervisor.call('ping')
-        return {'ok': True, 'armed': self.guard.armed, 'driver_alive': True,
+        detail = self.supervisor.call('status')
+        return dict(detail, **{'ok': True, 'armed': self.guard.armed, 'driver_alive': True,
                 'controller': self.supervisor.kind,
                 'simulated': self.supervisor.kind == 'fake',
-                'physical_motion_verified': False}
+                'physical_motion_verified': False})
 
 
 def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
-                     response_timeout=0.5, factory=None):
+                     response_timeout=0.5, factory=None, operator_arm=None, operator_stop=None):
     """One session, disarmed on entry. Caller must exclusively own the journal."""
+    if operator_arm is not None:
+        operator_arm.clear()
     session = secrets.token_hex(32)
     guard = CommandGuard(keys, journal)
     options = dict(lease_seconds=lease_seconds, response_timeout=response_timeout)
@@ -92,6 +98,15 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
     try:
         conn.sendall(encode({'session': session, 'protocol': 1, 'tools': sorted(TOOLS)}))
         while supervisor.healthy:
+            if operator_stop is not None and operator_stop.is_set():
+                operator_stop.clear()
+                if operator_arm is not None:
+                    operator_arm.clear()
+                service.action({'command': 'stop'})
+            if operator_arm is not None and operator_arm.is_set():
+                operator_arm.clear()
+                if peer is not None:
+                    guard.arm()
             try:
                 chunk = conn.recv(4096)
             except socket.timeout:
@@ -142,7 +157,12 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--fake', action='store_true', required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--fake', action='store_true')
+    mode.add_argument('--real', action='store_true')
+    parser.add_argument('--hardware-config')
+    parser.add_argument('--sdk-path', default='/home/pi/MasterPi/masterpi_sdk/common_sdk/common/ros_robot_controller_sdk.py')
+    parser.add_argument('--operator-signals', action='store_true', help='local SIGUSR1 arms current authenticated session; SIGUSR2 stops')
     parser.add_argument('--host', default='127.0.0.1')
     parser.add_argument('--port', type=int, default=0)
     parser.add_argument('--peer', default='127.0.0.1')
@@ -157,6 +177,16 @@ def main():
             raise ValueError()
     except (KeyError, ValueError):
         parser.error('key environment variable missing or invalid; supply at least 32 bytes')
+    factory = None
+    if args.real:
+        if not args.hardware_config:
+            parser.error('--real requires --hardware-config')
+        from .hardware import RealBoardFactory
+        factory = RealBoardFactory(args.sdk_path, args.hardware_config)
+    operator_arm, operator_stop = threading.Event(), threading.Event()
+    if args.operator_signals:
+        signal.signal(signal.SIGUSR1, lambda *_: operator_arm.set())
+        signal.signal(signal.SIGUSR2, lambda *_: operator_stop.set())
     # Transport is authenticated but unencrypted. Only the private robot link or
     # loopback is intended. Bind host and peer must be selected explicitly.
     journal, notes = Journal(args.journal), Journal(args.notes_journal)
@@ -165,13 +195,14 @@ def main():
         with socket.socket() as listener:
             listener.bind((args.host, args.port))
             listener.listen(1)
-            print('fake Pi service listening on %s:%s' % listener.getsockname(), flush=True)
+            print(('fake' if args.fake else 'real, DISARMED') + ' Pi service listening on %s:%s' % listener.getsockname(), flush=True)
             while True:
                 conn, address = listener.accept()
                 if address[0] != args.peer:
                     conn.close()
                     continue
-                serve_connection(conn, {args.issuer: key}, journal, notes)
+                serve_connection(conn, {args.issuer: key}, journal, notes, factory=factory,
+                                 operator_arm=operator_arm, operator_stop=operator_stop)
 
 
 if __name__ == '__main__':

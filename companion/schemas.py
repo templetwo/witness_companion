@@ -1,4 +1,4 @@
-# Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:55:17 EDT
+# Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:32:40 EDT
 """Data shapes for the companion coordinator.
 
 Event mirrors witness_brain.schemas.event_schema.Event (id, timestamp, source,
@@ -18,8 +18,10 @@ from typing import Any, Dict, List, Optional
 # ---------------------------------------------------------------------------
 # Closed command set. Nothing outside this set ever reaches a controller.
 # ---------------------------------------------------------------------------
-MOTION_COMMANDS = frozenset({"look_left", "look_right", "look_center"})
-NON_MOTION_COMMANDS = frozenset({"stop", "say", "display"})
+from .controls import EXTRA_MOTION, EXTRA_OUTPUT, validate as validate_control
+
+MOTION_COMMANDS = frozenset({"look_left", "look_right", "look_center"}) | EXTRA_MOTION
+NON_MOTION_COMMANDS = frozenset({"stop", "say", "display"}) | EXTRA_OUTPUT
 COMMANDS = MOTION_COMMANDS | NON_MOTION_COMMANDS
 TEXT_COMMANDS = frozenset({"say", "display"})
 
@@ -155,8 +157,13 @@ class ActionRequest:
                 raise MalformedCommand("text too long")
             if clean_text(args["text"]) != args["text"]:
                 raise MalformedCommand("text has control characters")
+        elif raw["command"] in EXTRA_MOTION | EXTRA_OUTPUT:
+            try:
+                validate_control(raw["command"], args)
+            except (ValueError, TypeError, KeyError) as exc:
+                raise MalformedCommand(str(exc)) from exc
         elif args:
-            # Motion and stop take no arguments: no raw values ever reach a motor.
+            # Named look and stop take no arguments.
             raise MalformedCommand("%s takes no args" % raw["command"])
         return cls(command=raw["command"], seq=raw["seq"],
                    issued_at=float(raw["issued_at"]), expires_at=float(raw["expires_at"]),

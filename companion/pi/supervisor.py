@@ -1,4 +1,4 @@
-# Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:55:17 EDT
+# Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:32:40 EDT
 """Independent monotonic watchdog and isolated, killable driver process."""
 import ctypes
 import math
@@ -28,7 +28,9 @@ def _worker(connection, factory, parent_pid):
         while True:
             operation, args = connection.recv()
             if operation == 'ping':
-                result = {'alive': True}
+                result = board.health() if hasattr(board, 'health') else {'alive': True}
+            elif operation == 'status':
+                result = board.status() if hasattr(board, 'status') else {}
             elif operation == 'action':
                 result = board.execute(args['command'], args['args'])
             elif operation == 'snapshot':
