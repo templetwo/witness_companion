@@ -1,0 +1,165 @@
+{
+  "at": "2026-10-12T11:13:01.617024-04:00",
+  "channel": 1,
+  "physical_execution_verified": true,
+  "initial_readback": {
+    "ok": true,
+    "kind": "pwm_position",
+    "id": 1,
+    "value": 1500,
+    "physical_position_verified": false,
+    "meaning": "board_commanded_pulse"
+  },
+  "original": 1500,
+  "destination": 1800,
+  "duration_seconds": 0.6,
+  "outbound": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "accepted"
+  },
+  "after_jog_readback": {
+    "ok": true,
+    "kind": "pwm_position",
+    "id": 1,
+    "value": 1800,
+    "physical_position_verified": false,
+    "meaning": "board_commanded_pulse"
+  },
+  "return": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "accepted"
+  },
+  "after_return_readback": {
+    "ok": true,
+    "kind": "pwm_position",
+    "id": 1,
+    "value": 1500,
+    "physical_position_verified": false,
+    "meaning": "board_commanded_pulse"
+  },
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "final_status": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 7601,
+        "read_at": 1791817987.1213002,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {
+        "pwm_1": {
+          "bus": "pwm",
+          "id": 1,
+          "min": 1500,
+          "max": 1800
+        }
+      },
+      "outputs": [
+        "buzzer"
+      ],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "operator_observation": "Opened farther and returned",
+  "verification_scope": "Visible gripper opening and return only, no measured gap or grasp/load test",
+  "restored_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:15:22.523552-04:00"
+}

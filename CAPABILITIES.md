@@ -42,7 +42,7 @@ four different kinds of evidence. See `receipts/vendor-mapping-facts.json` and
 | Diagonals | All four directions and stops confirmed at duty 25/0.5s | Slight movement on smooth surface |
 | Turns | Left and right nose turns and stops confirmed at duty 25/0.5s | No measured turn angle |
 | PWM 3/4/5/6 | Each 40us jog and return physically observed | About 3.6 nominal degrees per vendor conversion; not measured joint angles or full ranges |
-| Gripper PWM 1 | 100us jog1500→1600→1500 moved and returned | Initial 40us jog had no visible movement; no grasp/load test |
+| Gripper PWM 1 | Initial100us jog worked; subsequent vendor release pose1500→1800→1500 at0.6s each way physically opened farther and returned | No measured opening width or grasp/load test |
 | Battery | Live telemetry about 7.7–7.9V, final 7.672V | No capacity/current measurement |
 | Sonar | Fixed separate-I2C-transaction reads; ten clear-space samples506–510mm | Not calibrated against a ruler; no autonomous avoidance |
 | Camera | 640x480 JPEG; 147 requests/12s, 76 unique sequences, about 6.27fps; median RTT 1.75ms | Frame read time is not measured exposure time |
@@ -98,3 +98,12 @@ independent whole-Pi-freeze cutoff is still outside the software guard.
 Raw room images and detailed live receipts stay outside the repo in
 `/home/tony/witness_scratch/capabilities-20261012/`. The report retains failed,
 unobserved and conflicting trials alongside later successes.
+
+
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:15:22.523552-04:00
+
+Follow-up: vendor gripper release1500→1800→1500,0.6s each way, physically
+confirmed opened farther and returned. Receipt: receipts/vendor-gripper-release.json.
+This follow-up is distinct from the initial all-slight survey. Runtime override
+removed after the test; authenticated status again disarmed, wheel limit0 and
+no joints/outputs. Larger arm poses and loaded travel measurements remain pending.

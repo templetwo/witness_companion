@@ -32,3 +32,7 @@ Detailed evidence: receipts/capability-live-summary.json,
 receipts/vendor-mapping-facts.json, receipts/capability-deployed-manifest.json.
 No OpenClaw changes, live MCP registration, Stack commit or git push in this task.
 Previously authorized push remains blocked by missing GitHub authentication.
+
+Follow-up: vendor gripper release1800us and return1500us physically confirmed
+(opened farther and returned),0.6s each way; see receipts/vendor-gripper-release.json.
+Temporary override removed; normal locked status verified afterwards.
