@@ -1,4 +1,4 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:56:29 EDT
+Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:06:14 EDT
 
 # Source findings A and B
 
@@ -85,3 +85,36 @@ masterpi_pc_software/Arm.py imports socket symbols but contains no matching
 second listener. Identity of the observed 9026 process remains UNKNOWN.
 No SSH, port-9026 probe, vendor process execution or control-function call was
 used for this source analysis.
+
+## Anthony's subsequent decision: dedicated Witness serial
+
+Anthony's direct instruction in this session: "i will not be using the app.
+serial is ours only". This selects the exclusive Witness driver architecture.
+The earlier recommendation is now selected by Anthony. It does not assert that
+live vendor descriptors have already closed. No Pi process was stopped here.
+
+The handover must identify every process holding /dev/ttyAMA0 and the mechanism
+that restarts it, stop the vendor controllers and their restart paths, verify
+no competing serial owners remain, then construct exactly one Board inside the
+supervised Witness driver. Do not use a vendor umbrella module that imports
+additional Board objects. Reject startup if another owner exists. The supplied
+source has no matching controller service unit or autostart definition, so no
+service name or stop command is guessed in this report.
+
+The camera must be split from control before replacing the umbrella process:
+MasterPi.py:103-106 launches RPC and MJPEG together; :108-111 opens its camera.
+Camera.py:15-80 implements camera capture without constructing a Board, and
+mjpg_server.py:67 starts only the HTTP stream. These are reference boundaries
+for a camera-only replacement; no vendor file was copied or executed.
+
+Source correction verified after HQ updated the passdown: get_battery at
+common/ros_robot_controller_sdk.py:178-190 uses a nonblocking queue read. An
+empty queue or disabled reception returns None. Null is not evidence of a dead
+serial link. The three receivers can compete, but that cause was not measured
+here. The duty-12 floor pulse's lack of motion could reflect stiction or the
+control path; the single test did not distinguish them. Do not silently promote
+either explanation to a finding.
+
+The serial allocation does not repeat or extend the earlier one-pulse driving
+permission. SSH access remains absent on this seat, and no credentials were
+provisioned. Live handover has not occurred.

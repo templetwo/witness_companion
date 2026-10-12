@@ -1,12 +1,12 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:56:29 EDT
+Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:06:14 EDT
 
 # Pi guard service for review
 
 This branch contains a fake-only TCP entry point, a Jetson client implementing
 Controller, and a staged SDK mapping behind a Board interface. It is not
 installed on the Pi or registered in OpenClaw. No vendor source is included.
-The choice to replace MasterPi or use vendor RPC is still a recommendation for
-HQ and Anthony; see VENDOR_FINDINGS.md. The executable CLI only constructs
+Anthony has selected exclusive Witness serial ownership and will not use the
+vendor app; see VENDOR_FINDINGS.md for the decision and pending live handover. The executable CLI only constructs
 FakeBoard. There is no --armed or --real flag.
 
 ## Wire and tool contract
