@@ -1,0 +1,19 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:44:55.687385-04:00",
+  "method": "SSH metadata reads only; no SDK session, actions or state mutations",
+  "guard_active_state": "active",
+  "guard_config": "/etc/temple-witness/hardware.json",
+  "operator_signals_enabled": false,
+  "runtime_override_present": false,
+  "inactive_runtime_json_present": true,
+  "vendor_units": {
+    "masterpi": "masked",
+    "hw_remote": "masked",
+    "hw_button_scan": "masked",
+    "hw_find": "masked"
+  },
+  "correction": "Prior report overstated cleanup: the systemd override was removed; inactive /run commissioning.json remained. No active reference to it.",
+  "pose_and_battery_not_remeasured": true,
+  "prior_handover_archive": "/home/tony/witness_scratch/capabilities-20261012/WITNESS-HQ-HANDOVER-before-detailed-passdown.md",
+  "archive_sha256": "ef529ec543a6c17162606811335c75a154cfbb72ddfcbb757cb9ac6ce5ac03ea"
+}
