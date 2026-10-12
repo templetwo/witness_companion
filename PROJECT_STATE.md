@@ -1,53 +1,76 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:09:09.146747-04:00
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
-# Temple controller: initial capability survey recorded
+# Witness checkpoint: motion stopped for low battery
 
-Temple owns the Pi controller and camera. Vendor controller, phone interface,
-button launcher and discovery remain persistently masked; an actual reboot
-already verified Temple recovery without vendor fallback. The 4 GB Pi runs the
-hardware stack; the Jetson remains the planning host.
+Temple control and reboot persistence are established. The 4 GB Pi runs the
+guard, hardware driver and camera; the Jetson handles planning. Vendor masterpi,
+hw_remote, hw_button_scan and hw_find remain persistently masked. The deployed
+Pi release is still `/opt/temple-witness/releases/20261012-capabilities-04`.
 
-See CAPABILITIES.md for the installed vendor baseline, measured/observed results,
-and remaining limits. Operator confirmed all eight travel directions, both turns,
-small movements/returns of PWM 3–6 and the gripper, plus buzzer and light output.
-**All movement was slight.** This is not full-range or useful-speed calibration.
-Sonar transaction handling was fixed; camera/battery telemetry and stationary
-frozen-driver recovery were tested. Display text, microphone/speaker, IMU and
-other optional peripherals remain unverified or unavailable.
+## Current physical and control state
 
-Installed vendor data already supplies wheel layout, servo roles, IK geometry,
-poses and software offsets. The Pi offsets differ from the downloaded reference.
-Next work should adapt that baseline into bounded Temple poses/IK and measure
-loaded response, not rediscover nominal geometry through trial motion.
+**The arm is not at home.** Last verified commanded pulses, in microseconds:
 
-Final release: /opt/temple-witness/releases/20261012-capabilities-04.
-52 deployed file hashes verified.145 Jetson tests pass; Pi 144 pass + one skip.
-No runtime commissioning override remains. Persistent config records observed
-wheel signs but wheel ceiling 0, joints{}, outputs[], sonarfalse. No local arming
-signals enabled. Final authenticated status disarmed/inactive; serial released
-when disconnected, Temple services active/enabled, vendor units masked/inactive,
-battery 7672mV, Pi throttled 0x0, fresh camera JPEG verified.
+| PWM channel | Role | Commanded value |
+| --- | --- | --- |
+| 1 | Gripper | 1500 |
+| 3 | Wrist pitch | 604 |
+| 4 | Elbow | 2385 |
+| 5 | Shoulder | 1295 |
+| 6 | Base yaw | 1405 |
 
-Detailed evidence: receipts/capability-live-summary.json,
-receipts/vendor-mapping-facts.json, receipts/capability-deployed-manifest.json.
-No OpenClaw changes, live MCP registration, Stack commit or git push in this task.
-Previously authorized push remains blocked by missing GitHub authentication.
+The arm model predicts tip (0,9.10,12.22)cm and pitch -45 degrees. These are
+predictions, not measured physical coordinates; PWM reads are board setpoints.
+The camera visibly looks down. The green-topped blocks remain partly cropped
+at the bottom of the latest successful image. No grasp or payload lift occurred.
 
-Follow-up: vendor gripper release1800us and return1500us physically confirmed
-(opened farther and returned),0.6s each way; see receipts/vendor-gripper-release.json.
-Temporary override removed; normal locked status verified afterwards.
+Latest battery samples at 11:59 EDT: **6.851, 6.842, 6.836 V**. The planned next
+viewing move aborted at 6.945 V, before arming or movement, against the existing
+7.0 V floor. Charge the robot before further physical work; do not lower the
+threshold or retry for a transient higher sample.
 
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:27:08.153274-04:00
+Normal configuration restored and independently checked: disarmed, drive inactive,
+wheel limit 0, joints{}, outputs[], sonarfalse, no runtime commissioning override
+and no operator-arm signals. Vendor masks persist. No new reboot was performed.
 
-Bounded arm planning added on Jetson (ARM_POSES.md): modelled1cm lift and staged
-5cm-forward/2cm-up reach physically observed with returns. Larger reach confirmed;
-exact distances remain predictions.153 Jetson tests pass. Pi code unchanged;
-runtime arming removed and locked status/vendor masks verified after both tests.
+## Completed commissioning
 
+All eight translations and both turns were observed with stops. Early joint and
+gripper checks were slight; later vendor gripper release, larger forward/up reach,
+and mirrored side reaches were observed with returns. Subsequent wrist and
+elbow/shoulder movements produced fresh downward camera views and were left in
+the pose above. See ARM_POSES.md and CAPABILITIES.md for evidence and limits.
 
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:32:35.886647-04:00
+Buzzer/lights, camera, battery, corrected sonar transactions and stationary driver
+freeze recovery were tested. No full speed/range/load calibration, successful
+grasp, autonomous vision behavior, audio I/O or whole-Pi-freeze stopping guarantee.
 
-Left and right arm reaches now physically observed with returns. Each combines
-a modelled 3cm sideways, 5cm forward and 2cm upward move; exact distances remain
-unmeasured. See ARM_POSES.md and receipts/arm-side-live.json.155 Jetson tests pass;
-Pi code unchanged. Normal locked state and vendor masks verified afterwards.
+## Unfinished work and resume order
+
+1. Establish charged battery and current attended clearance. Read actual setpoints;
+   old home-start runners do not apply. Never replay a scratch action automatically.
+2. Diagnose the repeated worker startup failure: EOFError escaped Supervisor
+   construction at 11:36 and 11:53; systemd recovered disarmed. Root cause unknown,
+   no fix claimed. Both failures preceded the intended movement.
+3. Obtain a complete stack view and validate camera-to-gripper localization.
+   Vendor images are rectified, Temple snapshots raw; the vendor planar pixel map
+   is not established for this viewing pose or the top of a three-block stack.
+   Sonar 125–126mm is an unassigned echo, not a verified block/front-edge distance.
+4. Plan and check an approach before opening, closing or lifting around the block.
+   The latest proposed pose (PWM3/4/5=572/2283/1476) was never executed.
+5. Remaining broader work: loaded travel measurement, optional peripherals/audio,
+   independent power cutoff, live MCP registration and general bounded arm control.
+
+## Evidence and validation
+
+`receipts/arm-camera-low-battery.json` records current state, completed moves,
+preflight abort, battery samples and hashes of local raw evidence. Room images
+and one-off runners remain in `/home/tony/witness_scratch/capabilities-20261012/`.
+Earlier receipts cover vendor facts, reboot persistence, wheel mapping and poses.
+
+Last software results: **155 Jetson passes**, **144 Pi passes + one skip**.
+Those are prior results, not rerun for this documentation-only checkpoint.
+Pi runtime code unchanged; previous 52-file deployment manifest remains the last
+hash verification. No new installation, motion, OpenClaw edit or deployment in
+this checkpoint task. Local git checkpoint follows; GitHub push previously failed
+for unavailable authentication. Stack update is tracked separately from local files.

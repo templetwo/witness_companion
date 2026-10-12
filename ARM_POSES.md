@@ -1,8 +1,8 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:27:08.153274-04:00
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
 # Bounded Temple arm poses
 
-`companion/arm_lift.py` provides pure Jetson-side planning for two attended poses.
+`companion/arm_lift.py` provides pure Jetson-side planning for bounded attended poses.
 It imports no vendor module and accesses no hardware. The Pi still owns the SDK,
 authentication, local arming, joint limits and driver supervision. This does not
 add an unrestricted Cartesian action or enable autonomous arm control.
@@ -60,8 +60,8 @@ plan = plan_reach({3: 754, 4: 2485, 5: 845, 6: 1405})
 ```
 
 Scratch attended runners are outside the repository at
-`/home/tony/witness_scratch/capabilities-20261012/`. They require an explicit
-execution flag and refuse reuse of their receipt name. Do not automatically
+`/home/tony/witness_scratch/capabilities-20261012/`. The earlier pose runners require an explicit execution flag. Later one-off
+camera runners execute when invoked; all refuse reuse of their receipt name. Do not automatically
 replay them. A new session requires current readiness and a fresh starting check.
 
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:32:35.886647-04:00
@@ -88,3 +88,30 @@ After both attended tests: override absent, normal configuration loaded,
 disarmed, wheel ceiling0, joints{}, outputs[], serial released on disconnect,
 no operator-arm signals, all four vendor masks intact. Evidence:
 `receipts/arm-side-live.json` and `receipts/arm-side-tests-jetson.txt`.
+
+
+## Camera viewing and low-battery stop, latest checkpoint
+
+The wrist was moved 754->604us, then shoulder 845->995us, then elbow
+2485->2385us with shoulder 995->1295us in two stages. Fresh images showed the
+view progressively lower. These were individually attended scratch commands,
+not additions to the reusable pose API. They did not return home.
+
+**Current commanded pulses: 1=1500,3=604,4=2385,5=1295,6=1405.** The model predicts
+(0,9.10,12.22)cm and -45 degree pitch; physical coordinates/angles unmeasured.
+The green top and red/blue shapes are partly visible at the bottom of the view.
+No full stack localization, grasp or payload lift is established.
+
+A further pose3/4/5=572/2283/1476 was planned but aborted before arming/motion at
+6945mV. Later battery samples6851/6842/6836mV remain below the7000mV floor.
+Normal locked configuration restored. Current state and evidence hashes are in
+`receipts/arm-camera-low-battery.json`; resume steps in `PROJECT_STATE.md`.
+
+Sonar125–126mm cannot be assigned to the stack. Installed camera intrinsics and
+planar map were read as data; vendor Camera.py rectifies frames while Temple
+publishes raw frames. Camera-to-gripper transform and stack-height corrections
+are not validated. Do not blindly use the vendor pixel map for this grasp.
+
+Worker startup EOFError caused two service restarts before movement; the cause
+is unresolved. Recovery was disarmed. Software test counts remain155 Jetson,
+144 Pi plus one skip, from prior runs. No new runtime deployment or test claim.

@@ -1,8 +1,9 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:09:09.146747-04:00
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
 # Witness capability map and commissioning results
 
-**All movements were slight**, as Anthony explicitly reported. Tests establish
+**Initial movements were slight**, as Anthony explicitly reported; subsequent
+larger reaches were observed. Tests establish
 observed direction/response and stopping or return, not useful speed, full travel,
 load capacity, positioning accuracy or collision-free reach. The Jetson remained
 mounted. Later lateral, turn and diagonal trials were on a user-reported smooth
@@ -43,7 +44,7 @@ four different kinds of evidence. See `receipts/vendor-mapping-facts.json` and
 | Turns | Left and right nose turns and stops confirmed at duty 25/0.5s | No measured turn angle |
 | PWM 3/4/5/6 | Each 40us jog and return physically observed | About 3.6 nominal degrees per vendor conversion; not measured joint angles or full ranges |
 | Gripper PWM 1 | Initial100us jog worked; subsequent vendor release pose1500→1800→1500 at0.6s each way physically opened farther and returned | No measured opening width or grasp/load test |
-| Battery | Live telemetry about 7.7–7.9V, final 7.672V | No capacity/current measurement |
+| Battery | Latest 6.836V; next viewing move blocked at 6.945V against 7.0V floor | No capacity/current measurement; physical work stopped |
 | Sonar | Fixed separate-I2C-transaction reads; ten clear-space samples506–510mm | Not calibrated against a ruler; no autonomous avoidance |
 | Camera | 640x480 JPEG; 147 requests/12s, 76 unique sequences, about 6.27fps; median RTT 1.75ms | Frame read time is not measured exposure time |
 | Buzzer | Beeps physically confirmed | Short bounded tones |
@@ -54,7 +55,7 @@ four different kinds of evidence. See `receipts/vendor-mapping-facts.json` and
 | IMU / buttons / gamepad / SBUS | Interfaces inventoried; no packets in passive window | Hardware availability remains unknown |
 | Speech / microphone | Piper synthesized a WAV; playback and capture could not open default audio device | No audible speech or microphone capability established |
 | Five tool facade | Live status, snapshot, stop and local pending note worked; speech failed at playback | No live MCP/OpenClaw registration; note not committed to Stack |
-| Arm IK / stored sequences | Vendor source and eight stored files inspected | Not yet ported to bounded Temple trajectories; no full-range playback |
+| Arm IK / stored sequences | Pure bounded lift/reach/side planners tested; downward viewing moves observed in camera frames | General IK and stored playback unavailable; no grasp/full-range validation |
 | Vision modes / LAB / avoidance | Vendor source inventory complete | Not re-enabled or claimed operational through Temple |
 | Driver stall recovery | Stationary SIGSTOP: status failed in 0.502s, serial released, next session disarmed | No moving fault injection; no guarantee for whole-Pi/kernel freeze |
 
@@ -76,7 +77,7 @@ operator's observed frame; they are not a silent modification of vendor source.
 | Turn left |1,1,1,1 |
 | Turn right |-1,-1,-1,-1 |
 
-## Final state and next implementation step
+## Initial survey checkpoint (historical; latest state below)
 
 Release `/opt/temple-witness/releases/20261012-capabilities-04` is active; 52 file
 hashes match local sources. 145 Jetson tests passed; 144 Pi tests passed and one
@@ -125,3 +126,30 @@ Left and right arm reaches now physically observed with returns. Each combines
 a modelled 3cm sideways, 5cm forward and 2cm upward move; exact distances remain
 unmeasured. See ARM_POSES.md and receipts/arm-side-live.json.155 Jetson tests pass;
 Pi code unchanged. Normal locked state and vendor masks verified afterwards.
+
+
+## Camera viewing and low-battery stop, latest checkpoint
+
+The wrist was moved 754->604us, then shoulder 845->995us, then elbow
+2485->2385us with shoulder 995->1295us in two stages. Fresh images showed the
+view progressively lower. These were individually attended scratch commands,
+not additions to the reusable pose API. They did not return home.
+
+**Current commanded pulses: 1=1500,3=604,4=2385,5=1295,6=1405.** The model predicts
+(0,9.10,12.22)cm and -45 degree pitch; physical coordinates/angles unmeasured.
+The green top and red/blue shapes are partly visible at the bottom of the view.
+No full stack localization, grasp or payload lift is established.
+
+A further pose3/4/5=572/2283/1476 was planned but aborted before arming/motion at
+6945mV. Later battery samples6851/6842/6836mV remain below the7000mV floor.
+Normal locked configuration restored. Current state and evidence hashes are in
+`receipts/arm-camera-low-battery.json`; resume steps in `PROJECT_STATE.md`.
+
+Sonar125–126mm cannot be assigned to the stack. Installed camera intrinsics and
+planar map were read as data; vendor Camera.py rectifies frames while Temple
+publishes raw frames. Camera-to-gripper transform and stack-height corrections
+are not validated. Do not blindly use the vendor pixel map for this grasp.
+
+Worker startup EOFError caused two service restarts before movement; the cause
+is unresolved. Recovery was disarmed. Software test counts remain155 Jetson,
+144 Pi plus one skip, from prior runs. No new runtime deployment or test claim.

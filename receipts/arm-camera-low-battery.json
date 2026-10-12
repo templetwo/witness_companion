@@ -1,0 +1,394 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00",
+  "scope": "Camera viewing motions and low-battery stop; no grasp",
+  "completed_moves": [
+    {
+      "receipt": "fork-look-down.json",
+      "at": "2026-10-12T11:50:45.864231-04:00",
+      "authorization": "point the fork cammera down and look again",
+      "start": {
+        "1": 1500,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "commanded_target": {
+        "1": 1500,
+        "3": 604,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "readback": {
+        "1": 1500,
+        "3": 604,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "camera_observation": "Fresh image shows a downward change in view; optical angle not measured",
+      "locked_status": {
+        "telemetry": {},
+        "sensor_errors": {},
+        "drive_active": false,
+        "capabilities": {
+          "wheel_duty_limit": 0,
+          "directions": [
+            "backward",
+            "backward_left",
+            "backward_right",
+            "forward",
+            "forward_left",
+            "forward_right",
+            "left",
+            "right",
+            "turn_left",
+            "turn_right"
+          ],
+          "joints": {},
+          "outputs": [],
+          "sonar": false,
+          "legacy_modes": "unavailable: require bounded reimplementation",
+          "arm_ik": "unavailable: geometry and joint calibration unverified",
+          "stored_actions": "unavailable: trajectories unaudited"
+        },
+        "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+        "ok": true,
+        "armed": false,
+        "driver_alive": true,
+        "controller": "exclusive-sdk",
+        "simulated": false,
+        "physical_motion_verified": false,
+        "mic": "unconfigured",
+        "camera": "unconfigured",
+        "speech": "unconfigured",
+        "backend": {
+          "backend_id": "witness-direct",
+          "kind": "none",
+          "model": null,
+          "where_computed": "jetson"
+        }
+      }
+    },
+    {
+      "receipt": "fork-look-down-more.json",
+      "at": "2026-10-12T11:51:32.172494-04:00",
+      "authorization": "more",
+      "start": {
+        "1": 1500,
+        "3": 604,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "commanded_target": {
+        "1": 1500,
+        "3": 604,
+        "4": 2485,
+        "5": 995,
+        "6": 1405
+      },
+      "readback": {
+        "1": 1500,
+        "3": 604,
+        "4": 2485,
+        "5": 995,
+        "6": 1405
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "camera_observation": "Fresh image shows a downward change in view; optical angle not measured",
+      "locked_status": {
+        "telemetry": {},
+        "sensor_errors": {},
+        "drive_active": false,
+        "capabilities": {
+          "wheel_duty_limit": 0,
+          "directions": [
+            "backward",
+            "backward_left",
+            "backward_right",
+            "forward",
+            "forward_left",
+            "forward_right",
+            "left",
+            "right",
+            "turn_left",
+            "turn_right"
+          ],
+          "joints": {},
+          "outputs": [],
+          "sonar": false,
+          "legacy_modes": "unavailable: require bounded reimplementation",
+          "arm_ik": "unavailable: geometry and joint calibration unverified",
+          "stored_actions": "unavailable: trajectories unaudited"
+        },
+        "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+        "ok": true,
+        "armed": false,
+        "driver_alive": true,
+        "controller": "exclusive-sdk",
+        "simulated": false,
+        "physical_motion_verified": false,
+        "mic": "unconfigured",
+        "camera": "unconfigured",
+        "speech": "unconfigured",
+        "backend": {
+          "backend_id": "witness-direct",
+          "kind": "none",
+          "model": null,
+          "where_computed": "jetson"
+        }
+      }
+    },
+    {
+      "receipt": "fork-look-down-elbow-shoulder.json",
+      "at": "2026-10-12T11:53:49.481088-04:00",
+      "authorization": "use the other arm servos",
+      "start": {
+        "1": 1500,
+        "3": 604,
+        "4": 2485,
+        "5": 995,
+        "6": 1405
+      },
+      "commanded_target": {
+        "1": 1500,
+        "3": 604,
+        "4": 2385,
+        "5": 1295,
+        "6": 1405
+      },
+      "readback": {
+        "1": 1500,
+        "3": 604,
+        "4": 2385,
+        "5": 1295,
+        "6": 1405
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "camera_observation": "Fresh image shows a downward change in view; optical angle not measured",
+      "locked_status": {
+        "telemetry": {},
+        "sensor_errors": {},
+        "drive_active": false,
+        "capabilities": {
+          "wheel_duty_limit": 0,
+          "directions": [
+            "backward",
+            "backward_left",
+            "backward_right",
+            "forward",
+            "forward_left",
+            "forward_right",
+            "left",
+            "right",
+            "turn_left",
+            "turn_right"
+          ],
+          "joints": {},
+          "outputs": [],
+          "sonar": false,
+          "legacy_modes": "unavailable: require bounded reimplementation",
+          "arm_ik": "unavailable: geometry and joint calibration unverified",
+          "stored_actions": "unavailable: trajectories unaudited"
+        },
+        "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+        "ok": true,
+        "armed": false,
+        "driver_alive": true,
+        "controller": "exclusive-sdk",
+        "simulated": false,
+        "physical_motion_verified": false,
+        "mic": "unconfigured",
+        "camera": "unconfigured",
+        "speech": "unconfigured",
+        "backend": {
+          "backend_id": "witness-direct",
+          "kind": "none",
+          "model": null,
+          "where_computed": "jetson"
+        }
+      }
+    }
+  ],
+  "current_commanded_pwm_us": {
+    "1": 1500,
+    "3": 604,
+    "4": 2385,
+    "5": 1295,
+    "6": 1405
+  },
+  "current_pose_is_home": false,
+  "model_tip_cm": [
+    0,
+    9.097596062247344,
+    12.224908565910418
+  ],
+  "model_pitch_degrees": -45,
+  "physical_tip_position_measured": false,
+  "latest_battery": {
+    "at": "2026-10-12T11:59:52.351148-04:00",
+    "samples_mv": [
+      6851,
+      6842,
+      6836
+    ],
+    "motion_floor_mv": 7000
+  },
+  "aborted_move": {
+    "reason": "preflight battery 6945mV below 7000mV",
+    "motion_sent": false,
+    "target_pwm_us": {
+      "1": 1500,
+      "3": 572,
+      "4": 2283,
+      "5": 1476,
+      "6": 1405
+    },
+    "cleanup": {
+      "override_removed": true
+    }
+  },
+  "final_locked_status": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 6836,
+        "read_at": 1791820794.374656,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "vision": {
+    "observation": "Green top with red/blue beneath or alongside, cropped at bottom center; full stack geometry unresolved",
+    "grasp_performed": false,
+    "camera_gripper_extrinsics_verified": false,
+    "sonar_samples_mm": [
+      125,
+      125,
+      126,
+      125,
+      125,
+      125,
+      125,
+      125,
+      126,
+      125,
+      125,
+      125
+    ],
+    "sonar_echo_associated_with_stack": false,
+    "vendor_mapping_limit": "Vendor rectifies its image and uses a planar map; Temple frames are raw. Stack-height and current-pose mapping unvalidated."
+  },
+  "open_fault": {
+    "events_local": [
+      "2026-10-12 11:36:20 EDT",
+      "2026-10-12 11:53:24 EDT"
+    ],
+    "symptom": "Worker startup EOFError escaped Supervisor construction; service restarted disarmed",
+    "root_cause": "unknown",
+    "fixed": false
+  },
+  "validation": "Documentation/receipt checkpoint only. Previous 155 Jetson passes; Pi 144 passes and one skip. No new runtime tests or deployment.",
+  "evidence": {
+    "fork-look-down.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down.json",
+      "sha256": "ba6900a1085448046c53bae72754346c86c7215a527b30b30ef3cad9e556d3ae"
+    },
+    "fork-look-down-more.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down-more.json",
+      "sha256": "2209802eb41238c0bb74ceba9e10f1f6bcf49c0c64de29fa6852ffa38ea5d7d0"
+    },
+    "fork-look-down-elbow-shoulder.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down-elbow-shoulder.json",
+      "sha256": "0058adc95a7a1372a147191601d0af80187392c0f6c8e902f818b50c3ba2f7a7"
+    },
+    "fork-stack-view.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-stack-view.json",
+      "sha256": "58d82d90a1056ecf0e9d57374773f47e08d75ed6bbd3be9d5f83abd66bb5093c"
+    },
+    "grasp-passive-sensors.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-passive-sensors.json",
+      "sha256": "43436e023f1139174ae83511f414e801348059685de3e792a2e2a950a620605d"
+    },
+    "look-elbow-shoulder-recovery.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/look-elbow-shoulder-recovery.json",
+      "sha256": "4a7e5cfd30476f7b6f664329c41e8fe42f6c1083e3b44e427bbbcf6b763c1383"
+    },
+    "stack-view-low-battery-final.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/stack-view-low-battery-final.json",
+      "sha256": "912400cb1ba26fc29875391a886271df0fb938f3467f100a53689601a85915e2"
+    },
+    "battery-check-115954.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/battery-check-115954.json",
+      "sha256": "f7d150280b9591ef257e3dda8e4a5d1735683b17bbb735c88e4cfced14f5b5ab"
+    },
+    "grasp-preflight-startup-journal.txt": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-preflight-startup-journal.txt",
+      "sha256": "eb144168954081d1e68b71991a2e2f7297ae2f7d7da4f99e9f3ed6e9a4723abe"
+    },
+    "fork-look-down-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down-before.jpg",
+      "sha256": "5042dfd982e247c303f4c2cfae711ad0fccfb1f7c10d15b9d65d5cecb6193d02"
+    },
+    "fork-look-down-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down-after.jpg",
+      "sha256": "68d5340acda38bd8a1a30aed1c409b0e9738a2ec7e28ff43b7d377a31ab73e0c"
+    },
+    "fork-look-down-more-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down-more-after.jpg",
+      "sha256": "c5aa824ae12cbd0270d1703bf6b3e4abaaed000c5c445a8690b00cc21fd30dff"
+    },
+    "fork-look-down-elbow-shoulder-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/fork-look-down-elbow-shoulder-after.jpg",
+      "sha256": "fd0346a40084ae71e276dfd2a45cdc5c0f4ff8fc34e86d4ec46d29f31b091811"
+    }
+  }
+}

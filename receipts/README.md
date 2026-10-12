@@ -1,3 +1,9 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
+
+Latest Jetson checkpoint: `arm-camera-low-battery.json` records the held non-home
+pose, completed camera motions and low-battery abort. Current project overview:
+`../PROJECT_STATE.md`. Earlier evidence below retains its original scope/date.
+
 # receipts: companion coordinator, hardware-free harness
 
 - **Tested sha:** `4e253546417bca3578ceff2c125964f69e4c4e7a` on branch `prep/companion-coordinator`

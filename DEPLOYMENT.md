@@ -1,4 +1,4 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:09:09.146747-04:00
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
 # Temple Witness Pi controller deployment
 
@@ -66,7 +66,7 @@ NetworkManager, SSH and existing network infrastructure are preserved.
 The current Pi address is still DHCP-assigned, not reserved by this work; an
 address change requires updating the configured bindings and Jetson endpoint.
 
-## Validation and remaining commissioning
+## Initial deployment validation (historical)
 
 See CAPABILITIES.md and receipts/capability-live-summary.json.145 Jetson tests
 passed; Pi 144 passed with one unrelated PyYAML skip.52 deployed hashes match.
@@ -92,3 +92,30 @@ and disable both Temple services, verify no serial holder, replace each vendor
 mask with its backed-up unit, reload systemd, and then explicitly choose which
 vendor services to enable/start. Starting vendor code may initialize hardware.
 Do not execute rollback automatically on a fault or reboot.
+
+
+## Camera viewing and low-battery stop, latest checkpoint
+
+The wrist was moved 754->604us, then shoulder 845->995us, then elbow
+2485->2385us with shoulder 995->1295us in two stages. Fresh images showed the
+view progressively lower. These were individually attended scratch commands,
+not additions to the reusable pose API. They did not return home.
+
+**Current commanded pulses: 1=1500,3=604,4=2385,5=1295,6=1405.** The model predicts
+(0,9.10,12.22)cm and -45 degree pitch; physical coordinates/angles unmeasured.
+The green top and red/blue shapes are partly visible at the bottom of the view.
+No full stack localization, grasp or payload lift is established.
+
+A further pose3/4/5=572/2283/1476 was planned but aborted before arming/motion at
+6945mV. Later battery samples6851/6842/6836mV remain below the7000mV floor.
+Normal locked configuration restored. Current state and evidence hashes are in
+`receipts/arm-camera-low-battery.json`; resume steps in `PROJECT_STATE.md`.
+
+Sonar125–126mm cannot be assigned to the stack. Installed camera intrinsics and
+planar map were read as data; vendor Camera.py rectifies frames while Temple
+publishes raw frames. Camera-to-gripper transform and stack-height corrections
+are not validated. Do not blindly use the vendor pixel map for this grasp.
+
+Worker startup EOFError caused two service restarts before movement; the cause
+is unresolved. Recovery was disarmed. Software test counts remain155 Jetson,
+144 Pi plus one skip, from prior runs. No new runtime deployment or test claim.
