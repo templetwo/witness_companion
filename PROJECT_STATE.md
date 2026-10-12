@@ -1,3 +1,38 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:37:27.588607-04:00
+
+## Latest: grasp attempt, no confirmed pickup
+
+ATTENDED GRASP ATTEMPT ENDED WITHOUT CONFIRMED PICKUP. Both cameras now show
+blocks and fork; green is above red/blue side-by-side. Pads contacted, tilted
+and shifted green, but no inspected frame confirms complete clearance/retention.
+Gripper closure1700/1600, then1500us with deeper seating did not secure a pickup.
+User reports arm quiet and suspects loose grip. Stronger closure alone was not
+sufficient; jaw placement and physical joint response need correction.
+
+FINAL: gripper OPEN and visibly clear above supported stack. Command readbacks
+1=1800,3=782,4=1803,5=2016,6=1520us; NOT HOME and not encoder angles. Normal guard
+locked/disarmed,driveinactive,wheel0,joints{},outputs[],sonarfalse; runtime
+commissioning files removed, normal service has no operator signals. All four
+vendor units independently checked masked. Last movement preflight battery
+7720mV. No wheels moved. No new runtime deployment or code-test count.
+
+Modelled coordinated lifts and exact pulse reversal diverged from observed tip
+movement. Unloaded shoulder100us/0.6s produced clear rise;50us/1s earlier did not.
+Cause not established; do not assume deadband, weak servo, calibration error or
+full-range/load capability. Camera-to-jaw and joint response remain uncalibrated.
+Startup EOFError recurred17:28:31 and17:34:35 before arming/actions. Fresh disarmed
+sessions verified unchanged commands before narrowly bounded recovery. Fault
+remains unresolved; further grasps held for controller and placement diagnosis.
+No scratch runner may auto-replay; historical reports are not fresh permission.
+
+Evidence: witness_pi_guard/receipts/arm-grasp-attempt.json hashes raw receipts
+and final images in witness_scratch/capabilities-20261012. Final view:
+grasp-clear-s2-after.jpg. No claim of autonomous grasping or successful payload
+lift. User's two blue front lights identified provisionally as ultrasonic RGB
+indicators, consistent with vendor device documentation and earlier light tests.
+
+## Earlier checkpoints, historical
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:05:08.748652-04:00
 
 ## Latest: charged and upright pose restored

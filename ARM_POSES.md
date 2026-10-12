@@ -1,3 +1,12 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:37:27.588607-04:00
+
+Current checkpoint: attended grasp attempts made contact and moved the green
+block, but did not establish secure pickup. Gripper now open and clear, controls
+locked. Current pulses1=1800,3=782,4=1803,5=2016,6=1520us, not home. Coordinated
+model predictions/reversals diverged from physical motion; require calibration
+and fix repeated startup EOF fault before further grasping. See PROJECT_STATE.md
+and receipts/arm-grasp-attempt.json. No new runtime/software-test changes.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
 # Bounded Temple arm poses

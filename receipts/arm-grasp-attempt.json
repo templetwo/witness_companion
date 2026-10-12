@@ -1,0 +1,1135 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:37:27.588607-04:00",
+  "authorization": "User requested grasp and retry; continuous attended session; user repositioned external webcam and later reported quiet arm, suggested grip too loose.",
+  "outcome": "No confirmed secure pickup. Pads contacted, tilted and shifted green block; no inspected frame establishes complete separation/retention. Final jaws open and visually clear, block supported by lower red/blue stack.",
+  "final_commanded_pulses": {
+    "1": 1800,
+    "3": 782,
+    "4": 1803,
+    "5": 2016,
+    "6": 1520
+  },
+  "physical_joint_angles_measured": false,
+  "not_home": true,
+  "final_locked_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "preflight_battery_mv": 7720,
+  "limitations": [
+    "Coordinated modeled lifts and exact command reversals did not reliably match physical tip motion. Cause unestablished.",
+    "Shoulder100us at0.6s visibly raised unloaded jaws;50us at1s did not clearly lift. This does not establish universal deadband or timing cause.",
+    "Force not measured; stronger1500us gripper closure rotated block and still failed retention. Jaw placement as well as grip requires correction.",
+    "Startup EOFError recurred before arming at17:28:31 and before setup at17:34:35. No action replayed after unknown outcome; independently verified unchanged commands before recovery actions. Fault remains unresolved.",
+    "Camera intrinsics/extrinsics and servo response not calibrated for repeatable autonomous grasping."
+  ],
+  "runtime_changed": false,
+  "software_tests_rerun": false,
+  "raw_receipts": [
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-align-yaw-initialize.json",
+      "sha256": "a0a13a50135eaa2c69939494d0650ebe330f4eed5c7cce6d7d238722f062986a",
+      "start": {
+        "1": 1500,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1405
+      },
+      "target": {
+        "1": 1500,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1485
+      },
+      "readback": {
+        "1": 1500,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1485
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 0,
+      "battery_preflight": {
+        "value": 7785,
+        "read_at": 1791839459.872047,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-align-yaw-after.jpg",
+          "sha256": "27a961bd210315f3333db102b0f9c29215ff91fb75d4273a497fb8ea619d1d44"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-align-yaw-fork-after.jpg",
+          "sha256": "3d17695f9b7d73e3b214b034b940f5e064c3948e0ec3b4c114de15209f75e16d"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-a-initialize.json",
+      "sha256": "1581043f79a8fe0cde01771ba228cb547418bba6d7fc2987c724f91a3bb1d9d8",
+      "start": {
+        "1": 1800,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 803,
+        "4": 2406,
+        "5": 1585,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 803,
+        "4": 2406,
+        "5": 1585,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 4,
+      "battery_preflight": {
+        "value": 7828,
+        "read_at": 1791839583.141193,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-a-after.jpg",
+          "sha256": "e86b5d3ef60894bf7aad0057cd9f7dece9f49f730a1298ba0255e90c7629a80d"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-a-fork-after.jpg",
+          "sha256": "da262e1a2afdee3fef41d788408a10c9de75056254a7a1f43e79c8823a9208b3"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-b-initialize.json",
+      "sha256": "76a3e6b380d6b90c272df45ea90cc9fb34a9ed30de42eb0fea0a55c18f9cd006",
+      "start": {
+        "1": 1800,
+        "3": 856,
+        "4": 2468,
+        "5": 1576,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 1026,
+        "4": 2439,
+        "5": 1774,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 1026,
+        "4": 2439,
+        "5": 1774,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 4,
+      "battery_preflight": {
+        "value": 7920,
+        "read_at": 1791839907.2690537,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-b-after.jpg",
+          "sha256": "33cbbcaf583626d4aa40d3aa0830f9c6156179252d0a037c05b4de4d4d744195"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-b-fork-after.jpg",
+          "sha256": "dea1520227b1235437bf889f7961efdf53958b28bde673bf8e3393062d4dda48"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-c-initialize.json",
+      "sha256": "00a9decc888f1dab908723766199056ebdb4dd88726250e94e8385a3856608a6",
+      "start": {
+        "1": 1800,
+        "3": 1026,
+        "4": 2439,
+        "5": 1774,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 1106,
+        "4": 2275,
+        "5": 2018,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 1106,
+        "4": 2275,
+        "5": 2018,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 4,
+      "battery_preflight": {
+        "value": 7805,
+        "read_at": 1791839949.7151537,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-c-after.jpg",
+          "sha256": "5d2fefa49351386c1c453ea326af8b57a33ebc0b4987d2fb3cc71cc6c8d29f25"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-approach-c-fork-after.jpg",
+          "sha256": "2bd05e00b3cd454784d444d54a5a933ead3cf8fdf9a623d0294584c2415ea8b5"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-clear-s2-initialize.json",
+      "sha256": "d12cac9199db1e0ed8512b08edd80b9ad1f8d33f6998854e0ad0978253482c40",
+      "start": {
+        "1": 1500,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 2,
+      "battery_preflight": {
+        "value": 7720,
+        "read_at": 1791840933.1744592,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-clear-s2-after.jpg",
+          "sha256": "c1dd8b216d0097aee72471a5b28d227d5548f51cd1fd9228eac23e34eeb8d6dc"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-clear-s2-fork-after.jpg",
+          "sha256": "14f8021b88eb195015404c532f5b5a6fc86a7f971f6021baae55bc3f921c419c"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-f-initialize.json",
+      "sha256": "6001065c566a6cedd8e6a90a2865845224fc0420f1f314d9705a79c6e9f6df9a",
+      "start": {
+        "1": 1800,
+        "3": 993,
+        "4": 1959,
+        "5": 2221,
+        "6": 1520
+      },
+      "target": {
+        "1": 1700,
+        "3": 993,
+        "4": 1959,
+        "5": 2221,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1700,
+        "3": 993,
+        "4": 1959,
+        "5": 2221,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7849,
+        "read_at": 1791840100.1283238,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-f-after.jpg",
+          "sha256": "9c1ad42f808e444cc6f67215f4897cc6797bdf724f161638ad6485db3ec5b2e3"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-f-fork-after.jpg",
+          "sha256": "371493641cffa2eb507a8d89c91585564d60bf670d761cc12e245ef052179dba"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-h-initialize.json",
+      "sha256": "d119405ff81b051c137caac3aab3d7a5304ef815b81a332efa8f34260ad3453d",
+      "start": {
+        "1": 1700,
+        "3": 944,
+        "4": 1913,
+        "5": 2218,
+        "6": 1520
+      },
+      "target": {
+        "1": 1600,
+        "3": 944,
+        "4": 1913,
+        "5": 2218,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1600,
+        "3": 944,
+        "4": 1913,
+        "5": 2218,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7780,
+        "read_at": 1791840202.3657355,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-h-after.jpg",
+          "sha256": "a81a554a371d9c066bf881dcd678c82299ca46c32e17299a736f1e15697806ce"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-h-fork-after.jpg",
+          "sha256": "8e31bd0df25185d5adba2d1abd8761e84483ea3debbfc2df4e424dc38434c580"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-q-initialize.json",
+      "sha256": "fcda934aa0b3776a0658d88d9070773f380eb7b62a3f40c28eb5613230007e9f",
+      "start": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "target": {
+        "1": 1500,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1500,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 2,
+      "battery_preflight": {
+        "value": 7794,
+        "read_at": 1791840735.6941514,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-q-after.jpg",
+          "sha256": "1102c6883dc6eadb19219c0618786d506b6c3b37486121764056aacd91ee96f9"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-close-q-fork-after.jpg",
+          "sha256": "fe48ea299a6faaa7fb1a54b1b4c94b70de4d494e56499d0c865ec5e5156fe049"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-forward-d-initialize.json",
+      "sha256": "c4f328d44a9b690bb01d91b8c473cb935f7a9d2215b09ccd2214ae5331b63a62",
+      "start": {
+        "1": 1800,
+        "3": 1106,
+        "4": 2275,
+        "5": 2018,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 1014,
+        "4": 2063,
+        "5": 2138,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 1014,
+        "4": 2063,
+        "5": 2138,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 4,
+      "battery_preflight": {
+        "value": 7834,
+        "read_at": 1791840003.7086444,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-forward-d-after.jpg",
+          "sha256": "3ea1921ab69395e836c5e85028e27b91f98cc290af88685b3d6b2b3e8bd2da79"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-forward-d-fork-after.jpg",
+          "sha256": "3cd3b6827c06b1adfdaa37ea53770c477ca73be6acd41c407a4329af13bc4c34"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-g-initialize.json",
+      "sha256": "7201e85ab7deccdfc232e2afe2c6867a9c7f40b86a2877def1dc796f7f0f3509",
+      "start": {
+        "1": 1700,
+        "3": 993,
+        "4": 1959,
+        "5": 2221,
+        "6": 1520
+      },
+      "target": {
+        "1": 1700,
+        "3": 944,
+        "4": 1913,
+        "5": 2218,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1700,
+        "3": 944,
+        "4": 1913,
+        "5": 2218,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 2,
+      "battery_preflight": {
+        "value": 7766,
+        "read_at": 1791840138.4865305,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-g-after.jpg",
+          "sha256": "f1cd6e1630fccde05906b8fca3fe173d8b0335319a1634b52a2acd150692a6b3"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-g-fork-after.jpg",
+          "sha256": "b9aa5f9e0e34d9f728ada36a93edaf799e499762d9bc34988d4f441bba82bedc"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-i-initialize.json",
+      "sha256": "1b28d54d1a6ec5aaba947a822ee584d7e2d267db4b1863830b5c3fe0142ba16f",
+      "start": {
+        "1": 1600,
+        "3": 944,
+        "4": 1913,
+        "5": 2218,
+        "6": 1520
+      },
+      "target": {
+        "1": 1600,
+        "3": 914,
+        "4": 1967,
+        "5": 2134,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1600,
+        "3": 914,
+        "4": 1967,
+        "5": 2134,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 4,
+      "battery_preflight": {
+        "value": 7862,
+        "read_at": 1791840246.7424262,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-i-after.jpg",
+          "sha256": "45b28fe6f9483191874b802d35c703258cc9c02a14367df64553acd9556e93a7"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-i-fork-after.jpg",
+          "sha256": "80542521900bab1b6f8daedb7e16cbffaeb2436fc28c948476dca210210c7102"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-j-initialize.json",
+      "sha256": "c823c49193fae04d080e1f6f2954b3de9a0d2f25b62f2bef64c518f81667afc2",
+      "start": {
+        "1": 1600,
+        "3": 914,
+        "4": 1967,
+        "5": 2134,
+        "6": 1520
+      },
+      "target": {
+        "1": 1600,
+        "3": 782,
+        "4": 1803,
+        "5": 2166,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1600,
+        "3": 782,
+        "4": 1803,
+        "5": 2166,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 4,
+      "battery_preflight": {
+        "value": 7823,
+        "read_at": 1791840303.5428069,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-j-after.jpg",
+          "sha256": "969b3dad751989ef323f9e2fa1221e2cbc3eb5ba238ab84f10826ef7c66ad143"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-j-fork-after.jpg",
+          "sha256": "0c1cdf613514ca4971ed380c452f2e5f5ff819aae66f7a4577cfebee592f97b1"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-r-initialize.json",
+      "sha256": "17644be5f7fed0b792c02aff098221fe022a7b4251fd722665c46ce344dff0b8",
+      "start": {
+        "1": 1500,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "target": {
+        "1": 1500,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1500,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7743,
+        "read_at": 1791840795.820341,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-r-after.jpg",
+          "sha256": "f7b345392583a27c0000f415ededf068ced80219179c5cf1125db47111cb9245"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lift-r-fork-after.jpg",
+          "sha256": "1d4544d147f451c798e38f7a059e032ba3b639d2263da5efc4ac45568de2d83f"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lower-check-initialize.json",
+      "sha256": "cd51e38e7959689c8281141b6df12344838e32e9208e8144248d09b622df8bdb",
+      "start": {
+        "1": 1800,
+        "3": 803,
+        "4": 2406,
+        "5": 1585,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 856,
+        "4": 2468,
+        "5": 1576,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 856,
+        "4": 2468,
+        "5": 1576,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 2,
+      "battery_preflight": {
+        "value": 7858,
+        "read_at": 1791839700.117053,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lower-check-after.jpg",
+          "sha256": "1c032f4456514491be1e92e24a6e693b10278da57bb543eb9f4e3a29b57c41d0"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-lower-check-fork-after.jpg",
+          "sha256": "f682ad479dbcc5921443d88265b2ef5f13a9a79c4b024aa33c258b0b7a26d253"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-open-align-initialize.json",
+      "sha256": "114ad6e79d3ab3b6af9434cd61fa865d8892d22ceebeef145a2ec25f62cdb1ae",
+      "start": {
+        "1": 1500,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1485
+      },
+      "target": {
+        "1": 1800,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 2,
+      "battery_preflight": {
+        "value": 7773,
+        "read_at": 1791839534.3866162,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-open-align-after.jpg",
+          "sha256": "36f2f5976c84f58201dfeca4d8828f0ddbf0689f509c37d44df799ea3024f6c5"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-open-align-fork-after.jpg",
+          "sha256": "ab752bef802d8ed45cbd156d767b3ec6a6a66d7a719eeeb16a87a84ad90f76ab"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-release-l-initialize.json",
+      "sha256": "c023420277b4cc70bc5eefc644f030a893ac411c4fc83d381273ffe553c0ac7a",
+      "start": {
+        "1": 1600,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7783,
+        "read_at": 1791840432.1369178,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-release-l-after.jpg",
+          "sha256": "322cd2ade13cc4d2e3929e9e8d8436e1ee5ae9545a4ad0410ea045966c0a0c70"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-release-l-fork-after.jpg",
+          "sha256": "0b05367e76d0f3ddca9f550cd3fcd5971bd221c77ad561ec63f06556efa760c9"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-reseat-n-initialize.json",
+      "sha256": "5ac278402ea981db14422d0a71b08b13d084dce7b79952b1f1024468b9facf6b",
+      "start": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7788,
+        "read_at": 1791840614.6539857,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-reseat-n-after.jpg",
+          "sha256": "776ea9d60cec08ae20d69a6e091491ca150369826eacdb37626dba549b3912a6"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-reseat-n-fork-after.jpg",
+          "sha256": "fe1294efa0daff14c6994cc568cecc2edf19697acd9f276f78f65853665edac8"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-e-initialize.json",
+      "sha256": "2362df4f32402b07ae837e447732208f676e82677412375fa4a5aeaa0f755894",
+      "start": {
+        "1": 1800,
+        "3": 1014,
+        "4": 2063,
+        "5": 2138,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 993,
+        "4": 1959,
+        "5": 2221,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 993,
+        "4": 1959,
+        "5": 2221,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 2,
+      "battery_preflight": {
+        "value": 7842,
+        "read_at": 1791840050.439786,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-e-after.jpg",
+          "sha256": "d781e63131d9a5cde50edfa828adf983ef961615bb9b7be80d4ae39504c24829"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-e-fork-after.jpg",
+          "sha256": "20f47bb4c8f92f14162c9ea6e58a2b6a2b639f2c7750945708341a73683e5e91"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-o-initialize.json",
+      "sha256": "517f6847559ec0678723bb9a72304bf5cb64f8bb30e227ae67319bc0872ed8a1",
+      "start": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2166,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2166,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7804,
+        "read_at": 1791840659.5854704,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-o-after.jpg",
+          "sha256": "d713964a43ada819e1edb4b1c7001add910e0d75a09a6d17e36dd2aef88ac7d7"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-o-fork-after.jpg",
+          "sha256": "56a9d0270cc892656c2873703583967d4d3369aa2b68b3b5e28f950ba70d907e"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-p-initialize.json",
+      "sha256": "9e4d6a9d085d3bccae9ab26ca110ceb03b234e7353808710459810074e0afec1",
+      "start": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2166,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7803,
+        "read_at": 1791840704.0409222,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-p-after.jpg",
+          "sha256": "b7b8af5ab5907b68fc972aa0a6a3a5394de8031e396def2152fb93239c4d780d"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-seat-p-fork-after.jpg",
+          "sha256": "a9c11920e89629650cf65f594fb2fceeee9ef899adca2ccfeeb49d4e440c7285"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-shoulder-k-initialize.json",
+      "sha256": "b5952ba2a9cc226db42324d7b21f29a29d80681f3680112121973ff0d0a2a3de",
+      "start": {
+        "1": 1600,
+        "3": 782,
+        "4": 1803,
+        "5": 2166,
+        "6": 1520
+      },
+      "target": {
+        "1": 1600,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1600,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7864,
+        "read_at": 1791840362.9936516,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-shoulder-k-after.jpg",
+          "sha256": "8166ddee6d3c1a6b88e720075756dce860594589a45be8000ce5b48870057ffd"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-shoulder-k-fork-after.jpg",
+          "sha256": "dfe2a166213c2e78e9455dae6846d7fa0f2973109aed6fb82cab4e55bf24ed43"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-survey-initialize.json",
+      "sha256": "5d24339409f1233199225f23505f906df71b3bbe0ac6ef6c2a9ec043c7925e0e",
+      "start": {
+        "1": 1500,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "target": {
+        "1": 1500,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1405
+      },
+      "readback": {
+        "1": 1500,
+        "3": 572,
+        "4": 2283,
+        "5": 1476,
+        "6": 1405
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 7,
+      "battery_preflight": {
+        "value": 7830,
+        "read_at": 1791839243.2902713,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-survey-after.jpg",
+          "sha256": "81325a1583b94ba4f227272704da69221da13391ff7b8448458c146ecea612ff"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-survey-fork-after.jpg",
+          "sha256": "2bd9b2323ae651222f0b0231ab903935350c1bdb4f1d7a2be43098a7fc1e333d"
+        }
+      ]
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-unloaded-m-initialize.json",
+      "sha256": "2452efa3c5a17dc6a65d403d6508206c2f87e712b38354707b3fba302cf16513",
+      "start": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1520
+      },
+      "readback": null,
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 0,
+      "battery_preflight": null,
+      "images": []
+    },
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-unloaded-m2-initialize.json",
+      "sha256": "153addafec7c8d27a563944eef400e997ec9f4d41debb7109bf152d6d153be14",
+      "start": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1520
+      },
+      "readback": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1520
+      },
+      "cleanup": {
+        "override_removed": true
+      },
+      "stage_count": 1,
+      "battery_preflight": {
+        "value": 7777,
+        "read_at": 1791840571.0586085,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      },
+      "images": [
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-unloaded-m2-after.jpg",
+          "sha256": "9224915c0b38dc3c5a655c39874443ba0a081cb7e681f82247d0f250a64dd8fc"
+        },
+        {
+          "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-unloaded-m2-fork-after.jpg",
+          "sha256": "85485db2aab0fa93d7f4ad7979d17ce8a0d83f994b814147c091248fffd79f90"
+        }
+      ]
+    }
+  ],
+  "additional_evidence": [
+    {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/grasp-clear-s-aborted.json",
+      "sha256": "9e5db4af57b590d018c6c25a90521b0e302d97be9dbec233c333a1d95ec1e78e"
+    }
+  ],
+  "no_automatic_replay": true
+}

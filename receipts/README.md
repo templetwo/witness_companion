@@ -1,3 +1,9 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:37:27.588607-04:00
+
+Latest: `arm-grasp-attempt.json` records unsuccessful attended grasp attempts,
+final open/clear/disarmed state, observed positioning divergence and repeated
+pre-arm startup faults. Raw receipts and camera image hashes included.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
 Latest Jetson checkpoint: `arm-camera-low-battery.json` records the held non-home
