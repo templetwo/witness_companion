@@ -1,4 +1,4 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-12T10:05:53.789871-04:00
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:09:09.146747-04:00
 
 # Temple Witness Pi controller deployment
 
@@ -8,14 +8,16 @@ reasoning remain on the Jetson; no language model was installed on the Pi.
 
 ## Live configuration
 
-- Pi release: `/opt/temple-witness/releases/20261012-handover-01`, selected by
-  `/opt/temple-witness/current`. File digests: `receipts/temple-deployed-manifest.json`.
+- Pi release: `/opt/temple-witness/releases/20261012-capabilities-04`, selected by
+  `/opt/temple-witness/current`. File digests: `receipts/capability-deployed-manifest.json`.
 - `temple-witness-guard.service`: enabled at boot, authenticated TCP
   `10.42.0.23:9040`, restricted to Jetson peer `10.42.0.1`.
 - `temple-witness-camera.service`: enabled at boot, separate camera-only process,
   `http://10.42.0.23:8080/snapshot.jpg`, restricted to that same peer.
 - Guard uses `/etc/temple-witness/hardware.json`: wheel duty limit **0**, no
-  joints, outputs or sonar. Always starts disarmed; the deployed command does
+  joints, outputs or sonar. Observed direction signs are saved with the zero wheel
+  ceiling. Runtime commissioning override has been removed. Always starts disarmed;
+  the deployed command does
   not enable operator arming signals. No remote arming operation exists.
 - The guard opens a single SDK Board in a supervised child for each connection.
   Startup writes zero wheel duty. Clean disconnect or heartbeat loss kills the
@@ -66,24 +68,20 @@ address change requires updating the configured bindings and Jetson endpoint.
 
 ## Validation and remaining commissioning
 
-- Jetson Python 3.10: 132 tests passed, including 18 focused handover tests.
-- Pi Python 3.11: 132 run, 131 passed, one unrelated PyYAML config test skipped.
-  Initial unprivileged tests could not write MCP temporary directories inside
-  the root-owned release; rerunning as the intended guard identity resolved it.
-- Full live ownership inventory found one serial descriptor in one Temple
-  worker; vendor TCP ports 9030/9026 and UDP discovery 9027 were absent.
-- Actual heartbeat lapse with wheels disabled released serial; a new explicit
-  session started disarmed. This verifies process cleanup, not physical braking.
-- Battery telemetry arrived around 7.9 V. Separate camera returned JPEGs with
-  advancing frame sequences. Timestamps describe frame-read time, not measured
-  sensor exposure. Pi power flags were 0x0 and NTP synchronized.
-- Memory snapshot: 4050 MiB total, about 3450 MiB available after disconnect.
+See CAPABILITIES.md and receipts/capability-live-summary.json.145 Jetson tests
+passed; Pi 144 passed with one unrelated PyYAML skip.52 deployed hashes match.
+All eight translations,two turns, four small arm jogs and a small gripper jog were
+physically observed with stops/returns. All movements were slight. Camera,
+battery, sonar reads, lights/beep, and stationary frozen-driver recovery were
+checked. Microphone/playback and several optional peripherals remain unavailable
+or unverified. Vendor geometry, channel mapping and actual Pi offsets are recorded
+in receipts/vendor-mapping-facts.json; full-range safe trajectories remain work.
 
-No nonzero motor command, servo command, drive test or arm test was sent.
-Physical stopping, direction validation, wheel/servo calibration, full-Pi-freeze
-cutoff and attended motion commissioning remain outstanding. Outputs and sonar
-also remain disabled until their specific validation. The unused operator-arm
-signal path and broader adapter behavior still need review before enabling them.
+Final authenticated status is disarmed, drive inactive and wheel ceiling 0.
+No serial owner remains after disconnect. Guard/camera remain active/enabled;
+four vendor masks remain intact. Final battery 7672mV, throttled 0x0, fresh JPEG.
+Actual reboot testing occurred during handover, before these commissioning tests.
+No whole-Pi-freeze stop guarantee, live MCP registration or autonomy is claimed.
 
 ## Rollback, only on a future explicit operator instruction
 

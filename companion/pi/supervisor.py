@@ -31,6 +31,8 @@ def _worker(connection, factory, parent_pid):
                 result = board.health() if hasattr(board, 'health') else {'alive': True}
             elif operation == 'status':
                 result = board.status() if hasattr(board, 'status') else {}
+            elif operation == 'probe':
+                result = board.probe(args) if hasattr(board, 'probe') else {'ok': False, 'reason': 'probe_unavailable'}
             elif operation == 'action':
                 result = board.execute(args['command'], args['args'])
             elif operation == 'snapshot':

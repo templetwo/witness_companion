@@ -1,0 +1,3237 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:09:09.146747-04:00",
+  "operator_observations": {
+    "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T10:41:12.278712-04:00",
+    "configuration": "Jetson mounted; latest left test reported on smooth surface. Do not retroactively assign smooth surface to earlier trials.",
+    "observations": {
+      "drive-forward-raised": "All four turned and stopped; wheels raised at that time only",
+      "drive-forward-floor-long": "Moved backwards and stopped",
+      "drive-forward-calibrated-repeat": "Forward and stopped",
+      "drive-left-calibrated-repeat": "Front left wheel turned; no chassis movement",
+      "drive-left-floor25": "Slid RIGHT and stopped; user correction supersedes initial left report",
+      "drive-left-loaded-left": "User reports slid right. Stop was commanded and guard disarmed; user has not yet explicitly confirmed physical stop for this pulse.",
+      "drive-left-loaded-left-repeat": "Explicit user-requested repeat, duty25/0.5s, signs [-1,-1,1,1]: RIGHT and stopped. Physical stop confirmed.",
+      "drive-left-left-opposite": "User says that also worked in response to left-and-stop question; reports moving robot onto smooth surface. Signs [1,1,-1,-1], duty25/0.5s. Guard stop accepted and disarmed.",
+      "drive-turn_left-floor25": "Nose turned left and stopped; all-positive signs, duty25/0.5s, smooth surface.",
+      "drive-turn_right-floor25": "Nose turned right and stopped; all-negative signs, duty25/0.5s, smooth surface.",
+      "drive-forward_left-floor25": "Forward-left and stopped; [1,0,0,-1], duty25/0.5s, smooth surface.",
+      "drive-forward_right-floor25": "Operator confirmed correct diagonal and stop in ordered group of three; smooth surface, Jetson mounted.",
+      "drive-backward_left-floor25": "Operator confirmed correct diagonal and stop in ordered group of three; smooth surface, Jetson mounted.",
+      "drive-backward_right-floor25": "Operator confirmed correct diagonal and stop in ordered group of three; smooth surface, Jetson mounted.",
+      "joint-1": "No visible movement for1500->1540->1500; commanded readback changed and returned. Physical gripper unverified.",
+      "joint-3": "A joint moved and returned for754->794->754; anatomical role not identified by operator.",
+      "joint-4": "Operator confirms small movement and return in ordered group of three; anatomical role not separately identified.",
+      "joint-5": "Operator confirms small movement and return in ordered group of three; anatomical role not separately identified.",
+      "joint-6": "Operator confirms small movement and return in ordered group of three; anatomical role not separately identified.",
+      "joint-1-step100": "Gripper moved and returned for1500->1600->1500.",
+      "visual-outputs-followup": "Coloured lights visible; no text.",
+      "isolated-outputs-repeat": "Red for3s then off; blue steady/slight blink and blue blinking. Timed sequence was board RGB red, sonar RGB blue, then LED flashes."
+    },
+    "unverified_candidate_signs": {
+      "left": [
+        -1,
+        -1,
+        1,
+        1
+      ]
+    },
+    "load_note": "Extra Jetson weight reported by user; contribution to floor resistance not isolated.",
+    "lateral_mapping_status": "Latest operator results support left=[1,1,-1,-1], right=[-1,-1,1,1]. Earlier conflicting right report retained; exact reason unestablished. Smooth-surface success is not proof of weight as sole cause.",
+    "reported_signs": {
+      "forward": [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "backward": [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "right": [
+        1,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "verified_signs": {
+      "forward": [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "backward": [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "left": [
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "right": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "turn_left": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "turn_right": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "forward_left": [
+        1,
+        0,
+        0,
+        -1
+      ],
+      "forward_right": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "backward_left": [
+        0,
+        1,
+        -1,
+        0
+      ],
+      "backward_right": [
+        -1,
+        0,
+        0,
+        1
+      ]
+    },
+    "movement_scale": "Operator explicitly notes ALL movements so far have been slight. Direction/response/stop/return checks only; no full-range, speed, load, reach, or useful work capability established."
+  },
+  "nominal_mapping": "vendor-mapping-facts.json",
+  "source_receipts": {
+    "arm-preflight-readback.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/arm-preflight-readback.json",
+      "sha256": "acac5013cc240ca393b78fa73d517bf622d9a19f7f45787b2afeeb99845cad8e"
+    },
+    "audio-inventory.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/audio-inventory.json",
+      "sha256": "256a28618f9ac7015cdf0167ab6fc8ccec803b66357a689b8893d2a7c758a647"
+    },
+    "audio-live.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/audio-live.json",
+      "sha256": "46bf67665b9a677d14a1c2f3dba2fe3523d7722ae1b3a37cf1d4d663964d1c30"
+    },
+    "camera-performance.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/camera-performance.json",
+      "sha256": "f9f65c929100a847b59b431dacb3df5014ba237ce5c2e565621e53ac69904850"
+    },
+    "commissioning-cleanup.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/commissioning-cleanup.json",
+      "sha256": "06d1e2c3e8c48b3e490026d0bdea027b81098437d3853420449cd2a4602617a9"
+    },
+    "drive-backward_left-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-backward_left-floor25.json",
+      "sha256": "c07020a83dcb0696162837d9a3e8638fedabe3a083fdc73b04914a8e1df2984b"
+    },
+    "drive-backward_right-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-backward_right-floor25.json",
+      "sha256": "99b7890310e55e9e71715d8c46dbb9f128f756a553c0f4843f5f8ed7eff40a75"
+    },
+    "drive-forward-calibrated-repeat.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward-calibrated-repeat.json",
+      "sha256": "1a53bcc2f8596270349368b86d1220bd5fa7454b094739f397ba6a9b16cce8e1"
+    },
+    "drive-forward-calibrated.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward-calibrated.json",
+      "sha256": "66d46325b8407223d9506ed9e64a18e24ffc9b9a9cc482ecad4bff60a83f213c"
+    },
+    "drive-forward-floor-long.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward-floor-long.json",
+      "sha256": "da191f20711fe079b6517255410fccffcf7079fb905b041ab6fad723a15cd857"
+    },
+    "drive-forward-raised.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward-raised.json",
+      "sha256": "9b1dbd6b673c81c663f6c06238a8a81440956a5a6a2883bf0fad00646c7a9f35"
+    },
+    "drive-forward.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward.json",
+      "sha256": "8678fa9cb8d4951d4524962d0c39062f42d7db271b719e01fd852af2b5a6a816"
+    },
+    "drive-forward_left-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward_left-floor25.json",
+      "sha256": "253c0cc397cf576714adeb66616c67597c876fb22d128ebbeda9878b86f1833e"
+    },
+    "drive-forward_right-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-forward_right-floor25.json",
+      "sha256": "2e002ec1e81c2e986cec2a6bd1459c2820a52e5455b8312dd131d87428764c20"
+    },
+    "drive-left-calibrated-repeat.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-left-calibrated-repeat.json",
+      "sha256": "37c5c646645ff73ecbcc73711449ac9672046faee207231712ff7986792ec25c"
+    },
+    "drive-left-calibrated.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-left-calibrated.json",
+      "sha256": "383ad8f5c9636cd7e8bacfbe0d90617bb3e173b7daef669255ebd4b2b40d7dc7"
+    },
+    "drive-left-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-left-floor25.json",
+      "sha256": "93f2f35a237cb851ed8cb12f3d7f31620a7d8efc3a48b7f245af4339e5b88e8b"
+    },
+    "drive-left-left-opposite.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-left-left-opposite.json",
+      "sha256": "7a12105067e597ea7c81e5498ebc8052b7b158cd6c1ee942fde7150f0f177b4b"
+    },
+    "drive-left-loaded-left-repeat.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-left-loaded-left-repeat.json",
+      "sha256": "aac3146de46d28542f7f2b355dcbc095fd9aa4a432a2f66067187d282a04b455"
+    },
+    "drive-left-loaded-left.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-left-loaded-left.json",
+      "sha256": "91a68020410318a73b26b7b840616de85fc8edb7d20a24cb04ba80c37eaa6b69"
+    },
+    "drive-turn_left-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-turn_left-floor25.json",
+      "sha256": "46570fccebaf85edc5cd7b9cd995e31c3e5c0ee842609bb88b69964b7c83d14f"
+    },
+    "drive-turn_right-floor25.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/drive-turn_right-floor25.json",
+      "sha256": "66cf2b5875e40c2823afbf10be778c1bbf09ff80a6e8a4ac609063cf95452c79"
+    },
+    "final-locked-state.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/final-locked-state.json",
+      "sha256": "16c6da7ad0c864e22322e161c377146e4d404e385736a644ffab197144cc4dd1"
+    },
+    "five-tools-live.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/five-tools-live.json",
+      "sha256": "143f0ef744e96d617c32a7d4a97b67dad759c45885db2aa09cbe0dd1a8b8ff5c"
+    },
+    "forward-image-comparison.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/forward-image-comparison.json",
+      "sha256": "1cd7663b52f5364478f425f93879590e456ae962965cbd6828d7b78f144d04e3"
+    },
+    "hdmi-audio-presence.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/hdmi-audio-presence.json",
+      "sha256": "7b27dac9d93811f335e464aee86c6e1c709291aa4bb5d68c791447bb1318bd27"
+    },
+    "isolated-outputs-and-bus-probes.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/isolated-outputs-and-bus-probes.json",
+      "sha256": "11d1d5dde6e6dfddf635f5bc2cf51a5f55089a4bdf052383728cb7d4fdb0b7ae"
+    },
+    "isolated-outputs-repeat.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/isolated-outputs-repeat.json",
+      "sha256": "c661d97b24afcc877e06650dff36b9703dc0a6a4895ac8035024a846ea921f40"
+    },
+    "joint-1-step100.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/joint-1-step100.json",
+      "sha256": "bcf9afcbf71aeabee3f420fa927e4747294142ac5b109423ae42df17d85b3129"
+    },
+    "joint-1.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/joint-1.json",
+      "sha256": "111f3fc9cebc509748383610a5ef28cb50734e31c4367f26ea92d8532431bdb9"
+    },
+    "joint-3.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/joint-3.json",
+      "sha256": "57039f2e5bd20c387db2073f06f74b9e4572fc89b25f86bbd2c4dd66a5c58548"
+    },
+    "joint-4.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/joint-4.json",
+      "sha256": "6afb7469b485d3306fa81059090190c31331e2d80fbdb184c5db27b51d79eb02"
+    },
+    "joint-5.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/joint-5.json",
+      "sha256": "fe42e337c4a47e732dea716f96e28c0398e9f832c20b21057711f3251b173a45"
+    },
+    "joint-6.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/joint-6.json",
+      "sha256": "4ae3e55215cffdc2cd29f2cb9231f02f1e9362e7a4381e49f499854874e9f461"
+    },
+    "operator-observations.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/operator-observations.json",
+      "sha256": "a0d79cd4d0fd8097f004953cc5e561c2f1c7be0766260b0dc01107f201975b65"
+    },
+    "passive-baseline.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/passive-baseline.json",
+      "sha256": "102f1e524fa523bd4aad2d80b6c436b470b157e2109756cc348789be9157b662"
+    },
+    "sensors-and-outputs.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/sensors-and-outputs.json",
+      "sha256": "043fe2989ac625da575b6de3f6dfd73becc9968a1ca5d588340ab2e25eb2eb74"
+    },
+    "sonar-after-fix.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/sonar-after-fix.json",
+      "sha256": "b15a47fc5ff34b1543940b5c0d2986e0553e0c80e0ebc9c5721b0c85791ade31"
+    },
+    "sonar-transaction-check.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/sonar-transaction-check.json",
+      "sha256": "223f638f254d392fb941a1346f9a2ae53d83f8de4dbbb16facd153268c66a882"
+    },
+    "stationary-driver-freeze.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/stationary-driver-freeze.json",
+      "sha256": "83eba8ee2dfea7996691ca72d05b6603da2e74ead0071fa6d404c46c32cdfc46"
+    },
+    "stored-action-audit.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/stored-action-audit.json",
+      "sha256": "1651e43f9136e0b8cb4a8523bc3f56fd816964019dd44dabdf9488291c0b38ed"
+    },
+    "visual-outputs-followup.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/visual-outputs-followup.json",
+      "sha256": "a17827b17fb7a9189021c0e978241ebcfed16630daf9fb48b4c5d1ffa7a4c1bc"
+    }
+  },
+  "drive_tests": {
+    "drive-backward_left-floor25": {
+      "direction": "backward_left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:52:06.611392-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-backward_right-floor25": {
+      "direction": "backward_right",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:52:13.428039-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward-calibrated-repeat": {
+      "direction": "forward",
+      "duty": 20,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:31:52.098398-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward-calibrated": {
+      "direction": "forward",
+      "duty": 20,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:30:24.922025-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward-floor-long": {
+      "direction": "forward",
+      "duty": 20,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:26:51.570828-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward-raised": {
+      "direction": "forward",
+      "duty": 20,
+      "duration_seconds": 0.2,
+      "at": "2026-10-12T10:24:31.213691-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward": {
+      "direction": "forward",
+      "duty": 20,
+      "duration_seconds": 0.2,
+      "at": "2026-10-12T10:21:20.364160-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward_left-floor25": {
+      "direction": "forward_left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:51:06.517755-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-forward_right-floor25": {
+      "direction": "forward_right",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:51:59.793712-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-left-calibrated-repeat": {
+      "direction": "left",
+      "duty": 20,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:33:49.519867-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-left-calibrated": {
+      "direction": "left",
+      "duty": 20,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:33:05.077366-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-left-floor25": {
+      "direction": "left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:36:09.583923-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-left-left-opposite": {
+      "direction": "left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:47:39.768258-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-left-loaded-left-repeat": {
+      "direction": "left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:45:53.282961-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-left-loaded-left": {
+      "direction": "left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:41:16.978794-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-turn_left-floor25": {
+      "direction": "turn_left",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:49:03.420612-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    },
+    "drive-turn_right-floor25": {
+      "direction": "turn_right",
+      "duty": 25,
+      "duration_seconds": 0.5,
+      "at": "2026-10-12T10:49:43.539911-04:00",
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "explicit_stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      },
+      "final_armed": false
+    }
+  },
+  "joint_tests": {
+    "joint-1-step100": {
+      "channel": 1,
+      "original": 1500,
+      "destination": 1600,
+      "duration_seconds": 0.4,
+      "initial_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 1,
+        "value": 1500,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_jog_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 1,
+        "value": 1600,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_return_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 1,
+        "value": 1500,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      }
+    },
+    "joint-1": {
+      "channel": 1,
+      "original": 1500,
+      "destination": 1540,
+      "duration_seconds": 0.4,
+      "initial_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 1,
+        "value": 1500,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_jog_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 1,
+        "value": 1540,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_return_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 1,
+        "value": 1500,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      }
+    },
+    "joint-3": {
+      "channel": 3,
+      "original": 754,
+      "destination": 794,
+      "duration_seconds": 0.4,
+      "initial_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 3,
+        "value": 754,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_jog_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 3,
+        "value": 794,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_return_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 3,
+        "value": 754,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      }
+    },
+    "joint-4": {
+      "channel": 4,
+      "original": 2485,
+      "destination": 2445,
+      "duration_seconds": 0.4,
+      "initial_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 4,
+        "value": 2485,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_jog_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 4,
+        "value": 2445,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_return_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 4,
+        "value": 2485,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      }
+    },
+    "joint-5": {
+      "channel": 5,
+      "original": 845,
+      "destination": 885,
+      "duration_seconds": 0.4,
+      "initial_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 5,
+        "value": 845,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_jog_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 5,
+        "value": 885,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_return_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 5,
+        "value": 845,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      }
+    },
+    "joint-6": {
+      "channel": 6,
+      "original": 1405,
+      "destination": 1445,
+      "duration_seconds": 0.4,
+      "initial_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 6,
+        "value": 1405,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_jog_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 6,
+        "value": 1445,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "after_return_readback": {
+        "ok": true,
+        "kind": "pwm_position",
+        "id": 6,
+        "value": 1405,
+        "physical_position_verified": false,
+        "meaning": "board_commanded_pulse"
+      },
+      "stop": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "stop accepted"
+      }
+    }
+  },
+  "final-locked-state": {
+    "at": "2026-10-12T11:03:02.818075-04:00",
+    "status": {
+      "telemetry": {
+        "battery_mv": {
+          "value": 7672,
+          "read_at": 1791817384.02073,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 0,
+        "directions": [
+          "backward",
+          "backward_left",
+          "backward_right",
+          "forward",
+          "forward_left",
+          "forward_right",
+          "left",
+          "right",
+          "turn_left",
+          "turn_right"
+        ],
+        "joints": {},
+        "outputs": [],
+        "sonar": false,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false,
+      "mic": "unconfigured",
+      "camera": "unconfigured",
+      "speech": "unconfigured",
+      "backend": {
+        "backend_id": "witness-direct",
+        "kind": "none",
+        "model": null,
+        "where_computed": "jetson"
+      }
+    },
+    "pi": {
+      "units": {
+        "temple-witness-guard.service": {
+          "enabled": {
+            "returncode": 0,
+            "stdout": "enabled"
+          },
+          "active": {
+            "returncode": 0,
+            "stdout": "active"
+          }
+        },
+        "temple-witness-camera.service": {
+          "enabled": {
+            "returncode": 0,
+            "stdout": "enabled"
+          },
+          "active": {
+            "returncode": 0,
+            "stdout": "active"
+          }
+        },
+        "masterpi.service": {
+          "enabled": {
+            "returncode": 1,
+            "stdout": "masked"
+          },
+          "active": {
+            "returncode": 3,
+            "stdout": "inactive"
+          }
+        },
+        "hw_remote.service": {
+          "enabled": {
+            "returncode": 1,
+            "stdout": "masked"
+          },
+          "active": {
+            "returncode": 3,
+            "stdout": "inactive"
+          }
+        },
+        "hw_button_scan.service": {
+          "enabled": {
+            "returncode": 1,
+            "stdout": "masked"
+          },
+          "active": {
+            "returncode": 3,
+            "stdout": "inactive"
+          }
+        },
+        "hw_find.service": {
+          "enabled": {
+            "returncode": 1,
+            "stdout": "masked"
+          },
+          "active": {
+            "returncode": 3,
+            "stdout": "inactive"
+          }
+        }
+      },
+      "ownership": {
+        "device": "/dev/ttyAMA0",
+        "device_is_character": true,
+        "serial_holder_pids": [],
+        "owners": [
+          {
+            "pid": 1818,
+            "comm": "python3",
+            "cgroup": [
+              "0::/system.slice/temple-witness-camera.service"
+            ],
+            "serial_fds": [],
+            "listening_ports": [
+              8080
+            ]
+          },
+          {
+            "pid": 26718,
+            "comm": "python3",
+            "cgroup": [
+              "0::/system.slice/temple-witness-guard.service"
+            ],
+            "serial_fds": [],
+            "listening_ports": [
+              9040
+            ]
+          }
+        ],
+        "unreadable_pids": [],
+        "vanished_pids": [],
+        "network_tables_unreadable": [],
+        "listener_ports": [
+          8080,
+          9040
+        ],
+        "owner_mapped_ports": [
+          8080,
+          9040
+        ],
+        "inspection_complete": true,
+        "serial_release_verified": false,
+        "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+      },
+      "power": {
+        "returncode": 0,
+        "stdout": "throttled=0x0"
+      },
+      "guard_exec": {
+        "returncode": 0,
+        "stdout": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -B -m companion.pi.service --real --host 10.42.0.23 --peer 10.42.0.1 --port 9040 --hardware-config /etc/temple-witness/hardware.json --key-file /run/credentials/temple-witness-guard.service/guard.key --journal /var/lib/temple-witness/guard.jsonl --notes-journal /var/lib/temple-witness/notes.jsonl ; ignore_errors=no ; start_time=[Mon 2026-10-12 11:01:23 EDT] ; stop_time=[n/a] ; pid=26718 ; code=(null) ; status=0/0 }"
+      },
+      "persistent_config": {
+        "wheel_duty_limit": 0,
+        "joints": {},
+        "outputs": [],
+        "sonar": false,
+        "direction_signs": {
+          "forward": [
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "backward": [
+            -1,
+            1,
+            -1,
+            1
+          ],
+          "left": [
+            1,
+            1,
+            -1,
+            -1
+          ],
+          "right": [
+            -1,
+            -1,
+            1,
+            1
+          ],
+          "turn_left": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "turn_right": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "forward_left": [
+            1,
+            0,
+            0,
+            -1
+          ],
+          "forward_right": [
+            0,
+            -1,
+            1,
+            0
+          ],
+          "backward_left": [
+            0,
+            1,
+            -1,
+            0
+          ],
+          "backward_right": [
+            -1,
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "override_exists": false
+    },
+    "camera": {
+      "bytes": 32234,
+      "content_type": "image/jpeg"
+    }
+  },
+  "stationary-driver-freeze": {
+    "at": "2026-10-12T10:59:34.845102-04:00",
+    "stationary_only": true,
+    "before": {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 163,
+          "read_at": 1791817175.0605767,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 0,
+        "directions": [
+          "backward",
+          "backward_left",
+          "backward_right",
+          "forward",
+          "forward_left",
+          "forward_right",
+          "left",
+          "right",
+          "turn_left",
+          "turn_right"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false,
+      "mic": "unconfigured",
+      "camera": "unconfigured",
+      "speech": "unconfigured",
+      "backend": {
+        "backend_id": "witness-direct",
+        "kind": "none",
+        "model": null,
+        "where_computed": "jetson"
+      }
+    },
+    "stop": {
+      "executed": null,
+      "sdk_returned": true,
+      "simulated": false,
+      "physical_execution_verified": false,
+      "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+      "ok": true,
+      "verdict": "applied",
+      "reason": "stop accepted"
+    },
+    "freeze": {
+      "frozen_worker_pid": 25895,
+      "guard_pid": 14967
+    },
+    "fault_status": {
+      "ok": false,
+      "armed": false,
+      "controller": "unavailable",
+      "reason": "Pi guard unavailable; restart tools after restoring link",
+      "mic": "unconfigured",
+      "camera": "unconfigured",
+      "speech": "unconfigured",
+      "backend": {
+        "backend_id": "witness-direct",
+        "kind": "none",
+        "model": null,
+        "where_computed": "jetson"
+      }
+    },
+    "status_call_seconds": 0.5018369830004303,
+    "after": {
+      "device": "/dev/ttyAMA0",
+      "device_is_character": true,
+      "serial_holder_pids": [],
+      "owners": [
+        {
+          "pid": 14967,
+          "comm": "python3",
+          "cgroup": [
+            "0::/system.slice/temple-witness-guard.service"
+          ],
+          "serial_fds": [],
+          "listening_ports": [
+            9040
+          ]
+        },
+        {
+          "pid": 1818,
+          "comm": "python3",
+          "cgroup": [
+            "0::/system.slice/temple-witness-camera.service"
+          ],
+          "serial_fds": [],
+          "listening_ports": [
+            8080
+          ]
+        }
+      ],
+      "unreadable_pids": [],
+      "vanished_pids": [],
+      "network_tables_unreadable": [],
+      "listener_ports": [
+        8080,
+        9040
+      ],
+      "owner_mapped_ports": [
+        8080,
+        9040
+      ],
+      "inspection_complete": true,
+      "serial_release_verified": false,
+      "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+    },
+    "recovered": {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 162,
+          "read_at": 1791817177.133879,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 0,
+        "directions": [
+          "backward",
+          "backward_left",
+          "backward_right",
+          "forward",
+          "forward_left",
+          "forward_right",
+          "left",
+          "right",
+          "turn_left",
+          "turn_right"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false,
+      "mic": "unconfigured",
+      "camera": "unconfigured",
+      "speech": "unconfigured",
+      "backend": {
+        "backend_id": "witness-direct",
+        "kind": "none",
+        "model": null,
+        "where_computed": "jetson"
+      }
+    }
+  },
+  "camera-performance": {
+    "summary": {
+      "requests": 147,
+      "elapsed_seconds": 12.044738767999888,
+      "unique_sequences": 76,
+      "frame_sequence_rate": 6.270958119195785,
+      "median_roundtrip_seconds": 0.001746919999959573,
+      "max_roundtrip_seconds": 0.006244071999844891,
+      "max_frame_read_age_seconds": 0.20413875579833984,
+      "opencv_available_jetson": true
+    },
+    "samples": [
+      {
+        "at": 1791814710.4687428,
+        "roundtrip_seconds": 0.0046611949999260105,
+        "bytes": 47900,
+        "sequence": 4973,
+        "frame_read_age_seconds": 0.16545939445495605,
+        "sha256": "4210781d160c2895a5d46d4b628215229f54cbe53f40e670cb024e5db74bab82"
+      },
+      {
+        "at": 1791814710.5511284,
+        "roundtrip_seconds": 0.00216426500014677,
+        "bytes": 48064,
+        "sequence": 4974,
+        "frame_read_age_seconds": 0.0882422924041748,
+        "sha256": "56687f883bf0e2c3b59ca1e2a1d3ffefc9fc6374ee58723ea2e0c860372a5308"
+      },
+      {
+        "at": 1791814710.633011,
+        "roundtrip_seconds": 0.0016908509999211674,
+        "bytes": 48064,
+        "sequence": 4974,
+        "frame_read_age_seconds": 0.17012405395507812,
+        "sha256": "56687f883bf0e2c3b59ca1e2a1d3ffefc9fc6374ee58723ea2e0c860372a5308"
+      },
+      {
+        "at": 1791814710.715099,
+        "roundtrip_seconds": 0.0019080519998624368,
+        "bytes": 48005,
+        "sequence": 4975,
+        "frame_read_age_seconds": 0.09564042091369629,
+        "sha256": "96aa162c1dbda1763897e5085b30164180c2494e90ae3ab3b1f26a8ea8eab230"
+      },
+      {
+        "at": 1791814710.7969038,
+        "roundtrip_seconds": 0.0016285429999243206,
+        "bytes": 48005,
+        "sequence": 4975,
+        "frame_read_age_seconds": 0.1774439811706543,
+        "sha256": "96aa162c1dbda1763897e5085b30164180c2494e90ae3ab3b1f26a8ea8eab230"
+      },
+      {
+        "at": 1791814710.8790598,
+        "roundtrip_seconds": 0.0019882829999460228,
+        "bytes": 47973,
+        "sequence": 4976,
+        "frame_read_age_seconds": 0.09927797317504883,
+        "sha256": "6eb1a1c9097d56b40cf75a80ff5f673eea87236ac5b46108bcbc84dbec058e05"
+      },
+      {
+        "at": 1791814710.9608223,
+        "roundtrip_seconds": 0.0015989399998943554,
+        "bytes": 47973,
+        "sequence": 4976,
+        "frame_read_age_seconds": 0.18104124069213867,
+        "sha256": "6eb1a1c9097d56b40cf75a80ff5f673eea87236ac5b46108bcbc84dbec058e05"
+      },
+      {
+        "at": 1791814711.0427616,
+        "roundtrip_seconds": 0.001770474000068134,
+        "bytes": 48000,
+        "sequence": 4977,
+        "frame_read_age_seconds": 0.10383176803588867,
+        "sha256": "9ac7e1bba21a7df5c2cdcd793036e553194ccd7747924444c55c6983f127d7f1"
+      },
+      {
+        "at": 1791814711.1245177,
+        "roundtrip_seconds": 0.0015905560001101549,
+        "bytes": 48000,
+        "sequence": 4977,
+        "frame_read_age_seconds": 0.18558812141418457,
+        "sha256": "9ac7e1bba21a7df5c2cdcd793036e553194ccd7747924444c55c6983f127d7f1"
+      },
+      {
+        "at": 1791814711.2064373,
+        "roundtrip_seconds": 0.0017548250000345433,
+        "bytes": 47892,
+        "sequence": 4978,
+        "frame_read_age_seconds": 0.10704708099365234,
+        "sha256": "ce53dbe9898d5930333d574fda6a41d677d753cc58d97e8cbb442594f8b4bba2"
+      },
+      {
+        "at": 1791814711.288143,
+        "roundtrip_seconds": 0.0015413369999350834,
+        "bytes": 47892,
+        "sequence": 4978,
+        "frame_read_age_seconds": 0.1887524127960205,
+        "sha256": "ce53dbe9898d5930333d574fda6a41d677d753cc58d97e8cbb442594f8b4bba2"
+      },
+      {
+        "at": 1791814711.3700023,
+        "roundtrip_seconds": 0.0016957160000856675,
+        "bytes": 47933,
+        "sequence": 4979,
+        "frame_read_age_seconds": 0.11106109619140625,
+        "sha256": "c2bf80ef50df3e4f29cdc6a4eb7d4fbadbd17245848820ff288b2629a10e0cef"
+      },
+      {
+        "at": 1791814711.4517817,
+        "roundtrip_seconds": 0.0016169579998859263,
+        "bytes": 47933,
+        "sequence": 4979,
+        "frame_read_age_seconds": 0.1928403377532959,
+        "sha256": "c2bf80ef50df3e4f29cdc6a4eb7d4fbadbd17245848820ff288b2629a10e0cef"
+      },
+      {
+        "at": 1791814711.5340397,
+        "roundtrip_seconds": 0.0020719370002098003,
+        "bytes": 47897,
+        "sequence": 4980,
+        "frame_read_age_seconds": 0.11471080780029297,
+        "sha256": "e7f7f7fb7fc1ea8b4acf79fdf30e8cec2fdbd258f244b04743516ed963705790"
+      },
+      {
+        "at": 1791814711.6158729,
+        "roundtrip_seconds": 0.001641248000169071,
+        "bytes": 47897,
+        "sequence": 4980,
+        "frame_read_age_seconds": 0.19654226303100586,
+        "sha256": "e7f7f7fb7fc1ea8b4acf79fdf30e8cec2fdbd258f244b04743516ed963705790"
+      },
+      {
+        "at": 1791814711.6978996,
+        "roundtrip_seconds": 0.0018322710000120424,
+        "bytes": 48066,
+        "sequence": 4981,
+        "frame_read_age_seconds": 0.1185445785522461,
+        "sha256": "e8af1a32eee7292acb330731e6e46298918b8bf65f0e92a0f1cd0304a4de539d"
+      },
+      {
+        "at": 1791814711.7798395,
+        "roundtrip_seconds": 0.0017673379998086602,
+        "bytes": 48066,
+        "sequence": 4981,
+        "frame_read_age_seconds": 0.200484037399292,
+        "sha256": "e8af1a32eee7292acb330731e6e46298918b8bf65f0e92a0f1cd0304a4de539d"
+      },
+      {
+        "at": 1791814711.8617063,
+        "roundtrip_seconds": 0.0016881950000424695,
+        "bytes": 47895,
+        "sequence": 4982,
+        "frame_read_age_seconds": 0.12666916847229004,
+        "sha256": "fad673ebe674ec833c80319133ab07fe2d88d6fc0bc7fe07322a8876f12d1504"
+      },
+      {
+        "at": 1791814711.9436495,
+        "roundtrip_seconds": 0.0017697379998935503,
+        "bytes": 47861,
+        "sequence": 4983,
+        "frame_read_age_seconds": 0.0481870174407959,
+        "sha256": "a57fc5759ec52e95adb5e46067b5c875a6bceed4c7e962f7af31f797500f5ab7"
+      },
+      {
+        "at": 1791814712.025361,
+        "roundtrip_seconds": 0.0015449200000148267,
+        "bytes": 47861,
+        "sequence": 4983,
+        "frame_read_age_seconds": 0.1298987865447998,
+        "sha256": "a57fc5759ec52e95adb5e46067b5c875a6bceed4c7e962f7af31f797500f5ab7"
+      },
+      {
+        "at": 1791814712.1072748,
+        "roundtrip_seconds": 0.0017473679999966407,
+        "bytes": 48026,
+        "sequence": 4984,
+        "frame_read_age_seconds": 0.05229902267456055,
+        "sha256": "c6f2858c55b877ff2cc26dd9d43cb31ecd502dc826ac588ecb4dc53e527bd47c"
+      },
+      {
+        "at": 1791814712.1889248,
+        "roundtrip_seconds": 0.0014847879999706493,
+        "bytes": 48026,
+        "sequence": 4984,
+        "frame_read_age_seconds": 0.13394904136657715,
+        "sha256": "c6f2858c55b877ff2cc26dd9d43cb31ecd502dc826ac588ecb4dc53e527bd47c"
+      },
+      {
+        "at": 1791814712.2708795,
+        "roundtrip_seconds": 0.0017885229999592411,
+        "bytes": 47904,
+        "sequence": 4985,
+        "frame_read_age_seconds": 0.05541110038757324,
+        "sha256": "fc430f353964c99bb6a329e0bae181f73a4b4678e1f99011e7c01f5060191872"
+      },
+      {
+        "at": 1791814712.3525088,
+        "roundtrip_seconds": 0.0014647860000422952,
+        "bytes": 47904,
+        "sequence": 4985,
+        "frame_read_age_seconds": 0.1370401382446289,
+        "sha256": "fc430f353964c99bb6a329e0bae181f73a4b4678e1f99011e7c01f5060191872"
+      },
+      {
+        "at": 1791814712.4344366,
+        "roundtrip_seconds": 0.0017639139998664177,
+        "bytes": 48009,
+        "sequence": 4986,
+        "frame_read_age_seconds": 0.05940127372741699,
+        "sha256": "a9a8e5788f00b5158603ae61060cd08f0b594a70a074cf394175baa5f2fbd3e8"
+      },
+      {
+        "at": 1791814712.5160723,
+        "roundtrip_seconds": 0.001472659000000931,
+        "bytes": 48009,
+        "sequence": 4986,
+        "frame_read_age_seconds": 0.1410365104675293,
+        "sha256": "a9a8e5788f00b5158603ae61060cd08f0b594a70a074cf394175baa5f2fbd3e8"
+      },
+      {
+        "at": 1791814712.5981097,
+        "roundtrip_seconds": 0.0018608489999678568,
+        "bytes": 48089,
+        "sequence": 4987,
+        "frame_read_age_seconds": 0.06261157989501953,
+        "sha256": "91ad40e653978416f3451b50731b9a552381650fb2ba2874521fb7b69989515a"
+      },
+      {
+        "at": 1791814712.679775,
+        "roundtrip_seconds": 0.0014866759997858026,
+        "bytes": 48089,
+        "sequence": 4987,
+        "frame_read_age_seconds": 0.14427661895751953,
+        "sha256": "91ad40e653978416f3451b50731b9a552381650fb2ba2874521fb7b69989515a"
+      },
+      {
+        "at": 1791814712.761773,
+        "roundtrip_seconds": 0.0018171979997987364,
+        "bytes": 47833,
+        "sequence": 4988,
+        "frame_read_age_seconds": 0.0662851333618164,
+        "sha256": "16d224b10686cc09737f500df0734ea96a8a8fbecaec9b95853911f8aea6282b"
+      },
+      {
+        "at": 1791814712.8437853,
+        "roundtrip_seconds": 0.0018442719999711699,
+        "bytes": 47833,
+        "sequence": 4988,
+        "frame_read_age_seconds": 0.14829659461975098,
+        "sha256": "16d224b10686cc09737f500df0734ea96a8a8fbecaec9b95853911f8aea6282b"
+      },
+      {
+        "at": 1791814712.925773,
+        "roundtrip_seconds": 0.0018221579998680681,
+        "bytes": 48060,
+        "sequence": 4989,
+        "frame_read_age_seconds": 0.07468128204345703,
+        "sha256": "ff280e641aae4deefa25c7d662f22ebf9e6aeff730f07d373060bc0a3a3ad87e"
+      },
+      {
+        "at": 1791814713.007394,
+        "roundtrip_seconds": 0.0014572980001048563,
+        "bytes": 48060,
+        "sequence": 4989,
+        "frame_read_age_seconds": 0.15630221366882324,
+        "sha256": "ff280e641aae4deefa25c7d662f22ebf9e6aeff730f07d373060bc0a3a3ad87e"
+      },
+      {
+        "at": 1791814713.0893555,
+        "roundtrip_seconds": 0.0017987009998705616,
+        "bytes": 47945,
+        "sequence": 4990,
+        "frame_read_age_seconds": 0.07782220840454102,
+        "sha256": "f85a929d1897d1a2b0aad1f953f0c6ff1c42f892a77f9c41a250e87559a33930"
+      },
+      {
+        "at": 1791814713.1709936,
+        "roundtrip_seconds": 0.0014750589998584474,
+        "bytes": 47945,
+        "sequence": 4990,
+        "frame_read_age_seconds": 0.15946030616760254,
+        "sha256": "f85a929d1897d1a2b0aad1f953f0c6ff1c42f892a77f9c41a250e87559a33930"
+      },
+      {
+        "at": 1791814713.2529142,
+        "roundtrip_seconds": 0.0017525850000765786,
+        "bytes": 47965,
+        "sequence": 4991,
+        "frame_read_age_seconds": 0.08191847801208496,
+        "sha256": "00ce3f163725ce63a44673790759fb18ad83a8616336995c177c33ccfa0c0fed"
+      },
+      {
+        "at": 1791814713.3346024,
+        "roundtrip_seconds": 0.0015229989999170357,
+        "bytes": 47965,
+        "sequence": 4991,
+        "frame_read_age_seconds": 0.16360712051391602,
+        "sha256": "00ce3f163725ce63a44673790759fb18ad83a8616336995c177c33ccfa0c0fed"
+      },
+      {
+        "at": 1791814713.4165006,
+        "roundtrip_seconds": 0.0017352080001273862,
+        "bytes": 47872,
+        "sequence": 4992,
+        "frame_read_age_seconds": 0.08508682250976562,
+        "sha256": "5581a1abd667e39f51804fd634f4d315f8565d9d31ea729d8f645e8c5ae99758"
+      },
+      {
+        "at": 1791814713.4981563,
+        "roundtrip_seconds": 0.0014926929998182459,
+        "bytes": 47872,
+        "sequence": 4992,
+        "frame_read_age_seconds": 0.16674280166625977,
+        "sha256": "5581a1abd667e39f51804fd634f4d315f8565d9d31ea729d8f645e8c5ae99758"
+      },
+      {
+        "at": 1791814713.5800397,
+        "roundtrip_seconds": 0.0017548250000345433,
+        "bytes": 47903,
+        "sequence": 4993,
+        "frame_read_age_seconds": 0.08858823776245117,
+        "sha256": "71ade89734576874dd2bb692b654feb5e7b757eeba0ed0e7f501d40d797bbb70"
+      },
+      {
+        "at": 1791814713.6616592,
+        "roundtrip_seconds": 0.001456337000036001,
+        "bytes": 47903,
+        "sequence": 4993,
+        "frame_read_age_seconds": 0.17020750045776367,
+        "sha256": "71ade89734576874dd2bb692b654feb5e7b757eeba0ed0e7f501d40d797bbb70"
+      },
+      {
+        "at": 1791814713.743573,
+        "roundtrip_seconds": 0.001746919999959573,
+        "bytes": 47974,
+        "sequence": 4994,
+        "frame_read_age_seconds": 0.09258389472961426,
+        "sha256": "deec703c80b0e958a0a31e9e58376357059add1d1cfb7e74f216b35e1f3af801"
+      },
+      {
+        "at": 1791814713.825255,
+        "roundtrip_seconds": 0.0015067730000737356,
+        "bytes": 47974,
+        "sequence": 4994,
+        "frame_read_age_seconds": 0.17426562309265137,
+        "sha256": "deec703c80b0e958a0a31e9e58376357059add1d1cfb7e74f216b35e1f3af801"
+      },
+      {
+        "at": 1791814713.9071746,
+        "roundtrip_seconds": 0.0017519450000236247,
+        "bytes": 48038,
+        "sequence": 4995,
+        "frame_read_age_seconds": 0.09570932388305664,
+        "sha256": "2b8205192b33c3c12d8464aeb7bd19ea5eddea81b7bd6dd449a9c70fb1638746"
+      },
+      {
+        "at": 1791814713.988845,
+        "roundtrip_seconds": 0.0015037980001579854,
+        "bytes": 48038,
+        "sequence": 4995,
+        "frame_read_age_seconds": 0.17737889289855957,
+        "sha256": "2b8205192b33c3c12d8464aeb7bd19ea5eddea81b7bd6dd449a9c70fb1638746"
+      },
+      {
+        "at": 1791814714.0706937,
+        "roundtrip_seconds": 0.0016841639999256586,
+        "bytes": 48093,
+        "sequence": 4996,
+        "frame_read_age_seconds": 0.09969162940979004,
+        "sha256": "73e100132d1c3cdef8c6a710ff3da962c6e9ae6fdb4e368ffce3fa18de52f10a"
+      },
+      {
+        "at": 1791814714.1524088,
+        "roundtrip_seconds": 0.001551160999952117,
+        "bytes": 48093,
+        "sequence": 4996,
+        "frame_read_age_seconds": 0.18140673637390137,
+        "sha256": "73e100132d1c3cdef8c6a710ff3da962c6e9ae6fdb4e368ffce3fa18de52f10a"
+      },
+      {
+        "at": 1791814714.2343156,
+        "roundtrip_seconds": 0.001742727999953786,
+        "bytes": 47999,
+        "sequence": 4997,
+        "frame_read_age_seconds": 0.10681414604187012,
+        "sha256": "8d923703d32426b2af463395e48c1972f72754c38bc2c15c2490f40701f06181"
+      },
+      {
+        "at": 1791814714.3159928,
+        "roundtrip_seconds": 0.0015145830000165006,
+        "bytes": 47999,
+        "sequence": 4997,
+        "frame_read_age_seconds": 0.1884922981262207,
+        "sha256": "8d923703d32426b2af463395e48c1972f72754c38bc2c15c2490f40701f06181"
+      },
+      {
+        "at": 1791814714.3979278,
+        "roundtrip_seconds": 0.0017684899999039772,
+        "bytes": 47952,
+        "sequence": 4998,
+        "frame_read_age_seconds": 0.11084985733032227,
+        "sha256": "df87aa49fe2e43818691638fa9a10438bd0142cd48cdbad3e5e96cde6897041b"
+      },
+      {
+        "at": 1791814714.4796903,
+        "roundtrip_seconds": 0.001597437000100399,
+        "bytes": 47952,
+        "sequence": 4998,
+        "frame_read_age_seconds": 0.1926124095916748,
+        "sha256": "df87aa49fe2e43818691638fa9a10438bd0142cd48cdbad3e5e96cde6897041b"
+      },
+      {
+        "at": 1791814714.5615432,
+        "roundtrip_seconds": 0.0016889640000954387,
+        "bytes": 47950,
+        "sequence": 4999,
+        "frame_read_age_seconds": 0.11404609680175781,
+        "sha256": "c5f33732a0e52653398fd689e8347dc03454d37ec517595343c8f42012769966"
+      },
+      {
+        "at": 1791814714.6432667,
+        "roundtrip_seconds": 0.0015600900001118134,
+        "bytes": 47950,
+        "sequence": 4999,
+        "frame_read_age_seconds": 0.1957697868347168,
+        "sha256": "c5f33732a0e52653398fd689e8347dc03454d37ec517595343c8f42012769966"
+      },
+      {
+        "at": 1791814714.7252207,
+        "roundtrip_seconds": 0.0017844599999534694,
+        "bytes": 47869,
+        "sequence": 5000,
+        "frame_read_age_seconds": 0.11772990226745605,
+        "sha256": "6b84599864488523afbd77c99262a018e9710e7adb2f56d1387b6fc3e9655069"
+      },
+      {
+        "at": 1791814714.8116298,
+        "roundtrip_seconds": 0.006244071999844891,
+        "bytes": 47869,
+        "sequence": 5000,
+        "frame_read_age_seconds": 0.20413875579833984,
+        "sha256": "6b84599864488523afbd77c99262a018e9710e7adb2f56d1387b6fc3e9655069"
+      },
+      {
+        "at": 1791814714.8936622,
+        "roundtrip_seconds": 0.001861873000052583,
+        "bytes": 48066,
+        "sequence": 5001,
+        "frame_read_age_seconds": 0.1260087490081787,
+        "sha256": "360c4907631a6109fead6d02768939ac3dab73329a8abac7231b5ed86bcacce7"
+      },
+      {
+        "at": 1791814714.9756184,
+        "roundtrip_seconds": 0.0017776110000795597,
+        "bytes": 47889,
+        "sequence": 5002,
+        "frame_read_age_seconds": 0.048471689224243164,
+        "sha256": "d61ba4ff4d39162fa72e27e5ff5ebf73fd54ae8fa519d270ed315b26dffdde47"
+      },
+      {
+        "at": 1791814715.0573132,
+        "roundtrip_seconds": 0.0015264879998539982,
+        "bytes": 47889,
+        "sequence": 5002,
+        "frame_read_age_seconds": 0.13016653060913086,
+        "sha256": "d61ba4ff4d39162fa72e27e5ff5ebf73fd54ae8fa519d270ed315b26dffdde47"
+      },
+      {
+        "at": 1791814715.1392355,
+        "roundtrip_seconds": 0.0017538980000608717,
+        "bytes": 47953,
+        "sequence": 5003,
+        "frame_read_age_seconds": 0.051995277404785156,
+        "sha256": "d4ace37cad864e4d737d3b7a10667e1be01cee079da3d4716af3051438d2c96b"
+      },
+      {
+        "at": 1791814715.2208612,
+        "roundtrip_seconds": 0.0014568819999567495,
+        "bytes": 47953,
+        "sequence": 5003,
+        "frame_read_age_seconds": 0.1336205005645752,
+        "sha256": "d4ace37cad864e4d737d3b7a10667e1be01cee079da3d4716af3051438d2c96b"
+      },
+      {
+        "at": 1791814715.3028157,
+        "roundtrip_seconds": 0.0017852589999165502,
+        "bytes": 47919,
+        "sequence": 5004,
+        "frame_read_age_seconds": 0.05906510353088379,
+        "sha256": "8f54945b8446559ef198d605827053411f29fe664194326d2c309a85cae345fc"
+      },
+      {
+        "at": 1791814715.3844323,
+        "roundtrip_seconds": 0.0014492650000192953,
+        "bytes": 47919,
+        "sequence": 5004,
+        "frame_read_age_seconds": 0.14068150520324707,
+        "sha256": "8f54945b8446559ef198d605827053411f29fe664194326d2c309a85cae345fc"
+      },
+      {
+        "at": 1791814715.4663763,
+        "roundtrip_seconds": 0.0017752740000105405,
+        "bytes": 47951,
+        "sequence": 5005,
+        "frame_read_age_seconds": 0.06227278709411621,
+        "sha256": "e6999c064801c97db24728ca2f5be1783bbddd1775b3409c34ec5ec55622b700"
+      },
+      {
+        "at": 1791814715.548,
+        "roundtrip_seconds": 0.0014559220001046924,
+        "bytes": 47951,
+        "sequence": 5005,
+        "frame_read_age_seconds": 0.14389634132385254,
+        "sha256": "e6999c064801c97db24728ca2f5be1783bbddd1775b3409c34ec5ec55622b700"
+      },
+      {
+        "at": 1791814715.6298735,
+        "roundtrip_seconds": 0.0017052860000603687,
+        "bytes": 47971,
+        "sequence": 5006,
+        "frame_read_age_seconds": 0.06666946411132812,
+        "sha256": "c8414dba1f1e7511492fcd24af02f0421331dba6324e6bbfd593306491b62a92"
+      },
+      {
+        "at": 1791814715.711545,
+        "roundtrip_seconds": 0.0015004379999936646,
+        "bytes": 47971,
+        "sequence": 5006,
+        "frame_read_age_seconds": 0.14834117889404297,
+        "sha256": "c8414dba1f1e7511492fcd24af02f0421331dba6324e6bbfd593306491b62a92"
+      },
+      {
+        "at": 1791814715.7934384,
+        "roundtrip_seconds": 0.0017219910000676464,
+        "bytes": 48066,
+        "sequence": 5007,
+        "frame_read_age_seconds": 0.06978201866149902,
+        "sha256": "d18784f0a7bdfbd078ffe567a62e0a7ac2cb7c29a077142bd2f4e8cce80df967"
+      },
+      {
+        "at": 1791814715.8750646,
+        "roundtrip_seconds": 0.0014564979999249772,
+        "bytes": 48066,
+        "sequence": 5007,
+        "frame_read_age_seconds": 0.15140819549560547,
+        "sha256": "d18784f0a7bdfbd078ffe567a62e0a7ac2cb7c29a077142bd2f4e8cce80df967"
+      },
+      {
+        "at": 1791814715.9569604,
+        "roundtrip_seconds": 0.0017229820000466134,
+        "bytes": 47983,
+        "sequence": 5008,
+        "frame_read_age_seconds": 0.07380390167236328,
+        "sha256": "085676347361c537f006af962ac541e5a41ca1c179fed1cbb946ad4613a9d55a"
+      },
+      {
+        "at": 1791814716.0385356,
+        "roundtrip_seconds": 0.0014012619999448361,
+        "bytes": 47983,
+        "sequence": 5008,
+        "frame_read_age_seconds": 0.1553783416748047,
+        "sha256": "085676347361c537f006af962ac541e5a41ca1c179fed1cbb946ad4613a9d55a"
+      },
+      {
+        "at": 1791814716.1204245,
+        "roundtrip_seconds": 0.0017233989999567711,
+        "bytes": 47902,
+        "sequence": 5009,
+        "frame_read_age_seconds": 0.07677531242370605,
+        "sha256": "1575b75f29769eb41aa7ad5b95a6899ac4e9c7674f956563cf34ba0a6ad4673d"
+      },
+      {
+        "at": 1791814716.2020252,
+        "roundtrip_seconds": 0.0014368490001288592,
+        "bytes": 47902,
+        "sequence": 5009,
+        "frame_read_age_seconds": 0.15837574005126953,
+        "sha256": "1575b75f29769eb41aa7ad5b95a6899ac4e9c7674f956563cf34ba0a6ad4673d"
+      },
+      {
+        "at": 1791814716.2839775,
+        "roundtrip_seconds": 0.0017845229999693402,
+        "bytes": 47799,
+        "sequence": 5010,
+        "frame_read_age_seconds": 0.08064675331115723,
+        "sha256": "a28f333fa950762d766fec1edb3ccc2ee516e4d6852c3ead322c97cf7a88041e"
+      },
+      {
+        "at": 1791814716.365609,
+        "roundtrip_seconds": 0.0014673789999051223,
+        "bytes": 47799,
+        "sequence": 5010,
+        "frame_read_age_seconds": 0.1622779369354248,
+        "sha256": "a28f333fa950762d766fec1edb3ccc2ee516e4d6852c3ead322c97cf7a88041e"
+      },
+      {
+        "at": 1791814716.4474864,
+        "roundtrip_seconds": 0.0017137339998498646,
+        "bytes": 47802,
+        "sequence": 5011,
+        "frame_read_age_seconds": 0.08780312538146973,
+        "sha256": "434fae05b0ec2223f75c4c90bd144bbce0a916590add0d3d622d1d1b5c354fae"
+      },
+      {
+        "at": 1791814716.5293288,
+        "roundtrip_seconds": 0.001666849999992337,
+        "bytes": 47802,
+        "sequence": 5011,
+        "frame_read_age_seconds": 0.1696467399597168,
+        "sha256": "434fae05b0ec2223f75c4c90bd144bbce0a916590add0d3d622d1d1b5c354fae"
+      },
+      {
+        "at": 1791814716.6113803,
+        "roundtrip_seconds": 0.0018712189998950635,
+        "bytes": 47924,
+        "sequence": 5012,
+        "frame_read_age_seconds": 0.09160923957824707,
+        "sha256": "0893a0a55f0d013c1b84e2d6caf3d30f3d831f156f50fe1ab455f369975c5395"
+      },
+      {
+        "at": 1791814716.6930702,
+        "roundtrip_seconds": 0.001525239999864425,
+        "bytes": 47924,
+        "sequence": 5012,
+        "frame_read_age_seconds": 0.17329859733581543,
+        "sha256": "0893a0a55f0d013c1b84e2d6caf3d30f3d831f156f50fe1ab455f369975c5395"
+      },
+      {
+        "at": 1791814716.774939,
+        "roundtrip_seconds": 0.0016990770000120392,
+        "bytes": 47927,
+        "sequence": 5013,
+        "frame_read_age_seconds": 0.09560489654541016,
+        "sha256": "4506549a8dbc8492ea23ec57bce4648123a20bdde2ed2220016d92de300f3378"
+      },
+      {
+        "at": 1791814716.856623,
+        "roundtrip_seconds": 0.0015041500000734231,
+        "bytes": 47927,
+        "sequence": 5013,
+        "frame_read_age_seconds": 0.17728877067565918,
+        "sha256": "4506549a8dbc8492ea23ec57bce4648123a20bdde2ed2220016d92de300f3378"
+      },
+      {
+        "at": 1791814716.938683,
+        "roundtrip_seconds": 0.0018902599999819358,
+        "bytes": 47986,
+        "sequence": 5014,
+        "frame_read_age_seconds": 0.09813880920410156,
+        "sha256": "89c8361fdd07e78d7eca198ead922e95778758964e8484c8e7e6aabe12a94bce"
+      },
+      {
+        "at": 1791814717.0204315,
+        "roundtrip_seconds": 0.0015819489999557845,
+        "bytes": 47986,
+        "sequence": 5014,
+        "frame_read_age_seconds": 0.1798865795135498,
+        "sha256": "89c8361fdd07e78d7eca198ead922e95778758964e8484c8e7e6aabe12a94bce"
+      },
+      {
+        "at": 1791814717.1023607,
+        "roundtrip_seconds": 0.0017562019997967582,
+        "bytes": 48127,
+        "sequence": 5015,
+        "frame_read_age_seconds": 0.10354232788085938,
+        "sha256": "4cf3ca2d634cc4899e09d0c2a4eb6f280df14e6eaac5c4a0ac1ccac863ab2e02"
+      },
+      {
+        "at": 1791814717.1840847,
+        "roundtrip_seconds": 0.0015597709998473874,
+        "bytes": 48127,
+        "sequence": 5015,
+        "frame_read_age_seconds": 0.18526625633239746,
+        "sha256": "4cf3ca2d634cc4899e09d0c2a4eb6f280df14e6eaac5c4a0ac1ccac863ab2e02"
+      },
+      {
+        "at": 1791814717.2659535,
+        "roundtrip_seconds": 0.00170003700009147,
+        "bytes": 47865,
+        "sequence": 5016,
+        "frame_read_age_seconds": 0.10627079010009766,
+        "sha256": "39f5c4f22b005c5dac53ef7950a0573b246e7c206b29e872883bac02b5944688"
+      },
+      {
+        "at": 1791814717.3478134,
+        "roundtrip_seconds": 0.001692261000016515,
+        "bytes": 47865,
+        "sequence": 5016,
+        "frame_read_age_seconds": 0.18812990188598633,
+        "sha256": "39f5c4f22b005c5dac53ef7950a0573b246e7c206b29e872883bac02b5944688"
+      },
+      {
+        "at": 1791814717.429808,
+        "roundtrip_seconds": 0.0018224469999950088,
+        "bytes": 47851,
+        "sequence": 5017,
+        "frame_read_age_seconds": 0.11010479927062988,
+        "sha256": "e0990a3f2077fe6d6820eb1fa0152a49b90573c3cf29d47780e1e2a852536de2"
+      },
+      {
+        "at": 1791814717.5115514,
+        "roundtrip_seconds": 0.001571771000044464,
+        "bytes": 47851,
+        "sequence": 5017,
+        "frame_read_age_seconds": 0.1918480396270752,
+        "sha256": "e0990a3f2077fe6d6820eb1fa0152a49b90573c3cf29d47780e1e2a852536de2"
+      },
+      {
+        "at": 1791814717.5934126,
+        "roundtrip_seconds": 0.0016951410000274336,
+        "bytes": 47948,
+        "sequence": 5018,
+        "frame_read_age_seconds": 0.11777091026306152,
+        "sha256": "01be84eb487925a6208c72872d3fd7a9f811200988cbc9f4935f1305428de748"
+      },
+      {
+        "at": 1791814717.675606,
+        "roundtrip_seconds": 0.0020285109999349515,
+        "bytes": 47948,
+        "sequence": 5018,
+        "frame_read_age_seconds": 0.19996404647827148,
+        "sha256": "01be84eb487925a6208c72872d3fd7a9f811200988cbc9f4935f1305428de748"
+      },
+      {
+        "at": 1791814717.7575147,
+        "roundtrip_seconds": 0.001739560000032725,
+        "bytes": 47987,
+        "sequence": 5019,
+        "frame_read_age_seconds": 0.12101125717163086,
+        "sha256": "15c56702d08bf8f6097245efc27d35b3c3b8b5b0aaf32d2426e3579ace7e720c"
+      },
+      {
+        "at": 1791814717.839657,
+        "roundtrip_seconds": 0.0019636100000752776,
+        "bytes": 47987,
+        "sequence": 5019,
+        "frame_read_age_seconds": 0.2031538486480713,
+        "sha256": "15c56702d08bf8f6097245efc27d35b3c3b8b5b0aaf32d2426e3579ace7e720c"
+      },
+      {
+        "at": 1791814717.9214222,
+        "roundtrip_seconds": 0.001587357000062184,
+        "bytes": 47988,
+        "sequence": 5020,
+        "frame_read_age_seconds": 0.1261768341064453,
+        "sha256": "0a4d18260e0ce76e0fbafacaa1085acc7b3043ac8b52b755399d2a4ed42a4a3b"
+      },
+      {
+        "at": 1791814718.003344,
+        "roundtrip_seconds": 0.0017568099999607512,
+        "bytes": 47921,
+        "sequence": 5021,
+        "frame_read_age_seconds": 0.04758405685424805,
+        "sha256": "49f3f39a42251e433c1f3d5f4fe12e720ad0b0678b2739b0e247cc5e2ee730f8"
+      },
+      {
+        "at": 1791814718.0850248,
+        "roundtrip_seconds": 0.0015146460000323714,
+        "bytes": 47921,
+        "sequence": 5021,
+        "frame_read_age_seconds": 0.12926554679870605,
+        "sha256": "49f3f39a42251e433c1f3d5f4fe12e720ad0b0678b2739b0e247cc5e2ee730f8"
+      },
+      {
+        "at": 1791814718.167054,
+        "roundtrip_seconds": 0.0018538740000622056,
+        "bytes": 47902,
+        "sequence": 5022,
+        "frame_read_age_seconds": 0.05164313316345215,
+        "sha256": "1a8c41723c39b702a7859a1c0c203f4ef9faa5ebd932fb3e7bda581f657422bd"
+      },
+      {
+        "at": 1791814718.248757,
+        "roundtrip_seconds": 0.001540760999887425,
+        "bytes": 47902,
+        "sequence": 5022,
+        "frame_read_age_seconds": 0.1333460807800293,
+        "sha256": "1a8c41723c39b702a7859a1c0c203f4ef9faa5ebd932fb3e7bda581f657422bd"
+      },
+      {
+        "at": 1791814718.3307073,
+        "roundtrip_seconds": 0.0017870840001705801,
+        "bytes": 47929,
+        "sequence": 5023,
+        "frame_read_age_seconds": 0.05495452880859375,
+        "sha256": "5ec49acccee8f207bce26d118a896b0bd5b3481a02ef8292af55af2a447b7421"
+      },
+      {
+        "at": 1791814718.4124024,
+        "roundtrip_seconds": 0.0015315759999339207,
+        "bytes": 47929,
+        "sequence": 5023,
+        "frame_read_age_seconds": 0.13664984703063965,
+        "sha256": "5ec49acccee8f207bce26d118a896b0bd5b3481a02ef8292af55af2a447b7421"
+      },
+      {
+        "at": 1791814718.4943864,
+        "roundtrip_seconds": 0.0018164939999678609,
+        "bytes": 47981,
+        "sequence": 5024,
+        "frame_read_age_seconds": 0.058595895767211914,
+        "sha256": "168b04a3c13dd641194964e6af1180c5610a861b9e1afa7f0971974214208e8c"
+      },
+      {
+        "at": 1791814718.5760608,
+        "roundtrip_seconds": 0.0015084390001902648,
+        "bytes": 47981,
+        "sequence": 5024,
+        "frame_read_age_seconds": 0.14027023315429688,
+        "sha256": "168b04a3c13dd641194964e6af1180c5610a861b9e1afa7f0971974214208e8c"
+      },
+      {
+        "at": 1791814718.6580112,
+        "roundtrip_seconds": 0.001786827999922025,
+        "bytes": 47858,
+        "sequence": 5025,
+        "frame_read_age_seconds": 0.06270861625671387,
+        "sha256": "255ac3c7bd536140b2b66312d4b3987c4afd62bbdb70fb5644b325428c97a381"
+      },
+      {
+        "at": 1791814718.739768,
+        "roundtrip_seconds": 0.0015871639998294995,
+        "bytes": 47858,
+        "sequence": 5025,
+        "frame_read_age_seconds": 0.14446592330932617,
+        "sha256": "255ac3c7bd536140b2b66312d4b3987c4afd62bbdb70fb5644b325428c97a381"
+      },
+      {
+        "at": 1791814718.8217893,
+        "roundtrip_seconds": 0.0018473770001037337,
+        "bytes": 47794,
+        "sequence": 5026,
+        "frame_read_age_seconds": 0.06989669799804688,
+        "sha256": "1c691c18a3bd49783869bea87f4a847c78f319ec533fe1c9f41123ea6e83db3a"
+      },
+      {
+        "at": 1791814718.90382,
+        "roundtrip_seconds": 0.0018642750001163222,
+        "bytes": 47794,
+        "sequence": 5026,
+        "frame_read_age_seconds": 0.15192770957946777,
+        "sha256": "1c691c18a3bd49783869bea87f4a847c78f319ec533fe1c9f41123ea6e83db3a"
+      },
+      {
+        "at": 1791814718.9858067,
+        "roundtrip_seconds": 0.0018215510001482471,
+        "bytes": 48037,
+        "sequence": 5027,
+        "frame_read_age_seconds": 0.07435417175292969,
+        "sha256": "8492e9c26ee8088d33f986d6106e69f11a3068ebdb1a0ce74e71551abd031671"
+      },
+      {
+        "at": 1791814719.067491,
+        "roundtrip_seconds": 0.0015157350001118175,
+        "bytes": 48037,
+        "sequence": 5027,
+        "frame_read_age_seconds": 0.15603947639465332,
+        "sha256": "8492e9c26ee8088d33f986d6106e69f11a3068ebdb1a0ce74e71551abd031671"
+      },
+      {
+        "at": 1791814719.1495218,
+        "roundtrip_seconds": 0.0018607219999466906,
+        "bytes": 47960,
+        "sequence": 5028,
+        "frame_read_age_seconds": 0.07772684097290039,
+        "sha256": "46c5704ae750c27b7f269a8d7c922dcfbd0e67ee72d0d3159b0622c8464d02d4"
+      },
+      {
+        "at": 1791814719.231215,
+        "roundtrip_seconds": 0.0015275440000550589,
+        "bytes": 47960,
+        "sequence": 5028,
+        "frame_read_age_seconds": 0.15942001342773438,
+        "sha256": "46c5704ae750c27b7f269a8d7c922dcfbd0e67ee72d0d3159b0622c8464d02d4"
+      },
+      {
+        "at": 1791814719.3133872,
+        "roundtrip_seconds": 0.00197625199984941,
+        "bytes": 47848,
+        "sequence": 5029,
+        "frame_read_age_seconds": 0.08147430419921875,
+        "sha256": "ed6b1ae307b3f9065b7de0b36fa88ff07a914af6c78fa0192d3eb3ffbb9f36c2"
+      },
+      {
+        "at": 1791814719.3952963,
+        "roundtrip_seconds": 0.0017081659998439136,
+        "bytes": 47848,
+        "sequence": 5029,
+        "frame_read_age_seconds": 0.16338419914245605,
+        "sha256": "ed6b1ae307b3f9065b7de0b36fa88ff07a914af6c78fa0192d3eb3ffbb9f36c2"
+      },
+      {
+        "at": 1791814719.4774354,
+        "roundtrip_seconds": 0.0019507139998040657,
+        "bytes": 47746,
+        "sequence": 5030,
+        "frame_read_age_seconds": 0.08602190017700195,
+        "sha256": "17aee4026901ed164b8b59e01a6d4de5eb93ec1b432df30ae794ea4d2eb29049"
+      },
+      {
+        "at": 1791814719.5593088,
+        "roundtrip_seconds": 0.0016904359999898588,
+        "bytes": 47746,
+        "sequence": 5030,
+        "frame_read_age_seconds": 0.16789627075195312,
+        "sha256": "17aee4026901ed164b8b59e01a6d4de5eb93ec1b432df30ae794ea4d2eb29049"
+      },
+      {
+        "at": 1791814719.6412485,
+        "roundtrip_seconds": 0.0017648739999458485,
+        "bytes": 47831,
+        "sequence": 5031,
+        "frame_read_age_seconds": 0.08942198753356934,
+        "sha256": "ab1f2a5aed489825e6bbcb162c3665e65355728adc1895ff1512e0897377acda"
+      },
+      {
+        "at": 1791814719.7232835,
+        "roundtrip_seconds": 0.0018575220001366688,
+        "bytes": 47831,
+        "sequence": 5031,
+        "frame_read_age_seconds": 0.17145776748657227,
+        "sha256": "ab1f2a5aed489825e6bbcb162c3665e65355728adc1895ff1512e0897377acda"
+      },
+      {
+        "at": 1791814719.8053455,
+        "roundtrip_seconds": 0.0018802440001763898,
+        "bytes": 47952,
+        "sequence": 5032,
+        "frame_read_age_seconds": 0.09411740303039551,
+        "sha256": "92c0e665d144c4b8768b384732f5592e261d51252d0edd68d23065826f7f181b"
+      },
+      {
+        "at": 1791814719.8874125,
+        "roundtrip_seconds": 0.001803117999997994,
+        "bytes": 47952,
+        "sequence": 5032,
+        "frame_read_age_seconds": 0.1761035919189453,
+        "sha256": "92c0e665d144c4b8768b384732f5592e261d51252d0edd68d23065826f7f181b"
+      },
+      {
+        "at": 1791814719.969648,
+        "roundtrip_seconds": 0.002022751000140488,
+        "bytes": 48033,
+        "sequence": 5033,
+        "frame_read_age_seconds": 0.10181188583374023,
+        "sha256": "ed4c89ead01aacb6d04e43cf9916b5d4fd63fbf11e88085ade7087ff2c1732b6"
+      },
+      {
+        "at": 1791814720.0517302,
+        "roundtrip_seconds": 0.001904118000084054,
+        "bytes": 48033,
+        "sequence": 5033,
+        "frame_read_age_seconds": 0.18389391899108887,
+        "sha256": "ed4c89ead01aacb6d04e43cf9916b5d4fd63fbf11e88085ade7087ff2c1732b6"
+      },
+      {
+        "at": 1791814720.1338575,
+        "roundtrip_seconds": 0.0018879879999076365,
+        "bytes": 47877,
+        "sequence": 5034,
+        "frame_read_age_seconds": 0.10651135444641113,
+        "sha256": "58742c8201743389e0381007bacf664fcaba17add7337b06ce990ba7a558d5c1"
+      },
+      {
+        "at": 1791814720.2159274,
+        "roundtrip_seconds": 0.0018580350001684565,
+        "bytes": 47877,
+        "sequence": 5034,
+        "frame_read_age_seconds": 0.18858098983764648,
+        "sha256": "58742c8201743389e0381007bacf664fcaba17add7337b06ce990ba7a558d5c1"
+      },
+      {
+        "at": 1791814720.2979374,
+        "roundtrip_seconds": 0.0018382559999281511,
+        "bytes": 48021,
+        "sequence": 5035,
+        "frame_read_age_seconds": 0.10967731475830078,
+        "sha256": "cdf6ad71a6e56d9cf4af566833ac73da94dd41d0022b4db3d0ba02dd240a2066"
+      },
+      {
+        "at": 1791814720.3799808,
+        "roundtrip_seconds": 0.0018049100001462648,
+        "bytes": 48021,
+        "sequence": 5035,
+        "frame_read_age_seconds": 0.19172382354736328,
+        "sha256": "cdf6ad71a6e56d9cf4af566833ac73da94dd41d0022b4db3d0ba02dd240a2066"
+      },
+      {
+        "at": 1791814720.4620934,
+        "roundtrip_seconds": 0.0019334000000981177,
+        "bytes": 47886,
+        "sequence": 5036,
+        "frame_read_age_seconds": 0.11423826217651367,
+        "sha256": "778d89fd3815543ca45c54009d8de895c79f21d6411920e3beee099428897c22"
+      },
+      {
+        "at": 1791814720.5440576,
+        "roundtrip_seconds": 0.0017861249998532003,
+        "bytes": 47886,
+        "sequence": 5036,
+        "frame_read_age_seconds": 0.19620251655578613,
+        "sha256": "778d89fd3815543ca45c54009d8de895c79f21d6411920e3beee099428897c22"
+      },
+      {
+        "at": 1791814720.626111,
+        "roundtrip_seconds": 0.0018752200001017627,
+        "bytes": 48018,
+        "sequence": 5037,
+        "frame_read_age_seconds": 0.11870670318603516,
+        "sha256": "c617cee1839e63437c07fc0cd70ad137c4f271b4d2754f8a2a20d09eef2d7ae9"
+      },
+      {
+        "at": 1791814720.7081108,
+        "roundtrip_seconds": 0.001828048000106719,
+        "bytes": 48018,
+        "sequence": 5037,
+        "frame_read_age_seconds": 0.20070481300354004,
+        "sha256": "c617cee1839e63437c07fc0cd70ad137c4f271b4d2754f8a2a20d09eef2d7ae9"
+      },
+      {
+        "at": 1791814720.7898934,
+        "roundtrip_seconds": 0.0016192000000501139,
+        "bytes": 47951,
+        "sequence": 5038,
+        "frame_read_age_seconds": 0.12203121185302734,
+        "sha256": "81a1c022c774d46881e4387569ea545dffad89b13bb61acf206a6c992e670e4c"
+      },
+      {
+        "at": 1791814720.8719923,
+        "roundtrip_seconds": 0.0019292719998702523,
+        "bytes": 47951,
+        "sequence": 5038,
+        "frame_read_age_seconds": 0.2041308879852295,
+        "sha256": "81a1c022c774d46881e4387569ea545dffad89b13bb61acf206a6c992e670e4c"
+      },
+      {
+        "at": 1791814720.9541173,
+        "roundtrip_seconds": 0.0019469049998406263,
+        "bytes": 47982,
+        "sequence": 5039,
+        "frame_read_age_seconds": 0.12677693367004395,
+        "sha256": "afbf42b6b049d9501c446f1475d962d3bf9eb6c2692e483650963cca31c64812"
+      },
+      {
+        "at": 1791814721.0362232,
+        "roundtrip_seconds": 0.0019241509999119444,
+        "bytes": 47866,
+        "sequence": 5040,
+        "frame_read_age_seconds": 0.05268383026123047,
+        "sha256": "1cc8e5e505fa5743e2211bced3e6edd5e1a9c07fac670e452d72d606b243cc6a"
+      },
+      {
+        "at": 1791814721.117985,
+        "roundtrip_seconds": 0.0015840290000141977,
+        "bytes": 47866,
+        "sequence": 5040,
+        "frame_read_age_seconds": 0.1344437599182129,
+        "sha256": "1cc8e5e505fa5743e2211bced3e6edd5e1a9c07fac670e452d72d606b243cc6a"
+      },
+      {
+        "at": 1791814721.2000513,
+        "roundtrip_seconds": 0.0018970460000673484,
+        "bytes": 47815,
+        "sequence": 5041,
+        "frame_read_age_seconds": 0.05653691291809082,
+        "sha256": "4b5273f2b89855f4f80b8233e08c55c149e80f81ad5cf7b2e43f7bad4cc1928d"
+      },
+      {
+        "at": 1791814721.281698,
+        "roundtrip_seconds": 0.0014779399998587905,
+        "bytes": 47815,
+        "sequence": 5041,
+        "frame_read_age_seconds": 0.1381840705871582,
+        "sha256": "4b5273f2b89855f4f80b8233e08c55c149e80f81ad5cf7b2e43f7bad4cc1928d"
+      },
+      {
+        "at": 1791814721.3636646,
+        "roundtrip_seconds": 0.0018046859997866704,
+        "bytes": 47990,
+        "sequence": 5042,
+        "frame_read_age_seconds": 0.059740304946899414,
+        "sha256": "0f8114170f7d1cf1d871d8d86e6a015ac632bdd0bb4a8d0c9eba8cf693ad97ad"
+      },
+      {
+        "at": 1791814721.4455106,
+        "roundtrip_seconds": 0.001666147000150886,
+        "bytes": 47990,
+        "sequence": 5042,
+        "frame_read_age_seconds": 0.1415872573852539,
+        "sha256": "0f8114170f7d1cf1d871d8d86e6a015ac632bdd0bb4a8d0c9eba8cf693ad97ad"
+      },
+      {
+        "at": 1791814721.527627,
+        "roundtrip_seconds": 0.0019378160000087519,
+        "bytes": 48013,
+        "sequence": 5043,
+        "frame_read_age_seconds": 0.06371212005615234,
+        "sha256": "69f178cc31be32f7c1771ed7403b95c03cbb95ff24cb284dbeb6ea1a8f4063da"
+      },
+      {
+        "at": 1791814721.6094468,
+        "roundtrip_seconds": 0.001638338000020667,
+        "bytes": 48013,
+        "sequence": 5043,
+        "frame_read_age_seconds": 0.14553165435791016,
+        "sha256": "69f178cc31be32f7c1771ed7403b95c03cbb95ff24cb284dbeb6ea1a8f4063da"
+      },
+      {
+        "at": 1791814721.6915224,
+        "roundtrip_seconds": 0.0018974939998770424,
+        "bytes": 47892,
+        "sequence": 5044,
+        "frame_read_age_seconds": 0.06804990768432617,
+        "sha256": "357cbf61c7d5565123469da21defe728613b9104b768386894a3caf2b44e6279"
+      },
+      {
+        "at": 1791814721.7734976,
+        "roundtrip_seconds": 0.0017835319999903732,
+        "bytes": 47892,
+        "sequence": 5044,
+        "frame_read_age_seconds": 0.15002727508544922,
+        "sha256": "357cbf61c7d5565123469da21defe728613b9104b768386894a3caf2b44e6279"
+      },
+      {
+        "at": 1791814721.8556895,
+        "roundtrip_seconds": 0.0019937889999255276,
+        "bytes": 47807,
+        "sequence": 5045,
+        "frame_read_age_seconds": 0.07176685333251953,
+        "sha256": "3a1b14678303294d957ca89d5f5e1e8e8bdc7d1ccddf9c32fd3d174f696011a7"
+      },
+      {
+        "at": 1791814721.9374309,
+        "roundtrip_seconds": 0.0015631639998900937,
+        "bytes": 47807,
+        "sequence": 5045,
+        "frame_read_age_seconds": 0.15350723266601562,
+        "sha256": "3a1b14678303294d957ca89d5f5e1e8e8bdc7d1ccddf9c32fd3d174f696011a7"
+      },
+      {
+        "at": 1791814722.019444,
+        "roundtrip_seconds": 0.0018444969998654415,
+        "bytes": 47963,
+        "sequence": 5046,
+        "frame_read_age_seconds": 0.0759735107421875,
+        "sha256": "d964d377611ba6ea138b6fb0098eccc7694ab02f0ddbdabe73c68733a64791bd"
+      },
+      {
+        "at": 1791814722.1011388,
+        "roundtrip_seconds": 0.0015296889998808183,
+        "bytes": 47963,
+        "sequence": 5046,
+        "frame_read_age_seconds": 0.1576681137084961,
+        "sha256": "d964d377611ba6ea138b6fb0098eccc7694ab02f0ddbdabe73c68733a64791bd"
+      },
+      {
+        "at": 1791814722.1831374,
+        "roundtrip_seconds": 0.0018342560001656238,
+        "bytes": 47887,
+        "sequence": 5047,
+        "frame_read_age_seconds": 0.08320736885070801,
+        "sha256": "5bb0872c2951068c3db0958096b0266c19246e97363918f44aa4392aee255d7a"
+      },
+      {
+        "at": 1791814722.2648818,
+        "roundtrip_seconds": 0.0015753889999814419,
+        "bytes": 47887,
+        "sequence": 5047,
+        "frame_read_age_seconds": 0.16495251655578613,
+        "sha256": "5bb0872c2951068c3db0958096b0266c19246e97363918f44aa4392aee255d7a"
+      },
+      {
+        "at": 1791814722.3468895,
+        "roundtrip_seconds": 0.0018399529999442166,
+        "bytes": 47904,
+        "sequence": 5048,
+        "frame_read_age_seconds": 0.08691596984863281,
+        "sha256": "e227d2da95a54753863fadf4422ce8c2d054b79181d9dbe6a969d759752eedec"
+      },
+      {
+        "at": 1791814722.4286377,
+        "roundtrip_seconds": 0.0015840290000141977,
+        "bytes": 47904,
+        "sequence": 5048,
+        "frame_read_age_seconds": 0.16866445541381836,
+        "sha256": "e227d2da95a54753863fadf4422ce8c2d054b79181d9dbe6a969d759752eedec"
+      }
+    ]
+  },
+  "audio-live": {
+    "playback": {
+      "exit": 1,
+      "stderr": "aplay: main:831: audio open error: No such file or directory\n"
+    },
+    "capture": {
+      "exit": 1,
+      "stderr": "arecord: main:831: audio open error: No such file or directory\n"
+    }
+  },
+  "sonar-after-fix": [
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815726.8886282,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815726.9905083,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7823,
+          "read_at": 1791815726.9898443,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815727.0924509,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7821,
+          "read_at": 1791815727.0917947,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815727.1942008,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7820,
+          "read_at": 1791815727.1935751,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 506,
+          "read_at": 1791815727.296048,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7819,
+          "read_at": 1791815727.2954018,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815727.3978298,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7820,
+          "read_at": 1791815727.3971746,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815727.4996798,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7820,
+          "read_at": 1791815727.4990683,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815727.601606,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7820,
+          "read_at": 1791815727.4990683,
+          "age_since_read_seconds": 0.10186649399997805,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 510,
+          "read_at": 1791815727.7034922,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7819,
+          "read_at": 1791815727.7028484,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    },
+    {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 509,
+          "read_at": 1791815727.8052688,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7820,
+          "read_at": 1791815727.8046741,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 20,
+        "directions": [
+          "backward",
+          "forward",
+          "left"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false
+    }
+  ],
+  "isolated-outputs-and-bus-probes": {
+    "at": "2026-10-12T11:00:19.219718-04:00",
+    "writes": [
+      {
+        "command": "rgb",
+        "index": 1,
+        "result": {
+          "executed": null,
+          "sdk_returned": true,
+          "simulated": false,
+          "physical_execution_verified": false,
+          "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+          "ok": true,
+          "verdict": "applied",
+          "reason": "accepted"
+        }
+      },
+      {
+        "command": "rgb",
+        "index": 2,
+        "result": {
+          "executed": null,
+          "sdk_returned": true,
+          "simulated": false,
+          "physical_execution_verified": false,
+          "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+          "ok": true,
+          "verdict": "applied",
+          "reason": "accepted"
+        }
+      },
+      {
+        "command": "sonar_rgb",
+        "index": 1,
+        "result": {
+          "executed": null,
+          "sdk_returned": true,
+          "simulated": false,
+          "physical_execution_verified": false,
+          "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+          "ok": true,
+          "verdict": "applied",
+          "reason": "accepted"
+        }
+      },
+      {
+        "command": "sonar_rgb",
+        "index": 2,
+        "result": {
+          "executed": null,
+          "sdk_returned": true,
+          "simulated": false,
+          "physical_execution_verified": false,
+          "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+          "ok": true,
+          "verdict": "applied",
+          "reason": "accepted"
+        }
+      }
+    ],
+    "bus_voltage": {
+      "ok": false,
+      "reason": "device_reported_failure",
+      "kind": "bus_voltage",
+      "id": 1
+    },
+    "bus_temperature": {
+      "ok": false,
+      "reason": "device_reported_failure",
+      "kind": "bus_temperature",
+      "id": 1
+    },
+    "bus_torque": {
+      "ok": false,
+      "reason": "device_reported_failure",
+      "kind": "bus_torque",
+      "id": 1
+    },
+    "bus_angle_limits": {
+      "ok": false,
+      "reason": "device_reported_failure",
+      "kind": "bus_angle_limits",
+      "id": 1
+    },
+    "led": {
+      "executed": null,
+      "sdk_returned": true,
+      "simulated": false,
+      "physical_execution_verified": false,
+      "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+      "ok": true,
+      "verdict": "applied",
+      "reason": "accepted"
+    },
+    "stop": {
+      "executed": null,
+      "sdk_returned": true,
+      "simulated": false,
+      "physical_execution_verified": false,
+      "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+      "ok": true,
+      "verdict": "applied",
+      "reason": "stop accepted"
+    },
+    "final_status": {
+      "telemetry": {
+        "sonar_mm": {
+          "value": 163,
+          "read_at": 1791817233.6735067,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        },
+        "battery_mv": {
+          "value": 7703,
+          "read_at": 1791817233.672804,
+          "age_since_read_seconds": 0.0,
+          "sample_time_known": false
+        }
+      },
+      "sensor_errors": {},
+      "drive_active": false,
+      "capabilities": {
+        "wheel_duty_limit": 0,
+        "directions": [
+          "backward",
+          "backward_left",
+          "backward_right",
+          "forward",
+          "forward_left",
+          "forward_right",
+          "left",
+          "right",
+          "turn_left",
+          "turn_right"
+        ],
+        "joints": {},
+        "outputs": [
+          "led",
+          "buzzer",
+          "rgb",
+          "display",
+          "sonar_rgb"
+        ],
+        "sonar": true,
+        "legacy_modes": "unavailable: require bounded reimplementation",
+        "arm_ik": "unavailable: geometry and joint calibration unverified",
+        "stored_actions": "unavailable: trajectories unaudited"
+      },
+      "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+      "ok": true,
+      "armed": false,
+      "driver_alive": true,
+      "controller": "exclusive-sdk",
+      "simulated": false,
+      "physical_motion_verified": false,
+      "mic": "unconfigured",
+      "camera": "unconfigured",
+      "speech": "unconfigured",
+      "backend": {
+        "backend_id": "witness-direct",
+        "kind": "none",
+        "model": null,
+        "where_computed": "jetson"
+      }
+    }
+  }
+}

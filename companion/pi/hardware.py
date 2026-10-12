@@ -9,7 +9,9 @@ import fcntl
 import importlib.util
 import json
 import os
+import queue
 from pathlib import Path
+import struct
 import termios
 import threading
 import time
@@ -18,8 +20,19 @@ from ..controls import DIRECTIONS, EXTRA_MOTION, EXTRA_OUTPUT, number, validate
 
 
 def validate_config(config):
-    if not isinstance(config, dict) or set(config) != {'wheel_duty_limit', 'joints', 'outputs', 'sonar'}:
+    required = {'wheel_duty_limit', 'joints', 'outputs', 'sonar'}
+    if (not isinstance(config, dict) or not required <= set(config)
+            or set(config) - required - {'direction_signs'}):
         raise ValueError('invalid hardware configuration fields')
+    if 'direction_signs' in config:
+        mapping = config['direction_signs']
+        if not isinstance(mapping, dict) or set(mapping) - set(DIRECTIONS):
+            raise ValueError('invalid calibrated direction names')
+        for signs in mapping.values():
+            if (not isinstance(signs, list) or len(signs) != 4
+                    or any(type(x) is not int or x not in (-1, 0, 1) for x in signs)
+                    or not any(signs)):
+                raise ValueError('direction needs four bounded wheel signs')
     number(config['wheel_duty_limit'], 0, 25, True)
     if type(config['sonar']) is not bool:
         raise ValueError('sonar must be a boolean')
@@ -56,6 +69,7 @@ class HardwareBoard:
         self._deadline = None
         self._fault = None
         self._telemetry = {}
+        self._sensor_errors = {}
         self._worker = threading.Thread(target=self._timed_stop, daemon=True)
         self._worker.start()
 
@@ -85,6 +99,9 @@ class HardwareBoard:
                 if ids:
                     self.sdk.bus_servo_stop(ids)
             elif command == 'drive':
+                directions = self.config.get('direction_signs', DIRECTIONS)
+                if args['direction'] not in directions:
+                    return self.unavailable('direction not commissioned')
                 if args['duty'] > self.config['wheel_duty_limit']:
                     return self.unavailable('drive exceeds commissioned duty limit')
                 if self._deadline is not None:
@@ -92,7 +109,7 @@ class HardwareBoard:
                 # Deadline is set BEFORE the write so a slow write cannot extend it.
                 self._deadline = time.monotonic() + args['duration_seconds']
                 self.sdk.set_motor_duty([[i, sign * args['duty']]
-                                        for i, sign in enumerate(DIRECTIONS[args['direction']], 1)])
+                                        for i, sign in enumerate(directions[args['direction']], 1)])
             elif command == 'joints':
                 groups = {'pwm': [], 'bus': []}
                 for name, pulse in args['positions'].items():
@@ -148,18 +165,81 @@ class HardwareBoard:
                 if value is not None:
                     self._telemetry[name] = (value, now, time.time())
             if self.sonar is not None:
-                self._telemetry['sonar_mm'] = (self.sonar.distance(), now, time.time())
+                try:
+                    value = self.sonar.distance()
+                    if value is None:
+                        self._sensor_errors['sonar_mm'] = 'out_of_range_or_invalid'
+                    else:
+                        self._telemetry['sonar_mm'] = (value, now, time.time())
+                        self._sensor_errors.pop('sonar_mm', None)
+                except OSError:
+                    self._sensor_errors['sonar_mm'] = 'sensor_io_error'
             samples = {name: {'value': value, 'read_at': wall, 'age_since_read_seconds': now - mono,
                               'sample_time_known': False}
                        for name, (value, mono, wall) in self._telemetry.items()}
-            return {'telemetry': samples, 'drive_active': self._deadline is not None,
+            return {'telemetry': samples, 'sensor_errors': dict(self._sensor_errors),
+                    'drive_active': self._deadline is not None,
                     'capabilities': {'wheel_duty_limit': self.config['wheel_duty_limit'],
+                        'directions': sorted(self.config.get('direction_signs', DIRECTIONS)),
                         'joints': self.config['joints'], 'outputs': self.config['outputs'],
                         'sonar': self.sonar is not None,
                         'legacy_modes': 'unavailable: require bounded reimplementation',
                         'arm_ik': 'unavailable: geometry and joint calibration unverified',
                         'stored_actions': 'unavailable: trajectories unaudited'},
                     'telemetry_note': 'Missing packets are unknown, not a dead-link diagnosis.'}
+
+    def probe(self, args):
+        """Bounded read-only board queries; no EEPROM, torque or position writes.
+
+        PWM values report the board's commanded pulse, not measured joint angle.
+        Bus replies carry a separate success flag. Never accept another channel's
+        reply. Probes are refused while a timed drive is active.
+        """
+        queries = {
+            'pwm_position': (4, 0x05, '<BBH', 'pwm_servo_queue'),
+            'pwm_offset': (4, 0x09, '<BBb', 'pwm_servo_queue'),
+            'bus_position': (5, 0x05, '<BBbh', 'bus_servo_queue'),
+            'bus_voltage': (5, 0x07, '<BBbH', 'bus_servo_queue'),
+            'bus_temperature': (5, 0x09, '<BBbB', 'bus_servo_queue'),
+            'bus_torque': (5, 0x0D, '<BBbb', 'bus_servo_queue'),
+            'bus_angle_limits': (5, 0x32, '<BBbHH', 'bus_servo_queue'),
+        }
+        if (not isinstance(args, dict) or set(args) != {'kind', 'id'}
+                or not isinstance(args['kind'], str) or args['kind'] not in queries):
+            raise ValueError('unknown diagnostic query')
+        number(args['id'], 1, 6, True)
+        function, command, fmt, queue_name = queries[args['kind']]
+        with self._lock:
+            if self._fault:
+                raise OSError(self._fault)
+            if self._deadline is not None:
+                return {'ok': False, 'reason': 'stop_drive_before_probe'}
+            replies = getattr(self.sdk, queue_name)
+            # Bounded drain: only the one-slot SDK queues are used here.
+            try:
+                replies.get_nowait()
+            except queue.Empty:
+                pass
+            self.sdk.buf_write(function, [command, args['id']])
+            deadline = time.monotonic() + .15
+            while time.monotonic() < deadline:
+                try:
+                    packet = replies.get(timeout=max(.001, deadline-time.monotonic()))
+                except queue.Empty:
+                    break
+                if len(packet) != struct.calcsize(fmt):
+                    continue
+                fields = struct.unpack(fmt, packet)
+                if fields[:2] != (args['id'], command):
+                    continue
+                if function == 5 and fields[2] != 0:
+                    return {'ok': False, 'reason': 'device_reported_failure', **args}
+                values = fields[2:] if function == 4 else fields[3:]
+                return {'ok': True, **args, 'value': values[0] if len(values)==1 else list(values),
+                        'physical_position_verified': False,
+                        'meaning': ('board_commanded_pulse' if args['kind']=='pwm_position'
+                                    else 'board_pwm_offset' if function==4 else 'bus_servo_reply')}
+            return {'ok': False, 'reason': 'no_matching_reply_within_150ms', **args}
 
     def snapshot(self):
         return {'ok': False, 'reason': 'use separate camera endpoint', 'simulated': False}
@@ -182,8 +262,12 @@ class SonarIO:
 
     def distance(self):
         with self.bus(1) as bus:
+            # This device requires a STOP between register selection and read.
+            # A combined repeated-start transaction returned misleading values
+            # in the live comparison against the installed vendor protocol.
+            bus.i2c_rdwr(self.msg.write(0x77, [0]))
             reply = self.msg.read(0x77, 2)
-            bus.i2c_rdwr(self.msg.write(0x77, [0]), reply)
+            bus.i2c_rdwr(reply)
             distance = int.from_bytes(bytes(reply), 'little')
             return distance if distance <= 5000 else None
 

@@ -69,6 +69,8 @@ class GuardService:
             self.notes.append({'type': 'proposed_note', 'id': note_id,
                                'text': clean_text(args['text'], 2000), 'approved': False})
             return {'ok': True, 'note_id': note_id, 'approved': False}
+        if tool == 'witness_status' and set(args) == {'probe'}:
+            return self.supervisor.call('probe', args['probe'])
         if args:
             raise ValueError('tool takes no arguments')
         if tool == 'witness_snapshot':
@@ -99,12 +101,14 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
     try:
         conn.sendall(encode({'session': session, 'protocol': 1, 'tools': sorted(TOOLS)}))
         while supervisor.healthy:
+            stopped = False
             if operator_stop is not None and operator_stop.is_set():
                 operator_stop.clear()
                 if operator_arm is not None:
                     operator_arm.clear()
                 service.action({'command': 'stop'})
-            if operator_arm is not None and operator_arm.is_set():
+                stopped = True
+            if not stopped and operator_arm is not None and operator_arm.is_set():
                 operator_arm.clear()
                 if peer is not None:
                     guard.arm()
