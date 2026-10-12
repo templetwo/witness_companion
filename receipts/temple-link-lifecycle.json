@@ -1,0 +1,186 @@
+{
+  "at": "2026-10-12T10:02:21.611226-04:00",
+  "scope": "stationary, zero duty limit, no action commands",
+  "after_clean_disconnect": {
+    "device": "/dev/ttyAMA0",
+    "device_is_character": true,
+    "serial_holder_pids": [],
+    "owners": [
+      {
+        "pid": 7366,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-camera.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          8080
+        ]
+      },
+      {
+        "pid": 7367,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-guard.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          9040
+        ]
+      }
+    ],
+    "unreadable_pids": [],
+    "vanished_pids": [],
+    "network_tables_unreadable": [],
+    "listener_ports": [
+      8080,
+      9040
+    ],
+    "owner_mapped_ports": [
+      8080,
+      9040
+    ],
+    "inspection_complete": true,
+    "serial_release_verified": false,
+    "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+  },
+  "initial_status": {
+    "telemetry": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false
+  },
+  "active": {
+    "device": "/dev/ttyAMA0",
+    "device_is_character": true,
+    "serial_holder_pids": [
+      8053
+    ],
+    "owners": [
+      {
+        "pid": 7366,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-camera.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          8080
+        ]
+      },
+      {
+        "pid": 7367,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-guard.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          9040
+        ]
+      },
+      {
+        "pid": 8053,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-guard.service"
+        ],
+        "serial_fds": [
+          5
+        ],
+        "listening_ports": []
+      }
+    ],
+    "unreadable_pids": [],
+    "vanished_pids": [],
+    "network_tables_unreadable": [],
+    "listener_ports": [
+      8080,
+      9040
+    ],
+    "owner_mapped_ports": [
+      8080,
+      9040
+    ],
+    "inspection_complete": true,
+    "serial_release_verified": false,
+    "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+  },
+  "after_heartbeat_loss": {
+    "device": "/dev/ttyAMA0",
+    "device_is_character": true,
+    "serial_holder_pids": [],
+    "owners": [
+      {
+        "pid": 7366,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-camera.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          8080
+        ]
+      },
+      {
+        "pid": 7367,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-guard.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          9040
+        ]
+      }
+    ],
+    "unreadable_pids": [],
+    "vanished_pids": [],
+    "network_tables_unreadable": [],
+    "listener_ports": [
+      8080,
+      9040
+    ],
+    "owner_mapped_ports": [
+      8080,
+      9040
+    ],
+    "inspection_complete": true,
+    "serial_release_verified": false,
+    "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+  },
+  "new_session_status": {
+    "telemetry": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false
+  }
+}

@@ -1,0 +1,65 @@
+Command: systemd-analyze verify /opt/temple-witness/releases/20261012-handover-01/deploy/temple-witness-guard.service /opt/temple-witness/releases/20261012-handover-01/deploy/temple-witness-camera.service
+Command: systemctl show hw_button_scan.service masterpi.service hw_remote.service hw_find.service -p Id -p ActiveState -p UnitFileState
+Id=hw_button_scan.service
+ActiveState=active
+UnitFileState=enabled
+
+Id=masterpi.service
+ActiveState=active
+UnitFileState=enabled
+
+Id=hw_remote.service
+ActiveState=active
+UnitFileState=enabled
+
+Id=hw_find.service
+ActiveState=active
+UnitFileState=enabled
+Vendor rollback files saved: /var/lib/temple-witness-handover/20261012-handover-01
+Command: systemctl disable --now hw_button_scan.service masterpi.service hw_remote.service hw_find.service
+Removed "/etc/systemd/system/multi-user.target.wants/hw_remote.service".
+Removed "/etc/systemd/system/multi-user.target.wants/masterpi.service".
+Removed "/etc/systemd/system/multi-user.target.wants/hw_find.service".
+Removed "/etc/systemd/system/multi-user.target.wants/hw_button_scan.service".
+Command: systemctl daemon-reload
+Command: systemctl enable --now temple-witness-guard.service temple-witness-camera.service
+Created symlink /etc/systemd/system/multi-user.target.wants/temple-witness-guard.service → /etc/systemd/system/temple-witness-guard.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/temple-witness-camera.service → /etc/systemd/system/temple-witness-camera.service.
+Command: systemctl show temple-witness-guard.service temple-witness-camera.service hw_button_scan.service masterpi.service hw_remote.service hw_find.service -p Id -p ActiveState -p SubState -p UnitFileState -p MainPID
+MainPID=7367
+Id=temple-witness-guard.service
+ActiveState=active
+SubState=running
+UnitFileState=enabled
+
+MainPID=7366
+Id=temple-witness-camera.service
+ActiveState=active
+SubState=running
+UnitFileState=enabled
+
+MainPID=0
+Id=hw_button_scan.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+
+MainPID=0
+Id=masterpi.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+
+MainPID=0
+Id=hw_remote.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+
+MainPID=0
+Id=hw_find.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+Service handover complete at 2026-10-12T10:00:52.054218-04:00
+No arm or movement command issued; next verify authenticated status and camera.

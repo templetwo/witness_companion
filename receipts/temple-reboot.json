@@ -1,0 +1,104 @@
+{
+  "requested_at": "2026-10-12T10:04:53.332268-04:00",
+  "before_boot_id": "f1d885ba-3593-42ef-bfaf-89ce261b7cd2",
+  "scope": "Pi only; Temple disarmed, wheel limit zero, vendor units persistently masked",
+  "after_boot_id": "ac9b8c99-173e-4b67-beeb-8ae44da9d391",
+  "returned_at": "2026-10-12T10:05:18.726748-04:00",
+  "postboot_services": "NRestarts=0\nId=temple-witness-guard.service\nActiveState=active\nSubState=running\nUnitFileState=enabled\n\nNRestarts=0\nId=temple-witness-camera.service\nActiveState=active\nSubState=running\nUnitFileState=enabled\n\nNRestarts=0\nId=masterpi.service\nActiveState=inactive\nSubState=dead\nUnitFileState=masked\n\nNRestarts=0\nId=hw_remote.service\nActiveState=inactive\nSubState=dead\nUnitFileState=masked\n\nNRestarts=0\nId=hw_button_scan.service\nActiveState=inactive\nSubState=dead\nUnitFileState=masked\n\nNRestarts=0\nId=hw_find.service\nActiveState=inactive\nSubState=dead\nUnitFileState=masked\nthrottled=0x0\nNTPSynchronized=yes\n 10:06:25 up 1 min,  2 users,  load average: 0.21, 0.11, 0.04\n",
+  "postboot_status": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 7921,
+        "read_at": 1791813986.6737654,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false
+  },
+  "postboot_ownership": {
+    "device": "/dev/ttyAMA0",
+    "device_is_character": true,
+    "serial_holder_pids": [
+      2391
+    ],
+    "owners": [
+      {
+        "pid": 1818,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-camera.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          8080
+        ]
+      },
+      {
+        "pid": 1819,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-guard.service"
+        ],
+        "serial_fds": [],
+        "listening_ports": [
+          9040
+        ]
+      },
+      {
+        "pid": 2391,
+        "comm": "python3",
+        "cgroup": [
+          "0::/system.slice/temple-witness-guard.service"
+        ],
+        "serial_fds": [
+          5
+        ],
+        "listening_ports": []
+      }
+    ],
+    "unreadable_pids": [],
+    "vanished_pids": [],
+    "network_tables_unreadable": [],
+    "listener_ports": [
+      8080,
+      9040
+    ],
+    "owner_mapped_ports": [
+      8080,
+      9040
+    ],
+    "inspection_complete": true,
+    "serial_release_verified": false,
+    "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+  },
+  "postboot_camera": [
+    {
+      "status": 200,
+      "bytes": 38462,
+      "sequence": "436"
+    },
+    {
+      "status": 200,
+      "bytes": 38553,
+      "sequence": "438"
+    }
+  ],
+  "verified_at": "2026-10-12T10:06:27.574152-04:00"
+}

@@ -1,0 +1,29 @@
+# Codex, gpt-6-astra, Jetson seat, 2026-10-12 10:05 EDT
+[Unit]
+Description=Temple Witness authenticated robot guard (disarmed, motion disabled)
+Wants=network-online.target
+After=network-online.target
+Conflicts=masterpi.service hw_remote.service hw_button_scan.service
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/temple-witness/current
+ExecStart=/usr/bin/python3 -B -m companion.pi.service --real --host 10.42.0.23 --peer 10.42.0.1 --port 9040 --hardware-config /etc/temple-witness/hardware.json --key-file %d/guard.key --journal /var/lib/temple-witness/guard.jsonl --notes-journal /var/lib/temple-witness/notes.jsonl
+LoadCredential=guard.key:/etc/temple-witness/guard.key
+StateDirectory=temple-witness
+StateDirectoryMode=0700
+UMask=0077
+Restart=on-failure
+RestartSec=3
+KillMode=control-group
+TimeoutStopSec=3
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

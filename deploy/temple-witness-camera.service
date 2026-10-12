@@ -1,0 +1,26 @@
+# Codex, gpt-6-astra, Jetson seat, 2026-10-12 10:05 EDT
+[Unit]
+Description=Temple Witness camera snapshots (no robot controls)
+Wants=network-online.target
+After=network-online.target
+Conflicts=masterpi.service
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/opt/temple-witness/current
+ExecStart=/usr/bin/python3 -B -m companion.pi.camera_service --host 10.42.0.23 --peer 10.42.0.1 --port 8080 --device /dev/v4l/by-id/usb-icSpring_icspring_camera-video-index0
+UMask=0077
+Restart=on-failure
+RestartSec=3
+KillMode=control-group
+TimeoutStopSec=3
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -8,6 +8,7 @@ actions must carry the existing signed ActionRequest, checked on the Pi.
 import argparse
 import fcntl
 import os
+from pathlib import Path
 import secrets
 import signal
 import threading
@@ -168,15 +169,18 @@ def main():
     parser.add_argument('--peer', default='127.0.0.1')
     parser.add_argument('--issuer', default='jetson-coordinator')
     parser.add_argument('--key-env', default='WITNESS_GUARD_KEY_HEX', help='name only; never a value')
+    parser.add_argument('--key-file', help='protected file containing a hexadecimal key')
     parser.add_argument('--journal', required=True)
     parser.add_argument('--notes-journal', required=True)
     args = parser.parse_args()
     try:
-        key = bytes.fromhex(os.environ[args.key_env])
+        material = (Path(args.key_file).read_text().strip() if args.key_file
+                    else os.environ.pop(args.key_env))
+        key = bytes.fromhex(material)
         if len(key) < 32:
             raise ValueError()
-    except (KeyError, ValueError):
-        parser.error('key environment variable missing or invalid; supply at least 32 bytes')
+    except (KeyError, ValueError, OSError):
+        parser.error('key source missing or invalid; supply at least 32 bytes')
     factory = None
     if args.real:
         if not args.hardware_config:
@@ -193,6 +197,7 @@ def main():
     with open(args.journal+'.lock', 'a') as lease:
         fcntl.flock(lease.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         with socket.socket() as listener:
+            listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             listener.bind((args.host, args.port))
             listener.listen(1)
             print(('fake' if args.fake else 'real, DISARMED') + ' Pi service listening on %s:%s' % listener.getsockname(), flush=True)

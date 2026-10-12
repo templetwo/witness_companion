@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import stat
 
-PORTS = {8080, 9026, 9030}
+PORTS = {8080, 9026, 9030, 9040}
 
 
 def socket_ports(proc):

@@ -1,0 +1,23 @@
+[
+  {
+    "http_status": 200,
+    "bytes": 42494,
+    "sequence": "220",
+    "frame_read_time": "1791813687.4022453",
+    "received_at": 1791813687.5386007
+  },
+  {
+    "http_status": 200,
+    "bytes": 42398,
+    "sequence": "222",
+    "frame_read_time": "1791813687.7166677",
+    "received_at": 1791813687.8411338
+  },
+  {
+    "http_status": 200,
+    "bytes": 42318,
+    "sequence": "224",
+    "frame_read_time": "1791813688.0359957",
+    "received_at": 1791813688.143561
+  }
+]

@@ -1,0 +1,42 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T10:03:27.719753-04:00
+NRestarts=0
+Id=temple-witness-guard.service
+ActiveState=active
+SubState=running
+UnitFileState=enabled
+
+NRestarts=0
+Id=temple-witness-camera.service
+ActiveState=active
+SubState=running
+UnitFileState=enabled
+
+NRestarts=0
+Id=masterpi.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+
+NRestarts=0
+Id=hw_remote.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+
+NRestarts=0
+Id=hw_button_scan.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+
+NRestarts=0
+Id=hw_find.service
+ActiveState=inactive
+SubState=dead
+UnitFileState=masked
+throttled=0x0
+               total        used        free      shared  buff/cache   available
+Mem:            4050         600        2591          40         961        3450
+Swap:            199           0         199
+NTP=yes
+NTPSynchronized=yes

@@ -1,42 +1,65 @@
-Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:32:40 EDT
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T10:07:30.830175-04:00
 
-# Witness checkpoint: hardware paused for battery charging
+# Temple control handover complete; motion commissioning remains
 
-Anthony's latest instruction: "ill just charge the batterys", then "update the project state where we left off and the stack". Hardware work is paused. No new motion, SDK import, serial open, service stop, install or deployment occurred during this integration turn.
+Anthony authorized replacing vendor control with Temple control, specified that
+the 4 GB Pi should act as the stacked hardware controller under the Jetson, and
+required that reboots not restore vendor control. This supersedes the earlier
+selection of HQ for this handover. Full session access was enabled beforehand.
 
-## Observed hardware state
+## Verified deployed state
 
-- The Pi repeatedly lost Ethernet carrier. SSH returned briefly after USB-C changes and a reported 20 W supply, then failed again. Last observation: carrier=0 and SSH timeout; user reported solid red.
-- During reachable periods, vcgencmd returned 0x50005 (active undervoltage and throttling, plus historical flags). One later reading was 0x50000 (historical flags only), before another link loss. Power instability is evidenced; an exhausted battery is Anthony's hypothesis, not a proven root cause of every outage. The USB-C source/cable ratings were not established.
-- masterpi.service was still active after boot, PID 728 on one check. Vendor serial handover has NOT happened. Exclusive Witness serial ownership remains Anthony's chosen architecture; the vendor app will not be used.
-- A paired clock read showed Pi epoch 1791775573 (~23:26:13 EDT) while Jetson reported 23:29:09 EDT. Check and correct clock synchronization before testing the signed, short-TTL transport; this apparent ~176-second skew would reject valid actions.
-- Earlier attended floor pulse at duty 12 produced no observed motion. No subsequent drive attempt. Physical stopping and all new controls remain unverified by this seat.
+- Temple guard and separate camera are installed, enabled at boot, and running.
+  Pi release: `/opt/temple-witness/releases/20261012-handover-01`, selected by
+  `/opt/temple-witness/current`. All 51 deployed files matched local SHA256s.
+- `masterpi`, `hw_remote`, `hw_button_scan`, and `hw_find` services are inactive
+  and persistently masked in `/etc/systemd/system`; vendor app control/discovery
+  listeners are gone. The button service could launch vendor hardware tests;
+  its vendor Wi-Fi-reset/software-shutdown shortcuts are consequently retired.
+- Exactly one Temple supervised worker owns one serial descriptor during each
+  connection; none remains after clean disconnect or heartbeat expiry.
+- Guard endpoint `10.42.0.23:9040` is authenticated and restricted to the Jetson
+  at `10.42.0.1`. Credential values are protected and excluded from the repo.
+- Camera: `http://10.42.0.23:8080/snapshot.jpg`, independent of robot controls.
+- **Motion stays disabled:** disarmed, wheel duty limit zero, empty joint map,
+  no outputs or sonar configured. Operator-arm signals are not enabled.
+  Startup sent only zero wheel duty; no nonzero motor or servo action was sent.
+- Actual Pi reboot completed and changed the boot ID. Both Temple services
+  returned enabled/running with zero restarts; all four vendor units remained
+  masked/inactive. Authenticated status was still disarmed, with fresh battery
+  telemetry 7921 mV and advancing camera frame sequences. Power flags `0x0`;
+  NTP synchronized. Receipt: `receipts/temple-reboot.json`.
+- Pi memory before reboot: 4050 MiB total, about 3450 MiB available after the
+  control session closed. No language model was installed on the Pi.
 
-## Local software checkpoint, NOT deployment ready
+## Software validation
 
-Worktree /home/tony/witness_pi_guard, branch prep/pi-guard-service. Prior committed checkpoint: 12fab93. New work is saved as a WIP integration checkpoint on this branch; do not infer completion or authorization to operate from this commit.
+Jetson Python 3.10: 132 tests passed. Pi Python 3.11: 132 run, 131 passed, one
+unrelated PyYAML config check skipped. Eighteen focused handover tests cover
+motion-disabled configuration, timed wheel stops/overlap/failure, all-or-none
+joint validation, serial preflight/lock failures, and camera access/freshness.
+The first unprivileged Pi test run could not create MCP temporary directories
+inside the root-owned release; the intended guard identity completed the suite.
 
-Implemented locally, but requiring focused tests and review:
+Live stationary checks verified authenticated status, single serial ownership,
+clean-disconnect release, heartbeat-loss release, and fresh disarmed sessions.
+These are not physical stopping or driving tests. Receipts are in `receipts/`.
 
-- Expanded strict action schema: bounded named drive directions (duty <=25, duration <=0.5 s), named joint positions, LED, RGB, buzzer and sonar RGB.
-- HardwareBoard maps to an injected SDK, serializes writes, schedules a driver-local timed wheel stop, validates configured joint ranges before any joint write, and reports packet telemetry and configured capabilities.
-- RealBoardFactory lazily loads the standalone vendor SDK only on explicit --real, checks /proc ownership before/after open, requests advisory and tty-exclusive locks, and sends initial zero wheel duty. This factory has NEVER been run. Kernel tty exclusion does not stop a privileged opener; retiring restart paths is still required.
-- Pi service has explicit --fake/--real modes and optional local SIGUSR1 arming / SIGUSR2 stop. Starts disarmed; no remote arm tool. Signal/session race behavior still needs targeted tests and review.
-- MCP package imported from the sibling prep/mcp-tool-server worktree, with a live adapter connecting the five tools to PiLink, a persistent issued-action journal and local notes. No automatic reconnect or action retry.
-- CameraSnapshot fetches a bounded JPEG and distinguishes receive time from unknown vendor exposure time. Separate camera-only service avoids importing MasterPi control code. Local Piper/aplay adapter uses the existing local voice without downloading.
+## Operation and remaining work
 
-Not done: deployment/configuration, shared guard credential provisioning, stable power, time sync, exclusive serial handover, camera migration, calibrated joint map, direction validation, physical stop/heartbeat-loss commissioning, focused new-adapter tests, live end-to-end MCP registration. OpenClaw config remains unchanged. No new packages installed. No push.
+See `DEPLOYMENT.md` for endpoints, protected credential paths, status command,
+boot behavior and the attended rollback procedure. Original vendor unit files
+are backed up on the Pi at
+`/var/lib/temple-witness-handover/20261012-handover-01`. No automatic rollback.
 
-The new adapter has no commissioned limits file. A zero wheel limit and empty joint map are the intended initial configuration; do not fabricate calibration. Arm IK, stored trajectories and autonomous vendor vision modes report unavailable rather than importing competing serial owners. Microphone input remains unconfigured. PWM servo travel cannot be cancelled by the documented stop; it stops wheels and configured bus joints only. Software cannot guarantee a stop if the entire Pi freezes.
+Before any drive: commission wheel directions and physical stop behavior with
+Anthony at the switch, resolve whole-Pi-freeze motor cutoff, then set explicit
+limits and review/enable local arming. Joint calibration, peripheral validation,
+operator-arm signal races, speech/microphone integration and live MCP/OpenClaw
+registration remain separate work. The current Pi IP is DHCP-assigned; this task
+did not reserve it or change network infrastructure. No nonzero motion is
+permitted just because this software handover succeeded.
 
-## Verification at pause
-
-`python3 -m unittest discover -s tests -t .`: 114 tests passed on Jetson Python 3.10.12. This is the combined existing guard/coordinator/preflight/MCP regression suite, NOT focused coverage of the new hardware, camera and speech adapters. The MCP no-mode diagnostic assertion was updated for the new explicit --pi option. All 30 companion/MCP Python modules parse under 3.10 and 3.11 grammar; Python 3.11 runtime was not tested. Receipt: receipts/integration-checkpoint.txt.
-
-## Resume in order
-
-1. Anthony finishes charging and reconnects. Inspect carrier, SSH, current/historical power flags and clock synchronization without moving anything.
-2. Finish focused tests and review the WIP: bounded drive auto-stop/overlap/failure, all-or-none joint validation, calibration failures, serial exclusivity and restart behavior, local arming races, camera freshness/size/error handling, speech failure, MCP-to-real-guard behavior and credential lifecycle.
-3. Coordinate the already-selected HQ Pi handover; retire actual vendor owners and restart paths, preserve camera through the separate service, verify sole serial ownership. Keep initial service disarmed with motion disabled.
-4. Register the tools against the reviewed deployed endpoint. Validate sensor/camera/speech/peripheral capabilities honestly, then commission one bounded motor action with Anthony at the physical switch and suitable clearance. No automatic replay of prior pulses.
-5. Update project/Stack receipts with what was actually measured. No claim that Witness is fully wired or ready to pilot yet.
+No OpenClaw configuration changes, Stack write, or git push occurred in this
+handover. Earlier push authorization persists but GitHub authentication has not
+been repaired. Earlier Stack checkpoint proposal is not claimed committed.

@@ -1,0 +1,56 @@
+{
+  "device": "/dev/ttyAMA0",
+  "device_is_character": true,
+  "serial_holder_pids": [
+    7490
+  ],
+  "owners": [
+    {
+      "pid": 7366,
+      "comm": "python3",
+      "cgroup": [
+        "0::/system.slice/temple-witness-camera.service"
+      ],
+      "serial_fds": [],
+      "listening_ports": [
+        8080
+      ]
+    },
+    {
+      "pid": 7367,
+      "comm": "python3",
+      "cgroup": [
+        "0::/system.slice/temple-witness-guard.service"
+      ],
+      "serial_fds": [],
+      "listening_ports": [
+        9040
+      ]
+    },
+    {
+      "pid": 7490,
+      "comm": "python3",
+      "cgroup": [
+        "0::/system.slice/temple-witness-guard.service"
+      ],
+      "serial_fds": [
+        5
+      ],
+      "listening_ports": []
+    }
+  ],
+  "unreadable_pids": [],
+  "vanished_pids": [],
+  "network_tables_unreadable": [],
+  "listener_ports": [
+    8080,
+    9040
+  ],
+  "owner_mapped_ports": [
+    8080,
+    9040
+  ],
+  "inspection_complete": true,
+  "serial_release_verified": false,
+  "note": "One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened."
+}
