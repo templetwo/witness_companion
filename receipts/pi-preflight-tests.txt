@@ -1,0 +1,11 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:09:44 EDT
+COMMAND: /usr/bin/python3 -m unittest tests.test_pi_preflight -v
+test_maps_serial_and_9026_without_reading_secrets (tests.test_pi_preflight.PreflightTests) ... ok
+test_missing_network_table_reported (tests.test_pi_preflight.PreflightTests) ... ok
+test_permission_denial_never_looks_like_no_owner (tests.test_pi_preflight.PreflightTests) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+OK
+EXIT: 0
