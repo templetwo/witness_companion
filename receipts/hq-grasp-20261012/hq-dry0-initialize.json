@@ -1,0 +1,83 @@
+{
+  "identity": "HQ Mac Studio, claude-fable-5-1",
+  "at": "2026-10-12T18:49:10.031136-04:00",
+  "authorization": "Anthony at the terminal: 'ok let me see you grab the block and lift it'; attended, at the switch",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1800,
+    "3": 782,
+    "4": 1803,
+    "5": 2016,
+    "6": 1520
+  },
+  "planned_waypoints": [
+    {
+      "1": 1800,
+      "3": 782,
+      "4": 1803,
+      "5": 2116,
+      "6": 1520
+    },
+    {
+      "1": 1800,
+      "3": 782,
+      "4": 1803,
+      "5": 2216,
+      "6": 1520
+    }
+  ],
+  "channels": [
+    5
+  ],
+  "duration_seconds": 0.6,
+  "note": "dry preflight only",
+  "dry": true,
+  "external_before": "/home/tony/witness_scratch/hq-grasp-20261012/hq-dry0-before.jpg",
+  "before_image": {
+    "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-dry0-fork-before.jpg",
+    "sequence": "46414"
+  },
+  "readonly_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "result": "dry run: pose matches start, cameras fresh, no setup, no motion"
+}

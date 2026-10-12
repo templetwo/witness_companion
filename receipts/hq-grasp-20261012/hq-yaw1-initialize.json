@@ -1,0 +1,311 @@
+{
+  "identity": "HQ Mac Studio, claude-fable-5-1",
+  "at": "2026-10-12T18:55:47.817706-04:00",
+  "authorization": "Anthony at the terminal: 'ok let me see you grab the block and lift it'; attended, at the switch",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 2000,
+    "3": 782,
+    "4": 1803,
+    "5": 2016,
+    "6": 1520
+  },
+  "planned_waypoints": [
+    {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2016,
+      "6": 1620
+    }
+  ],
+  "channels": [
+    6
+  ],
+  "duration_seconds": 0.6,
+  "note": "Orientation step: base yaw +100us to learn which way the fork view shifts; green block is on the floor out of the fork view. Anthony: do not rearrange, use cameras.",
+  "dry": false,
+  "external_before": "/home/tony/witness_scratch/hq-grasp-20261012/hq-yaw1-before.jpg",
+  "before_image": {
+    "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-yaw1-fork-before.jpg",
+    "sequence": "48909"
+  },
+  "readonly_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "joints_override": {
+    "pwm_6": {
+      "bus": "pwm",
+      "id": 6,
+      "min": 1520,
+      "max": 1620
+    }
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "preflight": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 7271,
+        "read_at": 1791845754.5069203,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {
+        "pwm_6": {
+          "bus": "pwm",
+          "id": 6,
+          "min": 1520,
+          "max": 1620
+        }
+      },
+      "outputs": [
+        "buzzer"
+      ],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 2000,
+        "3": 782,
+        "4": 1803,
+        "5": 2016,
+        "6": 1620
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7266,
+      "external_image": "/home/tony/witness_scratch/hq-grasp-20261012/hq-yaw1-stage-1.jpg",
+      "fork_image": {
+        "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-yaw1-fork-stage-1.jpg",
+        "sequence": "48959"
+      }
+    }
+  ],
+  "readback": {
+    "1": 2000,
+    "3": 782,
+    "4": 1803,
+    "5": 2016,
+    "6": 1620
+  },
+  "external_after": "/home/tony/witness_scratch/hq-grasp-20261012/hq-yaw1-after.jpg",
+  "after_image": {
+    "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-yaw1-fork-after.jpg",
+    "sequence": "48974"
+  },
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 7265,
+        "read_at": 1791845762.2400873,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {
+        "pwm_6": {
+          "bus": "pwm",
+          "id": 6,
+          "min": 1520,
+          "max": 1620
+        }
+      },
+      "outputs": [
+        "buzzer"
+      ],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "locked_readback": {
+    "1": 2000,
+    "3": 782,
+    "4": 1803,
+    "5": 2016,
+    "6": 1620
+  }
+}

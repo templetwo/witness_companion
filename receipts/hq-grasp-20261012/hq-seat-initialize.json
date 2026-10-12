@@ -1,0 +1,344 @@
+{
+  "identity": "HQ Mac Studio, claude-fable-5-1",
+  "at": "2026-10-12T18:49:51.607025-04:00",
+  "authorization": "Anthony at the terminal: 'ok let me see you grab the block and lift it'; attended, at the switch",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1800,
+    "3": 782,
+    "4": 1803,
+    "5": 2016,
+    "6": 1520
+  },
+  "planned_waypoints": [
+    {
+      "1": 1800,
+      "3": 782,
+      "4": 1803,
+      "5": 2116,
+      "6": 1520
+    },
+    {
+      "1": 1800,
+      "3": 782,
+      "4": 1803,
+      "5": 2216,
+      "6": 1520
+    }
+  ],
+  "channels": [
+    5
+  ],
+  "duration_seconds": 0.6,
+  "note": "Batch 1 seat: shoulder down two 100us steps, jaws open 1800, pads to come alongside the green block faces. Anthony: go.",
+  "dry": false,
+  "external_before": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-before.jpg",
+  "before_image": {
+    "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-fork-before.jpg",
+    "sequence": "46675"
+  },
+  "readonly_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "joints_override": {
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 2016,
+      "max": 2216
+    }
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "preflight": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 7326,
+        "read_at": 1791845398.2802947,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {
+        "pwm_5": {
+          "bus": "pwm",
+          "id": 5,
+          "min": 2016,
+          "max": 2216
+        }
+      },
+      "outputs": [
+        "buzzer"
+      ],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2116,
+        "6": 1520
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7327,
+      "external_image": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-stage-1.jpg",
+      "fork_image": {
+        "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-fork-stage-1.jpg",
+        "sequence": "46725"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 1800,
+        "3": 782,
+        "4": 1803,
+        "5": 2216,
+        "6": 1520
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7326,
+      "external_image": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-stage-2.jpg",
+      "fork_image": {
+        "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-fork-stage-2.jpg",
+        "sequence": "46747"
+      }
+    }
+  ],
+  "readback": {
+    "1": 1800,
+    "3": 782,
+    "4": 1803,
+    "5": 2216,
+    "6": 1520
+  },
+  "external_after": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-after.jpg",
+  "after_image": {
+    "path": "/home/tony/witness_scratch/hq-grasp-20261012/hq-seat-fork-after.jpg",
+    "sequence": "46762"
+  },
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after": {
+    "telemetry": {
+      "battery_mv": {
+        "value": 7363,
+        "read_at": 1791845409.523851,
+        "age_since_read_seconds": 0.0,
+        "sample_time_known": false
+      }
+    },
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {
+        "pwm_5": {
+          "bus": "pwm",
+          "id": 5,
+          "min": 2016,
+          "max": 2216
+        }
+      },
+      "outputs": [
+        "buzzer"
+      ],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "locked_readback": {
+    "1": 1800,
+    "3": 782,
+    "4": 1803,
+    "5": 2216,
+    "6": 1520
+  }
+}
