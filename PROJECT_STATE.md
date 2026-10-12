@@ -43,3 +43,11 @@ Bounded arm planning added on Jetson (ARM_POSES.md): modelled1cm lift and staged
 5cm-forward/2cm-up reach physically observed with returns. Larger reach confirmed;
 exact distances remain predictions.153 Jetson tests pass. Pi code unchanged;
 runtime arming removed and locked status/vendor masks verified after both tests.
+
+
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:32:35.886647-04:00
+
+Left and right arm reaches now physically observed with returns. Each combines
+a modelled 3cm sideways, 5cm forward and 2cm upward move; exact distances remain
+unmeasured. See ARM_POSES.md and receipts/arm-side-live.json.155 Jetson tests pass;
+Pi code unchanged. Normal locked state and vendor masks verified afterwards.

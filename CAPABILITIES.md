@@ -117,3 +117,11 @@ forward/2cm up reach in four stages was visibly larger and returned. Exact
 Cartesian displacement remains unmeasured. Pure planner is Jetson-only; general
 Cartesian control/stored actions remain unavailable.153 Jetson tests now pass;
 Pi code unchanged. Final status and boot configuration are again locked.
+
+
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:32:35.886647-04:00
+
+Left and right arm reaches now physically observed with returns. Each combines
+a modelled 3cm sideways, 5cm forward and 2cm upward move; exact distances remain
+unmeasured. See ARM_POSES.md and receipts/arm-side-live.json.155 Jetson tests pass;
+Pi code unchanged. Normal locked state and vendor masks verified afterwards.

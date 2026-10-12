@@ -63,3 +63,28 @@ Scratch attended runners are outside the repository at
 `/home/tony/witness_scratch/capabilities-20261012/`. They require an explicit
 execution flag and refuse reuse of their receipt name. Do not automatically
 replay them. A new session requires current readiness and a fresh starting check.
+
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T11:32:35.886647-04:00
+
+## Side reaches, observed and returned
+
+`plan_side_reach(start, "left" | "right")` adds a fixed 3cm sideways component
+to the existing 5cm-forward/2cm-up reach. It uses four 0.6s stages outward and
+the exact reverse home, with at most 150us per joint per stage and 20degrees
+of base rotation. Predicted transitions are sampled against a narrow corridor;
+this is not a collision or payload model. Unknown side names and uncommissioned
+starting poses are rejected. Limits include every waypoint when configuring
+this test's temporary joint allowances.
+
+Anthony confirmed left/forward and return, then right/forward and return.
+Predicted endpoints are approximately (-3,11,20)cm and (3,11,20)cm from the
+starting (0,6,18)cm. Target PWM3/4/5 are1005/2280/1301; PWM6 is1575 left and
+1235 right. Both returned to754/2485/845/1405. These distances remain model
+predictions; only qualitative direction and return are physically verified.
+
+155 Jetson tests now pass, including mirrored side poses, exact reverse paths,
+per-stage limits and invalid side/start rejection. Pi runtime code is unchanged.
+After both attended tests: override absent, normal configuration loaded,
+disarmed, wheel ceiling0, joints{}, outputs[], serial released on disconnect,
+no operator-arm signals, all four vendor masks intact. Evidence:
+`receipts/arm-side-live.json` and `receipts/arm-side-tests-jetson.txt`.

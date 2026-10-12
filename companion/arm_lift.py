@@ -121,16 +121,35 @@ def plan_reach(start):
     The guarded runner checks readback and battery between stages. This does
     not provide collision sensing or unrestricted Cartesian control.
     """
+    return _plan_reach(start, 0)
+
+
+def plan_side_reach(start, side):
+    """Add 3cm nominal left/right travel to the fixed forward/up reach.
+
+    Left is negative model x, right positive; physical direction needs an
+    attended observation. This introduces at most 20 degrees of base rotation.
+    """
+    if not isinstance(side, str) or side not in ('left', 'right'):
+        raise ValueError('side must be left or right')
+    return _plan_reach(start, -3 if side == 'left' else 3)
+
+
+def _plan_reach(start, lateral_cm):
+    if lateral_cm not in (-3, 0, 3):
+        raise ValueError('only fixed commissioned reach candidates supported')
     origin = _start_pose(start)
     waypoints = [dict(start)]
     samples = []
     for stage in range(1, 5):
         fraction = stage / 4
-        goal = dict(origin, y_cm=origin['y_cm'] + 5 * fraction,
+        goal = dict(origin, x_cm=origin['x_cm'] + lateral_cm * fraction,
+                    y_cm=origin['y_cm'] + 5 * fraction,
                     z_cm=origin['z_cm'] + 2 * fraction)
         target = _inverse(goal)
         previous = waypoints[-1]
-        if (target[6] != start[6]
+        if ((not lateral_cm and target[6] != start[6])
+                or abs(target[6] - start[6]) * DEGREES_PER_US > 20
                 or max(abs(target[c] - previous[c]) for c in CHANNELS) > 150):
             raise ValueError('reach stage exceeds joint bound or changes base yaw')
         for step in range(21):
@@ -139,7 +158,8 @@ def plan_reach(start):
                       for c in CHANNELS}
             pose = forward(pulses)
             along = (pose['y_cm'] - origin['y_cm']) / 5
-            if (abs(pose['x_cm'] - origin['x_cm']) > .1 or not -.02 <= along <= 1.02
+            if (abs(pose['x_cm'] - (origin['x_cm'] + lateral_cm * along)) > .1
+                    or not -.02 <= along <= 1.02
                     or abs(pose['z_cm'] - (origin['z_cm'] + 2 * along)) > .15
                     or abs(pose['pitch_degrees'] - origin['pitch_degrees']) > .2):
                 raise ValueError('predicted transition leaves narrow reach corridor')
@@ -151,5 +171,6 @@ def plan_reach(start):
             'return_waypoints': list(reversed(waypoints[:-1])),
             'predicted_start': origin, 'predicted_end': forward(waypoints[-1]),
             'stage_duration_seconds': .6, 'samples': samples,
+            'lateral_cm': lateral_cm,
             'physical_position_verified': False,
             'scope': 'fixed attended reach only; no collision or payload model'}

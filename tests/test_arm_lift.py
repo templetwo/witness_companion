@@ -1,7 +1,7 @@
 # Codex, gpt-6-astra, Jetson seat, 2026-10-12 EDT
 import unittest
 
-from companion.arm_lift import forward, plan_lift, plan_reach, _inverse, validate_pulses
+from companion.arm_lift import forward, plan_lift, plan_reach, plan_side_reach, _inverse, validate_pulses
 
 START = {3: 754, 4: 2485, 5: 845, 6: 1405}
 
@@ -68,3 +68,26 @@ class ArmLiftTests(unittest.TestCase):
         for start in [{**START, 6: 1500}, {**START, 3: 1700}]:
             with self.assertRaises(ValueError):
                 plan_reach(start)
+
+    def test_side_reaches_are_mirrored_and_return_exactly(self):
+        left, right = (plan_side_reach(START, side) for side in ('left', 'right'))
+        self.assertEqual(left['target'][6] - START[6], START[6] - right['target'][6])
+        for channel in (3, 4, 5):
+            self.assertEqual(left['target'][channel], right['target'][channel])
+        for sign, plan in [(-1, left), (1, right)]:
+            self.assertAlmostEqual(plan['predicted_end']['x_cm'], sign * 3, delta=.03)
+            self.assertAlmostEqual(plan['predicted_end']['y_cm'], 11, delta=.03)
+            self.assertAlmostEqual(plan['predicted_end']['z_cm'], 20, delta=.03)
+            self.assertEqual(plan['return_waypoints'], list(reversed([START] + plan['outbound_waypoints'][:-1])))
+            previous = START
+            for target in plan['outbound_waypoints'] + plan['return_waypoints']:
+                self.assertLessEqual(max(abs(target[c] - previous[c]) for c in START), 150)
+                self.assertLessEqual(abs(target[6] - START[6]) * .09, 20)
+                previous = target
+
+    def test_side_reach_rejects_unknown_side_and_outside_start(self):
+        for side in ['back', '', None, [], True]:
+            with self.assertRaises(ValueError):
+                plan_side_reach(START, side)
+        with self.assertRaises(ValueError):
+            plan_side_reach({**START, 6: 1700}, 'left')
