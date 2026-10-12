@@ -1,3 +1,27 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:05:08.748652-04:00
+
+## Latest: charged and upright pose restored
+
+At 17:05 EDT, after explicit operator attendance and clearance,
+the arm was restored one joint at a time with external webcam checks. Final
+commanded pulses: **1=1500,3=754,4=2485,5=845,6=1405us**. External images show an
+upright arm and approximately level, empty fork. These are setpoints and visual
+observations, not measured encoder angles. Earlier postboot zero readings no
+longer describe current commanded state.
+
+Battery after recharge was about8.08V; before the last move it was7.917V.
+Guard is locked/disarmed, wheel0,joints{},outputs[],sonarfalse; runtime override
+removed. New external C270 camera is on Jetson /dev/video0 at1280x720. It sees
+the whole arm but currently clips floor/blocks. Pi fork camera also works.
+No grasp occurred; full stack localization/camera-to-gripper calibration and
+prior startup EOF fault remain unresolved. Do not replay one-off initialization
+runners. Receipt: `receipts/arm-postboot-recovery.json`.
+
+This supersedes the non-home pose and low-battery state in the earlier records.
+Pi runtime unchanged; no new software-test count is claimed.
+
+## Earlier checkpoint, historical
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T12:03:05.050685-04:00
 
 # Witness checkpoint: motion stopped for low battery

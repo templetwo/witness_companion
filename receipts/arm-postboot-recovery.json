@@ -1,0 +1,321 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:05:08.748652-04:00",
+  "operator_readiness": "At switch; arm and gripper clear",
+  "purpose": "Post-reboot recovery of known upright commanded pose",
+  "runs": [
+    {
+      "receipt": "postboot-shoulder-initialize.json",
+      "at": "2026-10-12T16:59:53.623669-04:00",
+      "start": {
+        "1": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "target": {
+        "1": 0,
+        "3": 0,
+        "4": 0,
+        "5": 650,
+        "6": 0
+      },
+      "readback": {
+        "1": 0,
+        "3": 0,
+        "4": 0,
+        "5": 650,
+        "6": 0
+      },
+      "battery_before_mv": 7948
+    },
+    {
+      "receipt": "postboot-elbow-initialize.json",
+      "at": "2026-10-12T17:00:34.971559-04:00",
+      "start": {
+        "1": 0,
+        "3": 0,
+        "4": 0,
+        "5": 650,
+        "6": 0
+      },
+      "target": {
+        "1": 0,
+        "3": 0,
+        "4": 2485,
+        "5": 650,
+        "6": 0
+      },
+      "readback": {
+        "1": 0,
+        "3": 0,
+        "4": 2485,
+        "5": 650,
+        "6": 0
+      },
+      "battery_before_mv": 7936
+    },
+    {
+      "receipt": "postboot-wrist-initialize.json",
+      "at": "2026-10-12T17:01:15.156865-04:00",
+      "start": {
+        "1": 0,
+        "3": 0,
+        "4": 2485,
+        "5": 650,
+        "6": 0
+      },
+      "target": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 650,
+        "6": 0
+      },
+      "readback": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 650,
+        "6": 0
+      },
+      "battery_before_mv": 7927
+    },
+    {
+      "receipt": "postboot-base-initialize.json",
+      "at": "2026-10-12T17:01:46.890660-04:00",
+      "start": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 650,
+        "6": 0
+      },
+      "target": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 650,
+        "6": 1405
+      },
+      "readback": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 650,
+        "6": 1405
+      },
+      "battery_before_mv": 7917
+    },
+    {
+      "receipt": "postboot-upright-initialize.json",
+      "at": "2026-10-12T17:02:30.725657-04:00",
+      "start": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 650,
+        "6": 1405
+      },
+      "target": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "readback": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "battery_before_mv": 7916
+    },
+    {
+      "receipt": "postboot-gripper-initialize.json",
+      "at": "2026-10-12T17:03:07.262425-04:00",
+      "start": {
+        "1": 0,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "target": {
+        "1": 1500,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "readback": {
+        "1": 1500,
+        "3": 754,
+        "4": 2485,
+        "5": 845,
+        "6": 1405
+      },
+      "battery_before_mv": 7917
+    }
+  ],
+  "final_commanded_pwm_us": {
+    "1": 1500,
+    "3": 754,
+    "4": 2485,
+    "5": 845,
+    "6": 1405
+  },
+  "final_locked_status": {
+    "telemetry": {},
+    "sensor_errors": {},
+    "drive_active": false,
+    "capabilities": {
+      "wheel_duty_limit": 0,
+      "directions": [
+        "backward",
+        "backward_left",
+        "backward_right",
+        "forward",
+        "forward_left",
+        "forward_right",
+        "left",
+        "right",
+        "turn_left",
+        "turn_right"
+      ],
+      "joints": {},
+      "outputs": [],
+      "sonar": false,
+      "legacy_modes": "unavailable: require bounded reimplementation",
+      "arm_ik": "unavailable: geometry and joint calibration unverified",
+      "stored_actions": "unavailable: trajectories unaudited"
+    },
+    "telemetry_note": "Missing packets are unknown, not a dead-link diagnosis.",
+    "ok": true,
+    "armed": false,
+    "driver_alive": true,
+    "controller": "exclusive-sdk",
+    "simulated": false,
+    "physical_motion_verified": false,
+    "mic": "unconfigured",
+    "camera": "unconfigured",
+    "speech": "unconfigured",
+    "backend": {
+      "backend_id": "witness-direct",
+      "kind": "none",
+      "model": null,
+      "where_computed": "jetson"
+    }
+  },
+  "visual_observation": "Shoulder/elbow/wrist and final upright changes visible; empty fork approximately level. Distinct base/gripper travel not established from images.",
+  "physical_angles_measured": false,
+  "initialization_dynamics_measured": false,
+  "battery_before_last_move_mv": 7917,
+  "grasp_performed": false,
+  "external_camera": "Jetson /dev/video0 C270 HD WEBCAM,1280x720; capture released after use",
+  "evidence": {
+    "postboot-shoulder-initialize.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-shoulder-initialize.json",
+      "sha256": "7c3c21c7a3fab3e80a6fb55bdb8684e2b9240046763fd894e233b1141a978f61"
+    },
+    "postboot-shoulder-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-shoulder-before.jpg",
+      "sha256": "58bc2a3f76b888c9b2b8911f82c57816eaec7613170d622d29f2b416bf6579c7"
+    },
+    "postboot-shoulder-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-shoulder-after.jpg",
+      "sha256": "53367b90a5e507c1474ae08adaf2eddee48c74aa269ccba32e4c062d00a5f8e1"
+    },
+    "postboot-shoulder-fork-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-shoulder-fork-after.jpg",
+      "sha256": "1ccee8c3c3bac95be6ef3231bec14f875049b1472ff2bb3bf0a1574622851a63"
+    },
+    "postboot-elbow-initialize.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-elbow-initialize.json",
+      "sha256": "f44ad2995b5b4eed1f5b332eae6a7c6f0ef34d56a3e91a274f00d0a6d2c2eb2d"
+    },
+    "postboot-elbow-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-elbow-before.jpg",
+      "sha256": "f9c7c8ef486a0c88820d4f1aeaccde393e5f560eda4ff5f34f337919b75255f9"
+    },
+    "postboot-elbow-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-elbow-after.jpg",
+      "sha256": "2f9f8479720afc8a27cb19fbefedf2e88fec67509fbe22c7bafb49a3b636bc36"
+    },
+    "postboot-elbow-fork-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-elbow-fork-after.jpg",
+      "sha256": "f2dcba1e6e40c4c090a45b2c077811ce3166f0fe097d3cdb69de3bf9fa22c305"
+    },
+    "postboot-wrist-initialize.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-wrist-initialize.json",
+      "sha256": "0ae4a8dd57ee40c0acb070083e1712f6bd5e6b782f7dbdbc4bbf1e5a3b51ada3"
+    },
+    "postboot-wrist-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-wrist-before.jpg",
+      "sha256": "a86b7e9e7b0859062612e78d258d5aaa97ac94d58459b000dfd0ef8cc1bdd152"
+    },
+    "postboot-wrist-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-wrist-after.jpg",
+      "sha256": "2b665ab859c0137fc68028fa2d7afc79186e96f7adeb179c3dce984405f46354"
+    },
+    "postboot-wrist-fork-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-wrist-fork-after.jpg",
+      "sha256": "3983013eba015301ad4c3d0fd62799be857128daa5867cb63f9295fd195c90bf"
+    },
+    "postboot-base-initialize.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-base-initialize.json",
+      "sha256": "24252b1bd9b3805e7419a9836757dceeac0d677c9bee183fb4434f1a525834d7"
+    },
+    "postboot-base-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-base-before.jpg",
+      "sha256": "6c768d98509f77a6a98e61a769c0876765c31a84edb991e0b5d2e1afe846d617"
+    },
+    "postboot-base-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-base-after.jpg",
+      "sha256": "3a38b851dfae16a774d74bd78dd93bbcd0fdbee18107f5a0eccb7cf9671492f3"
+    },
+    "postboot-base-fork-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-base-fork-after.jpg",
+      "sha256": "840c9fd8da910dbd21a615c7c3418313c7ec2bc7d2fc9e4ef7c3a9914f272b98"
+    },
+    "postboot-upright-initialize.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-upright-initialize.json",
+      "sha256": "ab5299ae85a2e426905ebc910b138b25a5cb2243730fe84089f2f55631fb7f35"
+    },
+    "postboot-upright-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-upright-before.jpg",
+      "sha256": "f944ccdbe63cab0f405c95097e6a12d0974c007b411358ef60c057d616f5681c"
+    },
+    "postboot-upright-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-upright-after.jpg",
+      "sha256": "b5c103d37b5bc0c1a2b55ef5ae64656dbed2f1f082626c5e50c0a35f536184d5"
+    },
+    "postboot-upright-fork-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-upright-fork-after.jpg",
+      "sha256": "ca4fe6fed7454c3d42dc25e36f2a2178698ed93572d773872e39d6e27d7455b9"
+    },
+    "postboot-gripper-initialize.json": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-gripper-initialize.json",
+      "sha256": "47df9d580c5612fb4cad6602ba643772aa1128e10e88f320980e6b2d3d8f50b1"
+    },
+    "postboot-gripper-before.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-gripper-before.jpg",
+      "sha256": "03dfec437728ca62154031c6ed2370b28f1073f0b56effeb7efd14d31c4efd79"
+    },
+    "postboot-gripper-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-gripper-after.jpg",
+      "sha256": "ee2337f3f1cc6865a8e7305f4baa7ab4337c49dbc8f820d65d861df499d71a83"
+    },
+    "postboot-gripper-fork-after.jpg": {
+      "path": "/home/tony/witness_scratch/capabilities-20261012/postboot-gripper-fork-after.jpg",
+      "sha256": "68ac825072d6a37c2565ae1de7cb9c4b9ed1d33f61f75629e58e278f2a644182"
+    }
+  },
+  "limitations": [
+    "No full stack localization or camera-to-gripper calibration",
+    "First initialization begins from unknown pulse state; exact physical angles/speed not measured",
+    "Prior startup EOF fault remains unresolved; runtime code unchanged"
+  ]
+}
