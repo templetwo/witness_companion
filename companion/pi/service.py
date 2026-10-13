@@ -7,6 +7,7 @@ actions must carry the existing signed ActionRequest, checked on the Pi.
 """
 import argparse
 import fcntl
+import math
 import os
 from pathlib import Path
 import secrets
@@ -17,7 +18,7 @@ import time
 
 from ..guard import CommandGuard
 from ..persist import Journal
-from ..schemas import clean_text
+from ..schemas import MOTION_COMMANDS, clean_text
 from .protocol import MAX_FRAME, decode, encode, signed, verify
 from .supervisor import Supervisor
 
@@ -26,14 +27,41 @@ TOOLS = frozenset({'witness_snapshot', 'witness_speak', 'witness_status',
 
 
 class GuardService:
-    def __init__(self, guard, supervisor, notes=None):
+    def __init__(self, guard, supervisor, notes=None, battery_floor_mv=7000):
+        if type(battery_floor_mv) is not int or battery_floor_mv <= 0:
+            raise ValueError('battery floor must be a positive integer')
         self.guard, self.supervisor, self.notes = guard, supervisor, notes
+        self.battery_floor_mv = battery_floor_mv
+
+    def _battery_refusal(self):
+        # Only the last status reply: no worker IPC or SDK read on the action path.
+        # The worker and supervisor share the host's monotonic clock. Never refresh
+        # the sample's timestamp when caching or returning the same old reading.
+        status = self.supervisor.cached_status
+        telemetry = status.get('telemetry', {}) if isinstance(status, dict) else {}
+        sample = telemetry.get('battery_mv') if isinstance(telemetry, dict) else None
+        value = sample.get('value') if isinstance(sample, dict) else None
+        stamp = sample.get('read_at_monotonic') if isinstance(sample, dict) else None
+        if (type(value) is not int or value < 0
+                or type(stamp) not in (int, float) or not math.isfinite(stamp)
+                or not 0 <= time.monotonic() - stamp <= 5):
+            return {'ok': False, 'verdict': 'rejected', 'executed': False,
+                    'reason': 'battery_unknown'}
+        if value < self.battery_floor_mv:
+            return {'ok': False, 'verdict': 'rejected', 'executed': False,
+                    'reason': 'battery_below_floor', 'battery_mv': value,
+                    'floor_mv': self.battery_floor_mv}
+        return None
 
     def action(self, raw):
         decision = self.guard.check(raw)
         if not decision.accepted:
             return {'ok': False, 'verdict': 'rejected', 'reason': decision.reason,
                     'executed': False}
+        if decision.command in MOTION_COMMANDS:
+            refusal = self._battery_refusal()
+            if refusal is not None:
+                return refusal
         result = self.supervisor.call('action', {'command': decision.command,
                     'args': {} if decision.command == 'stop' else raw['args']})
         if result.get('unavailable'):
@@ -79,11 +107,13 @@ class GuardService:
         return dict(detail, **{'ok': True, 'armed': self.guard.armed, 'driver_alive': True,
                 'controller': self.supervisor.kind,
                 'simulated': self.supervisor.kind == 'fake',
+                'battery_floor_mv': self.battery_floor_mv,
                 'physical_motion_verified': False})
 
 
 def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
-                     response_timeout=0.5, factory=None, operator_arm=None, operator_stop=None):
+                     response_timeout=0.5, factory=None, operator_arm=None, operator_stop=None,
+                     battery_floor_mv=7000):
     """One session, disarmed on entry. Caller must exclusively own the journal."""
     if operator_arm is not None:
         operator_arm.clear()
@@ -93,7 +123,7 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
     if factory is not None:
         options['factory'] = factory
     supervisor = Supervisor(**options)
-    service = GuardService(guard, supervisor, notes)
+    service = GuardService(guard, supervisor, notes, battery_floor_mv=battery_floor_mv)
     peer = None
     last_seq = -1
     pending = b''
@@ -160,6 +190,13 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
         conn.close()
 
 
+def positive_mv(value):
+    value = int(value)
+    if value <= 0:
+        raise argparse.ArgumentTypeError('battery floor must be a positive integer')
+    return value
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -176,6 +213,8 @@ def main():
     parser.add_argument('--key-file', help='protected file containing a hexadecimal key')
     parser.add_argument('--journal', required=True)
     parser.add_argument('--notes-journal', required=True)
+    parser.add_argument('--battery-floor-mv', type=positive_mv, default=7000,
+                        help='motion floor; requires a cached status sample at most 5 seconds old')
     args = parser.parse_args()
     try:
         material = (Path(args.key_file).read_text().strip() if args.key_file
@@ -211,7 +250,8 @@ def main():
                     conn.close()
                     continue
                 serve_connection(conn, {args.issuer: key}, journal, notes, factory=factory,
-                                 operator_arm=operator_arm, operator_stop=operator_stop)
+                                 operator_arm=operator_arm, operator_stop=operator_stop,
+                                 battery_floor_mv=args.battery_floor_mv)
 
 
 if __name__ == '__main__':

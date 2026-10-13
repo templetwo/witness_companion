@@ -174,7 +174,8 @@ class HardwareBoard:
                         self._sensor_errors.pop('sonar_mm', None)
                 except OSError:
                     self._sensor_errors['sonar_mm'] = 'sensor_io_error'
-            samples = {name: {'value': value, 'read_at': wall, 'age_since_read_seconds': now - mono,
+            samples = {name: {'value': value, 'read_at': wall, 'read_at_monotonic': mono,
+                              'age_since_read_seconds': now - mono,
                               'sample_time_known': False}
                        for name, (value, mono, wall) in self._telemetry.items()}
             return {'telemetry': samples, 'sensor_errors': dict(self._sensor_errors),

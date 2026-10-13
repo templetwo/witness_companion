@@ -1,0 +1,54 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat",
+  "timestamp_from_date": "2026-10-12T20:35:40-04:00",
+  "bound": "1a",
+  "base_commit": "cbdbbcad2fbc6747a9cbe614bb9fd1753b36b0c8",
+  "before_suite_count": 158,
+  "after_suite_count": 174,
+  "test_command": "python3 -m unittest discover -s tests -v",
+  "interpreters": {
+    "jetson": "Python 3.10.12",
+    "pi": "Python 3.11.2"
+  },
+  "logs": {
+    "jetson": {
+      "path": "/home/tony/witness_scratch/next-bound-1a-jetson.log",
+      "sha256": "c1aa1309f134b087ba7c23f58551ebcd732af9ceb3cb0f9437a1cd6d6b0b4214",
+      "test_count": 174,
+      "summary": "----------------------------------------------------------------------\nRan 174 tests in 9.144s\n\nOK"
+    },
+    "pi": {
+      "path": "/home/tony/witness_scratch/next-bound-1a-pi.log",
+      "sha256": "5b90ab19f17ec3b88452b645c5e04ab0405741928be260fb626c336639bb0566",
+      "test_count": 174,
+      "summary": "----------------------------------------------------------------------\nRan 174 tests in 9.055s\n\nOK"
+    },
+    "red": {
+      "path": "/home/tony/witness_scratch/next-bound-1a-red.log",
+      "sha256": "da8894808deed46c9b252a4a6c76146a3c5aa28dcdd5f6f39b78a800b18c829e",
+      "test_count": 14,
+      "summary": "----------------------------------------------------------------------\nRan 14 tests in 0.031s\n\nFAILED (failures=19, errors=6)"
+    }
+  },
+  "changed_file_sha256": {
+    "PASSDOWN.md": "7a555329b50238e531a820f263d75a6ed89a8f3d8645763d92f26d6644166ef2",
+    "companion/pi/hardware.py": "84bbee638c75ccc823f121a8e72f0830533efbf9011b599ed352cdb119eef5eb",
+    "companion/pi/service.py": "a2e9bf31e982552d62b7ddcd5dd98ce89b795b80ba2b94db270d259ff25b3c6c",
+    "companion/pi/supervisor.py": "c599ae3ce80cb2177dd079fa59e837d962ba3064b3840f954237d867106f3c28",
+    "tests/test_hardware_handover.py": "e408d480dfc860f37f025021a722ccd48c5421cbab9ff01ec1ec98573477752e",
+    "tests/test_pi_service.py": "c7c6800c5a39927a8780e619a822f6c2b68907818e4221ce04ce21788fbf1bc8"
+  },
+  "hash_scope": "All changed implementation/tests/PASSDOWN files; this self-referential receipt is excluded. Hashes describe this commit, not later edits.",
+  "pi_test_checkout": "/tmp/hq-eof-check; isolated scratch tree populated from branch bundle plus reviewed patch",
+  "pi_tested_code_hashes": {
+    "companion/pi/hardware.py": "84bbee638c75ccc823f121a8e72f0830533efbf9011b599ed352cdb119eef5eb",
+    "companion/pi/service.py": "a2e9bf31e982552d62b7ddcd5dd98ce89b795b80ba2b94db270d259ff25b3c6c",
+    "companion/pi/supervisor.py": "c599ae3ce80cb2177dd079fa59e837d962ba3064b3840f954237d867106f3c28",
+    "tests/test_hardware_handover.py": "e408d480dfc860f37f025021a722ccd48c5421cbab9ff01ec1ec98573477752e",
+    "tests/test_pi_service.py": "c7c6800c5a39927a8780e619a822f6c2b68907818e4221ce04ce21788fbf1bc8"
+  },
+  "deployment": false,
+  "robot_actions": false,
+  "guard_restart": false,
+  "vendor_import_or_file_read": false
+}

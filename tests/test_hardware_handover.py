@@ -136,6 +136,7 @@ class HardwareHandoverTests(unittest.TestCase):
         second = board.status()['telemetry']['battery_mv']
         self.assertEqual(second['value'], 8100)
         self.assertEqual(first['read_at'], second['read_at'])
+        self.assertEqual(first['read_at_monotonic'], second['read_at_monotonic'])
         self.assertFalse(second['sample_time_known'])
         self.assertGreaterEqual(second['age_since_read_seconds'], first['age_since_read_seconds'])
 
@@ -144,6 +145,8 @@ class HardwareHandoverTests(unittest.TestCase):
         key = b'test-only-key' * 3
         guard = CommandGuard({'test': key})
         supervisor = Mock()
+        supervisor.cached_status = {'telemetry': {'battery_mv': {
+            'value': 8000, 'read_at_monotonic': time.monotonic()}}}
         supervisor.call.side_effect = lambda op, data: board.execute(data['command'], data['args'])
         service = GuardService(guard, supervisor)
         now = time.time()

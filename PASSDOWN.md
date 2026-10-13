@@ -1,3 +1,38 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:35:40-04:00
+
+# Newest bound implementation: 1a ready for HQ review, not deployed
+
+Read `docs/hq/PASSDOWN_2026-10-12_NEXT_BOUND.md` and incoming passdown sections10–13.
+The later HQ state supersedes my earlier physical-state table below: last reported
+PWM1=2000,3=782,4=1803,5=2116,6=1420; battery floor hit6984mV; no pickup. No hardware
+state was remeasured for this software task. HQ subsequently pushed the earlier
+commits and committed both older Stack proposals. Their earlier pending status
+below is historical. This bound makes no new Stack write and no GitHub push.
+
+1a adds a7000mV default floor to every motion command after guard.check and before
+any action IPC. Missing, invalid, future-dated or older-than5s telemetry is unknown
+and refused; exactly7000mV and exactly5s pass. Stop and all nonmotion outputs bypass
+this battery gate. Refusal keeps arm state and the driver alive; signed sequence
+consumption remains the existing guard behavior, so use a new request, never replay.
+The floor is configurable by --battery-floor-mv and visible as battery_floor_mv.
+
+Implementation detail needed for review: the old supervisor did not retain status
+replies. It now caches a defensive copy; HardwareBoard.status exports the existing
+monotonic read stamp. The gate reads only this cache, doing no new worker/sensor
+I/O. A caller must obtain status first and keep its battery sample within5s.
+Monotonic stamps apply only on the Pi host; packet/sample acquisition age remains
+unknown as before. No healthy battery is invented when telemetry is absent.
+No deployed unit, live service, SDK, device, override or arm signal was touched.
+
+Baseline158 Jetson tests passed. New battery regressions fail against baseline code;
+current174 tests pass on Jetson3.10 and Pi3.11 scratch clone. The old /tmp/hq-eof-check
+was absent; a new unprivileged clone was made there from a bundle. Receipt1a.json
+under receipts/next-bound-20261013 records counts, interpreters and file hashes.
+HQ review remains required before deployment. Remaining bound1b and1c follow in
+separate commits, with separate receipts and diffs.
+
+---
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:44:55.687385-04:00
 
 # Witness detailed passdown to HQ and the next Jetson operator

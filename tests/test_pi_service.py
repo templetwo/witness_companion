@@ -11,6 +11,7 @@ import tempfile
 import threading
 import time
 import unittest
+from unittest.mock import Mock, patch
 
 from companion.guard import CommandGuard, sign
 from companion.persist import Journal
@@ -41,6 +42,138 @@ def silent_exit_factory():
     os._exit(3)
 
 
+class PoweredFakeBoard(FakeBoard):
+    """Explicit simulated telemetry; never provide a healthy default on real hardware."""
+    def __init__(self):
+        super().__init__()
+        self.stamp = time.monotonic()
+
+    def status(self):
+        return {'telemetry': {'battery_mv': {
+            'value': 8000, 'read_at_monotonic': self.stamp}}}
+
+
+
+class BatteryFloorTests(unittest.TestCase):
+    def setUp(self):
+        self.key = b'battery-test-only-key' * 2
+        self.guard = CommandGuard({'jetson': self.key})
+        self.guard.arm()
+        self.supervisor = Mock()
+        self.supervisor.cached_status = {}
+        self.supervisor.call.return_value = {'executed': False, 'simulated': True}
+        self.service = GuardService(self.guard, self.supervisor)
+        self.seq = 0
+        self.now = time.monotonic()
+
+    def sample(self, value=7000, age=0):
+        self.supervisor.cached_status = {'telemetry': {'battery_mv': {
+            'value': value, 'read_at_monotonic': self.now-age,
+            # Wall-clock and precomputed age deliberately cannot grant freshness.
+            'read_at': 9999999999, 'age_since_read_seconds': 0}}}
+
+    def action(self, command='look_left', args=None):
+        self.seq += 1
+        now = time.time()
+        raw = sign(ActionRequest(command, self.seq, now, now+3, str(self.seq),
+                                 'jetson', args or {}), self.key).to_dict()
+        with patch('companion.pi.service.time', Mock(monotonic=lambda: self.now)):
+            return self.service.action(raw)
+
+    def test_below_floor_refused_without_driver_call(self):
+        self.sample(6999)
+        self.assertEqual(self.action(), {'ok': False, 'verdict': 'rejected',
+            'executed': False, 'reason': 'battery_below_floor',
+            'battery_mv': 6999, 'floor_mv': 7000})
+        self.supervisor.call.assert_not_called()
+
+    def test_at_floor_applied(self):
+        self.sample(7000)
+        self.assertTrue(self.action()['ok'])
+        self.supervisor.call.assert_called_once_with('action',
+            {'command': 'look_left', 'args': {}})
+
+    def test_missing_reading_refused(self):
+        self.assertEqual(self.action()['reason'], 'battery_unknown')
+        self.supervisor.call.assert_not_called()
+
+    def test_stale_reading_refused_using_monotonic_stamp(self):
+        self.sample(8100, age=5.001)
+        self.assertEqual(self.action()['reason'], 'battery_unknown')
+        self.supervisor.call.assert_not_called()
+
+    def test_exact_five_second_boundary_applied(self):
+        self.sample(7000, age=5)
+        self.assertTrue(self.action()['ok'])
+
+    def test_invalid_or_future_reading_fails_closed(self):
+        cases = [(True, 0), (float('nan'), 0), ('8000', 0), (-1, 0),
+                 (8000, -1), (8000, float('nan')), (8000, float('inf'))]
+        for value, age in cases:
+            with self.subTest(value=value, age=age):
+                self.sample(value, age)
+                self.assertEqual(self.action()['reason'], 'battery_unknown')
+        self.supervisor.call.assert_not_called()
+
+    def test_missing_monotonic_stamp_is_unknown(self):
+        self.sample()
+        del self.supervisor.cached_status['telemetry']['battery_mv']['read_at_monotonic']
+        self.assertEqual(self.action()['reason'], 'battery_unknown')
+        self.supervisor.call.assert_not_called()
+
+    def test_stop_applied_at_zero_without_battery_gate(self):
+        self.sample(0)
+        self.assertTrue(self.action('stop')['ok'])
+        self.supervisor.call.assert_called_once_with('action', {'command': 'stop', 'args': {}})
+        self.assertFalse(self.guard.armed)
+
+    def test_refusal_keeps_armed_and_does_not_trip_supervisor(self):
+        self.sample(6999)
+        self.assertFalse(self.action()['ok'])
+        self.assertTrue(self.guard.armed)
+        self.supervisor.trip.assert_not_called()
+        self.supervisor.call.assert_not_called()
+        self.sample(7100)
+        self.assertTrue(self.action()['ok'])  # Fresh signed request, not a replay.
+
+    def test_every_motion_command_is_gated(self):
+        for command, args in [('look_left', {}), ('look_right', {}), ('look_center', {}),
+            ('drive', {'direction': 'forward', 'duty': 10, 'duration_seconds': .2}),
+            ('joints', {'positions': {'pwm_3': 1500}, 'duration_seconds': .5})]:
+            with self.subTest(command=command):
+                self.assertEqual(self.action(command, args)['reason'], 'battery_unknown')
+        self.supervisor.call.assert_not_called()
+
+    def test_nonmotion_outputs_not_gated(self):
+        cases = [('say', {'text': 'hello'}), ('display', {'text': 'hello'}),
+            ('led', {'on_seconds': .1, 'off_seconds': .1, 'repeat': 1}),
+            ('buzzer', {'frequency_hz': 1000, 'on_seconds': .1, 'off_seconds': .1, 'repeat': 1}),
+            ('rgb', {'index': 1, 'red': 0, 'green': 0, 'blue': 0}),
+            ('sonar_rgb', {'index': 1, 'red': 0, 'green': 0, 'blue': 0})]
+        for command, args in cases:
+            with self.subTest(command=command):
+                self.assertTrue(self.action(command, args)['ok'])
+
+    def test_guard_check_precedes_battery_gate(self):
+        self.guard.disarm()
+        self.assertEqual(self.action()['reason'], 'disarmed')
+        self.supervisor.call.assert_not_called()
+
+    def test_custom_floor_and_status(self):
+        self.service = GuardService(self.guard, self.supervisor, battery_floor_mv=7500)
+        self.sample(7499)
+        self.assertEqual(self.action()['floor_mv'], 7500)
+        self.supervisor.kind = 'fake'
+        self.supervisor.call.return_value = {}
+        status = self.service.dispatch({'op': 'tool', 'tool': 'witness_status', 'arguments': {}})
+        self.assertEqual(status['battery_floor_mv'], 7500)
+
+    def test_invalid_floor_rejected(self):
+        for value in [0, -1, True, 7000.0, '7000']:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                GuardService(self.guard, self.supervisor, battery_floor_mv=value)
+
+
 class PiTests(unittest.TestCase):
     def setUp(self):
         self.key = os.urandom(32)
@@ -61,7 +194,31 @@ class PiTests(unittest.TestCase):
         guard = CommandGuard({'jetson':self.key}, Journal(str(self.path/'guard.jsonl')))
         if armed:
             guard.arm()
-        return GuardService(guard, self.supervisor(**kwargs), Journal(str(self.path/'notes.jsonl')))
+        kwargs.setdefault('factory', PoweredFakeBoard)
+        supervisor = self.supervisor(**kwargs)
+        supervisor.call('status')  # Explicit fake preflight, as a live caller must do.
+        return GuardService(guard, supervisor, Journal(str(self.path/'notes.jsonl')))
+
+    def test_status_cache_preserves_sample_stamp_and_is_not_mutable_by_caller(self):
+        supervisor = self.supervisor(factory=PoweredFakeBoard)
+        self.assertEqual(supervisor.cached_status, {})
+        reply = supervisor.call('status')
+        stamp = reply['telemetry']['battery_mv']['read_at_monotonic']
+        reply['telemetry']['battery_mv']['value'] = 1
+        copy = supervisor.cached_status
+        self.assertEqual(copy['telemetry']['battery_mv']['value'], 8000)
+        copy['telemetry'].clear()
+        supervisor.call('status')
+        self.assertEqual(supervisor.cached_status['telemetry']['battery_mv']['read_at_monotonic'], stamp)
+
+    def test_cached_battery_ages_without_new_status_or_worker_call(self):
+        service = self.service(armed=True)
+        stamp = service.supervisor.cached_status['telemetry']['battery_mv']['read_at_monotonic']
+        with patch.object(service.supervisor, 'call') as call, patch(
+                'companion.pi.service.time', Mock(monotonic=lambda: stamp+5.01)):
+            self.assertEqual(service.action(self.action().to_dict())['reason'], 'battery_unknown')
+            call.assert_not_called()
+        self.assertTrue(service.guard.armed)
 
     def test_disarmed_guard_stops_but_refuses_motion(self):
         service = self.service()
@@ -243,6 +400,7 @@ class PiTests(unittest.TestCase):
             status=link.status()
             self.assertTrue(status['simulated'])
             self.assertFalse(status['armed'])
+            self.assertEqual(status['battery_floor_mv'], 7000)
             self.assertEqual(link.send(self.action()).status,'rejected')
             self.assertEqual(link.send(self.action('stop')).status,'applied')
         finally:

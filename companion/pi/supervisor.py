@@ -1,6 +1,7 @@
 # Codex, gpt-6-astra, Jetson seat, 2026-10-11 23:32:40 EDT
 """Independent monotonic watchdog and isolated, killable driver process."""
 import ctypes
+from copy import deepcopy
 import math
 import multiprocessing as mp
 import os
@@ -91,6 +92,7 @@ class Supervisor:
         self._deadline = time.monotonic() + lease_seconds
         self._state_lock = threading.Lock()
         self._call_lock = threading.Lock()
+        self._cached_status = {}
         self._done = threading.Event()
         self.reason = None
         ctx = mp.get_context('spawn')
@@ -153,6 +155,12 @@ class Supervisor:
             if self.process.is_alive():
                 self.process.kill()
 
+    @property
+    def cached_status(self):
+        """Latest successful status reply, without polling the worker or hardware."""
+        with self._call_lock:
+            return deepcopy(self._cached_status)
+
     def call(self, operation, args=None):
         with self._call_lock:
             if not self.healthy:
@@ -164,6 +172,8 @@ class Supervisor:
                 result = self.connection.recv()
                 if not self.healthy:
                     raise ConnectionError(self.reason or 'driver exited')
+                if operation == 'status':
+                    self._cached_status = deepcopy(result)
                 return result
             except (OSError, EOFError, TimeoutError) as exc:
                 self.trip('driver response failed')
