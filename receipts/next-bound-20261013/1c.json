@@ -1,0 +1,49 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat",
+  "timestamp_from_date": "2026-10-12T20:40:01-04:00",
+  "bound": "1c",
+  "base_commit": "0b4882522921c7ec6a07aca12b5d65e3ba7a80d2",
+  "before_suite_count": 180,
+  "after_suite_count": 188,
+  "test_command": "python3 -m unittest discover -s tests -v",
+  "interpreters": {
+    "jetson": "Python 3.10.12",
+    "pi": "Python 3.11.2"
+  },
+  "logs": {
+    "jetson": {
+      "path": "/home/tony/witness_scratch/next-bound-1c-jetson.log",
+      "sha256": "01c2aaf0ee75fa50a0d92b1d7588cbe70caef16512e8f38c560edc9182c06652",
+      "test_count": 188,
+      "summary": "----------------------------------------------------------------------\nRan 188 tests in 9.524s\n\nOK"
+    },
+    "pi": {
+      "path": "/home/tony/witness_scratch/next-bound-1c-pi.log",
+      "sha256": "f73faeb3195cfcf0cf75cdb51bd3431f584320ec4e668e643569272a3dfb4a89",
+      "test_count": 188,
+      "summary": "----------------------------------------------------------------------\nRan 188 tests in 9.468s\n\nOK"
+    },
+    "red": {
+      "path": "/home/tony/witness_scratch/next-bound-1c-red.log",
+      "sha256": "7d674da8e3a25af15d17f0120867d5045d12bc4ee0fcdc1835afe28415ffc822",
+      "test_count": 28,
+      "summary": "----------------------------------------------------------------------\nRan 28 tests in 1.175s\n\nFAILED (failures=2, errors=4)"
+    }
+  },
+  "changed_file_sha256": {
+    "PASSDOWN.md": "1475307b7fe0ae8b71262944cadb382ad232dadad50539fc09163f97d43690f7",
+    "PROJECT_STATE.md": "18bcb9f40c8daf64ca0ffe46f837d5ff300eae74ef0b18bbb4d22aec076f0b55",
+    "tests/test_witness_mcp.py": "bcefc51b8f1e7dfb60f660593b33c1649084d426bd214706ed752f1531ee4ba6",
+    "witness_mcp/tools.py": "e595c6fbc10ed526f19342207a8eb0ce4c323bfa9a0f8a139caebcbacc6e2552"
+  },
+  "hash_scope": "All changed implementation/tests/PASSDOWN files; this self-referential receipt is excluded. Hashes describe this commit, not later edits.",
+  "pi_test_checkout": "/tmp/hq-eof-check; isolated scratch tree populated from branch bundle plus reviewed patch",
+  "pi_tested_code_hashes": {
+    "tests/test_witness_mcp.py": "bcefc51b8f1e7dfb60f660593b33c1649084d426bd214706ed752f1531ee4ba6",
+    "witness_mcp/tools.py": "e595c6fbc10ed526f19342207a8eb0ce4c323bfa9a0f8a139caebcbacc6e2552"
+  },
+  "deployment": false,
+  "robot_actions": false,
+  "guard_restart": false,
+  "vendor_import_or_file_read": false
+}

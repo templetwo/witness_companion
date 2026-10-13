@@ -81,6 +81,9 @@ class Contract:
             'witness_snapshot', 'witness_speak', 'witness_status',
             'witness_propose_note', 'robot_request_action'})
         self.assertEqual(len(tools), 5)
+        limits = {t['name']: t['inputSchema']['properties']['text']['maxLength']
+                  for t in tools if 'text' in t['inputSchema']['properties']}
+        self.assertEqual(limits, {'witness_speak': 200, 'witness_propose_note': 2000})
         for tool in tools:
             schema = tool['inputSchema']
             self.assertEqual(schema['type'], 'object')
@@ -138,6 +141,29 @@ class Contract:
         response = self.exchange([call('shell_exec')])[1]
         self.assertEqual(response['error']['code'], -32602)
         self.assertEqual(response['error']['message'], 'Unknown tool')
+
+    def test_speech_201_characters_refused_at_schema(self):
+        response = self.exchange([call('witness_speak', {'text': 'x' * 201})])[1]
+        self.assertEqual(response['error']['code'], -32602)
+        self.assertEqual(self.services.speak_log, [])
+
+    def test_speech_200_characters_accepted(self):
+        response = self.exchange([call('witness_speak', {'text': 'x' * 200})])[1]
+        result = payload(response)
+        self.assertTrue(result['ok'])
+        self.assertTrue(result['recorded'])
+        self.assertFalse(result['played'])
+
+    def test_note_2001_characters_refused_at_schema(self):
+        response = self.exchange([call('witness_propose_note', {'text': 'x' * 2001})])[1]
+        self.assertEqual(response['error']['code'], -32602)
+        self.assertFalse(self.notes.exists())
+
+    def test_note_2000_characters_accepted_without_truncation(self):
+        text = 'x' * 2000
+        response = self.exchange([call('witness_propose_note', {'text': text})])[1]
+        self.assertTrue(payload(response)['ok'])
+        self.assertEqual(json.loads(self.notes.read_text())[0]['text'], text)
 
     def test_malformed_params_errors(self):
         invalid = [request('tools/call', []), request('tools/call', {'name': 9}),

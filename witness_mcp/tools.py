@@ -22,19 +22,20 @@ def object_schema(properties: dict, required=()) -> dict:
             'required': list(required), 'additionalProperties': False}
 
 
-TEXT = {'type': 'string', 'minLength': 1, 'maxLength': 10000, 'pattern': r'\S'}
+SPEECH_TEXT = {'type': 'string', 'minLength': 1, 'maxLength': 200, 'pattern': r'\S'}
+NOTE_TEXT = {'type': 'string', 'minLength': 1, 'maxLength': 2000, 'pattern': r'\S'}
 TOOL_SCHEMAS = [
     {'name': 'witness_snapshot',
      'description': 'Request a camera image with capture/receive timestamps; report unknown capture age honestly.',
      'inputSchema': object_schema({'max_age_seconds': {
          'type': 'number', 'minimum': 0, 'maximum': 3600, 'default': 5}})},
     {'name': 'witness_speak', 'description': 'Request speech; fake mode records without playback.',
-     'inputSchema': object_schema({'text': TEXT}, ['text'])},
+     'inputSchema': object_schema({'text': SPEECH_TEXT}, ['text'])},
     {'name': 'witness_status', 'description': 'Report mic, camera, backend, controller and armed state.',
      'inputSchema': object_schema({})},
     {'name': 'witness_propose_note',
      'description': 'Append a pending note only to the host-configured local JSON file.',
-     'inputSchema': object_schema({'text': TEXT}, ['text'])},
+     'inputSchema': object_schema({'text': NOTE_TEXT}, ['text'])},
     {'name': 'robot_request_action',
      'description': ('Live actions: stop {}, drive {direction,duty:1..25,duration_seconds:0.05..0.5}, '
                      'joints {positions:{configured_name:pulse},duration_seconds:0.1..1}, '

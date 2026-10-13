@@ -1,3 +1,19 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:40:01-04:00
+
+LATEST: HQ's next software bound is implemented in three separate commits on
+prep/pi-guard-service: cached 7000 mV / 5 s battery gate, validated companion
+drive/joints params, MCP speech 200 / notes 2000 character schemas. Final suite:
+188 passing on Jetson Python 3.10.12 and Pi scratch Python 3.11.2. See PASSDOWN.md
+and receipts/next-bound-20261013 for review and transfer details.
+
+NOT DEPLOYED. Live release last reported 20261012-capabilities-04. No live service
+restart, motion, SDK/vendor read, Stack write or GitHub push occurred in this task.
+Startup diagnostic fix 8a657b4 is in source but not live. Newer HQ physical record
+supersedes the old record below: jaws open at 2000; PWM 3=782,4=1803,5=2116,6=1420;
+not home; battery 6984 mV; no pickup. Nothing was remeasured during this task.
+New robot motion needs fresh charged-pack verification and operator attendance.
+HQ review precedes a separately authorized deployment.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:44:55.687385-04:00
 
 Current detailed handoff: `PASSDOWN.md`. It supersedes historical state below.

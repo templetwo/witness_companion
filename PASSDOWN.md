@@ -1,3 +1,55 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:40:01-04:00
+
+## Newest bound complete in source; HQ review required before deployment
+
+Implemented all three software changes from
+`docs/hq/PASSDOWN_2026-10-12_NEXT_BOUND.md`, in three separate commits:
+
+- 1a, `b53bea6`: cached battery floor for every motion command; 158 -> 174 tests.
+- 1b, `0b48825`: existing bounded validation for companion drive/joints; 174 -> 180.
+- 1c, this commit: MCP speech capped at 200 characters, proposed notes at 2000;
+  180 -> 188. Over-limit requests return standard schema error -32602 before the
+  adapter. Boundary values are accepted. No speech chunking was added.
+
+Each stage passed the complete `python3 -m unittest discover -s tests -v` suite
+on Jetson Python 3.10.12 and Pi Python 3.11.2. Pi tests ran only in the isolated
+`/tmp/hq-eof-check` checkout; changed Python file hashes match the tested Jetson
+source. Receipts are `receipts/next-bound-20261013/1a.json`, `1b.json`, `1c.json`.
+Each receipt identifies its parent/base commit and records hashes for that stage;
+use that stage's commit when checking hashes of documents changed again later.
+
+Pre-fix regression groups failed as expected. The baseline cbdbbca code is identical
+to 04e6de4 (cbdbbca adds only the HQ passdown). Before 1b and 1c, their respective
+production modules were still identical to 04e6de4. Exact red commands:
+
+- `python3 -m unittest tests.test_pi_service.BatteryFloorTests -v`
+- `python3 -m unittest tests.test_tools.ToolSurface -v`
+- `python3 -m unittest tests.test_witness_mcp.InProcessTests tests.test_witness_mcp.SubprocessTests -v`
+
+Full and red logs are under `/home/tony/witness_scratch/next-bound-*.log`.
+No deployment unit changed. No real SDK/vendor-image read, robot action, arming,
+override, signal, guard restart, live release change, Stack write or GitHub push.
+The new floor is source-only until reviewed and deployed. The existing startup
+failure diagnostic fix 8a657b4 is already in source, also still undeployed.
+
+HQ delivery bundle will be created immediately after this commit at
+`/home/tony/witness_scratch/bundles/20261012-next-bound.bundle` using
+`git bundle create <path> prep/pi-guard-service ^04e6de4`; it includes the incoming
+cbdbbca passdown plus the three implementation commits. HQ can review each with
+`git show <commit>` and carry the push. Bundle verification and SHA256 go in
+`/home/tony/WITNESS-CODEX-RESULT.md` to avoid changing the bundle's own contents.
+
+Carry forward the newer HQ physical state, not the superseded 17:45 state below:
+last reported commands PWM 1=2000, 3=782, 4=1803, 5=2116, 6=1420; jaws open,
+arm not home; last battery 6984 mV. No pickup was achieved. These are historical
+HQ observations, not fresh measurements. Prior Stack proposals were committed by
+HQ (e94dcc4b/de988f87); no new proposal was sent by this seat.
+
+Next: HQ review, then a separately authorized release cut carrying 8a657b4 and the
+battery gate. The handoff's proposed deployment procedure, network changes,
+mechanical inspection, calibration and grasp attempts remain outside this bound.
+No inherited attendance statement authorizes new motion.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:38:40-04:00
 
 ## Next bound 1b: structured companion motion, ready for HQ review
