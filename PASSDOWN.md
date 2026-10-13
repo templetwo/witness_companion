@@ -1,3 +1,12 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-13T07:03:00-04:00
+
+Anthony reports "review done" for the preceding guard-floor deployment.
+Review completion is now recorded from his report; no review findings or
+requested revisions accompanied it. Deployed source last verified a9197fb,
+release 20261013-guard-floor-01; deployment evidence commit b4bc895.
+This checkpoint changes documentation only. Runtime status was not remeasured;
+last verified state was disarmed, floor 7000 mV, wheel ceiling 0, no joints.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:50:34-04:00
 
 ## Guard floor release deployed on Anthony's explicit instruction
