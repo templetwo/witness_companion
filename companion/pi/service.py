@@ -122,13 +122,21 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
     options = dict(lease_seconds=lease_seconds, response_timeout=response_timeout)
     if factory is not None:
         options['factory'] = factory
-    supervisor = Supervisor(**options)
-    service = GuardService(guard, supervisor, notes, battery_floor_mv=battery_floor_mv)
+    supervisor = None
     peer = None
     last_seq = -1
     pending = b''
     conn.settimeout(0.1)
     try:
+        try:
+            supervisor = Supervisor(**options)
+        except (ConnectionError, TimeoutError):
+            # Supervisor already logged the cause and killed the child. This session
+            # ends disarmed with a fixed refusal; the listener keeps serving.
+            conn.sendall(encode({'ok': False, 'protocol': 1, 'armed': False,
+                                 'executed': False, 'reason': 'driver startup failed'}))
+            return
+        service = GuardService(guard, supervisor, notes, battery_floor_mv=battery_floor_mv)
         conn.sendall(encode({'session': session, 'protocol': 1, 'tools': sorted(TOOLS)}))
         while supervisor.healthy:
             stopped = False
@@ -186,7 +194,8 @@ def serve_connection(conn, keys, journal, notes=None, lease_seconds=2.0,
         pass  # EOF, malformed flood, or stalled writer closes this one session.
     finally:
         guard.disarm()
-        supervisor.close()
+        if supervisor is not None:
+            supervisor.close()
         conn.close()
 
 

@@ -28,6 +28,9 @@ class PiLink(Controller):
         self.sock.settimeout(timeout)
         try:
             hello = self._read()
+            if hello == {'ok': False, 'protocol': 1, 'armed': False, 'executed': False,
+                         'reason': 'driver startup failed'}:
+                raise ConnectionError('guard refused session: driver startup failed')
             if not isinstance(hello, dict) or hello.get('protocol') != 1 or not isinstance(hello.get('session'), str):
                 raise ValueError('invalid server greeting')
             self.session = hello['session']

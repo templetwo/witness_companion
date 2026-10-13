@@ -1,6 +1,7 @@
 # Codex, gpt-6-astra, Jetson seat, 2026-10-11 22:55:17 EDT
 import json
 import math
+import multiprocessing as mp
 import os
 from pathlib import Path
 import signal
@@ -40,6 +41,11 @@ def raising_factory():
 
 def silent_exit_factory():
     os._exit(3)
+
+
+def slow_factory():
+    time.sleep(10)
+    return FakeBoard()
 
 
 class PoweredFakeBoard(FakeBoard):
@@ -523,3 +529,85 @@ class StartupFailureTests(unittest.TestCase):
         self.addCleanup(s.close)
         self.assertEqual(s.kind, 'fake')
         self.assertTrue(s.healthy)
+
+
+class SessionStartupFailureTests(unittest.TestCase):
+    """A failed driver start ends one session with a bounded refusal, not the service."""
+    def setUp(self):
+        self.key = os.urandom(32)
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.journal = Journal(str(Path(self.temp.name)/'guard.jsonl'))
+
+    def serve(self, factory, lease=1.0):
+        server, client = socket.socketpair()
+        self.addCleanup(client.close)
+        client.settimeout(5)
+        arm, stop = threading.Event(), threading.Event()
+        arm.set()
+        start = time.monotonic()
+        serve_connection(server, {'jetson': self.key}, self.journal, lease_seconds=lease,
+                         factory=factory, operator_arm=arm, operator_stop=stop)
+        elapsed = time.monotonic() - start
+        frames = b''
+        while True:
+            chunk = client.recv(4096)
+            if not chunk:
+                break
+            frames += chunk
+        return [decode(line) for line in frames.split(b'\n') if line], elapsed, arm
+
+    def assert_refused(self, frames):
+        self.assertEqual(len(frames), 1)
+        self.assertEqual(frames[0], {'ok': False, 'protocol': 1, 'armed': False,
+                                     'executed': False, 'reason': 'driver startup failed'})
+        self.assertEqual(mp.active_children(), [])
+
+    def test_factory_exception_refuses_session_without_raising(self):
+        frames, _, arm = self.serve(raising_factory)
+        self.assert_refused(frames)
+        self.assertFalse(arm.is_set())
+        self.assertNotIn(b'fake factory failure', encode(frames[0]))
+
+    def test_silent_child_exit_refuses_session(self):
+        frames, _, _ = self.serve(silent_exit_factory)
+        self.assert_refused(frames)
+
+    def test_slow_start_is_bounded_and_child_released(self):
+        frames, elapsed, _ = self.serve(slow_factory, lease=0.5)
+        self.assert_refused(frames)
+        self.assertLess(elapsed, 4)
+
+    def test_next_session_after_failure_starts_clean(self):
+        self.assert_refused(self.serve(raising_factory)[0])
+        server, client = socket.socketpair()
+        client.settimeout(5)
+        thread = threading.Thread(target=serve_connection, daemon=True,
+                                  args=(server, {'jetson': self.key}, self.journal),
+                                  kwargs={'factory': FakeBoard})
+        thread.start()
+        buffer = b''
+        while b'\n' not in buffer:
+            buffer += client.recv(4096)
+        hello = decode(buffer.split(b'\n', 1)[0])
+        client.close()
+        thread.join(3)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(hello['protocol'], 1)
+        self.assertIsInstance(hello['session'], str)
+
+    def test_client_names_the_refusal(self):
+        listener = socket.socket()
+        listener.bind(('127.0.0.1', 0))
+        listener.listen(1)
+        self.addCleanup(listener.close)
+        def run():
+            conn, _ = listener.accept()
+            serve_connection(conn, {'jetson': self.key}, self.journal, factory=raising_factory)
+        thread = threading.Thread(target=run, daemon=True)
+        thread.start()
+        with self.assertRaises(ConnectionError) as ctx:
+            PiLink(listener.getsockname(), 'jetson', self.key, timeout=5)
+        self.assertIn('driver startup failed', str(ctx.exception))
+        thread.join(5)
+        self.assertFalse(thread.is_alive())

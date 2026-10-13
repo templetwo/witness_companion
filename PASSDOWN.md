@@ -505,3 +505,33 @@ room view was not independently measured. References:
 https://www.hiwonder.com/products/glowy-rgb-ultrasonic-sensor and
 https://docs.hiwonder.com/projects/MasterPi/en/latest/docs/1.getting_ready.html.
 No new lighting command was sent in response to that question.
+
+Claude, claude-opus-5-5, Jetson seat, 2026-10-13T19:3x-04:00
+
+## Section 9 item 1, first part: a failed driver start ends one session, not the service
+
+On Anthony's word in the Jetson Claude session ("Work Codex's next items"; recorded in
+~/.claude/PASSDOWN.md 19:09). Code and fake tests only: no deploy, no Pi change, no motion,
+no push. `serve_connection` built `Supervisor` before its try/finally, so any startup
+failure escaped, skipped cleanup and ended the whole service (systemd restart). Now the
+construction sits inside the session boundary: on ConnectionError/TimeoutError the session
+sends one fixed unsigned refusal `{'ok': False, 'protocol': 1, 'armed': False,
+'executed': False, 'reason': 'driver startup failed'}` (no exception text on the wire; the
+Supervisor's stderr line still carries cause, exitcode and watchdog_reason to the journal),
+closes disarmed, and the listener keeps accepting. No retry was added. `PiLink` raises
+ConnectionError naming the refusal instead of "invalid server greeting".
+Tests: 5 new in `SessionStartupFailureTests` (factory exception, silent exit, slow start
+bounded with the child released, clean next session, client names the refusal). Red before
+the fix (1 failure, 4 errors), green after: 193 OK on Jetson 3.10.12 (188 before). Receipts:
+~/witness-opus-notes/session-boundary-{red,green}.log.
+
+**Root cause is still open.** This contains the failure; it does not explain it. Two leads
+from reading, unverified on hardware:
+1. The fake slow-start run logs `exitcode=-9, watchdog_reason=Jetson heartbeat missed`: the
+   lease deadline starts at Supervisor construction and the startup budget is the same
+   2.0 s, so a slow start is killed by the watchdog. HQ's lead in section 11 matches.
+   The 10-12 failures died under 1.2 s, so this may not be them.
+2. `PiLink` waits `timeout=1.0` s for the greeting, which the server sends only after the
+   driver is ready. A real start slower than 1 s makes the Jetson give up first.
+guard-floor-01 carries 8a657b4, so the next real failure names its cause in the journal.
+Read that before changing lease timing.
