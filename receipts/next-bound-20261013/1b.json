@@ -1,0 +1,48 @@
+{
+  "identity": "Codex, gpt-6-astra, Jetson seat",
+  "timestamp_from_date": "2026-10-12T20:38:40-04:00",
+  "bound": "1b",
+  "base_commit": "b53bea6ff3252f21dd1791757f334da8115cc696",
+  "before_suite_count": 174,
+  "after_suite_count": 180,
+  "test_command": "python3 -m unittest discover -s tests -v",
+  "interpreters": {
+    "jetson": "Python 3.10.12",
+    "pi": "Python 3.11.2"
+  },
+  "logs": {
+    "jetson": {
+      "path": "/home/tony/witness_scratch/next-bound-1b-jetson.log",
+      "sha256": "fd7827a430823c9404d87707e55955e617a59871e61fdaa5fd0b5da5c7c466cc",
+      "test_count": 180,
+      "summary": "----------------------------------------------------------------------\nRan 180 tests in 9.189s\n\nOK"
+    },
+    "pi": {
+      "path": "/home/tony/witness_scratch/next-bound-1b-pi.log",
+      "sha256": "7f139e72a91c71b5b9049811d8fd3d61e50376ce694671df18d6be3766cc8201",
+      "test_count": 180,
+      "summary": "----------------------------------------------------------------------\nRan 180 tests in 9.113s\n\nOK"
+    },
+    "red": {
+      "path": "/home/tony/witness_scratch/next-bound-1b-red.log",
+      "sha256": "ba96db027e316d0d3d38a9271fe2a1d61de80fd41e2925cd1c3d4227c24c024f",
+      "test_count": 12,
+      "summary": "----------------------------------------------------------------------\nRan 12 tests in 0.076s\n\nFAILED (failures=6)"
+    }
+  },
+  "changed_file_sha256": {
+    "PASSDOWN.md": "71449b77b7699b4db486013f09d0865422600d56b7cf0d4fd2c79a9c47106f43",
+    "companion/tools.py": "00e3401c25a87ecc60ef2ea811e813dcca36f5fb1e92f79138a1ecc20ad38d90",
+    "tests/test_tools.py": "c65ee781a330e3bd1d12d0647eb838cceefb31131d9397a5b318bbe4f54879a9"
+  },
+  "hash_scope": "All changed implementation/tests/PASSDOWN files; this self-referential receipt is excluded. Hashes describe this commit, not later edits.",
+  "pi_test_checkout": "/tmp/hq-eof-check; isolated scratch tree populated from branch bundle plus reviewed patch",
+  "pi_tested_code_hashes": {
+    "companion/tools.py": "00e3401c25a87ecc60ef2ea811e813dcca36f5fb1e92f79138a1ecc20ad38d90",
+    "tests/test_tools.py": "c65ee781a330e3bd1d12d0647eb838cceefb31131d9397a5b318bbe4f54879a9"
+  },
+  "deployment": false,
+  "robot_actions": false,
+  "guard_restart": false,
+  "vendor_import_or_file_read": false
+}

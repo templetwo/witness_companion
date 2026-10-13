@@ -26,6 +26,7 @@ from typing import Any, Callable, Dict, Optional
 
 from .adapters.base import BackendUnavailable
 from .coordinator import Coordinator
+from .controls import EXTRA_MOTION, validate as validate_control
 from .guard import CommandGuard
 from .schemas import COMMANDS, MAX_TEXT_LEN, TEXT_COMMANDS, clean_text
 
@@ -176,6 +177,12 @@ def robot_request_action(name: str, params: Optional[Dict[str, Any]] = None) -> 
         if len(params["text"]) > MAX_TEXT_LEN:
             return _fail("text too long", verdict="refused")
         args = {"text": clean_text(params["text"])}
+    elif name in EXTRA_MOTION:
+        try:
+            validate_control(name, params)
+        except ValueError as exc:
+            return _fail(str(exc), verdict="refused")
+        args = params
     else:
         if params:
             return _fail("%s takes no params" % name, verdict="refused")

@@ -1,3 +1,20 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:38:40-04:00
+
+## Next bound 1b: structured companion motion, ready for HQ review
+
+`robot_request_action` now validates `drive` and `joints` through the existing
+`controls.validate` and passes the same params to the coordinator. Unknown names,
+non-object params, text shape/length and remaining no-param commands keep their
+refusals. The coordinator still enforces its guard; accepted tool input does not
+prove physical motion. No new controls, arming path or bounds were introduced.
+
+Six new tests bring the suite from 174 to 180, green on Jetson Python 3.10.12
+and the Pi Python 3.11.2 scratch checkout. The pre-fix tool test group failed
+six assertions. Receipt: `receipts/next-bound-20261013/1b.json`.
+First bound remains separately reviewable at `b53bea6`. This commit is 1b only;
+1c (MCP text limits) follows. No deploy, guard restart, robot action, real SDK
+read or Stack write. Physical state below is inherited, not remeasured.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:35:40-04:00
 
 # Newest bound implementation: 1a ready for HQ review, not deployed

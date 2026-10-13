@@ -1,5 +1,6 @@
 import json
 import unittest
+from unittest.mock import patch
 
 from tests.helpers import TempDirCase
 from companion import tools
@@ -59,6 +60,55 @@ class ToolSurface(TempDirCase):
         self.assertTrue(stop["ok"])
         self.assertEqual(stop["verdict"], "applied")
         self.assertEqual(self.ctrl.would_have_done(), ["stop"])
+
+    def test_valid_structured_motion_reaches_coordinator_with_same_args(self):
+        cases = [('drive', {'direction': 'forward', 'duty': 20,
+                            'duration_seconds': 0.3}),
+                 ('joints', {'positions': {'shoulder': 1500},
+                             'duration_seconds': 0.5})]
+        for name, params in cases:
+            with self.subTest(name=name), patch.object(
+                    self.coord, 'request_action', wraps=self.coord.request_action) as request:
+                out = tools.robot_request_action(name, params)
+                request.assert_called_once_with(name, params)
+                self.assertIs(request.call_args.args[1], params)
+                self.assertEqual((out['verdict'], out['reason']), ('rejected', 'disarmed'))
+                self.assertIn('does not prove physical motion', out['note'])
+        self.assertEqual(self.ctrl.would_have_done(), [])
+
+    def assert_tool_refusal(self, name, params, error):
+        with patch.object(self.coord, 'request_action') as request:
+            out = tools.robot_request_action(name, params)
+            self.assertFalse(out['ok'])
+            self.assertEqual(out['verdict'], 'refused')
+            self.assertEqual(out['error'], error)
+            request.assert_not_called()
+
+    def test_seven_joints_refused_before_coordinator(self):
+        self.assert_tool_refusal('joints', {
+            'positions': {'joint_%s' % n: 1500 for n in range(7)},
+            'duration_seconds': 0.5}, 'one to six named joints required')
+
+    def test_unknown_drive_direction_refused_before_coordinator(self):
+        self.assert_tool_refusal('drive', {'direction': 'up', 'duty': 20,
+            'duration_seconds': 0.3}, 'unknown drive direction')
+
+    def test_missing_drive_params_refused_before_coordinator(self):
+        for params in (None, {}):
+            with self.subTest(params=params):
+                self.assert_tool_refusal('drive', params, 'incorrect control arguments')
+
+    def test_look_params_still_refused_before_coordinator(self):
+        self.assert_tool_refusal('look_left', {'angle': 90}, 'look_left takes no params')
+
+    def test_existing_shape_and_text_refusals_preserved(self):
+        for name, params, error in [
+                ('unknown', {}, 'unknown action'),
+                ('drive', [], 'params must be an object'),
+                ('say', {'text': 5}, "say takes exactly {'text': str}"),
+                ('display', {'text': 'x' * 201}, 'text too long')]:
+            with self.subTest(name=name):
+                self.assert_tool_refusal(name, params, error)
 
     def test_status_reports_wiring_and_armed(self):
         st = tools.witness_status()
