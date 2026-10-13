@@ -1,3 +1,40 @@
+Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:50:34-04:00
+
+## Guard floor release deployed on Anthony's explicit instruction
+
+User: "deploy it. the pi is on usb powqer". This supersedes the previous
+source-only/no-deploy task state. No independent HQ review is claimed.
+
+Live Pi guard release is now `/opt/temple-witness/releases/20261013-guard-floor-01`,
+selected by the persistent `/opt/temple-witness/current` symlink. Source is
+`a9197fb8374c9a3177323569cf6d321543ef6dba`, carrying 8a657b4 startup diagnostics and
+all three next-bound changes. All 39 packaged source/configuration files match
+the release manifest's SHA256 hashes. Pi source compilation passed. The exact
+source already passed 188 tests on Jetson 3.10.12 and Pi scratch 3.11.2.
+
+Guard stopped and started once for deployment. Four authenticated status samples
+verified `armed: false`, `battery_floor_mv: 7000`, driver alive, drive inactive,
+wheel duty ceiling 0 and empty joint/output maps. First immediate connection
+preceded listener readiness and was refused; a later status-only session worked
+with the same PID and zero automatic restarts. No action replay occurred.
+Controller telemetry was 5295/5305/5302 mV on user-reported USB power; this is not
+a battery charge percentage or proof the motor pack is connected/charged.
+
+No arming, override, motion request, arm/gripper command or motion test occurred.
+The ordinary status worker opened the SDK and performed its existing zero-wheel
+startup/cleanup; serial ownership was absent after disconnect. No vendor image
+files were manually inspected or copied. Locked configuration and installed unit
+hashes are unchanged. All four vendor services remain masked/inactive; guard is
+enabled at boot. No reboot was needed/performed. The camera process was unchanged
+(the camera module is byte-identical across the old and new releases).
+
+Receipt: `receipts/guard-floor-deployed.json`; raw evidence and manifest:
+`/home/tony/witness_scratch/deploy-guard-floor-01/`.
+Rollback target remains `/opt/temple-witness/releases/20261012-capabilities-04`.
+No rollback was needed. No network changes, GitHub push, Stack write or message.
+Historical arm pose is not remeasured. Motion/calibration/grasp work still needs
+fresh operator attendance and a charged motor supply; deployment grants no motion.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T17:44:55.687385-04:00
 
 Current detailed handoff: `PASSDOWN.md`. It supersedes historical state below.
