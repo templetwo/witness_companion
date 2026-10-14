@@ -1,0 +1,206 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G8",
+  "at": "2026-10-13T19:49:32.917111-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 2000,
+    "3": 1022,
+    "4": 2003,
+    "5": 2416,
+    "6": 1485
+  },
+  "targets": [
+    {
+      "1": 2000,
+      "3": 1022,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+    },
+    {
+      "1": 2000,
+      "3": 1022,
+      "4": 1903,
+      "5": 2316,
+      "6": 1485
+    }
+  ],
+  "channels": [
+    4,
+    5
+  ],
+  "note": "clearance up, then elbow -100 outward probe",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791935377.0672371,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791935377.6026602
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791935379.8494065,
+      "battery": 7763
+    },
+    {
+      "name": "armed",
+      "at": 1791935381.6866858
+    },
+    {
+      "name": "motion_done",
+      "at": 1791935385.3184025
+    }
+  ],
+  "joints_override": {
+    "pwm_4": {
+      "bus": "pwm",
+      "id": 4,
+      "min": 1903,
+      "max": 2003
+    },
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 2316,
+      "max": 2316
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G8-c270-before.jpg",
+    "mean": 96.9,
+    "sha256": "222cb860355a5c8055073e4f350c2db532411b27d83d702fe8eee1f6667d86cc"
+  },
+  "readback_before": {
+    "1": 2000,
+    "3": 1022,
+    "4": 2003,
+    "5": 2416,
+    "6": 1485
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G8-claw-before.jpg",
+    "sha256": "34cb0c9db17925d3624f1ec0c022518ac5b8291b74803f6d92370aa3e11df3fb"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 2000,
+        "3": 1022,
+        "4": 2003,
+        "5": 2316,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7775,
+      "readback": {
+        "1": 2000,
+        "3": 1022,
+        "4": 2003,
+        "5": 2316,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G8-c270-stage-1.jpg",
+        "mean": 99.8,
+        "sha256": "d59ca992b67b8d8084c882b53d200f6407e4ec0e48fcf7cbd314499731e21a61"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G8-claw-stage-1.jpg",
+        "sha256": "14b2067a2383b4f5efb66f96cde0fc481e9632897a6205b9e142ebaa3ab2fe24"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 2000,
+        "3": 1022,
+        "4": 1903,
+        "5": 2316,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7776,
+      "readback": {
+        "1": 2000,
+        "3": 1022,
+        "4": 1903,
+        "5": 2316,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G8-c270-stage-2.jpg",
+        "mean": 99.8,
+        "sha256": "1ad91ac220098c3449af85da9c2e881b3789527d15ed340c448404243daf6f54"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G8-claw-stage-2.jpg",
+        "sha256": "d3bf1e18f5f6b336324b8128d1dbcfa5b4f850f3bb28de3f20fc6748df109973"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 2000,
+    "3": 1022,
+    "4": 1903,
+    "5": 2316,
+    "6": 1485
+  }
+}

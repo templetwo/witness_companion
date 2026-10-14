@@ -1,0 +1,250 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G77",
+  "at": "2026-10-13T21:06:12.658030-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT); tower: 'go fffor it' (20:5x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1400,
+    "3": 1132,
+    "4": 2453,
+    "5": 2246,
+    "6": 1375
+  },
+  "targets": [
+    {
+      "1": 1400,
+      "3": 1232,
+      "4": 2453,
+      "5": 2246,
+      "6": 1375
+    },
+    {
+      "1": 1400,
+      "3": 1232,
+      "4": 2453,
+      "5": 2246,
+      "6": 1335
+    },
+    {
+      "1": 1400,
+      "3": 1232,
+      "4": 2453,
+      "5": 2246,
+      "6": 1295
+    }
+  ],
+  "channels": [
+    3,
+    6
+  ],
+  "note": "nudge: finger out, sweep right into corner",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791939979.305009,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791939979.8221035
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791939982.0734434,
+      "battery": 7381
+    },
+    {
+      "name": "armed",
+      "at": 1791939983.8689685
+    },
+    {
+      "name": "motion_done",
+      "at": 1791939990.6792073
+    }
+  ],
+  "joints_override": {
+    "pwm_3": {
+      "bus": "pwm",
+      "id": 3,
+      "min": 1232,
+      "max": 1232
+    },
+    "pwm_6": {
+      "bus": "pwm",
+      "id": 6,
+      "min": 1295,
+      "max": 1375
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G77-c270-before.jpg",
+    "mean": 141.5,
+    "sha256": "508aea4b603a3b7cd50e2759e69315d183e3ffca53569334d9945bfa752e370f"
+  },
+  "readback_before": {
+    "1": 1400,
+    "3": 1132,
+    "4": 2453,
+    "5": 2246,
+    "6": 1375
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G77-claw-before.jpg",
+    "sha256": "b00eeab6bf4d4d1eda9d0119692ed28c2bbe857a508e5a46dcbe48ffa834b9f2"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 1400,
+        "3": 1232,
+        "4": 2453,
+        "5": 2246,
+        "6": 1375
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7383,
+      "readback": {
+        "1": 1400,
+        "3": 1232,
+        "4": 2453,
+        "5": 2246,
+        "6": 1375
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G77-c270-stage-1.jpg",
+        "mean": 127.8,
+        "sha256": "05859d01007d7400ca8daed48df6a463f8067a25973fff4835d8e31707bc3d91"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G77-claw-stage-1.jpg",
+        "sha256": "24e41e35221d68a601cc10111692f76a83c86225387cb0c84f8a467ed0b71673"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 1400,
+        "3": 1232,
+        "4": 2453,
+        "5": 2246,
+        "6": 1335
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7382,
+      "readback": {
+        "1": 1400,
+        "3": 1232,
+        "4": 2453,
+        "5": 2246,
+        "6": 1335
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G77-c270-stage-2.jpg",
+        "mean": 142.5,
+        "sha256": "f404fd1fad2ac62595fbbb2431498d45639310d24c9a31ed4d9d514217ad3363"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G77-claw-stage-2.jpg",
+        "sha256": "a8d127b18e5c584d70a2c51e001530c71be75aeceb3781df9252290d13efb947"
+      }
+    },
+    {
+      "index": 3,
+      "target": {
+        "1": 1400,
+        "3": 1232,
+        "4": 2453,
+        "5": 2246,
+        "6": 1295
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7396,
+      "readback": {
+        "1": 1400,
+        "3": 1232,
+        "4": 2453,
+        "5": 2246,
+        "6": 1295
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G77-c270-stage-3.jpg",
+        "mean": 126.1,
+        "sha256": "b312ed06fd61ecdb28cef3e74cd050c8cf46a016c7cb11386ba34036af714272"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G77-claw-stage-3.jpg",
+        "sha256": "83c25f23cd00db87d740cffeada566928edc67fa91e1357466fd3ad76b733cd9"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 1400,
+    "3": 1232,
+    "4": 2453,
+    "5": 2246,
+    "6": 1295
+  }
+}

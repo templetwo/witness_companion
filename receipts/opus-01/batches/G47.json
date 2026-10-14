@@ -1,0 +1,257 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G47",
+  "at": "2026-10-13T20:30:31.781184-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 2000,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1760
+  },
+  "targets": [
+    {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1730
+    },
+    {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+    },
+    {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+    }
+  ],
+  "channels": [
+    3,
+    5,
+    6
+  ],
+  "note": "regrab: centre, descend, wrist compensates",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791937836.3240554,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791937836.824821
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791937839.078264,
+      "battery": 7615
+    },
+    {
+      "name": "armed",
+      "at": 1791937840.9118366
+    },
+    {
+      "name": "motion_done",
+      "at": 1791937846.9562106
+    }
+  ],
+  "joints_override": {
+    "pwm_3": {
+      "bus": "pwm",
+      "id": 3,
+      "min": 1002,
+      "max": 1082
+    },
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 2046,
+      "max": 2246
+    },
+    "pwm_6": {
+      "bus": "pwm",
+      "id": 6,
+      "min": 1730,
+      "max": 1730
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G47-c270-before.jpg",
+    "mean": 112.0,
+    "sha256": "e094a1a6924ce1d478b0722a29e4778ac957c439ce0e8c84865bef4f7850a25e"
+  },
+  "readback_before": {
+    "1": 2000,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1760
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G47-claw-before.jpg",
+    "sha256": "8f9b0afc6d59cf7d45153a4f39412748b1592a42fbbf08540dd1a705d1b53ec8"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 2000,
+        "3": 1002,
+        "4": 2153,
+        "5": 2046,
+        "6": 1730
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7631,
+      "readback": {
+        "1": 2000,
+        "3": 1002,
+        "4": 2153,
+        "5": 2046,
+        "6": 1730
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G47-c270-stage-1.jpg",
+        "mean": 111.5,
+        "sha256": "a8acf4d9975a15aa4c8ca1f36270eebd829582c9dcef7c557d7ed85632544ac2"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G47-claw-stage-1.jpg",
+        "sha256": "23a8b6239da08f2e8c44bb734f6224c630b9bf2236f8081a1296e9f40c4f8954"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 2000,
+        "3": 1002,
+        "4": 2153,
+        "5": 2246,
+        "6": 1730
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7631,
+      "readback": {
+        "1": 2000,
+        "3": 1002,
+        "4": 2153,
+        "5": 2246,
+        "6": 1730
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G47-c270-stage-2.jpg",
+        "mean": 117.2,
+        "sha256": "95ad72202c264903458fd6a5365292a677329aa4abdfb1dd1bcde445fdfbbe12"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G47-claw-stage-2.jpg",
+        "sha256": "aacbf46c214f9e4540a2c84cc752a2e9931a57041bb27a03f36502f048d5ccad"
+      }
+    },
+    {
+      "index": 3,
+      "target": {
+        "1": 2000,
+        "3": 1082,
+        "4": 2153,
+        "5": 2246,
+        "6": 1730
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7652,
+      "readback": {
+        "1": 2000,
+        "3": 1082,
+        "4": 2153,
+        "5": 2246,
+        "6": 1730
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G47-c270-stage-3.jpg",
+        "mean": 113.8,
+        "sha256": "7688ac7939704d0f35f695b9efea3925dc19e0556edae1545dff85f8f5b1cde4"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G47-claw-stage-3.jpg",
+        "sha256": "609e0f769c5658efc16af281669e65288d6aee6e5be25cc12ec7739347726bb7"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2153,
+    "5": 2246,
+    "6": 1730
+  }
+}

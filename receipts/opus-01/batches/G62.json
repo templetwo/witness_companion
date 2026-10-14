@@ -1,0 +1,88 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G62",
+  "at": "2026-10-13T20:41:39.724300-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2253,
+    "5": 2146,
+    "6": 1485
+  },
+  "targets": [
+    {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 1946,
+      "6": 1485
+    }
+  ],
+  "channels": [
+    5
+  ],
+  "note": "stack 2: lift away, verify stack",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791938506.4654367,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791938506.9668913
+    }
+  ],
+  "joints_override": {
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 1946,
+      "max": 1946
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G62-c270-before.jpg",
+    "mean": 151.4,
+    "sha256": "f2e1bd0cc2063b907c77f5d3ce91aa77b49238c6c69857445b837ee47cc23cf9"
+  },
+  "readback_before": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2253,
+    "5": 2146,
+    "6": 1485
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G62-claw-before.jpg",
+    "sha256": "93bf0edf9d9d82569113ac6377edad46c31f273608d00b491ade83c8d4a0b7fe"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "error": "AssertionError: {'ok': False, 'armed': False, 'controller': 'unavailable', 'reason': 'Pi guard unavailable; restart tools after restoring link', 'mic': 'unconfigured', 'camera': 'unconfigured', 'speech': 'unconfigured', 'backend': {'backend_id': 'witness-direct', 'kind': 'none', 'model': None, 'where_computed': 'jetson'}}",
+  "stop": {
+    "ok": false,
+    "verdict": "unknown",
+    "reason": "link_failed_not_retried",
+    "executed": null
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  }
+}

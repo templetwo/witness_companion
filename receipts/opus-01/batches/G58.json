@@ -1,0 +1,213 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G58",
+  "at": "2026-10-13T20:39:06.993547-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1996,
+    "6": 1500
+  },
+  "targets": [
+    {
+      "1": 1400,
+      "3": 1112,
+      "4": 2253,
+      "5": 1996,
+      "6": 1485
+    },
+    {
+      "1": 1400,
+      "3": 1112,
+      "4": 2253,
+      "5": 2046,
+      "6": 1485
+    }
+  ],
+  "channels": [
+    3,
+    5,
+    6
+  ],
+  "note": "stack 2: align and lower",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791938352.4201586,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791938352.938251
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791938355.1854286,
+      "battery": 7568
+    },
+    {
+      "name": "armed",
+      "at": 1791938357.0027308
+    },
+    {
+      "name": "motion_done",
+      "at": 1791938361.3314726
+    }
+  ],
+  "joints_override": {
+    "pwm_3": {
+      "bus": "pwm",
+      "id": 3,
+      "min": 1112,
+      "max": 1112
+    },
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 1996,
+      "max": 2046
+    },
+    "pwm_6": {
+      "bus": "pwm",
+      "id": 6,
+      "min": 1485,
+      "max": 1485
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G58-c270-before.jpg",
+    "mean": 123.4,
+    "sha256": "61ddf6d890901c2655cb6d5e2ba05e2d1468be78e17282b0cbe5b039c9f4c199"
+  },
+  "readback_before": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1996,
+    "6": 1500
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G58-claw-before.jpg",
+    "sha256": "64a59f7933d881829f0eef25ce7ab543b624c4d3e26a15c239a4b5a5c91e950e"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 1400,
+        "3": 1112,
+        "4": 2253,
+        "5": 1996,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7568,
+      "readback": {
+        "1": 1400,
+        "3": 1112,
+        "4": 2253,
+        "5": 1996,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G58-c270-stage-1.jpg",
+        "mean": 124.1,
+        "sha256": "7abc40bfcd33bbf7b265a43c491db617cf915d993112dc5e4e0cfee1b535a0f4"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G58-claw-stage-1.jpg",
+        "sha256": "267943a1828cc1fdc22c630a14420a75678d4c6a0da19778d7c569193625a92a"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 1400,
+        "3": 1112,
+        "4": 2253,
+        "5": 2046,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7570,
+      "readback": {
+        "1": 1400,
+        "3": 1112,
+        "4": 2253,
+        "5": 2046,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G58-c270-stage-2.jpg",
+        "mean": 138.2,
+        "sha256": "858c4929082c48bbea1219275129a8562c25383beaff3cf0b9633eb2ad21c7e3"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G58-claw-stage-2.jpg",
+        "sha256": "85810d87ba7a1653fc0943d5f2d4064a1fcb58c6b4d3cf681760a4ebc260ab4c"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 1400,
+    "3": 1112,
+    "4": 2253,
+    "5": 2046,
+    "6": 1485
+  }
+}

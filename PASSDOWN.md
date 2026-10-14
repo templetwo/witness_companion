@@ -555,3 +555,19 @@ Startup refusal root cause now named in the journal 4x: "factory failed, Runtime
 changed". ModemManager is active on the Pi (serial prober): leading suspect. Fix is a Pi system change
 for Anthony/HQ (mask it or udev ID_MM_DEVICE_IGNORE for ttyAMA0), then deploy 4f2468b.
 No code changed in this commit. Not pushed. End state: guard disarmed, override removed, arm raised.
+
+HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:15 EDT
+
+## Session opus-01 close-out, landed by HQ from the Jetson disk
+
+Anthony: "check that session close out". Checked over ssh at 21:14 EDT: Pi guard active and DISARMED
+(restart 21:07:14 after the last operator signal), no drop-in override, normal ExecStart, release
+20261013-guard-floor-01; masterpi.service inactive. The seat's Stack close is written (claim 247f22a3,
+close_session entries, two handoffs on thread jetson-seat at 21:11 and 21:12). This commit lands what
+0179b38 predates: all 98 batch receipts as receipts/opus-01/batches/ (the frames stay on the Jetson at
+~/witness-opus-notes/opus-01/) and the final LEARNING.md (the three-stack attempt, the closed-jaw nudge
+that did not square the rotated blue block, and the end at 21:07: pack ~7390 mV, arm parked with pads off
+the rug at 1=1400 3=1132 4=2353 5=1846 6=1345, guard disarmed, no override, first stack still standing).
+Tower: not built. Waits on Anthony: charge the pack; the ModemManager decision (four "serial ownership
+changed" startup refusals in the journal; mask it or a udev ID_MM_DEVICE_IGNORE rule for ttyAMA0),
+then deploy 4f2468b so a refused start ends one session instead of the service.

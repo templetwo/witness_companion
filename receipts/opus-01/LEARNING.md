@@ -121,3 +121,22 @@ Constants: yaw +50 us ~ 65 px right (high, full-res), gain about doubles low; sh
 and pulls the gripper back; elbow reversal backlash ~100 us; shoulder ceiling 2500; runner gripper floor 1400.
 Hazards seen: ModemManager-suspected serial ownership refusals (4x) -> reconnect after ~5 s; claw camera
 brief stalls -> retry snapshot; C270 warm-up black frames; red pressed on the C270 lens blinds it.
+
+## TOWER ATTEMPT (Anthony 20:5x: 'im so ready to see this! go fffor it'; +4 fwd, +4 back pulses). Rule: follow the recipe, no hints.
+- T: G64 lower, G65 yaw 1375 centred blue, G66 low pose: blue at TOP of claw view, C270 jaws in front straddling blue = 2 in short (recipe step 3 case).
+- T: CAUGHT: jaws had stayed at 1800 since the stack release; a 45-deg block's diagonal (~4.2 cm) may not clear 1800. Recipe addition: always open to 2000 before the final approach.
+- T: TOWER GRAB 1 MISSED (20:58-20:59): blue rotated ~45 deg to the jaws; closed 2000->1400 (no clean stall,
+  last step 7.3%); double lift: blue px 89269 -> 24161 -> 575, jaws empty, blue back on floor.
+- RULE (also explains attempt 3 on green at ~30 deg): the block's faces must be roughly parallel to the jaws.
+  A corner-first close pivots the block out. Square it first (or yaw so the jaws meet two faces).
+- T: STOPPED at 21:0x (battery 7439 mV, ~140 above runner floor). Blue still rotated, now close to the C270.
+  TOWER NOT BUILT. Recipe verdict without hints: works for blocks square to the jaws (2/2), fails on rotated
+  blocks (0/2: green ~30 deg, blue ~45 deg). Missing step for the skill: square the block first (idea, untested:
+  nudge a corner with a closed jaw and yaw). End pose 1=1400 3=1132 4=2353 5=1846 6=1345, guard disarmed.
+- T: Anthony 21:0x: 'its ok to stop here if you chose to'. Chose to continue: try squaring blue with a closed-jaw nudge.
+- NUDGE TRY (21:05-21:06): closed jaws as a finger; G76 yaw 1375 + elbow 2453 put it on the rug but BEHIND blue
+  (elbow+ pulls back); G77 wrist 1232 (out) then yaw sweep 1375->1295: blue's edge angle unchanged (-27 -> -29 deg),
+  it only slid in the view = no contact. Next time: the finger must sit ~1 cm farther out (more wrist, or start the
+  sweep from the low pose before the elbow step), and confirm contact in the C270 before sweeping.
+- END 21:07: battery ~7390 mV, ~80 above the runner floor, too little for square + grab + stack. Parked with
+  G78 (pads lifted off the rug). Tower: not built. First stack still standing.

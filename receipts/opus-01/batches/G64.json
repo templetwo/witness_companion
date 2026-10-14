@@ -1,0 +1,250 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G64",
+  "at": "2026-10-13T20:53:13.719780-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT); tower: 'go fffor it' (20:5x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2053,
+    "5": 1746,
+    "6": 1485
+  },
+  "targets": [
+    {
+      "1": 1800,
+      "3": 1142,
+      "4": 2053,
+      "5": 1946,
+      "6": 1485
+    },
+    {
+      "1": 1800,
+      "3": 1142,
+      "4": 2053,
+      "5": 2146,
+      "6": 1485
+    },
+    {
+      "1": 1800,
+      "3": 1082,
+      "4": 2053,
+      "5": 2146,
+      "6": 1485
+    }
+  ],
+  "channels": [
+    3,
+    5
+  ],
+  "note": "tower: lower to find blue",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791939197.929965,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791939198.4386227
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791939200.686695,
+      "battery": 7486
+    },
+    {
+      "name": "armed",
+      "at": 1791939202.492139
+    },
+    {
+      "name": "motion_done",
+      "at": 1791939207.9376025
+    }
+  ],
+  "joints_override": {
+    "pwm_3": {
+      "bus": "pwm",
+      "id": 3,
+      "min": 1082,
+      "max": 1142
+    },
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 1946,
+      "max": 2146
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G64-c270-before.jpg",
+    "mean": 96.4,
+    "sha256": "124f00acaae2b00d597c52f300d2b162c1b35662760e834f3708fa3f75f21b3a"
+  },
+  "readback_before": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2053,
+    "5": 1746,
+    "6": 1485
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G64-claw-before.jpg",
+    "sha256": "3cf44c52f2781034a0bd6d757eed511bb2de6aba68084120a6702a11a9471145"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 1800,
+        "3": 1142,
+        "4": 2053,
+        "5": 1946,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7480,
+      "readback": {
+        "1": 1800,
+        "3": 1142,
+        "4": 2053,
+        "5": 1946,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G64-c270-stage-1.jpg",
+        "mean": 95.8,
+        "sha256": "f0c37e04aebd8f38350c06053115c6088e5b96beb50e0bd72227f14253ddbd18"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G64-claw-stage-1.jpg",
+        "sha256": "187e2dcba160b0339658d064871b75bb2a3747a0b767c385037dc6ddb7d6007e"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 1800,
+        "3": 1142,
+        "4": 2053,
+        "5": 2146,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7482,
+      "readback": {
+        "1": 1800,
+        "3": 1142,
+        "4": 2053,
+        "5": 2146,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G64-c270-stage-2.jpg",
+        "mean": 96.3,
+        "sha256": "84c49327a3ada4a53bbf43882adc6322f4c8e32f2ee6aac6750697f1297c237d"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G64-claw-stage-2.jpg",
+        "sha256": "97c24840b8a325ad7eca9f527dd086198cf49bfb4c200838cb19ed36a6cd7105"
+      }
+    },
+    {
+      "index": 3,
+      "target": {
+        "1": 1800,
+        "3": 1082,
+        "4": 2053,
+        "5": 2146,
+        "6": 1485
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7513,
+      "readback": {
+        "1": 1800,
+        "3": 1082,
+        "4": 2053,
+        "5": 2146,
+        "6": 1485
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G64-c270-stage-3.jpg",
+        "mean": 98.4,
+        "sha256": "fb9d0a1bc37389a78e7c72f4ff433e50b7769addab2af54b0d10151f8bb6dac9"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G64-claw-stage-3.jpg",
+        "sha256": "5eebabf0d19d782d7edc55ba78537ed14fb0e4864a0ce134a186bdb7895f6cda"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 1800,
+    "3": 1082,
+    "4": 2053,
+    "5": 2146,
+    "6": 1485
+  }
+}

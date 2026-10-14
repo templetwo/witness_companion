@@ -1,0 +1,71 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "R1",
+  "at": "2026-10-13T20:23:51.814871-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; reverse: 'reverse about 5 inches then look again' (20:2x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1696,
+    "6": 1450
+  },
+  "targets": [],
+  "channels": [],
+  "note": "",
+  "duration_seconds": 0.5,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791937438.439578,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791937438.94239
+    }
+  ],
+  "joints_override": {},
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/R1-c270-before.jpg",
+    "mean": 86.9,
+    "sha256": "23e332d8c3e050edae67b4e0a99f9e2bf114afbdb84497a026512b8acc07b8c0"
+  },
+  "readback_before": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1696,
+    "6": 1450
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/R1-claw-before.jpg",
+    "sha256": "fcd9d48259fc41040f36fb7673345bef783863bb0fe0839086127e52853d18f9"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "error": "AssertionError: {'ok': False, 'armed': False, 'controller': 'unavailable', 'reason': 'Pi guard unavailable; restart tools after restoring link', 'mic': 'unconfigured', 'camera': 'unconfigured', 'speech': 'unconfigured', 'backend': {'backend_id': 'witness-direct', 'kind': 'none', 'model': None, 'where_computed': 'jetson'}}",
+  "stop": {
+    "ok": false,
+    "verdict": "unknown",
+    "reason": "link_failed_not_retried",
+    "executed": null
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  }
+}

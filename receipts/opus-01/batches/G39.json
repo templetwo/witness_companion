@@ -1,0 +1,131 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G39",
+  "at": "2026-10-13T20:20:07.919773-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2253,
+    "5": 2096,
+    "6": 1450
+  },
+  "targets": [
+    {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 2096,
+      "6": 1450
+    }
+  ],
+  "channels": [
+    4
+  ],
+  "note": "stack: elbow past backlash",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791937214.7849214,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791937215.3109818
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791937217.5593925,
+      "battery": 7686
+    },
+    {
+      "name": "armed",
+      "at": 1791937219.387449
+    }
+  ],
+  "joints_override": {
+    "pwm_4": {
+      "bus": "pwm",
+      "id": 4,
+      "min": 2353,
+      "max": 2353
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G39-c270-before.jpg",
+    "mean": 49.1,
+    "sha256": "8eea95021fb01ff20bae62cec839e2fa247407ae0fc5051ea9e4748dbb5eee6a"
+  },
+  "readback_before": {
+    "1": 1400,
+    "3": 802,
+    "4": 2253,
+    "5": 2096,
+    "6": 1450
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G39-claw-before.jpg",
+    "sha256": "703e0c89ea4514df946564628fcc6136f33c5cff1e2c66a65ea194a9ac8841ae"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 1400,
+        "3": 802,
+        "4": 2353,
+        "5": 2096,
+        "6": 1450
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7691,
+      "readback": {
+        "1": 1400,
+        "3": 802,
+        "4": 2353,
+        "5": 2096,
+        "6": 1450
+      }
+    }
+  ],
+  "error": "AssertionError: C270 frame too dark (14.8)",
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G20",
+  "at": "2026-10-13T20:00:30.341137-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2053,
+    "5": 2496,
+    "6": 1545
+  },
+  "targets": [
+    {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+    }
+  ],
+  "channels": [
+    4
+  ],
+  "note": "unload: suspected jaw resting on block edge",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791936035.6997285,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791936036.2075896
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791936038.4584754,
+      "battery": 7788
+    },
+    {
+      "name": "armed",
+      "at": 1791936040.2618573
+    },
+    {
+      "name": "motion_done",
+      "at": 1791936042.3208098
+    }
+  ],
+  "joints_override": {
+    "pwm_4": {
+      "bus": "pwm",
+      "id": 4,
+      "min": 1953,
+      "max": 1953
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G20-c270-before.jpg",
+    "mean": 134.8,
+    "sha256": "b99d4d1e7ed2e9faac2c48dc583696794e0fc9ab7e77beea9f190154b5e4b7a6"
+  },
+  "readback_before": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2053,
+    "5": 2496,
+    "6": 1545
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G20-claw-before.jpg",
+    "sha256": "cc89af2f9ccdce5dd7252bc53ab07c6ce3954be02f0bd2c23924bfae49408754"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 2000,
+        "3": 1202,
+        "4": 1953,
+        "5": 2496,
+        "6": 1545
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7789,
+      "readback": {
+        "1": 2000,
+        "3": 1202,
+        "4": 1953,
+        "5": 2496,
+        "6": 1545
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G20-c270-stage-1.jpg",
+        "mean": 134.7,
+        "sha256": "6b85d8fbe9f04f6ecfc9c87362ce8652991b005f493b5a6092cef16568b53a8c"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G20-claw-stage-1.jpg",
+        "sha256": "a0c073835d4866b876406662467c9a7f405f55de77c10dd1874a085db27c5130"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1545
+  }
+}

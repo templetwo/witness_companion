@@ -1,0 +1,243 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "G53",
+  "at": "2026-10-13T20:35:03.358114-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; grasp: 'grab a block ant stack it on another' (19:4x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2453,
+    "5": 2246,
+    "6": 1790
+  },
+  "targets": [
+    {
+      "1": 1800,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+    },
+    {
+      "1": 1600,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+    },
+    {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+    }
+  ],
+  "channels": [
+    1
+  ],
+  "note": "regrab: close on green",
+  "duration_seconds": 0.6,
+  "dry": false,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791938110.3043694,
+      "battery": null
+    },
+    {
+      "name": "override_installed",
+      "at": 1791938110.8090005
+    },
+    {
+      "name": "preflight_ok",
+      "at": 1791938113.0569818,
+      "battery": 7565
+    },
+    {
+      "name": "armed",
+      "at": 1791938114.8424976
+    },
+    {
+      "name": "motion_done",
+      "at": 1791938121.6420403
+    }
+  ],
+  "joints_override": {
+    "pwm_1": {
+      "bus": "pwm",
+      "id": 1,
+      "min": 1400,
+      "max": 1800
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G53-c270-before.jpg",
+    "mean": 104.7,
+    "sha256": "56cc6f1b59d1f44e636a421d4505167b1bd46e7ff1e86fb28164cf4dd6ec2a50"
+  },
+  "readback_before": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2453,
+    "5": 2246,
+    "6": 1790
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/G53-claw-before.jpg",
+    "sha256": "b510920711daf8d7263072d40fbc73fa12caaab4cfede45f7382e7d9fe9ed96b"
+  },
+  "setup": {
+    "installed_offsets": {
+      "1": 0,
+      "3": 59,
+      "4": 72,
+      "5": 63,
+      "6": -95
+    },
+    "offset_file_sha256": "510e5b3f6cf484e282d7fe236bd5fe8d2b7efba262dc2cfa509463e73df6d944"
+  },
+  "stages": [
+    {
+      "index": 1,
+      "target": {
+        "1": 1800,
+        "3": 1082,
+        "4": 2453,
+        "5": 2246,
+        "6": 1790
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7573,
+      "readback": {
+        "1": 1800,
+        "3": 1082,
+        "4": 2453,
+        "5": 2246,
+        "6": 1790
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G53-c270-stage-1.jpg",
+        "mean": 145.6,
+        "sha256": "15022c84e9b81d3eb0caafceeba8efc6643fbeb309c1f6867b738a2911292fa6"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G53-claw-stage-1.jpg",
+        "sha256": "f56162f20716bd9a2974d03c0b5853996b29c9f5df2da5d3cf67fbe39c1db33f"
+      }
+    },
+    {
+      "index": 2,
+      "target": {
+        "1": 1600,
+        "3": 1082,
+        "4": 2453,
+        "5": 2246,
+        "6": 1790
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7573,
+      "readback": {
+        "1": 1600,
+        "3": 1082,
+        "4": 2453,
+        "5": 2246,
+        "6": 1790
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G53-c270-stage-2.jpg",
+        "mean": 132.9,
+        "sha256": "3150c99896d0b6246287d5781b2b8b34b3e263f789f0d372686b422bd10c94fb"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G53-claw-stage-2.jpg",
+        "sha256": "50b0fca3ab9d5b2e60c700c9c131e6512eb278117997ff42010eb8f53e5ec7c3"
+      }
+    },
+    {
+      "index": 3,
+      "target": {
+        "1": 1400,
+        "3": 1082,
+        "4": 2453,
+        "5": 2246,
+        "6": 1790
+      },
+      "action": {
+        "executed": null,
+        "sdk_returned": true,
+        "simulated": false,
+        "physical_execution_verified": false,
+        "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+        "ok": true,
+        "verdict": "applied",
+        "reason": "accepted"
+      },
+      "battery_mv": 7594,
+      "readback": {
+        "1": 1400,
+        "3": 1082,
+        "4": 2453,
+        "5": 2246,
+        "6": 1790
+      },
+      "c270": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G53-c270-stage-3.jpg",
+        "mean": 132.9,
+        "sha256": "bb6dd060d379018f267faebff80b2366ad48249ff0f9b275a5f20e38a73bc21e"
+      },
+      "claw": {
+        "path": "/home/tony/witness-opus-notes/opus-01/G53-claw-stage-3.jpg",
+        "sha256": "63990f2d9f37b41c5ebe591bb7bfc595c1095333977f012f719bb568e9f74ff1"
+      }
+    }
+  ],
+  "stop": {
+    "executed": null,
+    "sdk_returned": true,
+    "simulated": false,
+    "physical_execution_verified": false,
+    "stop_scope": "wheels and configured bus joints; PWM travel cannot be cancelled",
+    "ok": true,
+    "verdict": "applied",
+    "reason": "stop accepted"
+  },
+  "status_after_stop": {
+    "armed": false
+  },
+  "cleanup": {
+    "override_removed": true
+  },
+  "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+  },
+  "locked_readback": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2453,
+    "5": 2246,
+    "6": 1790
+  }
+}
