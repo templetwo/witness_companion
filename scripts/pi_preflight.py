@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import stat
+import time
 
 PORTS = {8080, 9026, 9030, 9040}
 
@@ -78,6 +79,63 @@ def inspect_owners(device='/dev/ttyAMA0', proc=Path('/proc')):
             'inspection_complete':not (denied or raced or network_errors) and observed_ports == expected_ports,
             'serial_release_verified':False,
             'note':'One /proc snapshot cannot prove ongoing exclusivity or stop behavior. No device opened.'}
+
+
+def _scan_defect(result, allowed_holders):
+    """Name the first defect that must refuse at once, 'vanished_only', or None for a clean scan."""
+    if result.get('device_is_character') is not True:
+        return 'device_not_character'
+    holders = result.get('serial_holder_pids')
+    if not isinstance(holders, list):
+        return 'malformed_result'
+    if set(holders) - set(allowed_holders):
+        return 'foreign_holder'
+    if result.get('inspection_complete') is True:
+        return None
+    # Fail closed: every field must be present and every defect other than vanished pids empty.
+    fields = ('unreadable_pids', 'vanished_pids', 'network_tables_unreadable',
+              'listener_ports', 'owner_mapped_ports')
+    if any(not isinstance(result.get(name), list) for name in fields):
+        return 'malformed_result'
+    if result['unreadable_pids']:
+        return 'unreadable_pids'
+    if result['network_tables_unreadable']:
+        return 'network_tables_unreadable'
+    if result['owner_mapped_ports'] != result['listener_ports']:
+        return 'port_map_mismatch'
+    if result['vanished_pids']:
+        return 'vanished_only'
+    return 'malformed_result'  # incomplete with no named defect
+
+
+def inspect_owners_settled(device='/dev/ttyAMA0', attempts=5, pause=0.05, proc=Path('/proc'),
+                           allowed_holders=(), sleep=None, budget=0.25):
+    """Bounded rescan around inspect_owners for process churn only.
+
+    A pid that exits between the /proc listing and its fd read (vanished_pids)
+    cannot hold the device, so a scan whose only defect is vanished pids is
+    rescanned up to `attempts` times. The first clean scan is accepted. If every
+    attempt is vanished-only, the last one is usable for the holder decision.
+    A denied pid, an unreadable network table, a port-map mismatch, a
+    non-character device, a holder outside `allowed_holders`, or a malformed
+    result refuses at once. inspect_owners' own contract is unchanged.
+    Rescanning also stops once `budget` seconds of wall clock would be passed
+    by another pause, so a slow sleep or a large /proc cannot stretch startup;
+    the deadline only shortens the loop and never turns a refusal into a pass.
+    """
+    sleep = time.sleep if sleep is None else sleep
+    started = time.monotonic()
+    for attempt in range(1, attempts + 1):
+        result = inspect_owners(device, proc)
+        defect = _scan_defect(result, allowed_holders)
+        if defect is None:
+            return {**result, 'usable':True, 'settled_on':'complete', 'attempts':attempt}
+        if defect != 'vanished_only':
+            return {**result, 'usable':False, 'settled_on':defect, 'attempts':attempt}
+        if attempt == attempts or time.monotonic() - started + pause > budget:
+            break
+        sleep(pause)
+    return {**result, 'usable':True, 'settled_on':'vanished_only', 'attempts':attempt}
 
 
 if __name__ == '__main__':

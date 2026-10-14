@@ -287,10 +287,11 @@ class RealBoardFactory:
 
     def __call__(self):
         # Read only the standalone SDK module, never MasterPi or mode imports.
-        from scripts.pi_preflight import inspect_owners
+        from scripts.pi_preflight import inspect_owners_settled
         config = validate_config(json.loads(Path(self.config_path).read_text()))
-        check = inspect_owners(self.device)
-        if (not check['device_is_character'] or not check['inspection_complete']
+        # Bounded rescan (<= 5 scans, 50 ms pauses, 0.25 s deadline) tolerates only pids that exited mid-scan.
+        check = inspect_owners_settled(self.device)
+        if (not check['usable'] or not check['device_is_character']
                 or check['serial_holder_pids']):
             raise RuntimeError('serial ownership preflight failed')
         spec = importlib.util.spec_from_file_location('witness_vendor_board', self.sdk_path)
@@ -301,8 +302,8 @@ class RealBoardFactory:
             sdk.port.write_timeout = 0.1
             fcntl.flock(sdk.port.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
             fcntl.ioctl(sdk.port.fileno(), termios.TIOCEXCL)
-            check = inspect_owners(self.device)
-            if not check['inspection_complete'] or set(check['serial_holder_pids']) != {os.getpid()}:
+            check = inspect_owners_settled(self.device, allowed_holders={os.getpid()})
+            if not check['usable'] or set(check['serial_holder_pids']) != {os.getpid()}:
                 raise RuntimeError('serial ownership changed')
             sdk.enable_reception()
             sdk.set_motor_duty([[i, 0] for i in range(1, 5)])

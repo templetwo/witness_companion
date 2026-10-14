@@ -205,3 +205,108 @@ class FactoryHandoverTests(unittest.TestCase):
 
     def test_exclusive_factory_initializes_one_board_with_zero_duty_only(self):
         self.run_factory(dict(self.empty, serial_holder_pids=[os.getpid()]))
+
+
+class FactoryVanishedPidTests(unittest.TestCase):
+    """Process churn (a pid exiting mid-scan) must not refuse; contention still must."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        config = Path(temp.name) / 'hardware.json'
+        config.write_text(json.dumps(LOCKED))
+        self.factory = RealBoardFactory('/not/a/vendor/module.py', str(config))
+
+    @staticmethod
+    def scan(holders=(), vanished=(), denied=(), network=(), mapped=(8080, 9040)):
+        # Shape of inspect_owners' real return value.
+        return {'device_is_character': True, 'serial_holder_pids': list(holders),
+                'unreadable_pids': list(denied), 'vanished_pids': list(vanished),
+                'network_tables_unreadable': list(network),
+                'listener_ports': [8080, 9040], 'owner_mapped_ports': list(mapped),
+                'inspection_complete': not (denied or vanished or network) and list(mapped) == [8080, 9040]}
+
+    def build(self, scans):
+        sdk = Mock()
+        sdk.port.fileno.return_value = 42
+        module = SimpleNamespace(Board=Mock(return_value=sdk))
+        owners = Mock(side_effect=scans)
+        with patch('scripts.pi_preflight.inspect_owners', owners), \
+             patch('time.sleep'), \
+             patch('companion.pi.hardware.importlib.util.spec_from_file_location', return_value=Mock()) as spec, \
+             patch('companion.pi.hardware.importlib.util.module_from_spec', return_value=module), \
+             patch('companion.pi.hardware.fcntl.flock'), \
+             patch('companion.pi.hardware.fcntl.ioctl'), \
+             patch('companion.pi.hardware.HardwareBoard') as board:
+            try:
+                self.factory()
+                error = None
+            except RuntimeError as exc:
+                error = exc
+        return SimpleNamespace(error=error, spec=spec, sdk=sdk, board=board, calls=owners.call_count)
+
+    def test_pre_open_vanished_only_scans_are_accepted(self):
+        me = os.getpid()
+        result = self.build([self.scan(vanished=[3117])] * 5 + [self.scan(holders=[me])])
+        self.assertIsNone(result.error)
+        self.assertEqual(result.calls, 6)
+        result.board.assert_called_once()
+        result.sdk.set_motor_duty.assert_called_once_with([[1, 0], [2, 0], [3, 0], [4, 0]])
+
+    def test_pre_open_vanished_then_clean_is_accepted(self):
+        me = os.getpid()
+        result = self.build([self.scan(vanished=[3117]), self.scan(), self.scan(holders=[me])])
+        self.assertIsNone(result.error)
+        self.assertEqual(result.calls, 3)
+
+    def test_post_open_vanished_only_scans_are_accepted(self):
+        me = os.getpid()
+        result = self.build([self.scan()] + [self.scan(holders=[me], vanished=[4242])] * 5)
+        self.assertIsNone(result.error)
+        self.assertEqual(result.calls, 6)
+        result.board.assert_called_once()
+
+    def test_pre_open_holder_refuses_even_with_vanished_pids(self):
+        result = self.build([self.scan(holders=[123], vanished=[3117])])
+        self.assertEqual(str(result.error), 'serial ownership preflight failed')
+        result.spec.assert_not_called()
+        self.assertEqual(result.calls, 1)
+
+    def test_pre_open_denied_refuses_without_rescan(self):
+        result = self.build([self.scan(denied=[1], vanished=[3117])])
+        self.assertEqual(str(result.error), 'serial ownership preflight failed')
+        result.spec.assert_not_called()
+        self.assertEqual(result.calls, 1)
+
+    def test_pre_open_port_mismatch_refuses_without_rescan(self):
+        result = self.build([self.scan(mapped=[8080], vanished=[3117])])
+        self.assertEqual(str(result.error), 'serial ownership preflight failed')
+        result.spec.assert_not_called()
+
+    def test_pre_open_unreadable_network_table_refuses(self):
+        result = self.build([self.scan(network=['/proc/net/tcp6'])])
+        self.assertEqual(str(result.error), 'serial ownership preflight failed')
+        result.spec.assert_not_called()
+
+    def test_post_open_foreign_holder_refuses_and_closes(self):
+        me = os.getpid()
+        result = self.build([self.scan(), self.scan(holders=[me, 123], vanished=[4242])])
+        self.assertEqual(str(result.error), 'serial ownership changed')
+        self.assertEqual(result.calls, 2)
+        result.sdk.port.close.assert_called_once()
+        result.sdk.set_motor_duty.assert_not_called()
+        result.board.assert_not_called()
+
+    def test_post_open_own_pid_missing_refuses(self):
+        result = self.build([self.scan(), self.scan(vanished=[4242])] + [self.scan(vanished=[4242])] * 4)
+        self.assertEqual(str(result.error), 'serial ownership changed')
+        result.sdk.port.close.assert_called_once()
+        result.board.assert_not_called()
+
+    def test_post_open_denied_refuses_and_closes(self):
+        me = os.getpid()
+        result = self.build([self.scan(), self.scan(holders=[me], denied=[7])])
+        self.assertEqual(str(result.error), 'serial ownership changed')
+        self.assertEqual(result.calls, 2)
+        result.sdk.port.close.assert_called_once()
+        result.board.assert_not_called()
