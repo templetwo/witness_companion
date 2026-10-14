@@ -571,3 +571,9 @@ the rug at 1=1400 3=1132 4=2353 5=1846 6=1345, guard disarmed, no override, firs
 Tower: not built. Waits on Anthony: charge the pack; the ModemManager decision (four "serial ownership
 changed" startup refusals in the journal; mask it or a udev ID_MM_DEVICE_IGNORE rule for ttyAMA0),
 then deploy 4f2468b so a refused start ends one session instead of the service.
+
+HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:31 EDT
+
+## Release 20261013-session-boundary-01 is live (4f2468b); the serial-ownership refusals are the scanner, fix in progress
+
+Cut on Anthony's "cut it. then write the fix". See DEPLOYMENT.md (top) and receipts/session-boundary-deployed.json. The ModemManager lead is retired by measurement (studio lane receipt serial-ownership-scan-measurement-20261013.md; Stack claim 9767be2d): inspect_owners voids its result whenever a pid vanishes mid-scan, holder or no holder. The fix (bounded rescan on vanished pids only, refusal kept for real holders, denied pids and unreadable network tables, red test first) is being written under HQ review now.

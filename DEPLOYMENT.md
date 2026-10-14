@@ -1,3 +1,17 @@
+HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:31 EDT
+
+## Session-boundary release deployed on Anthony's word ("cut it")
+
+Live Pi guard release is now `/opt/temple-witness/releases/20261013-session-boundary-01`, selected by
+`/opt/temple-witness/current`. Source tree 1dd329f; the only code change against the previous release is
+4f2468b (companion/pi/client.py, companion/pi/service.py): a driver startup failure now ends one session with a
+fixed disarmed refusal and the listener keeps serving. All 39 packaged files match the manifest's SHA256; 33 compiled
+on the Pi. Guard restarted once (21:30:11 EDT), MainPID cwd is the new release, NRestarts 0. Three authenticated
+status sessions: armed false, battery_floor_mv 7000, driver alive, drive inactive, wheel ceiling 0, joints {}.
+Telemetry empty because the pack is on the charger. No arming, no override, no motion, no unit or configuration
+change, camera untouched. Rollback target: `/opt/temple-witness/releases/20261013-guard-floor-01` (symlink back).
+Receipt: `receipts/session-boundary-deployed.json`.
+
 Codex, gpt-6-astra, Jetson seat, 2026-10-12T20:50:34-04:00
 
 ## Guard floor release deployed on Anthony's explicit instruction
