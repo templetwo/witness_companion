@@ -1,0 +1,4861 @@
+{
+ "identity": "claude-opus-5-5, Jetson Claude Code seat",
+ "session": "opus-01",
+ "date": "2026-10-13",
+ "authorization": [
+  "Approve; waive gripper check (19:4x)",
+  "grab a block ant stack it on another (19:4x)",
+  "Approve the drive (19:5x, 4 forward pulses)",
+  "reverse about 5 inches then look again (20:2x)",
+  "move back and take a picture of your first stacked block (20:4x)",
+  "commit that (20:4x)"
+ ],
+ "result": "Green block picked up and stacked on red at 20:42 EDT; verified by the C270 after release (jaws empty, green on red). Photo taken by the robot front camera at 20:44 after two backward pulses.",
+ "photo": {
+  "path": "receipts/opus-01/first-stack-2026-10-13.jpg",
+  "sha256": "0c9ceb8ecd10d35fc9826428066b287649ec63c180da8a89d24064844e83e8f2",
+  "camera": "C270 /dev/video0 on the Jetson, 1280x720"
+ },
+ "guard_release": "20261013-guard-floor-01 (4f2468b not deployed)",
+ "startup_refusals": "4x 'serial ownership changed' (20:24:00, 20:31:34, 20:41:39 and one at R1); ModemManager active on the Pi, leading suspect",
+ "runner": "witness-opus-notes/opus-01/run_batch.py on the Jetson (not in repo); raw frames and per-batch JSON stay there, hashed here",
+ "physical_angle_measured": false,
+ "batches": [
+  {
+   "batch": "A1",
+   "at": "2026-10-13T19:37:49.399050-04:00",
+   "dry": true,
+   "start": {
+    "1": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "targets": [
+    {
+     "1": 0,
+     "3": 0,
+     "4": 0,
+     "5": 2116,
+     "6": 0
+    }
+   ],
+   "note": null,
+   "stages": [],
+   "error": null,
+   "cleanup": null,
+   "locked": null,
+   "receipt_sha256": "f6c267a7b53383130b1377dacb8962e856e9a07f2247c0b8cb47090c56e56b18"
+  },
+  {
+   "batch": "A1",
+   "at": "2026-10-13T19:38:02.269373-04:00",
+   "dry": false,
+   "start": {
+    "1": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "targets": [
+    {
+     "1": 0,
+     "3": 0,
+     "4": 0,
+     "5": 2116,
+     "6": 0
+    }
+   ],
+   "note": null,
+   "stages": [
+    {
+     "target": {
+      "1": 0,
+      "3": 0,
+      "4": 0,
+      "5": 2116,
+      "6": 0
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7897,
+     "readback": {
+      "1": 0,
+      "3": 0,
+      "4": 0,
+      "5": 2116,
+      "6": 0
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "5cbd6b1bdd10241f4a479452bd2901ba3e2b40344705f3d63e19db139f131808"
+  },
+  {
+   "batch": "A2",
+   "at": "2026-10-13T19:38:38.240258-04:00",
+   "dry": false,
+   "start": {
+    "1": 0,
+    "3": 0,
+    "4": 0,
+    "5": 2116,
+    "6": 0
+   },
+   "targets": [
+    {
+     "1": 0,
+     "3": 0,
+     "4": 1803,
+     "5": 2116,
+     "6": 0
+    }
+   ],
+   "note": null,
+   "stages": [
+    {
+     "target": {
+      "1": 0,
+      "3": 0,
+      "4": 1803,
+      "5": 2116,
+      "6": 0
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7824,
+     "readback": {
+      "1": 0,
+      "3": 0,
+      "4": 1803,
+      "5": 2116,
+      "6": 0
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e5bf9fca5ce011c19a0e1f0a678eded175f70f63a77885606bb369ee36662273"
+  },
+  {
+   "batch": "A4b",
+   "at": "2026-10-13T19:41:36.390607-04:00",
+   "dry": false,
+   "start": {
+    "1": 0,
+    "3": 0,
+    "4": 1803,
+    "5": 2116,
+    "6": 0
+   },
+   "targets": [
+    {
+     "1": 0,
+     "3": 0,
+     "4": 1803,
+     "5": 2116,
+     "6": 1420
+    }
+   ],
+   "note": "",
+   "stages": [
+    {
+     "target": {
+      "1": 0,
+      "3": 0,
+      "4": 1803,
+      "5": 2116,
+      "6": 1420
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7729,
+     "readback": {
+      "1": 0,
+      "3": 0,
+      "4": 1803,
+      "5": 2116,
+      "6": 1420
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "6400484596922d0024e6ddabc64829eecf37748027218365ffbe41722caaa2e5"
+  },
+  {
+   "batch": "A5b",
+   "at": "2026-10-13T19:42:05.899134-04:00",
+   "dry": false,
+   "start": {
+    "1": 0,
+    "3": 0,
+    "4": 1803,
+    "5": 2116,
+    "6": 1420
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 0,
+     "4": 1803,
+     "5": 2116,
+     "6": 1420
+    }
+   ],
+   "note": "",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 0,
+      "4": 1803,
+      "5": 2116,
+      "6": 1420
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7732,
+     "readback": {
+      "1": 2000,
+      "3": 0,
+      "4": 1803,
+      "5": 2116,
+      "6": 1420
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "598d1b22dc43a1c7825a24800aaedb20517e08ec27a3b034b8eb81fdd95bf9c1"
+  },
+  {
+   "batch": "A3b",
+   "at": "2026-10-13T19:42:24.665465-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 0,
+    "4": 1803,
+    "5": 2116,
+    "6": 1420
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 782,
+     "4": 1803,
+     "5": 2116,
+     "6": 1420
+    }
+   ],
+   "note": "",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2116,
+      "6": 1420
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7722,
+     "readback": {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2116,
+      "6": 1420
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "74a25e3a46f2ea603b19c2018f67809cb4fd4e67fd7652e217184fe8848743bb"
+  },
+  {
+   "batch": "G1",
+   "at": "2026-10-13T19:43:07.550031-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 782,
+    "4": 1803,
+    "5": 2116,
+    "6": 1420
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 782,
+     "4": 1803,
+     "5": 2116,
+     "6": 1470
+    }
+   ],
+   "note": "yaw sign probe",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2116,
+      "6": 1470
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7721,
+     "readback": {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2116,
+      "6": 1470
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "fed1c6eede974ee2576be53e97d2a2aa1243ba2869d36b6253c1faff116d2706"
+  },
+  {
+   "batch": "G2",
+   "at": "2026-10-13T19:43:40.214049-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 782,
+    "4": 1803,
+    "5": 2116,
+    "6": 1470
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 782,
+     "4": 1803,
+     "5": 2216,
+     "6": 1485
+    }
+   ],
+   "note": "center red, lower 2cm",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7708,
+     "readback": {
+      "1": 2000,
+      "3": 782,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "f0b7a2c893cf1968e36a76a6b667e3dcd94b3975c4ebb6baa7c2d6def878bc95"
+  },
+  {
+   "batch": "G3",
+   "at": "2026-10-13T19:44:35.246792-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 782,
+    "4": 1803,
+    "5": 2216,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 782,
+     "4": 1903,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "descend: shoulder+elbow",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 782,
+      "4": 1903,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7716,
+     "readback": {
+      "1": 2000,
+      "3": 782,
+      "4": 1903,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "5957c82c2af2b1b22d5e074a161af710974d0ff996f8cf570786a0717ebfa4c3"
+  },
+  {
+   "batch": "G4",
+   "at": "2026-10-13T19:45:08.597071-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 782,
+    "4": 1903,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 782,
+     "4": 2003,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "elbow alone: learn image direction",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 782,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7806,
+     "readback": {
+      "1": 2000,
+      "3": 782,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "f89ca313dab6c2e3e0450ebf73d48e49a8a8e334f1f6c653afaa88d47b7ac72f"
+  },
+  {
+   "batch": "G5",
+   "at": "2026-10-13T19:47:44.208805-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 782,
+    "4": 2003,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 882,
+     "4": 2003,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "wrist probe",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 882,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7781,
+     "readback": {
+      "1": 2000,
+      "3": 882,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "779b230a3c12901519b1360af0231f26a2b10d5c17061681c360078d6998fca7"
+  },
+  {
+   "batch": "G6",
+   "at": "2026-10-13T19:48:15.085051-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 882,
+    "4": 2003,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 982,
+     "4": 2003,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "wrist tilt out to center red",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 982,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7781,
+     "readback": {
+      "1": 2000,
+      "3": 982,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "04ac77bba8378e0866a4e1c4b3f5b15844d183e2adaa40ef95b2eec7ec3d7833"
+  },
+  {
+   "batch": "G7",
+   "at": "2026-10-13T19:48:45.856755-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 982,
+    "4": 2003,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1022,
+     "4": 2003,
+     "5": 2416,
+     "6": 1485
+    }
+   ],
+   "note": "descend, wrist compensates",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1022,
+      "4": 2003,
+      "5": 2416,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7780,
+     "readback": {
+      "1": 2000,
+      "3": 1022,
+      "4": 2003,
+      "5": 2416,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e8b0beeae4a0ae11a2b6b280d0693f5f9b3c7cb61a4bdcfb92c06b9adc582d5d"
+  },
+  {
+   "batch": "G8",
+   "at": "2026-10-13T19:49:32.917111-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1022,
+    "4": 2003,
+    "5": 2416,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1022,
+     "4": 2003,
+     "5": 2316,
+     "6": 1485
+    },
+    {
+     "1": 2000,
+     "3": 1022,
+     "4": 1903,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "clearance up, then elbow -100 outward probe",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1022,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7775,
+     "readback": {
+      "1": 2000,
+      "3": 1022,
+      "4": 2003,
+      "5": 2316,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1022,
+      "4": 1903,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7776,
+     "readback": {
+      "1": 2000,
+      "3": 1022,
+      "4": 1903,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e86c924e3b69f46472a94a430b7bce125407a952f15adf6944055b1d71ecd850"
+  },
+  {
+   "batch": "G9",
+   "at": "2026-10-13T19:50:15.904991-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1022,
+    "4": 1903,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1022,
+     "4": 1803,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "elbow -100 after backlash",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1022,
+      "4": 1803,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7711,
+     "readback": {
+      "1": 2000,
+      "3": 1022,
+      "4": 1803,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "45e81a62f1ffc17148f0640c2935b661ac96932c080b5c3fb7d545035e73e0f4"
+  },
+  {
+   "batch": "G10",
+   "at": "2026-10-13T19:52:54.838597-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1022,
+    "4": 1803,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1022,
+     "4": 1803,
+     "5": 2216,
+     "6": 1485
+    },
+    {
+     "1": 2000,
+     "3": 1122,
+     "4": 1803,
+     "5": 2216,
+     "6": 1485
+    }
+   ],
+   "note": "reach out: shoulder up, wrist tilt out",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1022,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7795,
+     "readback": {
+      "1": 2000,
+      "3": 1022,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7791,
+     "readback": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "9c860d22a72d1a90114fcd1b70f13c06f82e64f08457bc27afb8f7ca265df76d"
+  },
+  {
+   "batch": "D1",
+   "at": "2026-10-13T19:54:20.328397-04:00",
+   "dry": true,
+   "start": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2216,
+    "6": 1485
+   },
+   "targets": [],
+   "note": "",
+   "stages": [],
+   "error": null,
+   "cleanup": null,
+   "locked": null,
+   "receipt_sha256": "a2e3d50829c0e6d7ea26ddbc3fab7b796ba5f60e50851010b7475ad3dd042ec0"
+  },
+  {
+   "batch": "D1",
+   "at": "2026-10-13T19:54:31.879251-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2216,
+    "6": 1485
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "forward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7791,
+     "readback": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2216,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "7b51501f6fd0dd11596c461a2a97f602205d0316676b8e139b0155edde1428cc"
+  },
+  {
+   "batch": "G11",
+   "at": "2026-10-13T19:55:13.804603-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2216,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1122,
+     "4": 1803,
+     "5": 2316,
+     "6": 1485
+    }
+   ],
+   "note": "descend toward red",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2316,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7825,
+     "readback": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2316,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "ac8c40970fc0a118f688671586d27fb59bf59cb779c30a845589b183f878220b"
+  },
+  {
+   "batch": "G12",
+   "at": "2026-10-13T19:55:42.674382-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2316,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1122,
+     "4": 1803,
+     "5": 2416,
+     "6": 1485
+    }
+   ],
+   "note": "descend",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2416,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7841,
+     "readback": {
+      "1": 2000,
+      "3": 1122,
+      "4": 1803,
+      "5": 2416,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e185d72246e471c4a4f4b5eedb2423ac220ad84c6f54bdf73d3a00bd35425cb1"
+  },
+  {
+   "batch": "G13b",
+   "at": "2026-10-13T19:56:28.920505-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2416,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1152,
+     "4": 1803,
+     "5": 2496,
+     "6": 1485
+    }
+   ],
+   "note": "descend onto green within 2500 ceiling",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1152,
+      "4": 1803,
+      "5": 2496,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7834,
+     "readback": {
+      "1": 2000,
+      "3": 1152,
+      "4": 1803,
+      "5": 2496,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "8825ee0f230b7a25427ef212c7a98e720e8fd2a7c775da4f2428de812b71faf3"
+  },
+  {
+   "batch": "G14",
+   "at": "2026-10-13T19:57:04.066377-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1152,
+    "4": 1803,
+    "5": 2496,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1485
+    }
+   ],
+   "note": "elbow down past backlash, wrist keeps centre",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7796,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "cb80d0a4840622aac6beb6453860f511a986491e90f4c5b20ad623509c4b8d5e"
+  },
+  {
+   "batch": "G15",
+   "at": "2026-10-13T19:57:32.074708-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1485
+    },
+    {
+     "1": 1600,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1485
+    }
+   ],
+   "note": "close on green",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7803,
+     "readback": {
+      "1": 1800,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 1600,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7804,
+     "readback": {
+      "1": 1600,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "25bd66c036b444f65bc1a18b192cab87cebd5fa33adb66724939af2e5759a722"
+  },
+  {
+   "batch": "G16",
+   "at": "2026-10-13T19:58:04.555933-04:00",
+   "dry": false,
+   "start": {
+    "1": 1600,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1600,
+     "3": 1202,
+     "4": 1953,
+     "5": 2296,
+     "6": 1485
+    }
+   ],
+   "note": "lift test: is green held",
+   "stages": [
+    {
+     "target": {
+      "1": 1600,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7710,
+     "readback": {
+      "1": 1600,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "ea53ae75dd3aa572ae5d6d51198d6cde42f8d5c2309a0127481e852dac91c04e"
+  },
+  {
+   "batch": "G17",
+   "at": "2026-10-13T19:58:40.189327-04:00",
+   "dry": false,
+   "start": {
+    "1": 1600,
+    "3": 1202,
+    "4": 1953,
+    "5": 2296,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1202,
+     "4": 1953,
+     "5": 2296,
+     "6": 1485
+    },
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2296,
+     "6": 1485
+    }
+   ],
+   "note": "open after miss",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7816,
+     "readback": {
+      "1": 1800,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7813,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "0b41e81e59ae1faaa4b4a6c7c02042ee060148321beb403d1fe1649353e5ca30"
+  },
+  {
+   "batch": "G18",
+   "at": "2026-10-13T19:59:28.159206-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2296,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2296,
+     "6": 1545
+    },
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1545
+    }
+   ],
+   "note": "attempt 2: yaw onto red, descend",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1545
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7818,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1545
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7819,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "3cdfe0af6c0c033085379225abc7183354e459a28836da871acf728b2a8c3f6b"
+  },
+  {
+   "batch": "G19",
+   "at": "2026-10-13T20:00:01.691460-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1545
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2053,
+     "5": 2496,
+     "6": 1545
+    }
+   ],
+   "note": "attempt 2: lower pads to mid-block",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2053,
+      "5": 2496,
+      "6": 1545
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7787,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2053,
+      "5": 2496,
+      "6": 1545
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "582169e4d3ffd5467299c24bcab384fe519174bd6dfb0a81c23469f94157071f"
+  },
+  {
+   "batch": "G20",
+   "at": "2026-10-13T20:00:30.341137-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2053,
+    "5": 2496,
+    "6": 1545
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1545
+    }
+   ],
+   "note": "unload: suspected jaw resting on block edge",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7789,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "0f86eff7a6ad4bee6c368a5223d1a21204afed7668201f3110355d12fde479c9"
+  },
+  {
+   "batch": "G21",
+   "at": "2026-10-13T20:02:13.407201-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1545
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2296,
+     "6": 1545
+    }
+   ],
+   "note": "lift jaw off blue",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1545
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7795,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1545
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "f9029377d5e6ffc6ffff7b0d4fb88d2a7f734128d9ac406b78c750b69bfc4039"
+  },
+  {
+   "batch": "D2",
+   "at": "2026-10-13T20:06:02.462529-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2296,
+    "6": 1545
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "forward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7796,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2296,
+      "6": 1545
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "dcef4b0fae28b82234a975f53873d060a3e88e6b8864c201207d4ed9ccd7d0ba"
+  },
+  {
+   "batch": "G22",
+   "at": "2026-10-13T20:06:34.375434-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2296,
+    "6": 1545
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1545
+    }
+   ],
+   "note": "descend to bring blocks back into claw view",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7795,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1545
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e187eb0703b0a2f784d8bd1433b8e9ed10f97925a56a4431daa4d1f8365a2bd3"
+  },
+  {
+   "batch": "G23",
+   "at": "2026-10-13T20:07:16.702764-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1545
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1445
+    }
+   ],
+   "note": "yaw to centre green between jaw tips",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1445
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7817,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1445
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "a5fd7692c957372c085f223ac24c8fc2a0cbb64ad4366afb173cdaa569bf4406"
+  },
+  {
+   "batch": "G24",
+   "at": "2026-10-13T20:07:46.417300-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1445
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 1953,
+     "5": 2496,
+     "6": 1490
+    }
+   ],
+   "note": "fine yaw onto green",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7807,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 1953,
+      "5": 2496,
+      "6": 1490
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "1b6abdab371f5e357ca225728176954a3f617ab32e737a2269987d88955fbd67"
+  },
+  {
+   "batch": "G25",
+   "at": "2026-10-13T20:08:18.201126-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 1953,
+    "5": 2496,
+    "6": 1490
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1490
+    }
+   ],
+   "note": "lower pads onto green",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7813,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "6bac05365d5e063000076361bd380b2a8a542605ef4503b09a03c919646ebe50"
+  },
+  {
+   "batch": "G26",
+   "at": "2026-10-13T20:08:50.136043-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2153,
+    "5": 2496,
+    "6": 1490
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1490
+    },
+    {
+     "1": 1600,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1490
+    }
+   ],
+   "note": "close on green, attempt 3",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7694,
+     "readback": {
+      "1": 1800,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     }
+    },
+    {
+     "target": {
+      "1": 1600,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7698,
+     "readback": {
+      "1": 1600,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "c30f00c3ca987e108d89220f924f07b4eb13655f879ce390c0c1421a1e7382cf"
+  },
+  {
+   "batch": "G27",
+   "at": "2026-10-13T20:09:27.629787-04:00",
+   "dry": false,
+   "start": {
+    "1": 1600,
+    "3": 1202,
+    "4": 2153,
+    "5": 2496,
+    "6": 1490
+   },
+   "targets": [
+    {
+     "1": 1600,
+     "3": 1202,
+     "4": 2153,
+     "5": 2296,
+     "6": 1490
+    }
+   ],
+   "note": "lift test attempt 3",
+   "stages": [
+    {
+     "target": {
+      "1": 1600,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7625,
+     "readback": {
+      "1": 1600,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "92464e00f09278e97d00d6e3d00474cb27035f2106f106d9acbb60f70323ca62"
+  },
+  {
+   "batch": "G28",
+   "at": "2026-10-13T20:10:08.090718-04:00",
+   "dry": false,
+   "start": {
+    "1": 1600,
+    "3": 1202,
+    "4": 2153,
+    "5": 2296,
+    "6": 1490
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1202,
+     "4": 2153,
+     "5": 2296,
+     "6": 1490
+    },
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2153,
+     "5": 2296,
+     "6": 1490
+    }
+   ],
+   "note": "open for attempt 4",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7749,
+     "readback": {
+      "1": 1800,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7747,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "1ef72cf2fdc0693f729d73ecda5ef9a84263e11d545cb1d4864087f713027066"
+  },
+  {
+   "batch": "D3",
+   "at": "2026-10-13T20:12:12.035033-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2153,
+    "5": 2296,
+    "6": 1490
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "forward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7741,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1490
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "51a60d6e67ce18b9a33e44de8e3237cb990240d238e64174eebd0befacf4d652"
+  },
+  {
+   "batch": "G29",
+   "at": "2026-10-13T20:12:45.835481-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2153,
+    "5": 2296,
+    "6": 1490
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1490
+    }
+   ],
+   "note": "attempt 4: descend to low pose after 2 in drive",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7747,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1490
+     }
+    }
+   ],
+   "error": "AssertionError: stale claw frame",
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": null,
+   "receipt_sha256": "9c5b904abba783ec69d6108bc18cde01abf157cd53176a9a10cfc1a835ebee83"
+  },
+  {
+   "batch": "G30",
+   "at": "2026-10-13T20:13:45.144131-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2153,
+    "5": 2496,
+    "6": 1490
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1450
+    }
+   ],
+   "note": "attempt 4: centre green between jaw tips",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7728,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "8ecbaf4e63e42c64dc4472ac85ef142ba82edff25985b4d6735fbd5bd9d70c60"
+  },
+  {
+   "batch": "G31",
+   "at": "2026-10-13T20:14:26.033270-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2153,
+    "5": 2496,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2253,
+     "5": 2496,
+     "6": 1450
+    }
+   ],
+   "note": "attempt 4: pads lower",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2253,
+      "5": 2496,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7715,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2253,
+      "5": 2496,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "afa6a35049684d512a47a6ea4e6e57a23f58dc0d271b3ca9682734dbb26d09e4"
+  },
+  {
+   "batch": "G32",
+   "at": "2026-10-13T20:14:53.199106-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2253,
+    "5": 2496,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1450
+    }
+   ],
+   "note": "unload elbow before close",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7742,
+     "readback": {
+      "1": 2000,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "ddc6d85a1cc1daed01a6683c920885e0e826dab06a26ee5fa7d24a0917d27612"
+  },
+  {
+   "batch": "G33",
+   "at": "2026-10-13T20:16:17.686638-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1202,
+    "4": 2153,
+    "5": 2496,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1450
+    },
+    {
+     "1": 1600,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1450
+    },
+    {
+     "1": 1400,
+     "3": 1202,
+     "4": 2153,
+     "5": 2496,
+     "6": 1450
+    }
+   ],
+   "note": "attempt 4: close to 1400 on green",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7744,
+     "readback": {
+      "1": 1800,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     }
+    },
+    {
+     "target": {
+      "1": 1600,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7741,
+     "readback": {
+      "1": 1600,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7739,
+     "readback": {
+      "1": 1400,
+      "3": 1202,
+      "4": 2153,
+      "5": 2496,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "14d7e2719165214df7cdae478a86a7cb216152b890423a8f8e0c6c7a0ca9351b"
+  },
+  {
+   "batch": "G34",
+   "at": "2026-10-13T20:16:55.877233-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1202,
+    "4": 2153,
+    "5": 2496,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1202,
+     "4": 2153,
+     "5": 2296,
+     "6": 1450
+    }
+   ],
+   "note": "attempt 4 lift test",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7724,
+     "readback": {
+      "1": 1400,
+      "3": 1202,
+      "4": 2153,
+      "5": 2296,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "b65a2bc56731b6aabcbfb1fb5c4780af99438d3ce4f25563c7a2cdd65665109e"
+  },
+  {
+   "batch": "G35",
+   "at": "2026-10-13T20:17:35.977213-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1202,
+    "4": 2153,
+    "5": 2296,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1202,
+     "4": 2153,
+     "5": 2096,
+     "6": 1450
+    }
+   ],
+   "note": "second lift: held block keeps size/position in claw view",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1202,
+      "4": 2153,
+      "5": 2096,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7724,
+     "readback": {
+      "1": 1400,
+      "3": 1202,
+      "4": 2153,
+      "5": 2096,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "11bd89cd4ec70080a4fa92d46e967972fa02a41093aaf383fac08c0e34b3f3c2"
+  },
+  {
+   "batch": "G36",
+   "at": "2026-10-13T20:18:33.240439-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1202,
+    "4": 2153,
+    "5": 2096,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1002,
+     "4": 2153,
+     "5": 2096,
+     "6": 1450
+    }
+   ],
+   "note": "stack: wrist toward vertical to find red",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1002,
+      "4": 2153,
+      "5": 2096,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7707,
+     "readback": {
+      "1": 1400,
+      "3": 1002,
+      "4": 2153,
+      "5": 2096,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "cfff889c9089eef2404c8b47673151a32ce4411b45e29ac542db49bb0c638678"
+  },
+  {
+   "batch": "G37",
+   "at": "2026-10-13T20:19:09.405684-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1002,
+    "4": 2153,
+    "5": 2096,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2153,
+     "5": 2096,
+     "6": 1450
+    }
+   ],
+   "note": "stack: look back toward robot for red",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 2096,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7706,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 2096,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "50fb9478f0205cd927f66afef710a5822bce2f69e3f2706b37082307c8cb9dc0"
+  },
+  {
+   "batch": "G38",
+   "at": "2026-10-13T20:19:40.073816-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 2096,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2253,
+     "5": 2096,
+     "6": 1450
+    }
+   ],
+   "note": "stack: bring green back toward robot",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2253,
+      "5": 2096,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7701,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2253,
+      "5": 2096,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "4eb088511adb2c12b8b1faeb2483590444e79ed1cbf9ea857ed4d17e521e40e8"
+  },
+  {
+   "batch": "G39",
+   "at": "2026-10-13T20:20:07.919773-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2253,
+    "5": 2096,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2353,
+     "5": 2096,
+     "6": 1450
+    }
+   ],
+   "note": "stack: elbow past backlash",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 2096,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7691,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 2096,
+      "6": 1450
+     }
+    }
+   ],
+   "error": "AssertionError: C270 frame too dark (14.8)",
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": null,
+   "receipt_sha256": "47328cfe6bf47b486bda31dfb015a8aa79eff662ee30450afd4b309c85044164"
+  },
+  {
+   "batch": "G40",
+   "at": "2026-10-13T20:23:04.810239-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2353,
+    "5": 2096,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2353,
+     "5": 1896,
+     "6": 1450
+    },
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2353,
+     "5": 1696,
+     "6": 1450
+    },
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2153,
+     "5": 1696,
+     "6": 1450
+    }
+   ],
+   "note": "lift green high before reversing",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 1896,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7647,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 1896,
+      "6": 1450
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 1696,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7652,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2353,
+      "5": 1696,
+      "6": 1450
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1696,
+      "6": 1450
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7679,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1696,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "b9370298cef648fb8410ace950b8c81c096a033e6ec553dfca0d82f2cd92944a"
+  },
+  {
+   "batch": "R1",
+   "at": "2026-10-13T20:23:51.814871-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1696,
+    "6": 1450
+   },
+   "targets": [],
+   "note": "",
+   "stages": [],
+   "error": "AssertionError: {'ok': False, 'armed': False, 'controller': 'unavailable', 'reason': 'Pi guard unavailable; restart tools after restoring link', 'mic': 'unconfigured', 'camera': 'unconfigured', 'speech': 'unconfigured', 'backend': {'backend_id': 'witness-direct', 'kind': 'none', 'model': None, 'where_computed': 'jetson'}}",
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": null,
+   "receipt_sha256": "eef1db2b77d6707b3d70d679e4a9cd2ae92715a002f055e857a2038f4a4b6a0a"
+  },
+  {
+   "batch": "R2",
+   "at": "2026-10-13T20:25:16.130831-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1696,
+    "6": 1450
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "backward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7644,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1696,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "6a5f036d9d4512207903e0a5b1e313f5f4ab40e674f0f3b7cfc5cfea8b38fb64"
+  },
+  {
+   "batch": "R3",
+   "at": "2026-10-13T20:25:49.632330-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1696,
+    "6": 1450
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "backward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7641,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1696,
+      "6": 1450
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "54bb78a3c7de5a66401113c14cb6e56e692bbe89ea3482a651639a902708e5c3"
+  },
+  {
+   "batch": "G41",
+   "at": "2026-10-13T20:26:28.147238-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1696,
+    "6": 1450
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2153,
+     "5": 1696,
+     "6": 1500
+    },
+    {
+     "1": 1400,
+     "3": 802,
+     "4": 2153,
+     "5": 1896,
+     "6": 1500
+    }
+   ],
+   "note": "stack: yaw toward red, lower",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1696,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7646,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1696,
+      "6": 1500
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1896,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7643,
+     "readback": {
+      "1": 1400,
+      "3": 802,
+      "4": 2153,
+      "5": 1896,
+      "6": 1500
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "70a0480507c500b62e5345f5f6a57f03202c9cdfa8dc76920793c7679a729ebc"
+  },
+  {
+   "batch": "G42",
+   "at": "2026-10-13T20:27:20.153209-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 802,
+    "4": 2153,
+    "5": 1896,
+    "6": 1500
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 902,
+     "4": 2153,
+     "5": 1896,
+     "6": 1500
+    },
+    {
+     "1": 1400,
+     "3": 902,
+     "4": 2153,
+     "5": 1996,
+     "6": 1500
+    }
+   ],
+   "note": "stack: swing green out, lower",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 902,
+      "4": 2153,
+      "5": 1896,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7670,
+     "readback": {
+      "1": 1400,
+      "3": 902,
+      "4": 2153,
+      "5": 1896,
+      "6": 1500
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 902,
+      "4": 2153,
+      "5": 1996,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7672,
+     "readback": {
+      "1": 1400,
+      "3": 902,
+      "4": 2153,
+      "5": 1996,
+      "6": 1500
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "44b61f23353e41e4736945d0551b419add50df4747700554e4a4933b16072086"
+  },
+  {
+   "batch": "G43",
+   "at": "2026-10-13T20:27:55.703744-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 902,
+    "4": 2153,
+    "5": 1996,
+    "6": 1500
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1002,
+     "4": 2153,
+     "5": 1996,
+     "6": 1500
+    },
+    {
+     "1": 1400,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1500
+    }
+   ],
+   "note": "stack: out then small lower",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1002,
+      "4": 2153,
+      "5": 1996,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7654,
+     "readback": {
+      "1": 1400,
+      "3": 1002,
+      "4": 2153,
+      "5": 1996,
+      "6": 1500
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7655,
+     "readback": {
+      "1": 1400,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1500
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "dde637491c3d296b268b9b51b2dcdb6ef656db95f6818e4f9c4779aa9a143624"
+  },
+  {
+   "batch": "G44",
+   "at": "2026-10-13T20:28:37.077680-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1500
+   },
+   "targets": [
+    {
+     "1": 1600,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1500
+    },
+    {
+     "1": 1800,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1500
+    }
+   ],
+   "note": "stack: release green onto red",
+   "stages": [
+    {
+     "target": {
+      "1": 1600,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7652,
+     "readback": {
+      "1": 1600,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1500
+     }
+    },
+    {
+     "target": {
+      "1": 1800,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7655,
+     "readback": {
+      "1": 1800,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1500
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "5b2af27102310ab55a122171b3d072690e30c8bb32dc4d862275ba727116657c"
+  },
+  {
+   "batch": "G45",
+   "at": "2026-10-13T20:29:22.102059-04:00",
+   "dry": false,
+   "start": {
+    "1": 1800,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1500
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1600
+    }
+   ],
+   "note": "regrab: open, yaw toward green",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1600
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7657,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1600
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "cfe47608649c5d97773743655d441a5fd68d2899962fe92b4eb041c8f568d0a9"
+  },
+  {
+   "batch": "G46",
+   "at": "2026-10-13T20:29:53.889707-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1600
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1760
+    }
+   ],
+   "note": "regrab: centre green",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1760
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7648,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1760
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "cc3bd1170d8921aa977a9963639b46a14895623809f0deee17f006c0e938c78c"
+  },
+  {
+   "batch": "G47",
+   "at": "2026-10-13T20:30:31.781184-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1760
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1730
+    },
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2246,
+     "6": 1730
+    },
+    {
+     "1": 2000,
+     "3": 1082,
+     "4": 2153,
+     "5": 2246,
+     "6": 1730
+    }
+   ],
+   "note": "regrab: centre, descend, wrist compensates",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7631,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1730
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7631,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7652,
+     "readback": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "91e078a705ffc320716652c82e3432bd431435afbd6a6e08d40446c45f98e475"
+  },
+  {
+   "batch": "G48",
+   "at": "2026-10-13T20:31:09.881768-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2153,
+    "5": 2246,
+    "6": 1730
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2246,
+     "6": 1730
+    },
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2046,
+     "6": 1730
+    }
+   ],
+   "note": "raise before D4",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7641,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7642,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1730
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "460d836e1a81ab1f64e68430aa1ba2f4b087a694e2d4e9b9b30da79d26700dcf"
+  },
+  {
+   "batch": "D4",
+   "at": "2026-10-13T20:32:18.901832-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1730
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "forward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7629,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2046,
+      "6": 1730
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "83d3c4bd80fdd9d4f7916c27bebfb9fbd050cfd1dd731d96a2c5f2693fea7927"
+  },
+  {
+   "batch": "G49",
+   "at": "2026-10-13T20:32:55.857023-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1002,
+    "4": 2153,
+    "5": 2046,
+    "6": 1730
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1002,
+     "4": 2153,
+     "5": 2246,
+     "6": 1730
+    },
+    {
+     "1": 2000,
+     "3": 1082,
+     "4": 2153,
+     "5": 2246,
+     "6": 1730
+    }
+   ],
+   "note": "regrab: descend after D4",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7622,
+     "readback": {
+      "1": 2000,
+      "3": 1002,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     }
+    },
+    {
+     "target": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7621,
+     "readback": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1730
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "10f46a069795f51c9527063d89d9fa9e96d2511b8670515cfdc37493d89af9a5"
+  },
+  {
+   "batch": "G50",
+   "at": "2026-10-13T20:33:30.595858-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2153,
+    "5": 2246,
+    "6": 1730
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1082,
+     "4": 2153,
+     "5": 2246,
+     "6": 1790
+    }
+   ],
+   "note": "regrab: centre green",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7631,
+     "readback": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2153,
+      "5": 2246,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "fe53fa0b3ccde8aa46affdc6468186116e1eee43e828bf19fe03e40542485f72"
+  },
+  {
+   "batch": "G51",
+   "at": "2026-10-13T20:34:01.306173-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2153,
+    "5": 2246,
+    "6": 1790
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1082,
+     "4": 2353,
+     "5": 2246,
+     "6": 1790
+    }
+   ],
+   "note": "regrab: lower pads",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2353,
+      "5": 2246,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7618,
+     "readback": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2353,
+      "5": 2246,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "118f3b17ed7d7e9872f056df3e32c4fc1e5390d1c7b5ac3b3941dcfa0a57a7ca"
+  },
+  {
+   "batch": "G52",
+   "at": "2026-10-13T20:34:31.741217-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2353,
+    "5": 2246,
+    "6": 1790
+   },
+   "targets": [
+    {
+     "1": 2000,
+     "3": 1082,
+     "4": 2453,
+     "5": 2246,
+     "6": 1790
+    }
+   ],
+   "note": "regrab: find floor",
+   "stages": [
+    {
+     "target": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7616,
+     "readback": {
+      "1": 2000,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "4598cefe1d6718f2905ccf1e9d53019f7a587044e06e03c7858fcac56db027d0"
+  },
+  {
+   "batch": "G53",
+   "at": "2026-10-13T20:35:03.358114-04:00",
+   "dry": false,
+   "start": {
+    "1": 2000,
+    "3": 1082,
+    "4": 2453,
+    "5": 2246,
+    "6": 1790
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1082,
+     "4": 2453,
+     "5": 2246,
+     "6": 1790
+    },
+    {
+     "1": 1600,
+     "3": 1082,
+     "4": 2453,
+     "5": 2246,
+     "6": 1790
+    },
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2453,
+     "5": 2246,
+     "6": 1790
+    }
+   ],
+   "note": "regrab: close on green",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7573,
+     "readback": {
+      "1": 1800,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     }
+    },
+    {
+     "target": {
+      "1": 1600,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7573,
+     "readback": {
+      "1": 1600,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7594,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 2246,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "8fbc8a4567d737142cabd55261b011b77772a36ef595a4541d2a647f658ef7cb"
+  },
+  {
+   "batch": "G54",
+   "at": "2026-10-13T20:35:33.767797-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2453,
+    "5": 2246,
+    "6": 1790
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2453,
+     "5": 2046,
+     "6": 1790
+    },
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2453,
+     "5": 1846,
+     "6": 1790
+    }
+   ],
+   "note": "regrab: double lift test",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 2046,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7558,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 2046,
+      "6": 1790
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 1846,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7554,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 1846,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "880ef992f6bcd1f285ef7e6da1b48363148e961d90c7d5ecb2063f92b0934dd8"
+  },
+  {
+   "batch": "G55",
+   "at": "2026-10-13T20:36:15.345883-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2453,
+    "5": 1846,
+    "6": 1790
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2453,
+     "5": 1696,
+     "6": 1790
+    },
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2253,
+     "5": 1696,
+     "6": 1790
+    }
+   ],
+   "note": "stack 2: lift high before reverse",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 1696,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7564,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2453,
+      "5": 1696,
+      "6": 1790
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1790
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7574,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "dbf8e9cba8755973f743035349c463a8daa37beb503abf9bc84d02bd0784bc48"
+  },
+  {
+   "batch": "R4",
+   "at": "2026-10-13T20:36:40.498318-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1696,
+    "6": 1790
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "backward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7535,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "ff3d3c6ec25c1748f316cc03c396f80b634dcd7977e0dc87171b787eda898bad"
+  },
+  {
+   "batch": "R5",
+   "at": "2026-10-13T20:36:55.992956-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1696,
+    "6": 1790
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "backward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7553,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1790
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e1937352d0af0b63811ee77eacdd04e49cd6cb7821a1bba7b0a0a1adf0deb92f"
+  },
+  {
+   "batch": "G56",
+   "at": "2026-10-13T20:37:37.060144-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1696,
+    "6": 1790
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2253,
+     "5": 1696,
+     "6": 1590
+    },
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2253,
+     "5": 1696,
+     "6": 1500
+    },
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2253,
+     "5": 1896,
+     "6": 1500
+    }
+   ],
+   "note": "stack 2: yaw to red, lower",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1590
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7561,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1590
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7554,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1696,
+      "6": 1500
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1896,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7569,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1896,
+      "6": 1500
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "e5eed8066c32a3d4a132e874ba4bf111e1227a0fe02d34b17db46675b8f998a1"
+  },
+  {
+   "batch": "G57",
+   "at": "2026-10-13T20:38:29.774906-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1896,
+    "6": 1500
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1082,
+     "4": 2253,
+     "5": 1996,
+     "6": 1500
+    }
+   ],
+   "note": "stack 2: lower, watch C270",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1996,
+      "6": 1500
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7572,
+     "readback": {
+      "1": 1400,
+      "3": 1082,
+      "4": 2253,
+      "5": 1996,
+      "6": 1500
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "f9e9929e8fc98b95c55384f2b0fdd56603ac09487fc570f83bdd27dc2bd348d7"
+  },
+  {
+   "batch": "G58",
+   "at": "2026-10-13T20:39:06.993547-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1082,
+    "4": 2253,
+    "5": 1996,
+    "6": 1500
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1112,
+     "4": 2253,
+     "5": 1996,
+     "6": 1485
+    },
+    {
+     "1": 1400,
+     "3": 1112,
+     "4": 2253,
+     "5": 2046,
+     "6": 1485
+    }
+   ],
+   "note": "stack 2: align and lower",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1112,
+      "4": 2253,
+      "5": 1996,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7568,
+     "readback": {
+      "1": 1400,
+      "3": 1112,
+      "4": 2253,
+      "5": 1996,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1112,
+      "4": 2253,
+      "5": 2046,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7570,
+     "readback": {
+      "1": 1400,
+      "3": 1112,
+      "4": 2253,
+      "5": 2046,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "71fab6edbcd81b0a21ec6991a446e76a325a4a245a2b2b1bacf1dd332443667a"
+  },
+  {
+   "batch": "G59",
+   "at": "2026-10-13T20:39:42.037951-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1112,
+    "4": 2253,
+    "5": 2046,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1142,
+     "4": 2253,
+     "5": 2046,
+     "6": 1485
+    },
+    {
+     "1": 1400,
+     "3": 1142,
+     "4": 2253,
+     "5": 2096,
+     "6": 1485
+    }
+   ],
+   "note": "stack 2: out a touch, lower until rest",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1142,
+      "4": 2253,
+      "5": 2046,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7569,
+     "readback": {
+      "1": 1400,
+      "3": 1142,
+      "4": 2253,
+      "5": 2046,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 1400,
+      "3": 1142,
+      "4": 2253,
+      "5": 2096,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7563,
+     "readback": {
+      "1": 1400,
+      "3": 1142,
+      "4": 2253,
+      "5": 2096,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "bbe225ae2c6661903fb80befcdff13380fd79da0c5637c7bf5d366b91245cd47"
+  },
+  {
+   "batch": "G60",
+   "at": "2026-10-13T20:40:22.329774-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1142,
+    "4": 2253,
+    "5": 2096,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1400,
+     "3": 1142,
+     "4": 2253,
+     "5": 2146,
+     "6": 1485
+    }
+   ],
+   "note": "stack 2: lower until rest",
+   "stages": [
+    {
+     "target": {
+      "1": 1400,
+      "3": 1142,
+      "4": 2253,
+      "5": 2146,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7550,
+     "readback": {
+      "1": 1400,
+      "3": 1142,
+      "4": 2253,
+      "5": 2146,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "6776a0760b314aebd1d36510ddd3914a8d3d0e1ca379e3175c858e8790ad553a"
+  },
+  {
+   "batch": "G61",
+   "at": "2026-10-13T20:41:08.164229-04:00",
+   "dry": false,
+   "start": {
+    "1": 1400,
+    "3": 1142,
+    "4": 2253,
+    "5": 2146,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1600,
+     "3": 1142,
+     "4": 2253,
+     "5": 2146,
+     "6": 1485
+    },
+    {
+     "1": 1800,
+     "3": 1142,
+     "4": 2253,
+     "5": 2146,
+     "6": 1485
+    }
+   ],
+   "note": "stack 2: release on contact",
+   "stages": [
+    {
+     "target": {
+      "1": 1600,
+      "3": 1142,
+      "4": 2253,
+      "5": 2146,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7558,
+     "readback": {
+      "1": 1600,
+      "3": 1142,
+      "4": 2253,
+      "5": 2146,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 2146,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7552,
+     "readback": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 2146,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "acae2ef686b14ba1fa5cb3c7d5c65eb810ee52900277d61974ad556de93bc84f"
+  },
+  {
+   "batch": "G62",
+   "at": "2026-10-13T20:41:39.724300-04:00",
+   "dry": false,
+   "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2253,
+    "5": 2146,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1142,
+     "4": 2253,
+     "5": 1946,
+     "6": 1485
+    }
+   ],
+   "note": "stack 2: lift away, verify stack",
+   "stages": [],
+   "error": "AssertionError: {'ok': False, 'armed': False, 'controller': 'unavailable', 'reason': 'Pi guard unavailable; restart tools after restoring link', 'mic': 'unconfigured', 'camera': 'unconfigured', 'speech': 'unconfigured', 'backend': {'backend_id': 'witness-direct', 'kind': 'none', 'model': None, 'where_computed': 'jetson'}}",
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": null,
+   "receipt_sha256": "8449612969ba4a0c2baeeee6a783be60bbffb0c7b864dc65922104995133185c"
+  },
+  {
+   "batch": "G62b",
+   "at": "2026-10-13T20:42:09.906729-04:00",
+   "dry": false,
+   "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2253,
+    "5": 2146,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1142,
+     "4": 2253,
+     "5": 1946,
+     "6": 1485
+    }
+   ],
+   "note": "stack 2: lift away, verify stack",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 1946,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7563,
+     "readback": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 1946,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "d6d79e7f6056b21545671264215aea33528491acb95dc83c5b9bb2b9afbc328f"
+  },
+  {
+   "batch": "G63",
+   "at": "2026-10-13T20:43:30.844374-04:00",
+   "dry": false,
+   "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2253,
+    "5": 1946,
+    "6": 1485
+   },
+   "targets": [
+    {
+     "1": 1800,
+     "3": 1142,
+     "4": 2253,
+     "5": 1746,
+     "6": 1485
+    },
+    {
+     "1": 1800,
+     "3": 1142,
+     "4": 2053,
+     "5": 1746,
+     "6": 1485
+    }
+   ],
+   "note": "lift clear of the stack before reversing",
+   "stages": [
+    {
+     "target": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 1746,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7552,
+     "readback": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2253,
+      "5": 1746,
+      "6": 1485
+     }
+    },
+    {
+     "target": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2053,
+      "5": 1746,
+      "6": 1485
+     },
+     "drive": null,
+     "verdict": "applied",
+     "battery_mv": 7551,
+     "readback": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2053,
+      "5": 1746,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "7f6ef6dad78b4ec973eedf43893d8572f51b6248899eafc15d47b1309a171881"
+  },
+  {
+   "batch": "R6",
+   "at": "2026-10-13T20:44:08.296570-04:00",
+   "dry": false,
+   "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2053,
+    "5": 1746,
+    "6": 1485
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "backward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7543,
+     "readback": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2053,
+      "5": 1746,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "f103f0a28d3b59d5e5fa6a31980532f84ecd5bc1886fbe2c066cc8c76c52be6d"
+  },
+  {
+   "batch": "R7",
+   "at": "2026-10-13T20:44:44.667540-04:00",
+   "dry": false,
+   "start": {
+    "1": 1800,
+    "3": 1142,
+    "4": 2053,
+    "5": 1746,
+    "6": 1485
+   },
+   "targets": [],
+   "note": "",
+   "stages": [
+    {
+     "target": null,
+     "drive": "backward duty 20 0.5 s",
+     "verdict": "applied",
+     "battery_mv": 7463,
+     "readback": {
+      "1": 1800,
+      "3": 1142,
+      "4": 2053,
+      "5": 1746,
+      "6": 1485
+     }
+    }
+   ],
+   "error": null,
+   "cleanup": {
+    "override_removed": true
+   },
+   "locked": {
+    "armed": false,
+    "joints": {},
+    "wheel_duty_limit": 0
+   },
+   "receipt_sha256": "0b6c8b2edc515d9c9ee845efd6aaaa482ef3d8d32e90986d348201303810ddb0"
+  }
+ ]
+}

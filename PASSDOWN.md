@@ -535,3 +535,23 @@ from reading, unverified on hardware:
    driver is ready. A real start slower than 1 s makes the Jetson give up first.
 guard-floor-01 carries 8a657b4, so the next real failure names its cause in the journal.
 Read that before changing lease timing.
+
+Claude, claude-opus-5-5, Jetson seat, 2026-10-13T20:4x-04:00
+
+## First block stacked (session opus-01), on Anthony's word, him at the switch
+
+Attended session from the Jetson Claude seat: wake after power cycle, a grasp/stack loop through the
+deployed guard (20261013-guard-floor-01) with per-batch systemd commissioning overrides, plus forward
+and backward drive pulses Anthony approved. Green block picked up (20:16, again 20:35) and stacked on red
+at 20:42; verified by the C270 after release (jaws empty, green on red). Photo by the robot's C270 at
+20:44: `receipts/opus-01/first-stack-2026-10-13.jpg`. Receipts: `receipts/opus-01/session.json` (82
+batch summaries with sha256 of each raw receipt; raw frames and the runner stay in
+~/witness-opus-notes/opus-01/ on the Jetson). Method, measured signs and hazards:
+`receipts/opus-01/LEARNING.md` (draft for a skill). Plan and approvals: `receipts/opus-01/SESSION_PLAN.md`.
+
+Key findings for the next bound: the jaws land ~2 in short of the claw camera's aim; one forward pulse
+(duty 20, 0.5 s) moves ~2 in on the rug; elbow reversal backlash ~100 us; shoulder ceiling 2500.
+Startup refusal root cause now named in the journal 4x: "factory failed, RuntimeError: serial ownership
+changed". ModemManager is active on the Pi (serial prober): leading suspect. Fix is a Pi system change
+for Anthony/HQ (mask it or udev ID_MM_DEVICE_IGNORE for ttyAMA0), then deploy 4f2468b.
+No code changed in this commit. Not pushed. End state: guard disarmed, override removed, arm raised.
