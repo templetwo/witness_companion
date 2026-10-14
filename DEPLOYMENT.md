@@ -1,3 +1,18 @@
+HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:49 EDT
+
+## Scanner release deployed on Anthony's word ("deploy")
+
+Live Pi guard release is now `/opt/temple-witness/releases/20261013-scanner-01`, selected by
+`/opt/temple-witness/current`. Source 7a12d2e; the only change against session-boundary-01 is the serial
+ownership scanner fix (companion/pi/hardware.py, scripts/pi_preflight.py): a scan whose only defect is a pid
+that vanished mid-read is rescanned and accepted; every other defect and any real holder still refuses at once.
+All 39 packaged files match the manifest's SHA256; 33 compiled on the Pi. Guard restarted once (21:48:33 EDT),
+MainPID cwd is the new release, NRestarts 0. Three quiet status sessions and six status sessions opened while the
+Pi spawned a process every 20 ms: all nine ok, armed false, battery_floor_mv 7000, and zero ownership refusals in
+the journal since the deploy (the previous release logged five in one attended hour). No arming, no override, no
+motion, no unit or configuration change, camera untouched. Rollback target:
+`/opt/temple-witness/releases/20261013-session-boundary-01` (symlink back). Receipt: `receipts/scanner-deployed.json`.
+
 HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:31 EDT
 
 ## Session-boundary release deployed on Anthony's word ("cut it")

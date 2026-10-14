@@ -577,3 +577,9 @@ HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:31 EDT
 ## Release 20261013-session-boundary-01 is live (4f2468b); the serial-ownership refusals are the scanner, fix in progress
 
 Cut on Anthony's "cut it. then write the fix". See DEPLOYMENT.md (top) and receipts/session-boundary-deployed.json. The ModemManager lead is retired by measurement (studio lane receipt serial-ownership-scan-measurement-20261013.md; Stack claim 9767be2d): inspect_owners voids its result whenever a pid vanishes mid-scan, holder or no holder. The fix (bounded rescan on vanished pids only, refusal kept for real holders, denied pids and unreadable network tables, red test first) is being written under HQ review now.
+
+HQ Mac Studio, claude-fable-5-1, 2026-10-13 21:49 EDT
+
+## Release 20261013-scanner-01 is live (7a12d2e)
+
+Cut on Anthony's "deploy". DEPLOYMENT.md (top) and receipts/scanner-deployed.json. In situ: nine status sessions, six of them under continuous process churn on the Pi, zero serial-ownership refusals. Rollback is the symlink back to session-boundary-01. Still open from tonight for a reviewed bound: the battery sample stamped at status-call time while the SDK queue keeps the oldest packet (hardware.py:165); a port-map mismatch from a listener restarting mid-scan still refuses without rescan.
