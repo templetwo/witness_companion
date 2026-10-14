@@ -1,0 +1,59 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "A1",
+  "at": "2026-10-13T19:37:49.399050-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (structured question, 2026-10-13 19:4x EDT), at the switch",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "targets": [
+    {
+      "1": 0,
+      "3": 0,
+      "4": 0,
+      "5": 2116,
+      "6": 0
+    }
+  ],
+  "channel": 5,
+  "duration_seconds": 1.0,
+  "dry": true,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791934674.2915702,
+      "battery": null
+    }
+  ],
+  "joints_override": {
+    "pwm_5": {
+      "bus": "pwm",
+      "id": 5,
+      "min": 2116,
+      "max": 2116
+    }
+  },
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/A1-c270-before.jpg",
+    "mean": 95.2,
+    "sha256": "cf1d202eaea6844a0fbae1cc559e99056f09abe93849a947d60e09c82e84ab78"
+  },
+  "readback_before": {
+    "1": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/A1-claw-before.jpg",
+    "sha256": "cdbb705601ec293eb1b1781ac7d25952137a0a3008b754ae2e5468e74a792320"
+  },
+  "result": "dry: pose matches start, cameras fresh, no setup, no motion"
+}

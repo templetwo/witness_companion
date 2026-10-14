@@ -1,0 +1,45 @@
+{
+  "identity": "claude-opus-5-5, Jetson Claude Code seat",
+  "session": "opus-01",
+  "batch": "D1",
+  "at": "2026-10-13T19:54:20.328397-04:00",
+  "authorization": "Anthony: 'Approve; waive gripper check' (19:4x EDT), at the switch; drive: 'Approve the drive' (19:5x EDT)",
+  "physical_angle_measured": false,
+  "start": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2216,
+    "6": 1485
+  },
+  "targets": [],
+  "channels": [],
+  "note": "",
+  "duration_seconds": 0.5,
+  "dry": true,
+  "phases": [
+    {
+      "name": "readonly_ok",
+      "at": 1791935664.4709184,
+      "battery": null
+    }
+  ],
+  "joints_override": {},
+  "c270_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/D1-c270-before.jpg",
+    "mean": 103.6,
+    "sha256": "fa1f9b9b4c7df0ab1f46b02a2b32bb1829a03b7dcc258d763c278622dabc3f23"
+  },
+  "readback_before": {
+    "1": 2000,
+    "3": 1122,
+    "4": 1803,
+    "5": 2216,
+    "6": 1485
+  },
+  "claw_before": {
+    "path": "/home/tony/witness-opus-notes/opus-01/D1-claw-before.jpg",
+    "sha256": "0bd5f686e2c90e679221ce45c2c41b42f5d99ff3de8f9031643461b7af7fe276"
+  },
+  "result": "dry: pose matches start, cameras fresh, no setup, no motion"
+}
