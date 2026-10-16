@@ -26,11 +26,11 @@ Anthony approves each step at the switch.
 | Session | Date | Batches | Result |
 |---|---|---|---|
 | opus-01 | 2026-10-13 | 82 batch entries in `receipts/opus-01/session.json` (98 receipt files in `receipts/opus-01/batches/`, dry runs and drive pulses included) | Green held on the fourth grasp attempt (20:16 EDT); the first stack attempt dropped it beside red; regrabbed at 20:35; first stack (green on red) at 20:42 EDT |
-| opus-02 | 2026-10-14 | 65 batch receipts on the Jetson (one dry), 21:29 to 22:35 EDT **[opus-02, Jetson only]** | No stack. Halted half-awake once for an unknown object at the C270 lens; claw camera out of focus until refocused mid-session; jaws landed short on every grasp |
+| opus-02 | 2026-10-14 | 65 batch receipts on the Jetson (two dry: A1-dry and G3-dry; 63 real), receipt `at` stamps 21:29:02 to 22:34:26 EDT **[opus-02, Jetson only]** | No stack. Halted half-awake once for an unknown object at the C270 lens; claw camera out of focus until refocused mid-session; jaws landed short on every grasp |
 
 That is roughly one minute per batch. Most of the minute goes to ceremony and model review, not motion. Guard restarts were also where most "serial ownership changed" startup refusals happened (four in opus-01, three of them on the connect right after an override restart). The scanner fix (7a12d2e, release 20261013-scanner-01) is live on the Pi (`receipts/scanner-deployed.json`). PASSDOWN.md calls the existing scripts evidence, not a production commissioning API (line 400), and lists making the commissioning harness dependable as the first follow-up (line 470).
 
-The worst cost is a lesson that did not stick. On Oct 13, Anthony saw with his own eyes that the jaws land about 2 in (5 cm) short of the claw camera's aim point, toward the robot (`receipts/opus-01/LEARNING.md`, GROUND TRUTH 20:1x). The same miss recurred all night on Oct 14, because the lesson lived in notes and not in code.
+The worst cost is a lesson that cannot be checked. On Oct 13, Anthony saw with his own eyes that the jaws land about 2 in (5 cm) short of the claw camera's aim point, toward the robot (`receipts/opus-01/LEARNING.md`, GROUND TRUTH 20:1x; a by-eye figure, never measured). On Oct 14 the offset WAS applied (forward pulses D4 to D6 were the recipe's offset step) and was insufficient: the jaws still closed in front of red at G35, the elbow lowering pulled them further back, and the claw camera had been re-aimed in its mount mid-session, so "centred" no longer meant what the Oct 13 numbers meant (Appendix B, items A3 and A4). Promoting the 2 in to config would not have saved the night. The lesson is that a constant is valid only under the configuration it was measured in (camera mount, pose family, elbow state), and config has to know when that configuration changed.
 
 ## 2. Architecture
 
@@ -84,22 +84,26 @@ Verified against `receipts/opus-01/LEARNING.md` unless marked otherwise.
 | Servo channels | 1 gripper, 3 wrist pitch, 4 elbow, 5 shoulder, 6 base yaw (CAPABILITIES.md line 32; `receipts/vendor-mapping-facts.json`, where roles 3/4/5 are inferred from the installed IK equations and 6 is explicit in source). **There is no wrist roll on this arm.** | all |
 | Pulse range | 500 to 2500 us nominal on channels 3 to 6 after the software offset (`companion/arm_lift.py`, `vendor-mapping-facts.json`); the opus-01 runner refused shoulder 2516, so 2500 is the runner ceiling too | all |
 | Wake order | shoulder, elbow, base, gripper, wrist | wake_arm |
-| Base gain | +50 us moves the claw view about 65 px right (high, full-res) | center_on |
-| Yaw gain vs height | about 2.4 px/us full-res when low (shoulder 2496), about 0.65 px/us high; re-measure after every height change | center_on |
-| Shoulder gain | +100 us moves the view about 45 px up and the gripper lower; about 2 cm per 100 us and it pulls the gripper back | approach |
-| Elbow gain | +100 us moves the view about 120 px up; elbow+ also pulls the gripper back toward the robot | approach |
-| Wrist gain | +100 us moves the view about 110 px down (jaws tilt outward); C270 jaw barely moves | approach |
+| Base gain | +50 us moves the claw view about 65 px right (high, full-res). **[void_mount: opus-01 claw geometry; the claw camera was tilted in its mount on Oct 14, left jaw tip at gripper 2000 moved from x=41 to x=112 px (Appendix B, A3); re-derive]** | center_on |
+| Yaw gain vs height | about 2.4 px/us full-res when low (shoulder 2496), about 0.65 px/us high; re-measure after every height change. opus-02 after the re-aim: about 1.9 px/us low (G27), about 1.0 high (G7) **[void_mount for the opus-01 values]** | center_on |
+| Shoulder gain | +100 us moves the view about 45 px up and the gripper lower; about 2 cm per 100 us and it pulls the gripper back **[void_mount for the px figure]** | approach |
+| Elbow gain | +100 us moves the view about 120 px up; elbow+ also pulls the gripper back toward the robot **[void_mount for the px figure]** | approach |
+| Elbow hard stop | an elbow decrease stalls near 1950 to 2000 us at shoulder 1846 (opus-02 G3, G16, G39; opus-01 G9); holding a command past it is stall load (42 mV drop across G3). Never command past it; unload on 0% at the stop **[opus-02, Jetson only]** | approach, place_on |
+| Wrist gain | +100 us moves the view about 110 px down (jaws tilt outward); C270 jaw barely moves **[void_mount for the px figure]** | approach |
 | Reach | vertical-gripper reach at block height about 12 cm from base | locate_blocks, approach |
 | Elbow backlash | about 100 us or more under load on reversal (G8/G9: 200 us of decrease with 0% change) | approach, place_on |
-| Aim offset | jaws land about 2 in (5 cm) short of the claw aim point, toward the robot; opus-02 saw more than 2 in at some base/wrist settings **[opus-02, Jetson only]** | approach |
-| Grasp point vs wrist | wrist 782 (vertical): image centre; wrist about 1200 (tilted): near the bottom, between the jaw tips | center_on, approach |
+| Aim offset | jaws land about 2 in (5 cm) short of the claw aim point, toward the robot (Anthony's by-eye figure, Oct 13, never measured); opus-02 saw more than 2 in at some base/wrist settings, under a different claw mount **[opus-02, Jetson only] [re-measure]** | approach |
+| Grasp point vs wrist | wrist 782 (vertical): image centre; wrist about 1200 (tilted): near the bottom, between the jaw tips **[void_mount]** | center_on, approach |
+| Claw mount fingerprint | the jaw-tip pixel positions at a fixed gripper value (the claw camera is rigid with the jaws). Stored in `config/arm_skills.yaml`; every skill's preflight compares it, and drift past tolerance voids every claw-view constant and stops the skill (Appendix B, A3) | all claw-view skills |
 | Close steps | 2000, 1800, 1600, 1400; runner gripper floor 1400 | grasp |
 | Open range | 1400 to 1800 on release; open to 2000 before a final approach | release, grasp |
 | Jaw-angle rule | the block's faces must be roughly parallel to the jaws; a corner-first close pivots the block out (0 of 2 on rotated blocks, 2 of 2 square) | square_block, grasp |
-| C270 straddle dead zone | the C270 can judge the straddle only for blocks more than about 2.5 in from its lens; the jaws grasp at about 1 in. Source: the opus-02 seat's close, not its learning log. **[re-measure]** | grasp |
+| C270 straddle dead zone | two samples, not a boundary: G42 (red about 2.5 in from the lens, overlay sharpness 30) was decidable and failed on evidence; G44 (about 1 in, sharpness 16) was undecidable. The boundary lies between, unmeasured. The C270 straddle read is a 2D projection; a jaw in front of a block can look beside it (G31 to G35). Record the overlay sharpness per frame as a cheap "too close to judge" proxy **[re-measure]** | grasp |
 | C270 warm-up | first 15 to 30 frames black | all C270 reads |
-| Drive pulse | duty 20, 0.5 s moved about 2 in once on the rug; two pulses overshot to about 10 cm | not a skill yet (see 3.12) |
+| Drive pulse | duty 20, 0.5 s: the log says about 2 in on the rug; the frames' own pixel numbers, under an assumed C270 focal length, say about 3 in per pulse (Appendix B, A5). Travel per pulse is unknown to within 2x. The front ultrasonic (sonar) is the instrument that settles it, and it is off in the locked hardware file **[re-measure]** | not a skill yet (see 3.12) |
 | Battery drop under arm work | about 115 mV over 9 batches, 235 mV over 26, 291 mV over 50 **[opus-02, Jetson only]** | session budgeting |
+| Sonar LEDs | the sonar module's RGB LEDs tint the rug blue and break colour reads (opus-01 stack attempt 1; the vendor's own colour demo turns them off first). `sonar_rgb` is an allowed output (`companion/pi/controls.py`). Off in every skill's preflight, before any colour threshold | locate_blocks, all colour reads |
+| Claw sharpness floor | a 0% diff on a blurred claw frame is not a held joint: opus-02's first half ran at Laplacian sharpness 3.5 to 4.3 against 93 at the same pose the night before, and real moves read 0%. The motion witness is valid only above a sharpness floor (about 50 proposed) **[opus-02, Jetson only] [re-measure]** | look, every motion witness |
 
 ### 3.2 wake_arm
 
@@ -147,8 +151,8 @@ Verified against `receipts/opus-01/LEARNING.md` unless marked otherwise.
 
 - **Preconditions:** approach succeeded; the target has a jaw-width gap on both gripping sides (opus-01 GROUND TRUTH 20:0x: red and blue touched, the right jaw was blocked); gripper open to 2000.
 - **Pre-close gates (all must pass):**
-  1. **C270 straddle gate:** the block's full width sits between the jaw inner edges. This caught the short reach repeatedly on Oct 14 and prevented every blind close. **[opus-02, Jetson only]**
-  2. **Grasp-range check (new, covers the C270 dead zone):** both jaw tips visible in the claw view with the block between them. If that cannot be judged, back up to a distance the C270 can judge, verify, then come in again. This is the claw-view jaw-tip check the opus-02 seat proposed as its next bound.
+  1. **C270 straddle gate:** the block's full width sits between the jaw inner edges. Adopted on Oct 14 after the G34 close ran ungated and missed; it refused both closes it was consulted on (n=2): G42 on evidence (a jaw in front) and G44 on undecidability. **[opus-02, Jetson only]**
+  2. **Grasp-range check (new, covers the C270 dead zone):** evidence that the block is AT TIP DEPTH, not merely on a ray between the tips. "Both jaw tips visible with the block between them" is NOT enough: the claw camera is rigid with the jaws, the tips are near the lens and the floor is far, so the opus-02 G44 stage-3 frame satisfies that wording with the blue block between the tips while the C270 showed the tips at red's top edge and red below the claw frame (Appendix B, A1). Candidates for the real test, to be bench-designed: the tips occlude the block's silhouette; the block's apparent width matches a 3 cm block at tip depth, calibrated once; or an independent range reading from the front sonar (Appendix B, A2). Negative control: `G44-claw-stage-3.jpg` must FAIL; a version of this gate that passes it fails review. If the gate cannot be judged, back up to a distance the C270 can judge, verify, then come in again. This is the claw-view jaw-tip check the opus-02 seat proposed as its next bound, sharpened by that seat's own review.
 - **Closed loop:** close in steps 2000, 1800, 1600, 1400. Diff after each step. A step with 0% change means the jaws stopped on the block, so hold that value (opus-01 attempt 4: the 1600 to 1400 step).
 - **Stop conditions:** any gate fails; jaws reach 1400 with change on every step (empty close); an unknown object.
 - **Outputs:** closing value at contact; gate results; composite including the C270 jaw view.
@@ -237,7 +241,7 @@ In every option, Anthony watches the live dual-camera page (port 8090) and holds
 
 House rules: a check that cannot fail is not a check, and an instrument must beat a trivial baseline, not just chance.
 
-1. **Bench replay (no hardware).** Replay recorded frames through each skill's perception. **Where the frames are:** opus-02's 378 frames and 65 batch receipts are on the Jetson under `~/witness-opus-notes/opus-02/`; opus-01's receipts in this repo (`receipts/opus-01/batches/`, 98 JSON files) carry no frames, and only the first-stack photo is committed, so whether opus-01 frames survive on the Jetson is open (section 9). Labels come from the receipts and Anthony's notes. Baselines: for the motion witness, the diff distribution of held-joint frame pairs. For straddle, "always say not straddled" and "always say straddled". For locate_blocks, a fixed-centre guess. Each instrument must beat its baseline.
+1. **Bench replay (no hardware).** Replay recorded frames through each skill's perception. **Where the frames are:** opus-02's 378 frames and 65 batch receipts are on the Jetson under `~/witness-opus-notes/opus-02/`; opus-01's receipts in this repo (`receipts/opus-01/batches/`, 98 JSON files) carry no frames, and only the first-stack photo is committed; the 554 opus-01 frames survive on the Jetson under `~/witness-opus-notes/opus-01/` (section 9, question 7). Labels come from the receipts and Anthony's notes. Baselines: for the motion witness, the diff distribution of held-joint frame pairs. For straddle, "always say not straddled" and "always say straddled". For locate_blocks, a fixed-centre guess. Each instrument must beat its baseline.
 2. **Fake-board tests.** A fake guard and board that record commands and can inject refusals, stale battery readings, frozen frames and black frames. They confirm budgets, the `finally` cleanup on every exit path, and that no refused action is re-sent.
 3. **Negative controls, one per stop condition**, each of which must fail closed:
    - frozen frame, black C270 frame, low brightness, out-of-focus claw frame;
@@ -273,8 +277,10 @@ House rules: a check that cannot fail is not a check, and an instrument must bea
 4. What counts as "significant" for the unknown-object stop: any non-block blob, or a size floor?
 5. ~~Can the wrist rotate the jaws for square_block?~~ Answered by the files: no. Channel 3 is wrist pitch; the arm has no roll joint. Squaring is a human job until a nudge method is designed and bench-tested.
 6. Should guard-native arming (no restart) get its own spec now, given that restarts are where the serial-ownership refusals clustered?
-7. Do opus-01 frames still exist on the Jetson? opus-02's do (378 files). The repo holds receipts only.
+7. ~~Do opus-01 frames still exist on the Jetson?~~ Answered by the Jetson seat (2026-10-16): yes, `~/witness-opus-notes/opus-01/` holds 554 jpg and 98 json plus `combo.py` and `diff.py`; opus-02 holds 378 jpg and 65 json. Both nights can be bench-replayed. The repo holds receipts only.
 8. Where should the spec and lessons live: `docs/hq/` (where every HQ document on this branch sits) or a new `docs/` top level as the draft proposed? This file is placed under `docs/hq/` pending his word.
+9. Turn the front sonar on (`"sonar": true` in the Pi hardware file is a commissioning override) for the ruler session, so pulse travel and the per-pose landing distance can be measured along the axis every miss has been on? Anthony pointed the Jetson seat at the sensor twice (10-12 and 10-16). HQ reviews the override; his word installs it.
+10. Audio as a witness: the Jetson has two capture devices (the C270's mic and the Adesso Xtream M3 he added; the Adesso's placement is unrecorded). Recording in the home is his consent question, separate from motion consent. Stage 2 would record alongside frames and test contact/stall detection against a trivial baseline before any skill relies on it.
 
 ## 10. Research notes behind the design
 
@@ -299,7 +305,7 @@ House rules: a check that cannot fail is not a check, and an instrument must bea
 | Vendor units masked, shortcuts retired | Confirmed | DEPLOYMENT.md:124-137; PASSDOWN.md:254-257 |
 | Scanner fix 7a12d2e, release 20261013-scanner-01 | Confirmed | receipts/scanner-deployed.json |
 | opus-01: 82 batch receipts, first stack 20:42 EDT after four grasp attempts | 82 entries in session.json (98 receipt files); first HOLD on attempt 4, stack 1 failed, regrab, stack at 20:42 | receipts/opus-01/session.json; LEARNING.md attempts 1-4, stack 1-2 |
-| opus-02: 62 batches in a bit over an hour, no stack | 65 receipts (one dry), 21:29:08 to 22:34:41 EDT, no stack | jetson:~/witness-opus-notes/opus-02/ (not in repo) |
+| opus-02: 62 batches in a bit over an hour, no stack | 65 receipts (two dry, 63 real; the Jetson seat's own recount, Appendix B item A8), file mtimes 21:29:08 to 22:34:41 EDT, receipt `at` stamps 21:29:02 to 22:34:26 EDT, no stack | jetson:~/witness-opus-notes/opus-02/ (not in repo) |
 | Section 3.1 constants match LEARNING.md | Confirmed, with the dead-zone row re-sourced to the opus-02 close | receipts/opus-01/LEARNING.md |
 | opus-02 LEARNING.md absent from the repo | Confirmed | no match for "opus-02" on the branch |
 | Park pose in ARM_POSES.md | **Not there**; no park pose is defined anywhere on the branch | ARM_POSES.md (reference start only) |
@@ -309,3 +315,19 @@ House rules: a check that cannot fail is not a check, and an instrument must bea
 | Four paper ids | All resolve to the cited titles; quoted figures inside the bodies not re-read except RoboGuard's abstract | arXiv abs pages; Crossref |
 
 Authored by Anthony J Vasquez Sr, with Claude as co-author.
+
+## Appendix B. The Jetson seat's review (2026-10-16 00:2x EDT, claude-opus-5-5 on tony-jetson)
+
+HQ's 10-15 passdown asked the seat that lived opus-01 and opus-02 to check sections 3.0, 3.1 and Appendix A against its own record. Its review is `jetson:~/witness-opus-notes/spec-review-2026-10-15.md` (sha256 `3ca634b0dbe09589f7464b54361a7b28c56632efb459db014064eb358fda0599`), with every computed number re-derived by `spec-review-tools/measure.py` (`8c614639...`). Its two stage-1 drafts are beside it: `ARM_LESSONS.md` (`b961bf81...`) and `arm_skills.yaml` (`12f5eaa2...`). A copy of all of it sits in HQ's lane. Its verdict: the architecture is right; the corrections are about which numbers are still true. Folded into this revision:
+
+- **A1** Gate 2 of 3.7 as first worded would have PASSED the G44 stage-3 frame. Reworded; G44-3 is now a must-fail negative control.
+- **A2** The front sonar measures range along the one axis every miss has been on; it is off in the locked hardware file; the vendor filters it over 5 samples and turns its LEDs off before colour work (read on the Pi under Anthony's 10-13 ruling, nothing copied or run). Two uses in order of value: pulse-travel witness, then a reach gate for stand-off, with a bench-calibrated final move rather than sonar in the last centimetres (its floor is about 2 cm and its offset from the C270 is unmeasured). Disagrees with FRICTION.md item 7 for the reach axis. Turning it on is a commissioning override: section 9, question 9.
+- **A3** The claw camera was tilted in its mount during the opus-02 refocus (left jaw tip at gripper 2000: x=41 to x=112 px). Every opus-01 claw-view constant is tagged `void_mount` in 3.1; a mount fingerprint row was added.
+- **A4** Section 1's "the lesson did not stick" story was wrong; rewritten.
+- **A5, A6, A7, A8** Drive-pulse travel, the C270 dead zone, the gate's record and the receipt counts, each corrected in place.
+- **A9** Microphones: section 9, question 10.
+- **B1 to B8**, not all folded, carried here for stage 2: elbow hard stop (added to 3.1); claw sharpness floor and the distance-independence focus test (added to 3.1; the look skill should carry the test); the diff method, threshold and resolution must travel with every diff and every pixel constant (opus-02 switched from 1280x720 to 640x360 at G3 and from full-res to half-res diffs mid-session, unrecorded); livecams holds `/dev/video0` exclusively and its label overlay must be masked out of diffs and colour reads; battery cannot be read without the override installed today, so wake_arm's battery precondition needs a guard change (section 4); a yaw hold test beside the lift test (G20); the D4/D6 frames where naive HSV finds the red Huggies box, not the block, belong in locate_blocks' negative controls.
+- **C** Question 7 answered (opus-01 frames exist); question 5 agreed from the record.
+- **D** Every other 3.1 row the seat checked against the logs held as quoted.
+
+Still at Anthony's word after this review: the consent unit, the sonar override, audio consent, push and PR.
