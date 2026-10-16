@@ -102,7 +102,7 @@ Verified against `receipts/opus-01/LEARNING.md` unless marked otherwise.
 | C270 warm-up | first 15 to 30 frames black | all C270 reads |
 | Drive pulse | duty 20, 0.5 s: the log says about 2 in on the rug; the frames' own pixel numbers, under an assumed C270 focal length, say about 3 in per pulse (Appendix B, A5). Travel per pulse is unknown to within 2x. The front ultrasonic (sonar) is the instrument that settles it, and it is off in the locked hardware file **[re-measure]** | not a skill yet (see 3.12) |
 | Battery drop under arm work | about 115 mV over 9 batches, 235 mV over 26, 291 mV over 50 **[opus-02, Jetson only]** | session budgeting |
-| Sonar LEDs | the sonar module's RGB LEDs tint the rug blue and break colour reads (opus-01 stack attempt 1; the vendor's own colour demo turns them off first). `sonar_rgb` is an allowed output (`companion/pi/controls.py`). Off in every skill's preflight, before any colour threshold | locate_blocks, all colour reads |
+| Sonar LEDs | the sonar module's RGB LEDs tint the rug blue and break colour reads (opus-01 stack attempt 1; the vendor's own colour demo turns them off first). `sonar_rgb` is an allowed output (`companion/pi/hardware.py` line 40; action schema in `companion/controls.py`). Off in every skill's preflight, before any colour threshold | locate_blocks, all colour reads |
 | Claw sharpness floor | a 0% diff on a blurred claw frame is not a held joint: opus-02's first half ran at Laplacian sharpness 3.5 to 4.3 against 93 at the same pose the night before, and real moves read 0%. The motion witness is valid only above a sharpness floor (about 50 proposed) **[opus-02, Jetson only] [re-measure]** | look, every motion witness |
 
 ### 3.2 wake_arm
@@ -316,7 +316,7 @@ House rules: a check that cannot fail is not a check, and an instrument must bea
 
 Authored by Anthony J Vasquez Sr, with Claude as co-author.
 
-## Appendix B. The Jetson seat's review (2026-10-16 00:2x EDT, claude-opus-5-5 on tony-jetson)
+## Appendix B. The Jetson seat's review (2026-10-15 23:52 to 2026-10-16 00:05 EDT by `date`; the review file's own "00:2x/00:3x/00:4x" are the seat's guesses and wrong, corrected in its passdown; claude-opus-5-5 on tony-jetson)
 
 HQ's 10-15 passdown asked the seat that lived opus-01 and opus-02 to check sections 3.0, 3.1 and Appendix A against its own record. Its review is `jetson:~/witness-opus-notes/spec-review-2026-10-15.md` (sha256 `3ca634b0dbe09589f7464b54361a7b28c56632efb459db014064eb358fda0599`), with every computed number re-derived by `spec-review-tools/measure.py` (`8c614639...`). Its two stage-1 drafts are beside it: `ARM_LESSONS.md` (`b961bf81...`) and `arm_skills.yaml` (`12f5eaa2...`). A copy of all of it sits in HQ's lane. Its verdict: the architecture is right; the corrections are about which numbers are still true. Folded into this revision:
 
@@ -330,4 +330,6 @@ HQ's 10-15 passdown asked the seat that lived opus-01 and opus-02 to check secti
 - **C** Question 7 answered (opus-01 frames exist); question 5 agreed from the record.
 - **D** Every other 3.1 row the seat checked against the logs held as quoted.
 
-Still at Anthony's word after this review: the consent unit, the sonar override, audio consent, push and PR.
+**Drive skill, second note (00:05 EDT, on Anthony's "also write the drive skill"):** `jetson:~/witness-opus-notes/drive-skill/` holds `drive_to_standoff`, a proposed replacement for section 3.12: pulses closed on the front sonar (5 samples, vendor-style outlier drop), the sonar and the C270 must agree after every pulse or it stops, a 0.25 s probe first, half-steps until two rates agree within 25%, no reversal, no retry, 6-pulse and 60 s budgets. Hashes: `drive_skill.py` `64c3e40a...`, `test_drive_skill.py` `7da96cc5...`, `DRIVE_SKILL.md` `71e43e91...`, `mutation-receipt.txt` `628d731f...`. HQ re-ran its 20 fake-board tests on the Studio (20 passed, `python -B -I`) and checked its `drive` arguments and 0.5 s cap against `companion/controls.py` (match). HQ's reading: once two rates agree the skill plans the full remaining move, so from that point the only overshoot margin is half the tolerance, and the "under 2x" guarantee in its doc holds only for the half-step phase; and the "C270 did not change" stop may fire on a true 10 mm move against a plain far scene, which is fail-closed but could make the skill unusable on this rug until the 1% threshold is bench-set. Not wired to the guard; needs sonar=true and a wheel duty limit of 20 in a commissioning hardware file (Anthony's word), the sonar answers from A2, and him at the switch with per-pulse consent. Section 3.12 stays as written until he rules.
+
+Still at Anthony's word after this review: the consent unit, the sonar override, the drive skill, audio consent, push and PR.
